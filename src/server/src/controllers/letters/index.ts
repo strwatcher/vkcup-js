@@ -1,8 +1,12 @@
 import { ServerResponse } from "http";
-import { isFolder, LettersDb } from "../../src/db/letter-db";
+import { isFolder, LettersDb } from "../../db/letter-db";
 import { notFoundResponse } from "../not-found";
 
-export function getLettersByFolder(response: ServerResponse, db: LettersDb, folder: string) {
+export function getLettersByFolder(
+  response: ServerResponse,
+  db: LettersDb,
+  folder: string
+) {
   if (folder) {
     if (isFolder(folder)) {
       response.statusCode = 200;
@@ -14,6 +18,4 @@ export function getLettersByFolder(response: ServerResponse, db: LettersDb, fold
       notFoundResponse(response);
     }
   }
-
 }
-

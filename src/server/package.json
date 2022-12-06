@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start:build": "node ./build.js --watch",
-    "start:run": "nodemon --watch ../../dist ../../dist/server.js",
+    "start:run": "nodemon --watch ../../dist/server.js ../../dist/server.js",
     "start": "concurrently npm:start:*",
     "build": "node ./build.js"
   },

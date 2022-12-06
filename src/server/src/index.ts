@@ -2,56 +2,37 @@ import * as http from "http";
 import path from "path";
 import url from "url";
 import querystring from "node:querystring";
-import { isFolder, LettersDb } from "./db/letter-db";
+import { LettersDb } from "./db/letter-db";
+import { getFolders } from "../controllers/folders";
+import { getLettersByFolder } from "../controllers/letters";
+import { getStatic } from "../controllers/static";
 
 const db = new LettersDb(path.join(__dirname, "db.json"));
 
-type qs = {
+type QS = {
   folder?: string;
 };
 
-const notFoundResponse = (res: http.ServerResponse) => {
-  res.statusCode = 404;
-  res.end(JSON.stringify({ status: false, message: "Such resource not found" }))
-}
-const handle = (
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-  params: string | null,
-  route?: string
-) => {
-  const parsedQs = params ? (querystring.parse(params) as qs) : null;
-  if (route === "letters" && parsedQs) {
-    const folder = parsedQs.folder;
-    if (folder) {
-      if (isFolder(folder)) {
-        res.statusCode = 200;
-        const data = db.getByFolder(folder);
-        const count = data.length;
-        res.end(JSON.stringify({ count, data }));
-        return;
-      } else {
-        notFoundResponse(res);
-      }
-    }
-  }
-  else if (route === "folders") {
-    res.statusCode = 200;
-    const data = db.getALlFolders();
-    const count = data.length;
-    res.end(JSON.stringify({ count, data }))
+const handle = (response: http.ServerResponse, params?: QS, route?: string) => {
+  if (route === "letters" && params) {
+    const folder = params.folder;
+    getLettersByFolder(response, db, folder);
+  } else if (route === "folders") {
+    getFolders(response, db);
   } else {
-    notFoundResponse(res);
+    getStatic(response, route);
   }
 };
 
 http
-  .createServer((req, res) => {
-    const parsed = url.parse(req.url!);
+  .createServer((request, response) => {
+    const parsed = url.parse(request.url!);
     const route = parsed.pathname?.split("/").join("").trim();
     const params = parsed.query;
-    res.setHeader("Content-Type", "application/json");
-    handle(req, res, params, route);
+    const parsedQs = params ? (querystring.parse(params) as QS) : null;
+
+    response.setHeader("Content-Type", "application/json");
+    handle(response, parsedQs, route);
   })
   .listen(3000);
 

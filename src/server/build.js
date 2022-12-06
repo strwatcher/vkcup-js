@@ -1,7 +1,6 @@
 const esbuild = require("esbuild");
 
 const { nodeExternalsPlugin } = require("esbuild-node-externals");
-const { argv } = require("process");
 
 const args = require('yargs').argv;
 

@@ -61,11 +61,7 @@ export class LettersDb extends DataBase<Letters> {
     return this._data.filter((item) => item.folder === folder);
   }
 
-  getAll() {
-    return [...this._data];
-  }
-
-  getALlFolders() {
+  getAllFolders() {
     const folders: string[] = [];
     this._data.forEach((item) => {
       const folder = item.folder ? item.folder : "Входящие";

@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "index.ts",
+  "scripts": {
+    "start:build": "node ./build.js --watch",
+    "start:run": "nodemon --watch ../../dist ../../dist/server.js",
+    "start": "concurrently npm:start:*",
+    "build": "node ./build.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.10",
+    "concurrently": "^7.6.0",
+    "esbuild": "^0.15.18",
+    "esbuild-node-externals": "^1.5.0",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.3",
+    "yargs": "^17.6.2"
+  }
+}

@@ -1,6 +1,6 @@
 import { ServerResponse } from "http";
+import { CompleteFolder, Folder } from "shared";
 import { LettersDb } from "../../db/letter-db";
-import { CompleteFolder, Folder } from "../../types/folder";
 import { FoldersToIcons, iconsMapping } from "./iconsMapping";
 
 function createFolder(folder: Folder, map: FoldersToIcons): CompleteFolder {

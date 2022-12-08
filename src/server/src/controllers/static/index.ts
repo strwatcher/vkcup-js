@@ -5,12 +5,12 @@ import { notFoundResponse } from "../not-found";
 
 const STATIC_PATH = path.join(__dirname, "static");
 
-const mimeTypes = {
+const mimeTypes: { [key: string]: string } = {
   html: "text/html; charset=UTF-8",
   svg: "image/svg+xml",
 };
 
-export async function getStatic(response: ServerResponse, url: string) {
+export async function getStatic(response: ServerResponse, url?: string) {
   const file = await prepareFile(url);
   const found = !!file;
   if (found) {
@@ -22,7 +22,9 @@ export async function getStatic(response: ServerResponse, url: string) {
   }
 }
 
-async function prepareFile(url: string) {
+async function prepareFile(url?: string) {
+  if (!url) return null;
+
   let paths: string[] = [STATIC_PATH, url];
 
   if (url === "") paths = [__dirname, "index.html"];
@@ -31,7 +33,9 @@ async function prepareFile(url: string) {
     () => true,
     () => false
   );
+
   if (!exists) return null;
+
   const ext = path.extname(filePath).substring(1).toLowerCase();
   const stream = fs.createReadStream(filePath);
   return { ext, stream };

@@ -1,12 +1,12 @@
 import { ServerResponse } from "http";
+import { isFolder } from "shared";
 import { LettersDb } from "../../db/letter-db";
-import { isFolder } from "../../types/folder";
 import { notFoundResponse } from "../not-found";
 
 export function getLettersByFolder(
   response: ServerResponse,
   db: LettersDb,
-  folder: string
+  folder?: string
 ) {
   if (folder) {
     if (isFolder(folder)) {

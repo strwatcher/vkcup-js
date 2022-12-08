@@ -4,7 +4,7 @@ import url from "url";
 import querystring from "node:querystring";
 import { LettersDb } from "./db/letter-db";
 import { route } from "./router";
-import { QS } from "./types";
+import { QS } from "shared";
 
 const db = new LettersDb(path.join(__dirname, "db.json"));
 

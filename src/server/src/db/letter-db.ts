@@ -1,5 +1,4 @@
-import { Folder } from "../types/folder";
-import { Letters } from "../types/letters";
+import { Folder, Letters } from "shared";
 import { DataBase } from "./db";
 
 export class LettersDb extends DataBase<Letters> {

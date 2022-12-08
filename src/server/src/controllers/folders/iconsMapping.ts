@@ -1,4 +1,4 @@
-import { Folder } from "../../types/folder";
+import { Folder } from "shared";
 
 export const iconsMapping: FoldersToIcons = {
   Входящие: {

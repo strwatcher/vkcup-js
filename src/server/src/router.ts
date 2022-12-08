@@ -1,22 +1,22 @@
 import { ServerResponse } from "http";
+import { QS } from "shared";
 import { getFolders } from "./controllers/folders";
 import { getLettersByFolder } from "./controllers/letters";
 import { getStatic } from "./controllers/static";
 import { LettersDb } from "./db/letter-db";
-import { QS } from "./types";
 
 export function route(
   db: LettersDb,
   response: ServerResponse,
-  query?: QS,
-  route?: string
+  query: QS | null,
+  resource?: string
 ) {
-  if (route === "letters" && query) {
+  if (resource === "letters" && query) {
     const folder = query.folder;
     getLettersByFolder(response, db, folder);
-  } else if (route === "folders") {
+  } else if (resource === "folders") {
     getFolders(response, db);
   } else {
-    getStatic(response, route);
+    getStatic(response, resource);
   }
 }

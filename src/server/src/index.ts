@@ -4,18 +4,19 @@ import url from "url";
 import querystring from "node:querystring";
 import { LettersDb } from "./db/letter-db";
 import { route } from "./router";
+import { QS } from "./types";
 
 const db = new LettersDb(path.join(__dirname, "db.json"));
 
 http
   .createServer((request, response) => {
-    const parsed = url.parse(request.url!);
-    const resource = parsed.pathname?.split("/").join("").trim();
-    const params = parsed.query;
-    const parsedQs = params ? (querystring.parse(params) as QS) : null;
+    const parsedUrl = url.parse(request.url!);
+    const resource = parsedUrl.pathname?.split("/").join("").trim();
+    const query = parsedUrl.query;
+    const parsedQuery = query ? (querystring.parse(query) as QS) : null;
 
     response.setHeader("Content-Type", "application/json");
-    route(db, response, parsedQs, resource);
+    route(db, response, parsedQuery, resource);
   })
   .listen(3000);
 

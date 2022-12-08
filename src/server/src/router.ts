@@ -8,11 +8,11 @@ import { QS } from "./types";
 export function route(
   db: LettersDb,
   response: ServerResponse,
-  params?: QS,
+  query?: QS,
   route?: string
 ) {
-  if (route === "letters" && params) {
-    const folder = params.folder;
+  if (route === "letters" && query) {
+    const folder = query.folder;
     getLettersByFolder(response, db, folder);
   } else if (route === "folders") {
     getFolders(response, db);

@@ -1,5 +1,6 @@
 import { ServerResponse } from "http";
-import { isFolder, LettersDb } from "../../db/letter-db";
+import { LettersDb } from "../../db/letter-db";
+import { isFolder } from "../../types/folder";
 import { notFoundResponse } from "../not-found";
 
 export function getLettersByFolder(

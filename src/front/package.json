@@ -7,16 +7,20 @@
     "dev": "vite",
     "build": "tsc && vite build --outDir=../../dist/",
     "preview": "vite preview",
-    "help": "vite build -h"
+    "start:tsc-watch": "tsc --watch",
+    "start:vite-watch": "vite build --outDir=../../dist/ --watch",
+    "start": "concurrently npm:start:*"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "shared": "file:../shared"
   },
   "devDependencies": {
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
+    "concurrently": "^7.6.0",
     "sass": "^1.56.1",
     "typescript": "^4.6.4",
     "vite": "^3.2.3",

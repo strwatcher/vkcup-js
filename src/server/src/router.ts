@@ -9,7 +9,7 @@ export function route(
   db: LettersDb,
   response: ServerResponse,
   query: QS | null,
-  resource?: string
+  resource: string
 ) {
   if (resource === "letters" && query) {
     const folder = query.folder;

@@ -26,8 +26,8 @@ export const iconsMapping: FoldersToIcons = {
     iconLight: "out-light.svg",
   },
   Черновики: {
-    icon: "drafts.svg",
-    iconLight: "drafts-light.svg",
+    icon: "draft.svg",
+    iconLight: "draft-light.svg",
   },
 };
 

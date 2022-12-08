@@ -1,3 +1,30 @@
 .wrapper {
+  font-family: Arial;
   width: 200px;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.light:hover {
+  background-color: rgba(0, 16, 61, 0.04);
+}
+
+.wrapperActive {
+  background-color: rgba(0, 16, 61, 0.08);
+}
+
+.dark {
+  color: #fff;
+  background-color: #000;
+}
+
+.dark:hover {
+  background: rgba(256, 256, 256, 0.04);
+}
+
+.darkActive {
+  background-color: rgba(256, 256, 256, 0.08);
 }

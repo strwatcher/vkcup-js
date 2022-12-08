@@ -10,7 +10,7 @@ const mimeTypes: { [key: string]: string } = {
   svg: "image/svg+xml",
 };
 
-export async function getStatic(response: ServerResponse, url?: string) {
+export async function getStatic(response: ServerResponse, url: string) {
   const file = await prepareFile(url);
   const found = !!file;
   if (found) {
@@ -22,9 +22,7 @@ export async function getStatic(response: ServerResponse, url?: string) {
   }
 }
 
-async function prepareFile(url?: string) {
-  if (!url) return null;
-
+async function prepareFile(url: string) {
   let paths: string[] = [STATIC_PATH, url];
 
   if (url === "") paths = [__dirname, "index.html"];

@@ -11,7 +11,7 @@ const db = new LettersDb(path.join(__dirname, "db.json"));
 http
   .createServer((request, response) => {
     const parsedUrl = url.parse(request.url!);
-    const resource = parsedUrl.pathname?.split("/").join("").trim();
+    const resource = parsedUrl.pathname!.split("/").join("").trim();
     const query = parsedUrl.query;
     const parsedQuery = query ? (querystring.parse(query) as QS) : null;
 

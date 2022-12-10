@@ -1,3 +1,3 @@
-import { Letter } from "./letter";
+import { ILetter } from "./letter";
 
-export type Letters = Array<Letter>;
+export type ILetters = Array<ILetter>;

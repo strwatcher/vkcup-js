@@ -1,10 +1,10 @@
-export type CompleteFolder = {
-  folder: Folder;
+export type ICompleteFolder = {
+  folder: IFolder;
   icon: string;
   iconLight: string;
 };
 
-export type Folder =
+export type IFolder =
   | "Архив"
   | "Входящие"
   | "Важное"
@@ -13,7 +13,7 @@ export type Folder =
   | "Спам"
   | "Корзина";
 
-export function isFolder(str?: string): str is Folder {
+export function isFolder(str?: string): str is IFolder {
   return (
     str === "Архив" ||
     str === "Входящие" ||

@@ -4,7 +4,7 @@ import url from "url";
 import querystring from "node:querystring";
 import { LettersDb } from "./db/letter-db";
 import { route } from "./router";
-import { QS } from "shared";
+import { IQS } from "shared";
 
 const db = new LettersDb(path.join(__dirname, "db.json"));
 
@@ -13,7 +13,7 @@ http
     const parsedUrl = url.parse(request.url!);
     const resource = parsedUrl.pathname!.split("/").join("").trim();
     const query = parsedUrl.query;
-    const parsedQuery = query ? (querystring.parse(query) as QS) : null;
+    const parsedQuery = query ? (querystring.parse(query) as IQS) : null;
 
     response.setHeader("Content-Type", "application/json");
     route(db, response, parsedQuery, resource);

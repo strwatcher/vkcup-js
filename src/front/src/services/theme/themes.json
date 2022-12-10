@@ -1,0 +1,12 @@
+{
+  "light": {
+    "main": "#F6F7F8",
+    "secondary": "#FFF",
+    "text": "#000"
+  },
+  "dark": {
+    "main": "#19191A",
+    "secondary": "#232324",
+    "text": "#FFF"
+  }
+}

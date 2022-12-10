@@ -1,4 +1,11 @@
-import { Folder } from "shared";
+import { IFolder } from "shared";
+
+export type FoldersToIcons = {
+  [P in IFolder]: {
+    icon: string;
+    iconLight: string;
+  };
+};
 
 export const iconsMapping: FoldersToIcons = {
   Входящие: {
@@ -29,11 +36,4 @@ export const iconsMapping: FoldersToIcons = {
     icon: "draft.svg",
     iconLight: "draft-light.svg",
   },
-};
-
-export type FoldersToIcons = {
-  [P in Folder]: {
-    icon: string;
-    iconLight: string;
-  };
 };

@@ -12,6 +12,8 @@
     "start": "concurrently npm:start:*"
   },
   "dependencies": {
+    "effector": "^22.4.0",
+    "effector-react": "^22.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "shared": "file:../shared"

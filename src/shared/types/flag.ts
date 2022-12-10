@@ -1,4 +1,4 @@
-export type Flag =
+export type IFlag =
   | "Заказы"
   | "Финансы"
   | "Регистрации"

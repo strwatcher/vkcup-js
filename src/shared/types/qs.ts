@@ -1,3 +1,3 @@
-export type QS = {
+export type IQS = {
   folder?: string;
 };

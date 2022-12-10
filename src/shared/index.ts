@@ -1,6 +1,6 @@
-export { type Folder, type CompleteFolder, isFolder } from "./types/folder";
-export { type Flag } from "./types/flag";
-export { type Letter } from "./types/letter";
-export { type Letters } from "./types/letters";
-export { type QS } from "./types/qs";
-export { type User } from "./types/user";
+export { type IFolder, type ICompleteFolder, isFolder } from "./types/folder";
+export { type IFlag } from "./types/flag";
+export { type ILetter } from "./types/letter";
+export { type ILetters } from "./types/letters";
+export { type IQS } from "./types/qs";
+export { type IUser } from "./types/user";

@@ -1,17 +1,17 @@
-import { Flag } from "./flag";
-import { Folder } from "./folder";
-import { User } from "./user";
+import { IFlag } from "./flag";
+import { IFolder } from "./folder";
+import { IUser } from "./user";
 
-export type Letter = {
-  author: User;
-  to: Array<User>;
+export type ILetter = {
+  author: IUser;
+  to: Array<IUser>;
   title: string;
   text: string;
   bookmark: boolean;
   important: boolean;
   read: boolean;
-  folder: Folder;
+  folder: IFolder;
   date: string;
-  flag: Flag;
+  flag: IFlag;
   doc: any;
 };

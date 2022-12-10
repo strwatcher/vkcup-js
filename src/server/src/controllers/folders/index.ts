@@ -1,16 +1,15 @@
 import { ServerResponse } from "http";
-import { CompleteFolder, Folder } from "shared";
-import { LettersDb } from "../../db/letter-db";
+import { ICompleteFolder, IFolder } from "shared";
 import { FoldersToIcons, iconsMapping } from "./iconsMapping";
 
-function createFolder(folder: Folder, map: FoldersToIcons): CompleteFolder {
+function createFolder(folder: IFolder, map: FoldersToIcons): ICompleteFolder {
   return {
     folder,
     ...map[folder],
   };
 }
 
-const rawFolders: Array<Folder> = [
+const rawFolders: Array<IFolder> = [
   "Входящие",
   "Важное",
   "Отправленные",
@@ -19,11 +18,11 @@ const rawFolders: Array<Folder> = [
   "Спам",
   "Корзина",
 ];
-const completeFolders: Array<CompleteFolder> = rawFolders.map((folder) =>
+const completeFolders: Array<ICompleteFolder> = rawFolders.map((folder) =>
   createFolder(folder, iconsMapping)
 );
 
-export function getFolders(response: ServerResponse, db: LettersDb) {
+export function getFolders(response: ServerResponse) {
   response.statusCode = 200;
   const data = completeFolders;
   const count = data.length;

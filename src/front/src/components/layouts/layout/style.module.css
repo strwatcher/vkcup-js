@@ -1,0 +1,9 @@
+.layout {
+  display: grid;
+  grid-template-columns: 232px 1fr;
+  min-height: 100vh;
+}
+
+.layout > *:first-child() {
+  padding: 12px 16px;
+}

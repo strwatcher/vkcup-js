@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { ICompleteFolder, IFolder } from "shared";
 import { Folder } from "../../components/folder";
 import { List } from "../../components/list";
+import { useTheme } from "../../hooks/use-theme";
 import {
   $folders,
   $selectedFolder,
@@ -12,6 +13,8 @@ import {
 } from "./state";
 
 export const Folders: React.FC = () => {
+  const { theme } = useTheme();
+
   const stores = {
     folders: useStore($folders),
     selectedFolder: useStore($selectedFolder),
@@ -26,7 +29,6 @@ export const Folders: React.FC = () => {
   const renders = {
     folder: React.useCallback(
       (folder: ICompleteFolder) => {
-        const theme = "light";
         const icon = theme === "dark" ? folder.iconLight : folder.icon;
         return (
           <Folder
@@ -38,7 +40,7 @@ export const Folders: React.FC = () => {
           />
         );
       },
-      [stores.selectedFolder]
+      [stores.selectedFolder, theme]
     ),
   };
 

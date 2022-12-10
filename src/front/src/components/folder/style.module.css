@@ -1,27 +1,21 @@
 .wrapper {
-  font-family: Arial;
   width: 200px;
   padding: 12px;
   border-radius: 8px;
   display: flex;
   gap: 10px;
   cursor: pointer;
+  color: var(--text);
 }
 
-p {
-  margin: 0;
-  padding: 0;
-  font-size: 15px;
-}
 @media screen and (max-width: 768px) {
   .wrapper {
     border-radius: 4px;
     width: fit-content;
   }
 
-  p {
+  span {
     display: none;
-    /* float: none; */
     width: 0px;
   }
 }
@@ -36,14 +30,9 @@ p {
   background-color: rgba(0, 16, 61, 0.08);
 }
 
-.dark {
-  color: #fff;
-  background-color: #000;
-}
-
 .dark:hover,
 .dark:focus {
-  background: rgba(256, 256, 256, 0.04);
+  background-color: rgba(256, 256, 256, 0.04);
 }
 
 .darkActive,

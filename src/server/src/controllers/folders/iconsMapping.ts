@@ -2,38 +2,38 @@ import { IFolder } from "shared";
 
 export type FoldersToIcons = {
   [P in IFolder]: {
-    icon: string;
-    iconLight: string;
+    light: string;
+    dark: string;
   };
 };
 
 export const iconsMapping: FoldersToIcons = {
   Входящие: {
-    icon: "in.svg",
-    iconLight: "in-light.svg",
+    light: "in.svg",
+    dark: "in-light.svg",
   },
   Спам: {
-    icon: "spam.svg",
-    iconLight: "spam-light.svg",
+    light: "spam.svg",
+    dark: "spam-light.svg",
   },
   Архив: {
-    icon: "archive.svg",
-    iconLight: "archive-light.svg",
+    light: "archive.svg",
+    dark: "archive-light.svg",
   },
   Важное: {
-    icon: "important.svg",
-    iconLight: "important-light.svg",
+    light: "important.svg",
+    dark: "important-light.svg",
   },
   Корзина: {
-    icon: "basket.svg",
-    iconLight: "basket-light.svg",
+    light: "basket.svg",
+    dark: "basket-light.svg",
   },
   Отправленные: {
-    icon: "out.svg",
-    iconLight: "out-light.svg",
+    light: "out.svg",
+    dark: "out-light.svg",
   },
   Черновики: {
-    icon: "draft.svg",
-    iconLight: "draft-light.svg",
+    light: "draft.svg",
+    dark: "draft-light.svg",
   },
 };

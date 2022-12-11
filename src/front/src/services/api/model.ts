@@ -7,6 +7,11 @@ type IApiConfig = {
 
 config as IApiConfig;
 
+export const genUrl = (url: string) => {
+  const baseUrl = config.base;
+  return baseUrl + url;
+};
+
 async function request<TReturn>(url: string): Promise<TReturn> {
   const response = await fetch(url);
   const json = await response.json();
@@ -17,8 +22,9 @@ export const createRequestFactory = <TReturn>(
   url: string,
   target?: Store<TReturn>
 ) => {
-  const baseUrl = config.base;
-  const requestFx = createEffect(() => request<TReturn>(baseUrl + url));
+  const requestFx = createEffect((params?: string) =>
+    request<TReturn>(genUrl(`${url}${!!params ? params : ""}`))
+  );
   if (target) {
     target.on(requestFx.doneData, (_, data) => data);
   }

@@ -1,17 +1,14 @@
 import React from "react";
 import { ThemeToggler } from "../../components/theme-toggler";
 import { Folders } from "../folders";
-import { baseUrl } from "../folders/model";
 import { useTheme } from "../../hooks/use-theme";
 import { SidebarLayout } from "../../components/layouts/sidebar-layout";
+import { genUrl } from "../../services/api/model";
 
 export const Sidebar: React.FC = () => {
-  const { theme, toggle } = useTheme();
+  const { theme, toggle, resources } = useTheme();
 
-  const themeIcon = React.useMemo(
-    () => `${baseUrl}${theme === "light" ? "theme.svg" : "theme-light.svg"}`,
-    [theme]
-  );
+  const themeIcon = React.useMemo(() => genUrl(resources.theme), [resources]);
 
   return (
     <SidebarLayout>

@@ -4,10 +4,11 @@ import { ICompleteFolder, IFolder } from "shared";
 import { Folder } from "../../components/folder";
 import { List } from "../../components/list";
 import { useTheme } from "../../hooks/use-theme";
+import { $letters } from "../letters/model";
+import { genUrl } from "../../services/api/model";
 import {
   $folders,
   $selectedFolder,
-  baseUrl,
   eventSelectFolder,
   fetchFoldersFx,
 } from "./model";
@@ -18,6 +19,7 @@ export const Folders: React.FC = () => {
   const stores = {
     folders: useStore($folders),
     selectedFolder: useStore($selectedFolder),
+    letters: useStore($letters),
   };
 
   const callbacks = {
@@ -29,12 +31,10 @@ export const Folders: React.FC = () => {
   const renders = {
     folder: React.useCallback(
       (folder: ICompleteFolder) => {
-        const icon = theme === "dark" ? folder.iconLight : folder.icon;
         return (
           <Folder
-            icon={baseUrl + icon}
+            icon={genUrl(folder[theme as keyof ICompleteFolder])}
             folder={folder.folder}
-            theme={theme}
             active={folder.folder === stores.selectedFolder}
             onClick={callbacks.selectFolder}
           />
@@ -47,6 +47,10 @@ export const Folders: React.FC = () => {
   useEffect(() => {
     fetchFoldersFx();
   }, []);
+
+  useEffect(() => {
+    console.log(stores.letters);
+  }, [stores.letters]);
 
   return <List items={stores.folders.data} render={renders.folder} />;
 };

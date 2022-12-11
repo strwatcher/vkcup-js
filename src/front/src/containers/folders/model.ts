@@ -1,12 +1,10 @@
-import { createEffect, createEvent, createStore } from "effector";
+import { createEvent, createStore, sample } from "effector";
 import { ICompleteFolder, IFolder } from "shared";
 import { createRequestFactory } from "../../services/api/model";
 export type FoldersState = {
   count: number;
   data: Array<ICompleteFolder>;
 };
-
-const baseUrl = "http://localhost:3000/";
 
 const $folders = createStore<FoldersState>({ count: 0, data: [] });
 
@@ -17,14 +15,15 @@ const { requestFx: fetchFoldersFx } = createRequestFactory<FoldersState>(
 
 const eventSelectFolder = createEvent<IFolder>();
 
-const $selectedFolder = createStore<IFolder>("Входящие");
+const $selectedFolder = createStore<IFolder | null>(null);
 
 $selectedFolder.on(eventSelectFolder, (_, data) => data);
 
-export {
-  baseUrl,
-  fetchFoldersFx,
-  $folders,
-  eventSelectFolder,
-  $selectedFolder,
-};
+sample({
+  clock: $folders,
+  fn: (clockData) =>
+    clockData.data.length ? clockData.data.at(0)!.folder : null,
+  target: $selectedFolder,
+});
+
+export { fetchFoldersFx, $folders, eventSelectFolder, $selectedFolder };

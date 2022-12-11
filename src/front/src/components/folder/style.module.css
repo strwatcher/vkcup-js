@@ -19,24 +19,13 @@
     width: 0px;
   }
 }
-.light:hover,
-.light:focus {
-  background-color: rgba(0, 16, 61, 0.04);
+.wrapper:hover,
+.wrapper:focus {
+  background-color: var(--hover);
 }
 
 .active,
 .active:hover,
 .active:focus {
-  background-color: rgba(0, 16, 61, 0.08);
-}
-
-.dark:hover,
-.dark:focus {
-  background-color: rgba(256, 256, 256, 0.04);
-}
-
-.darkActive,
-.darkActive:hover,
-.darkActive:focus {
-  background-color: rgba(256, 256, 256, 0.08);
+  background-color: var(--active);
 }

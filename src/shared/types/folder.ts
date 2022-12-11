@@ -1,7 +1,7 @@
 export type ICompleteFolder = {
   folder: IFolder;
-  icon: string;
-  iconLight: string;
+  light: string;
+  dark: string;
 };
 
 export type IFolder =

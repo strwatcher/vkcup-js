@@ -1,7 +1,7 @@
 import React from "react";
-import { ThemeToggler } from "../../components/theme-toggler/theme-toggler";
+import { ThemeToggler } from "../../components/theme-toggler";
 import { Folders } from "../folders";
-import { baseUrl } from "../folders/state";
+import { baseUrl } from "../folders/model";
 import { useTheme } from "../../hooks/use-theme";
 import { SidebarLayout } from "../../components/layouts/sidebar-layout";
 

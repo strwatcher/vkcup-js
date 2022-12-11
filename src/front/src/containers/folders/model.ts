@@ -1,5 +1,6 @@
 import { createEffect, createEvent, createStore } from "effector";
 import { ICompleteFolder, IFolder } from "shared";
+import { createRequestFactory } from "../../services/api/model";
 export type FoldersState = {
   count: number;
   data: Array<ICompleteFolder>;
@@ -7,16 +8,14 @@ export type FoldersState = {
 
 export const baseUrl = "http://localhost:3000/";
 
-export const fetchFoldersFx = createEffect(async () => {
-  const response = await fetch(baseUrl + "folders");
-  const json = (await response.json()) as FoldersState;
-  return json;
-});
+const { $data, requestFx: fetchFoldersFx } =
+  createRequestFactory<FoldersState>("folders");
+
+export { fetchFoldersFx };
 
 export const $folders = createStore<FoldersState>({ count: 0, data: [] });
 
-$folders.on(fetchFoldersFx.doneData, (_, data) => data);
-$folders.on(fetchFoldersFx.fail, () => ({ count: 0, data: [] }));
+$folders.on($data.updates, (state, data) => (data ? data : state));
 
 export const eventSelectFolder = createEvent<IFolder>();
 

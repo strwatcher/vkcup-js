@@ -10,7 +10,7 @@ import {
   baseUrl,
   eventSelectFolder,
   fetchFoldersFx,
-} from "./state";
+} from "./model";
 
 export const Folders: React.FC = () => {
   const { theme } = useTheme();

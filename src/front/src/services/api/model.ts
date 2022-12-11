@@ -1,4 +1,4 @@
-import { createEffect, createStore } from "effector";
+import { createEffect, createStore, Store } from "effector";
 import config from "./config.json";
 
 type IApiConfig = {
@@ -13,9 +13,15 @@ async function request<TReturn>(url: string): Promise<TReturn> {
   return json as TReturn;
 }
 
-export const createRequestFactory = <TReturn>(url: string) => {
+export const createRequestFactory = <TReturn>(
+  url: string,
+  target?: Store<TReturn>
+) => {
   const baseUrl = config.base;
   const requestFx = createEffect(() => request<TReturn>(baseUrl + url));
+  if (target) {
+    target.on(requestFx.doneData, (_, data) => data);
+  }
   const $data = createStore<TReturn | null>(null).on(
     requestFx.doneData,
     (_, data) => data

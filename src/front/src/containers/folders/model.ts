@@ -6,19 +6,25 @@ export type FoldersState = {
   data: Array<ICompleteFolder>;
 };
 
-export const baseUrl = "http://localhost:3000/";
+const baseUrl = "http://localhost:3000/";
 
-const { $data, requestFx: fetchFoldersFx } =
-  createRequestFactory<FoldersState>("folders");
+const $folders = createStore<FoldersState>({ count: 0, data: [] });
 
-export { fetchFoldersFx };
+const { requestFx: fetchFoldersFx } = createRequestFactory<FoldersState>(
+  "folders",
+  $folders
+);
 
-export const $folders = createStore<FoldersState>({ count: 0, data: [] });
+const eventSelectFolder = createEvent<IFolder>();
 
-$folders.on($data.updates, (state, data) => (data ? data : state));
-
-export const eventSelectFolder = createEvent<IFolder>();
-
-export const $selectedFolder = createStore<IFolder>("Входящие");
+const $selectedFolder = createStore<IFolder>("Входящие");
 
 $selectedFolder.on(eventSelectFolder, (_, data) => data);
+
+export {
+  baseUrl,
+  fetchFoldersFx,
+  $folders,
+  eventSelectFolder,
+  $selectedFolder,
+};

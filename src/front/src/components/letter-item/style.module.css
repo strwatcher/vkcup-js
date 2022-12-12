@@ -22,9 +22,9 @@
   background-color: var(--hover);
 }
 
-.active,
-.active:hover,
-.active:focus {
+.selected,
+.selected:hover,
+.selected:focus {
   background-color: var(--active);
 }
 
@@ -67,17 +67,36 @@
 
 .letter:hover .avatar,
 .letter:focus .avatar,
-.active .avatar {
+.selected .avatar {
   display: none;
 }
 
 .letter:hover .checkbox,
 .letter:focus .checkbox,
-.active .checkbox {
+.selected .checkbox {
   display: block;
+}
+
+.author {
+  color: var(--letter-head-text);
+  font-weight: 700;
 }
 
 .content {
   display: flex;
   gap: 8px;
+}
+
+.title {
+  color: var(--letter-head-text);
+  font-weight: 700;
+}
+
+.text {
+  color: var(--letter-text);
+}
+
+.read .author,
+.read .title {
+  font-weight: 400;
 }

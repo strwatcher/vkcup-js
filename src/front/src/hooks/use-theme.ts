@@ -18,6 +18,11 @@ export function useTheme() {
     document.body.style.setProperty("--text", colors.text);
     document.body.style.setProperty("--hover", colors.hover);
     document.body.style.setProperty("--active", colors.active);
+    document.body.style.setProperty("--letter-text", colors.letterText);
+    document.body.style.setProperty(
+      "--letter-head-text",
+      colors.letterHeadText
+    );
   }, [colors]);
 
   return { theme, colors, resources, toggle };

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { LetterState } from "../../containers/letters/model";
 import { joinClasses } from "../../utils/join-classes";
 import s from "./style.module.css";
@@ -7,7 +7,7 @@ type LetterProps = LetterState & {
   onRead: (id: number) => void;
 };
 
-export const Letter: React.FC<LetterProps> = (props) => {
+export const LetterItem: React.FC<LetterProps> = (props) => {
   const date = new Date(props.date);
   const time = `${date.getHours()}:${date
     .getMinutes()

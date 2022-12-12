@@ -1,6 +1,6 @@
 import { useStore } from "effector-react";
 import React from "react";
-import { Letter } from "../../components/letter";
+import { LetterItem } from "../../components/letter-item";
 import { List } from "../../components/list";
 import {
   $letters,
@@ -25,7 +25,7 @@ export const Letters: React.FC = () => {
   const renders = {
     letter: React.useCallback(
       (letter: LetterState) => (
-        <Letter
+        <LetterItem
           {...letter}
           onSelect={callbacks.onSelect}
           onRead={callbacks.onRead}

@@ -1,17 +1,26 @@
 import React from "react";
 import { useStore } from "effector-react";
 import {
-  $icons as $resources,
+  $resources as $resources,
   $theme,
   $themeColors,
+  $themeSize,
   eventToggleTheme,
+  windowWidthChanged,
 } from "../services/theme/theme";
 
 export function useTheme() {
   const theme = useStore($theme);
   const colors = useStore($themeColors);
   const resources = useStore($resources);
+  const size = useStore($themeSize);
+
   const toggle = eventToggleTheme;
+
+  const handleWindowResize = React.useCallback((_: UIEvent) => {
+    windowWidthChanged(window.innerWidth);
+  }, []);
+
   React.useEffect(() => {
     document.body.style.setProperty("--main", colors.main);
     document.body.style.setProperty("--secondary", colors.secondary);
@@ -23,7 +32,10 @@ export function useTheme() {
       "--letter-head-text",
       colors.letterHeadText
     );
+
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
   }, [colors]);
 
-  return { theme, colors, resources, toggle };
+  return { theme, colors, size, resources, toggle };
 }

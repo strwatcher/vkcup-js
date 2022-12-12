@@ -23,8 +23,8 @@ export type Resources = {
 
 export const resourcesMapping: ResourcesMappingType = {
   dark: {
-    logo: "logo.svg",
-    compactLogo: "loco-compact.svg",
+    logo: "logo-light.svg",
+    compactLogo: "logo-compact.svg",
     marked: "marked.svg",
     unmarked: "unmarked.svg",
     menu: "menu-light.svg",
@@ -40,7 +40,7 @@ export const resourcesMapping: ResourcesMappingType = {
   },
   light: {
     logo: "logo.svg",
-    compactLogo: "loco-compact.svg",
+    compactLogo: "logo-compact.svg",
     marked: "marked.svg",
     unmarked: "unmarked.svg",
     menu: "menu.svg",

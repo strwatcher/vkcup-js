@@ -9,3 +9,4 @@ export type ITheme = {
 };
 
 export type IThemeType = "dark" | "light";
+export type IThemeSize = "small" | "big";

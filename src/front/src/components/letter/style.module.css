@@ -1,0 +1,40 @@
+.letter {
+  --avatar-padding: 12px;
+  --avatar-size: 32px;
+
+  display: grid;
+  grid-template-columns:
+    calc(var(--avatar-size) + var(--avatar-padding))
+    1fr
+    3fr
+    44px;
+
+  align-items: center;
+  padding: 8px 11px;
+  background-color: var(--secondary);
+  color: var(--text);
+  border-radius: 12px;
+}
+
+.letter:hover,
+.letter:focus {
+  background-color: var(--hover);
+}
+
+.active,
+.active:hover,
+.active:focus {
+  background-color: var(--active);
+}
+
+.avatar {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: 50%;
+  margin-right: var(--avatar-padding);
+}
+
+.content {
+  display: flex;
+  gap: 8px;
+}

@@ -33,7 +33,7 @@ export const Folders: React.FC = () => {
       (folder: ICompleteFolder) => {
         return (
           <Folder
-            icon={genUrl(folder[theme as keyof ICompleteFolder])}
+            icon={genUrl(folder.icon[theme as keyof ICompleteFolder["icon"]])}
             folder={folder.folder}
             active={folder.folder === stores.selectedFolder}
             onClick={callbacks.selectFolder}

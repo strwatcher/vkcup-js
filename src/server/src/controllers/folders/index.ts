@@ -5,7 +5,9 @@ import { FoldersToIcons, iconsMapping } from "./iconsMapping";
 function createFolder(folder: IFolder, map: FoldersToIcons): ICompleteFolder {
   return {
     folder,
-    ...map[folder],
+    icon: {
+      ...map[folder],
+    },
   };
 }
 

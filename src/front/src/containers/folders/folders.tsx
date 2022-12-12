@@ -48,9 +48,5 @@ export const Folders: React.FC = () => {
     fetchFoldersFx();
   }, []);
 
-  useEffect(() => {
-    console.log(stores.letters);
-  }, [stores.letters]);
-
   return <List items={stores.folders.data} render={renders.folder} />;
 };

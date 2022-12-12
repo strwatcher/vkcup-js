@@ -1,4 +1,4 @@
-import { createEffect, createStore, Store } from "effector";
+import { createEffect, Effect, sample, Store } from "effector";
 import config from "./config.json";
 
 type IApiConfig = {
@@ -18,20 +18,27 @@ async function request<TReturn>(url: string): Promise<TReturn> {
   return json as TReturn;
 }
 
-export const createRequestFactory = <TReturn>(
-  url: string,
-  target?: Store<TReturn>
-) => {
+export function createRequestFactory<TReturn, TFetch = TReturn>({
+  url,
+  target,
+  fn,
+}: {
+  url: string;
+  target: Store<TReturn>;
+  fn?: (data: TFetch) => TReturn;
+}): Effect<string | undefined | void, TFetch> {
   const requestFx = createEffect((params?: string) =>
-    request<TReturn>(genUrl(`${url}${!!params ? params : ""}`))
-  );
-  if (target) {
-    target.on(requestFx.doneData, (_, data) => data);
-  }
-  const $data = createStore<TReturn | null>(null).on(
-    requestFx.doneData,
-    (_, data) => data
+    request<TFetch>(genUrl(`${url}${!!params ? params : ""}`))
   );
 
-  return { requestFx, $data };
-};
+  const safeFn = (data: TFetch) =>
+    fn ? fn(data) : (data as unknown as TReturn);
+
+  sample({
+    clock: requestFx.doneData,
+    fn: (data) => safeFn(data),
+    target,
+  });
+
+  return requestFx;
+}

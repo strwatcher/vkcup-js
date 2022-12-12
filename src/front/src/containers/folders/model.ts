@@ -8,10 +8,10 @@ export type FoldersState = {
 
 const $folders = createStore<FoldersState>({ count: 0, data: [] });
 
-const { requestFx: fetchFoldersFx } = createRequestFactory<FoldersState>(
-  "folders",
-  $folders
-);
+const fetchFoldersFx = createRequestFactory<FoldersState>({
+  url: "folders",
+  target: $folders,
+});
 
 const eventSelectFolder = createEvent<IFolder>();
 

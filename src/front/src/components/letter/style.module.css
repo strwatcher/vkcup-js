@@ -4,6 +4,7 @@
 
   display: grid;
   grid-template-columns:
+    17px
     calc(var(--avatar-size) + var(--avatar-padding))
     1fr
     3fr
@@ -27,11 +28,53 @@
   background-color: var(--active);
 }
 
+.readFlag {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #005ff9;
+}
+
+.read .readFlag {
+  visibility: hidden;
+}
+
+.read:hover .readFlag {
+  background-color: #a5a7ad;
+  visibility: visible;
+}
+
 .avatar {
   width: var(--avatar-size);
   height: var(--avatar-size);
   border-radius: 50%;
   margin-right: var(--avatar-padding);
+}
+
+.checkbox {
+  margin: 0px;
+  padding: 0px;
+  display: none;
+  width: 16px;
+  height: 16px;
+
+  --margin: calc((var(--avatar-size) - 16px) / 2);
+  margin-top: var(--margin);
+  margin-bottom: var(--margin);
+  margin-right: calc(var(--avatar-padding) + var(--margin));
+  justify-self: end;
+}
+
+.letter:hover .avatar,
+.letter:focus .avatar,
+.active .avatar {
+  display: none;
+}
+
+.letter:hover .checkbox,
+.letter:focus .checkbox,
+.active .checkbox {
+  display: block;
 }
 
 .content {

@@ -1,8 +1,10 @@
-import React from "react";
-import { ILetter } from "shared";
+import React, { ChangeEvent } from "react";
+import { LetterState } from "../../containers/letters/model";
+import { joinClasses } from "../../utils/join-classes";
 import s from "./style.module.css";
-type LetterProps = ILetter & {
-  selected: boolean;
+type LetterProps = LetterState & {
+  onSelect: (id: number) => void;
+  onRead: (id: number) => void;
 };
 
 export const Letter: React.FC<LetterProps> = (props) => {
@@ -11,16 +13,27 @@ export const Letter: React.FC<LetterProps> = (props) => {
     .getMinutes()
     .toString()
     .padStart(2, "0")}`;
+
+  const className = React.useMemo(() => {
+    return joinClasses(
+      s.letter,
+      props.read && s.read,
+      props.selected && s.selected
+    );
+  }, [props.read, props.selected]);
+
   return (
-    <div className={s.letter}>
-      {props.selected ? (
-        <input type={"checkbox"} />
-      ) : (
-        <img
-          className={s.avatar}
-          src={props.author.avatar ?? "https://picsum.photos/200"}
-        />
+    <div className={className}>
+      <div className={s.readFlag} onClick={() => props.onRead(props.id)}></div>
+      {!props.selected && (
+        <img className={s.avatar} src={props.author.avatar ?? ""} />
       )}
+      <input
+        type={"checkbox"}
+        className={s.checkbox}
+        onChange={() => props.onSelect(props.id)}
+        checked={props.selected}
+      />
       <span className={s.author}>
         {props.author.name} {props.author.surname}
       </span>

@@ -1,3 +1,5 @@
-export function joinClasses(...classes: Array<string>): string {
-  return classes.join(" ");
+export function joinClasses(
+  ...classes: Array<string | false | null | undefined>
+): string {
+  return classes.filter((className) => !!className).join(" ");
 }

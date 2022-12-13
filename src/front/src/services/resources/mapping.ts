@@ -19,6 +19,8 @@ export type Resources = {
   ticket: string;
   plane: string;
   theme: string;
+  checkbox: string;
+  checkboxChecked: string;
 };
 
 export const resourcesMapping: ResourcesMappingType = {
@@ -37,6 +39,8 @@ export const resourcesMapping: ResourcesMappingType = {
     ticket: "ticket.svg",
     plane: "plane.svg",
     theme: "theme-light.svg",
+    checkbox: "checkbox-dark.svg",
+    checkboxChecked: "checkbox-checked.svg",
   },
   light: {
     logo: "logo.svg",
@@ -53,5 +57,7 @@ export const resourcesMapping: ResourcesMappingType = {
     ticket: "ticket.svg",
     plane: "plane.svg",
     theme: "theme.svg",
+    checkbox: "checkbox-light.svg",
+    checkboxChecked: "checkbox-checked.svg",
   },
 };

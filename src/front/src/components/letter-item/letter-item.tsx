@@ -1,5 +1,6 @@
 import React from "react";
 import { LetterState } from "../../containers/letters/model";
+import { SimpleCheckbox } from "../../containers/simple-checkbox";
 import { joinClasses } from "../../utils/join-classes";
 import s from "./style.module.css";
 type LetterProps = LetterState & {
@@ -28,12 +29,12 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
       {!props.selected && (
         <img className={s.avatar} src={props.author.avatar ?? ""} />
       )}
-      <input
-        type={"checkbox"}
-        className={s.checkbox}
-        onChange={() => props.onSelect(props.id)}
-        checked={props.selected}
-      />
+      <div className={s.checkbox}>
+        <SimpleCheckbox
+          state={props.selected ? "checked" : "unchecked"}
+          onChange={() => props.onSelect(props.id)}
+        />
+      </div>
       <span className={s.author}>
         {props.author.name} {props.author.surname}
       </span>

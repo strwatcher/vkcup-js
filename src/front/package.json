@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build --outDir=../../dist/",
-    "preview": "vite preview",
     "start:tsc-watch": "tsc --watch",
     "start:vite-watch": "vite build --outDir=../../dist/ --watch",
-    "start": "concurrently npm:start:*"
+    "start": "concurrently npm:start:*",
+    "generate:component": "npx generate-react-cli component",
+    "generate:container": "npx generate-react-cli component --type=container"
   },
   "dependencies": {
     "effector": "^22.4.0",
@@ -23,6 +23,7 @@
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
     "concurrently": "^7.6.0",
+    "generate-react-cli": "^8.0.1",
     "sass": "^1.56.1",
     "typescript": "^4.6.4",
     "vite": "^3.2.3",

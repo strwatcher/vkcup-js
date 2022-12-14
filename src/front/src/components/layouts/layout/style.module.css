@@ -14,17 +14,19 @@
 }
 
 .content {
+  --sidebar-width: 232px;
   display: grid;
-  grid-template-columns: 232px 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr;
   height: calc(100vh - var(--header-height));
   gap: 12px;
   padding: 16px 12px;
 }
 @media screen and (max-width: 768px) {
   .content {
-    grid-template-columns: 40px 1fr;
+    --sidebar-width: 40px;
   }
 }
 .content > div:nth-child(2) {
+  width: calc(100vw - var(--sidebar-width) - 36px);
   overflow: auto;
 }

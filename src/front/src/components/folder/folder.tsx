@@ -6,9 +6,7 @@ import s from "./style.module.css";
 export interface FolderProps {
   folder: IFolder;
   icon: string;
-
   active: boolean;
-
   onClick: (folder: IFolder) => void;
 }
 

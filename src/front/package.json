@@ -8,8 +8,10 @@
     "start:tsc-watch": "tsc --watch",
     "start:vite-watch": "vite build --outDir=../../dist/ --watch",
     "start": "concurrently npm:start:*",
-    "generate:component": "npx generate-react-cli component",
-    "generate:container": "npx generate-react-cli component --type=container"
+    "generate:cm": "npx generate-react-cli component",
+    "generate:cn": "npx generate-react-cli component --type=container",
+    "generate:e": "npx generate-react-cli component --type=element",
+    "generate:l": "npx generate-react-cli component --type=layout"
   },
   "dependencies": {
     "effector": "^22.4.0",

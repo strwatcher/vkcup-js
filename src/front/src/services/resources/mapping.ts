@@ -21,6 +21,8 @@ export type Resources = {
   theme: string;
   checkbox: string;
   checkboxChecked: string;
+  read: string;
+  unread: string;
 };
 
 export const resourcesMapping: ResourcesMappingType = {
@@ -41,6 +43,8 @@ export const resourcesMapping: ResourcesMappingType = {
     theme: "theme-light.svg",
     checkbox: "checkbox-dark.svg",
     checkboxChecked: "checkbox-checked.svg",
+    read: "read.svg",
+    unread: "unread.svg",
   },
   light: {
     logo: "logo.svg",
@@ -59,5 +63,7 @@ export const resourcesMapping: ResourcesMappingType = {
     theme: "theme.svg",
     checkbox: "checkbox-light.svg",
     checkboxChecked: "checkbox-checked.svg",
+    read: "read.svg",
+    unread: "unread.svg",
   },
 };

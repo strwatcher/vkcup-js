@@ -1,6 +1,7 @@
 import React from "react";
 import { useStore } from "effector-react";
 import {
+  $flags,
   $resources as $resources,
   $theme,
   $themeColors,
@@ -14,6 +15,7 @@ export function useTheme() {
   const colors = useStore($themeColors);
   const resources = useStore($resources);
   const size = useStore($themeSize);
+  const flags = useStore($flags);
 
   const toggle = eventToggleTheme;
 
@@ -37,5 +39,5 @@ export function useTheme() {
     return () => window.removeEventListener("resize", handleWindowResize);
   }, [colors]);
 
-  return { theme, colors, size, resources, toggle };
+  return { theme, colors, size, resources, flags, toggle };
 }

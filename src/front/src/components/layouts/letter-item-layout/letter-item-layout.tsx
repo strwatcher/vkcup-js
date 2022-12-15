@@ -7,6 +7,7 @@ export type LetterItemLayoutProps = {
   selected: boolean;
   read: boolean;
   hoverRef: RefObject<HTMLDivElement>;
+  hasAttachments: boolean;
 };
 
 export const LetterItemLayout: React.FC<LetterItemLayoutProps> = (props) => {
@@ -14,7 +15,8 @@ export const LetterItemLayout: React.FC<LetterItemLayoutProps> = (props) => {
     return joinClasses(
       s.letter,
       props.read && s.read,
-      props.selected && s.selected
+      props.selected && s.selected,
+      props.hasAttachments && s.hasAttachments
     );
   }, [props.read, props.selected]);
 

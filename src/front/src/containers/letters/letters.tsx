@@ -1,5 +1,6 @@
 import { useStore } from "effector-react";
 import React from "react";
+import { ThreeVariantState } from "../../components/elements/three-state-checkbox";
 import { LetterItem } from "../../components/letter-item";
 import { List } from "../../components/list";
 import {
@@ -7,6 +8,9 @@ import {
   LetterState,
   letterSelectionToggled,
   letterReadToggled,
+  letterImportantSet,
+  letterUnset,
+  letterBookmarkSet,
 } from "./model";
 
 export const Letters: React.FC = () => {
@@ -20,6 +24,22 @@ export const Letters: React.FC = () => {
     onRead: React.useCallback((id: number) => {
       letterReadToggled(id);
     }, []),
+    onMarkImportant: React.useCallback(
+      (id: number, state: ThreeVariantState) => {
+        switch (state) {
+          case "unset":
+            letterBookmarkSet(id);
+            break;
+          case "first":
+            letterImportantSet(id);
+            break;
+          case "second":
+            letterUnset(id);
+            break;
+        }
+      },
+      []
+    ),
   };
 
   const renders = {
@@ -29,6 +49,7 @@ export const Letters: React.FC = () => {
           {...letter}
           onSelect={callbacks.onSelect}
           onRead={callbacks.onRead}
+          onMarkImportant={callbacks.onMarkImportant}
         />
       ),
       []

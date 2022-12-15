@@ -56,4 +56,38 @@ const { letterSelectionToggled, letterReadToggled } = createApi($letters, {
   }),
 });
 
-export { fetchLettersFx, $letters, letterSelectionToggled, letterReadToggled };
+const { letterImportantSet, letterBookmarkSet, letterUnset } = createApi(
+  $letters,
+  {
+    letterImportantSet: (letters, letterId) => ({
+      count: letters.count,
+      data: letters.data.map((letter) =>
+        letter.id === letterId ? { ...letter, important: true } : letter
+      ),
+    }),
+    letterBookmarkSet: (letters, letterId) => ({
+      count: letters.count,
+      data: letters.data.map((letter) =>
+        letter.id === letterId ? { ...letter, bookmark: true } : letter
+      ),
+    }),
+    letterUnset: (letters, letterId) => ({
+      count: letters.count,
+      data: letters.data.map((letter) =>
+        letter.id === letterId
+          ? { ...letter, bookmark: false, important: false }
+          : letter
+      ),
+    }),
+  }
+);
+
+export {
+  fetchLettersFx,
+  $letters,
+  letterSelectionToggled,
+  letterReadToggled,
+  letterImportantSet,
+  letterBookmarkSet,
+  letterUnset,
+};

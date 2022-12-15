@@ -14,7 +14,7 @@ export const SlicedTitleContent: React.FC<SlicedTitleContentProps> = (
   return (
     <div className={joinClasses(s.content, props.read && s.read)}>
       <span className={s.title}>{props.title}</span>
-      <span className={s.text}>{props.text}</span>
+      {props.text}
     </div>
   );
 };

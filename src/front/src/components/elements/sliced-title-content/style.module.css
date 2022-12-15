@@ -1,18 +1,14 @@
 .content {
-  display: flex;
-  gap: 8px;
-  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--letter-text);
 }
 
 .title {
+  margin-right: 8px;
   color: var(--letter-head-text);
   font-weight: 700;
-}
-
-.text {
-  color: var(--letter-text);
 }
 
 .read .author,

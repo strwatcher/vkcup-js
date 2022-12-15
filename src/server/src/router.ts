@@ -1,5 +1,6 @@
 import { ServerResponse } from "http";
 import { IQS } from "shared";
+import { getFlags } from "./controllers/flags";
 import { getFolders } from "./controllers/folders";
 import { getLettersByFolder } from "./controllers/letters";
 import { getStatic } from "./controllers/static";
@@ -15,7 +16,9 @@ export function route(
     const folder = query.folder;
     getLettersByFolder(response, db, folder);
   } else if (resource === "folders") {
-    getFolders(response, db);
+    getFolders(response);
+  } else if (resource === "flags") {
+    getFlags(response, db);
   } else {
     getStatic(response, resource);
   }

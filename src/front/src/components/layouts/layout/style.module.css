@@ -21,12 +21,14 @@
   gap: 12px;
   padding: 16px 12px;
 }
+
+.content > div:nth-child(2) {
+  width: calc(100vw - var(--sidebar-width) - 36px);
+  overflow: auto;
+}
+
 @media screen and (max-width: 768px) {
   .content {
     --sidebar-width: 40px;
   }
-}
-.content > div:nth-child(2) {
-  width: calc(100vw - var(--sidebar-width) - 36px);
-  overflow: auto;
 }

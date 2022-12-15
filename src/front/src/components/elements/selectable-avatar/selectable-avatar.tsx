@@ -1,8 +1,10 @@
 import React from "react";
-import { SimpleCheckbox } from "../../../containers/simple-checkbox";
-import { SimpleCheckboxState } from "../../../containers/simple-checkbox/simple-checkbox";
 import { joinClasses } from "../../../utils/join-classes";
 import { Avatar } from "../avatar";
+import {
+  SimpleCheckbox,
+  SimpleCheckboxState,
+} from "../simple-checbox/simple-checkbox";
 import s from "./style.module.css";
 
 export type SelectableAvatarProps = {

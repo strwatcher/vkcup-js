@@ -1,0 +1,10 @@
+.author {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  font-weight: 700;
+}
+
+.read {
+  font-weight: 400;
+}

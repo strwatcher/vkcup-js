@@ -1,14 +1,12 @@
 .letter {
-  --avatar-padding: 12px;
-  --avatar-size: 32px;
-
   display: grid;
   grid-template-columns:
     17px
-    calc(var(--avatar-size) + var(--avatar-padding))
-    300px
+    48px
+    160px
+    64px
     1fr
-    44px;
+    26px;
 
   align-items: center;
   height: 48px;
@@ -16,6 +14,17 @@
   background-color: var(--secondary);
   color: var(--text);
   border-radius: 12px;
+}
+
+.letter.hasAttachments {
+  grid-template-columns:
+    17px
+    48px
+    160px
+    64px
+    1fr
+    26px
+    26px;
 }
 
 .letter:hover,

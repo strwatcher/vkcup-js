@@ -1,6 +1,6 @@
 import React from "react";
-import { Checkbox } from "../../components/elements/checkbox";
-import { genUrl } from "../../services/api/model";
+import { genUrl } from "../../../services/api/model";
+import { Checkbox } from "../checkbox";
 
 export type SimpleCheckboxState = "checked" | "unchecked";
 

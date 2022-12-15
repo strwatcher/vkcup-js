@@ -18,7 +18,7 @@ export const Folder: React.FC<FolderProps> = (props) => {
       onClick={() => props.onClick(props.folder)}
     >
       <img src={props.icon} alt="" />
-      <span>{props.folder}</span>
+      <span className={s.title}>{props.folder}</span>
     </div>
   );
 };

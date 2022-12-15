@@ -4,6 +4,7 @@ import { useHover } from "../../hooks/use-hover";
 import { useTheme } from "../../hooks/use-theme";
 import { genUrl } from "../../services/api/model";
 import { AttachmentsIndicator } from "../elements/attachments-indicator";
+import { DateTimeIndicator } from "../elements/date-time-indicator";
 import { FlagIndicator } from "../elements/flag-indicator";
 import { SelectableAvatar } from "../elements/selectable-avatar";
 import { SimpleCheckbox } from "../elements/simple-checbox";
@@ -16,9 +17,9 @@ import {
 import { LetterItemLayout } from "../layouts/letter-item-layout";
 
 export type LetterProps = LetterState & {
-  onSelect: (id: number) => void;
-  onRead: (id: number) => void;
-  onMarkImportant: (id: number, state: ThreeVariantState) => void;
+  onSelect: (id: string) => void;
+  onRead: (id: string) => void;
+  onMarkImportant: (id: string, state: ThreeVariantState) => void;
 };
 
 export const LetterItem: React.FC<LetterProps> = (props) => {
@@ -65,6 +66,7 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
       hoverRef={letterRef}
       read={props.read}
       selected={props.selected}
+      hasFlag={!!props.flag}
       hasAttachments={!!props.doc}
     >
       <SimpleCheckbox
@@ -108,6 +110,7 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
           attachments={props.doc}
         />
       )}
+      <DateTimeIndicator date={props.date} />
     </LetterItemLayout>
   );
 };

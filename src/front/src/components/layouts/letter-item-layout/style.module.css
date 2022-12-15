@@ -6,7 +6,7 @@
     160px
     64px
     1fr
-    26px;
+    60px;
 
   align-items: center;
   height: 48px;
@@ -16,15 +16,44 @@
   border-radius: 12px;
 }
 
-.letter.hasAttachments {
+.letter > *:nth-child(5) {
+  margin-right: 24px;
+}
+
+.letter.hasAttachments,
+.letter.hasFlag {
   grid-template-columns:
     17px
     48px
     160px
     64px
     1fr
-    26px
-    26px;
+    32px
+    60px;
+}
+
+.letter.hasAttachments > *:nth-child(6),
+.letter.hasFlag > *:nth-child(6) {
+  margin-right: 16px;
+}
+
+.letter.hasAttachments.hasFlag {
+  grid-template-columns:
+    17px
+    48px
+    160px
+    64px
+    1fr
+    27.5px
+    32px
+    60px;
+}
+.letter.hasAttachments.hasFlag > *:nth-child(6) {
+  margin-right: 10.5px;
+}
+
+.letter.hasAttachments.hasFlag > *:nth-child(7) {
+  margin-right: 16px;
 }
 
 .letter:hover,

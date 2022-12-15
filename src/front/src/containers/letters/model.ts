@@ -2,6 +2,7 @@ import { createApi, createEvent, createStore, Event, sample } from "effector";
 import { ILetter, ILetters } from "shared";
 import { createRequestFactory } from "../../services/api/model";
 import { $selectedFolder } from "../folders/model";
+import { v4 as uuid4 } from "uuid";
 
 type RawLettersState = {
   data: ILetters;
@@ -15,7 +16,7 @@ export type LettersState = {
 
 export type LetterState = ILetter & {
   selected: boolean;
-  id: number;
+  id: string;
 };
 
 const $letters = createStore<LettersState>({ data: [], count: 0 });
@@ -24,10 +25,10 @@ const fetchLettersFx = createRequestFactory({
   url: "letters/",
   fn: (letters: RawLettersState) => ({
     count: letters.count,
-    data: letters.data.map((letter, index) => ({
+    data: letters.data.map((letter) => ({
       ...letter,
       selected: false,
-      id: index,
+      id: uuid4(),
     })),
   }),
   target: $letters,

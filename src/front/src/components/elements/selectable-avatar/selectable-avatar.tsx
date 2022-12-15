@@ -8,13 +8,13 @@ import {
 import s from "./style.module.css";
 
 export type SelectableAvatarProps = {
-  id: number;
+  id: string;
   selected: boolean;
   avatarSrc: string;
   images: {
     [P in SimpleCheckboxState]: string;
   };
-  onChange: (id: number) => void;
+  onChange: (id: string) => void;
   hovered: boolean;
 };
 

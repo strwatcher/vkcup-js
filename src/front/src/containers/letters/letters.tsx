@@ -18,14 +18,14 @@ export const Letters: React.FC = () => {
     letters: useStore($letters),
   };
   const callbacks = {
-    onSelect: React.useCallback((id: number) => {
+    onSelect: React.useCallback((id: string) => {
       letterSelectionToggled(id);
     }, []),
-    onRead: React.useCallback((id: number) => {
+    onRead: React.useCallback((id: string) => {
       letterReadToggled(id);
     }, []),
     onMarkImportant: React.useCallback(
-      (id: number, state: ThreeVariantState) => {
+      (id: string, state: ThreeVariantState) => {
         switch (state) {
           case "unset":
             letterBookmarkSet(id);

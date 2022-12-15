@@ -18,11 +18,13 @@
     "effector-react": "^22.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "shared": "file:../shared"
+    "shared": "file:../shared",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "@types/uuid": "^9.0.0",
     "@vitejs/plugin-react": "^2.2.0",
     "concurrently": "^7.6.0",
     "generate-react-cli": "^8.0.1",

@@ -6,6 +6,7 @@ import { genUrl } from "../../services/api/model";
 import { AttachmentsIndicator } from "../elements/attachments-indicator";
 import { DateTimeIndicator } from "../elements/date-time-indicator";
 import { FlagIndicator } from "../elements/flag-indicator";
+import { ReadIndicator } from "../elements/read-indicator";
 import { SelectableAvatar } from "../elements/selectable-avatar";
 import { SimpleCheckbox } from "../elements/simple-checbox";
 import { SlicedAuthor } from "../elements/sliced-author";
@@ -69,10 +70,11 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
       hasFlag={!!props.flag}
       hasAttachments={!!props.doc}
     >
-      <SimpleCheckbox
-        checked={props.read}
+      <ReadIndicator
+        read={props.read}
         images={images.readCheckboxImages}
         onChange={() => props.onRead(props.id)}
+        hovered={hovered}
       />
 
       <SelectableAvatar

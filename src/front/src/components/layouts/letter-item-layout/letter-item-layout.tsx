@@ -20,7 +20,7 @@ export const LetterItemLayout: React.FC<LetterItemLayoutProps> = (props) => {
       props.hasAttachments && s.hasAttachments,
       props.hasFlag && s.hasFlag
     );
-  }, [props.read, props.selected]);
+  }, [props.read, props.selected, props.hasAttachments, props.hasFlag]);
 
   return (
     <div tabIndex={0} ref={props.hoverRef} className={className}>

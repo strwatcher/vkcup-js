@@ -6,7 +6,8 @@
     "hover": "#00103D0A",
     "active": "#00103D14",
     "letterText": "#87898F",
-    "letterHeadText": "#2C2D2E"
+    "letterHeadText": "#2C2D2E",
+    "separator": "#00103D1F"
   },
   "dark": {
     "main": "#19191A",
@@ -15,6 +16,7 @@
     "hover": "#FFFFFF0A",
     "active": "#FFFFFF14",
     "letterText": "#8C8E94",
-    "letterHeadText": "#E7E8EA"
+    "letterHeadText": "#E7E8EA",
+    "separator": "#00000066"
   }
 }

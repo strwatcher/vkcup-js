@@ -34,6 +34,7 @@ export function useTheme() {
       "--letter-head-text",
       colors.letterHeadText
     );
+    document.body.style.setProperty("--separator", colors.separator);
 
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);

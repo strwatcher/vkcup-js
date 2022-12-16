@@ -14,7 +14,6 @@ export const App: React.FC = () => {
     return size === "big" ? resources.logo : resources.compactLogo;
   }, [resources, size]);
 
-  console.log(genUrl(logo));
   return (
     <Layout head={<Header logo={<img src={genUrl(logo)} />} />}>
       <Sidebar />

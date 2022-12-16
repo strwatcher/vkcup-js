@@ -1,4 +1,4 @@
-import { createApi, createEvent, createStore, Event, sample } from "effector";
+import { createApi, createEvent, createStore, sample } from "effector";
 import { ILetter, ILetters } from "shared";
 import { createRequestFactory } from "../../services/api/model";
 import { $selectedFolder } from "../folders/model";
@@ -17,9 +17,11 @@ export type LettersState = {
 export type LetterState = ILetter & {
   selected: boolean;
   id: string;
+  attachmentsOpened: boolean;
 };
 
 const $letters = createStore<LettersState>({ data: [], count: 0 });
+const $justFetched = createStore<boolean>(false);
 
 const fetchLettersFx = createRequestFactory({
   url: "letters/",
@@ -29,6 +31,7 @@ const fetchLettersFx = createRequestFactory({
       ...letter,
       selected: false,
       id: uuid4(),
+      attachmentsOpened: false,
     })),
   }),
   target: $letters,
@@ -38,6 +41,20 @@ sample({
   clock: $selectedFolder,
   fn: (clockData) => "?folder=" + clockData,
   target: fetchLettersFx,
+});
+
+sample({
+  clock: fetchLettersFx.done,
+  fn: () => true,
+  target: $justFetched,
+});
+
+const scrolledUp = createEvent();
+
+sample({
+  clock: scrolledUp,
+  fn: () => false,
+  target: $justFetched,
 });
 
 const { letterSelectionToggled, letterReadToggled } = createApi($letters, {
@@ -83,6 +100,21 @@ const { letterImportantSet, letterBookmarkSet, letterUnset } = createApi(
   }
 );
 
+const { openAttachments, closeAttachments } = createApi($letters, {
+  openAttachments: (letters, letterId) => ({
+    count: letters.count,
+    data: letters.data.map((letter) =>
+      letter.id === letterId ? { ...letter, attachmentsOpened: true } : letter
+    ),
+  }),
+  closeAttachments: (letters, letterId) => ({
+    count: letters.count,
+    data: letters.data.map((letter) =>
+      letter.id === letterId ? { ...letter, attachmentsOpened: false } : letter
+    ),
+  }),
+});
+
 export {
   fetchLettersFx,
   $letters,
@@ -91,4 +123,8 @@ export {
   letterImportantSet,
   letterBookmarkSet,
   letterUnset,
+  openAttachments,
+  closeAttachments,
+  $justFetched,
+  scrolledUp,
 };

@@ -6,6 +6,7 @@ export type ITheme = {
   active: string;
   letterText: string;
   letterHeadText: string;
+  separator: string;
 };
 
 export type IThemeType = "dark" | "light";

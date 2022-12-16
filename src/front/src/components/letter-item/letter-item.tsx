@@ -8,7 +8,6 @@ import { DateTimeIndicator } from "../elements/date-time-indicator";
 import { FlagIndicator } from "../elements/flag-indicator";
 import { ReadIndicator } from "../elements/read-indicator";
 import { SelectableAvatar } from "../elements/selectable-avatar";
-import { SimpleCheckbox } from "../elements/simple-checbox";
 import { SlicedAuthor } from "../elements/sliced-author";
 import { SlicedTitleContent } from "../elements/sliced-title-content";
 import {
@@ -21,6 +20,8 @@ export type LetterProps = LetterState & {
   onSelect: (id: string) => void;
   onRead: (id: string) => void;
   onMarkImportant: (id: string, state: ThreeVariantState) => void;
+  onToggleAttachments: (id: string, opened: boolean) => void;
+  onCloseAttachments: (id: string) => void;
 };
 
 export const LetterItem: React.FC<LetterProps> = (props) => {
@@ -110,6 +111,11 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
         <AttachmentsIndicator
           icon={genUrl(resources.attachment)}
           attachments={props.doc}
+          opened={props.attachmentsOpened}
+          onToggle={() =>
+            props.onToggleAttachments(props.id, props.attachmentsOpened)
+          }
+          onClose={() => props.onCloseAttachments(props.id)}
         />
       )}
       <DateTimeIndicator date={props.date} />

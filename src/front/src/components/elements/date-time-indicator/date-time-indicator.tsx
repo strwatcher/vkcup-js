@@ -11,6 +11,7 @@ export const DateTimeIndicator: React.FC<DateTimeIndicatorProps> = (props) => {
       "янв",
       "фев",
       "мар",
+      "апр",
       "мая",
       "июн",
       "июл",

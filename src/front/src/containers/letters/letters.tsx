@@ -82,7 +82,7 @@ export const Letters: React.FC = () => {
 
   return (
     <div ref={scrollRef}>
-      <List render={renders.letter} items={stores.letters.data} background />
+      <List render={renders.letter} items={stores.letters.data} />
     </div>
   );
 };

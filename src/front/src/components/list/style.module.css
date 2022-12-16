@@ -2,8 +2,3 @@
   display: flex;
   flex-direction: column;
 }
-
-.background {
-  background-color: var(--secondary);
-  border-radius: 12px;
-}

@@ -23,6 +23,8 @@
 }
 
 .content > div:nth-child(2) {
+  background-color: var(--secondary);
+  border-radius: 12px;
   width: calc(100vw - var(--sidebar-width) - 36px);
   overflow: auto;
 }

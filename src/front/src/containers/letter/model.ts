@@ -12,6 +12,18 @@ sample({
   target: $currentLetter,
 });
 
+sample({
+  clock: openLetter,
+  source: $letters,
+  fn: (letters, id) => ({
+    count: letters.count,
+    data: letters.data.map((letter) =>
+      letter.id === id ? { ...letter, read: true } : letter
+    ),
+  }),
+  target: $letters,
+});
+
 const closeLetter = createEvent();
 
 $currentLetter.on(closeLetter, () => null);

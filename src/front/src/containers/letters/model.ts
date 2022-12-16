@@ -115,6 +115,8 @@ const { openAttachments, closeAttachments } = createApi($letters, {
   }),
 });
 
+$letters.watch(console.log);
+
 export {
   fetchLettersFx,
   $letters,

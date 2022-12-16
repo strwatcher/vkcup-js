@@ -6,6 +6,8 @@
 }
 
 .head {
+  display: flex;
+  align-items: center;
   width: 100vw;
   height: var(--header-height);
   background-color: var(--secondary);

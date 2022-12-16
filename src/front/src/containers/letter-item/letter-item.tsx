@@ -1,27 +1,27 @@
 import React from "react";
+import { AttachmentsIndicator } from "../../components/elements/attachments-indicator";
+import { DateTimeIndicator } from "../../components/elements/date-time-indicator";
+import { FlagIndicator } from "../../components/elements/flag-indicator";
+import { ReadIndicator } from "../../components/elements/read-indicator";
+import { SelectableAvatar } from "../../components/elements/selectable-avatar";
+import { SlicedAuthor } from "../../components/elements/sliced-author";
+import { SlicedTitleContent } from "../../components/elements/sliced-title-content";
+import {
+  ThreeStateCheckbox,
+  ThreeVariantState,
+} from "../../components/elements/three-state-checkbox";
+import { LetterItemLayout } from "../../components/layouts/letter-item-layout";
 import { LetterState } from "../../containers/letters/model";
 import { useHover } from "../../hooks/use-hover";
 import { useTheme } from "../../hooks/use-theme";
 import { genUrl } from "../../services/api/model";
-import { AttachmentsIndicator } from "../elements/attachments-indicator";
-import { DateTimeIndicator } from "../elements/date-time-indicator";
-import { FlagIndicator } from "../elements/flag-indicator";
-import { ReadIndicator } from "../elements/read-indicator";
-import { SelectableAvatar } from "../elements/selectable-avatar";
-import { SlicedAuthor } from "../elements/sliced-author";
-import { SlicedTitleContent } from "../elements/sliced-title-content";
-import {
-  ThreeStateCheckbox,
-  ThreeVariantState,
-} from "../elements/three-state-checkbox";
-import { LetterItemLayout } from "../layouts/letter-item-layout";
 
 export type LetterProps = LetterState & {
   onSelect: (id: string) => void;
   onRead: (id: string) => void;
   onMarkImportant: (id: string, state: ThreeVariantState) => void;
   onToggleAttachments: (id: string, opened: boolean) => void;
-  onCloseAttachments: (id: string) => void;
+  onOpen: (id: string) => void;
 };
 
 export const LetterItem: React.FC<LetterProps> = (props) => {
@@ -70,6 +70,7 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
       selected={props.selected}
       hasFlag={!!props.flag}
       hasAttachments={!!props.doc}
+      onClick={() => props.onOpen(props.id)}
     >
       <ReadIndicator
         read={props.read}
@@ -115,7 +116,6 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
           onToggle={() =>
             props.onToggleAttachments(props.id, props.attachmentsOpened)
           }
-          onClose={() => props.onCloseAttachments(props.id)}
         />
       )}
       <DateTimeIndicator date={props.date} />

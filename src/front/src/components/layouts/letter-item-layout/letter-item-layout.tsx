@@ -9,6 +9,7 @@ export type LetterItemLayoutProps = {
   hoverRef: RefObject<HTMLDivElement>;
   hasAttachments: boolean;
   hasFlag: boolean;
+  onClick: () => void;
 };
 
 export const LetterItemLayout: React.FC<LetterItemLayoutProps> = (props) => {
@@ -23,7 +24,12 @@ export const LetterItemLayout: React.FC<LetterItemLayoutProps> = (props) => {
   }, [props.read, props.selected, props.hasAttachments, props.hasFlag]);
 
   return (
-    <div tabIndex={0} ref={props.hoverRef} className={className}>
+    <div
+      onClick={props.onClick}
+      tabIndex={0}
+      ref={props.hoverRef}
+      className={className}
+    >
       {props.children}
     </div>
   );

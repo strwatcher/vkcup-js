@@ -1,0 +1,16 @@
+.back {
+  display: flex;
+  gap: 19.5px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .backSign {
+    display: none;
+  }
+}
+
+.backSign {
+  color: var(--text);
+  font-weight: 500;
+}

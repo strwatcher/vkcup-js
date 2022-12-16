@@ -27,7 +27,7 @@ export const SelectableAvatar: React.FC<SelectableAvatarProps> = (props) => {
   }, [props.selected, props.hovered]);
 
   return (
-    <div className={className}>
+    <div className={className} onClick={(e) => e.stopPropagation()}>
       {!props.selected && (
         <div className={s.avatar}>
           <Avatar src={props.avatarSrc ?? ""} />

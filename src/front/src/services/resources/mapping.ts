@@ -9,6 +9,7 @@ export type IThemedResources = {
   attachment: string;
   theme: string;
   checkbox: string;
+  arrowBack: string;
 };
 
 export type INotThemedResources = {
@@ -36,12 +37,14 @@ export const resourcesMapping: IResourcesMapping = {
     attachment: "attachment-light.svg",
     theme: "theme-light.svg",
     checkbox: "checkbox-dark.svg",
+    arrowBack: "arrow-back-light.svg",
   },
   light: {
     menu: "menu.svg",
     attachment: "attachment.svg",
     theme: "theme.svg",
     checkbox: "checkbox-light.svg",
+    arrowBack: "arrow-back.svg",
   },
   notThemed: {
     logo: "logo.svg",

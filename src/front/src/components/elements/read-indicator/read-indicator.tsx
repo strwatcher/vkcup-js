@@ -21,6 +21,7 @@ export const ReadIndicator: React.FC<ReadIndicatorProps> = (props) => {
         props.hovered && s.hovered,
         props.read && s.read
       )}
+      onClick={(e) => e.stopPropagation()}
     >
       <SimpleCheckbox
         images={props.images}

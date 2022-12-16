@@ -10,15 +10,19 @@ export type IAttachmentItem = {
 export type AttachmentItemProps = IAttachmentItem;
 
 export const AttachmentItem: React.FC<AttachmentItemProps> = (props) => {
-  const openImageInNewWindow = React.useCallback(() => {
-    const newWindow = window.open("about:blank");
-    const image = newWindow!.document.createElement("img");
-    image.src = props.bytes;
-    newWindow?.document.body.appendChild(image);
-  }, [props.name, props.bytes]);
+  const openImageInNewWindow = React.useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      const newWindow = window.open("about:blank");
+      const image = newWindow!.document.createElement("img");
+      image.src = props.bytes;
+      newWindow?.document.body.appendChild(image);
+    },
+    [props.name, props.bytes]
+  );
 
   return (
-    <div className={s.wrapper}>
+    <div className={s.wrapper} onClick={openImageInNewWindow}>
       <img src={props.bytes} className={s.preview} />
       <span className={s.info}>
         {`${props.name}.jpg ${bToMb(base64Size(props.bytes)).toFixed(2)} MB`}

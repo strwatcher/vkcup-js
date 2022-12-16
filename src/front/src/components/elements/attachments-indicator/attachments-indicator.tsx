@@ -2,7 +2,7 @@ import React from "react";
 import { useClickOutside } from "../../../hooks/use-click-outside";
 import { joinClasses } from "../../../utils/join-classes";
 import { List } from "../../list";
-import { AttachmentItem, IAttachmentItem } from "../attachment-item";
+import { AttachmentItem } from "../attachment-item";
 import s from "./style.module.css";
 
 export type AttachmentsIndicatorProps = {
@@ -10,12 +10,18 @@ export type AttachmentsIndicatorProps = {
   attachments: any;
   opened: boolean;
   onToggle: () => void;
-  onClose: () => void;
 };
 
 export const AttachmentsIndicator: React.FC<AttachmentsIndicatorProps> = (
   props
 ) => {
+  const callbacks = {
+    toggle: React.useCallback((e: React.MouseEvent) => {
+      e.stopPropagation();
+      props.onToggle();
+    }, []),
+  };
+
   const indicatorRef = React.useRef(null);
   const popupRef = React.useRef(null);
 
@@ -42,7 +48,7 @@ export const AttachmentsIndicator: React.FC<AttachmentsIndicatorProps> = (
         ref={indicatorRef}
         src={props.icon}
         className={s.indicator}
-        onClick={props.onToggle}
+        onClick={callbacks.toggle}
       />
       <div
         ref={popupRef}

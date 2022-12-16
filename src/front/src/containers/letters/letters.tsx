@@ -1,9 +1,10 @@
 import { useStore } from "effector-react";
 import React, { useRef } from "react";
 import { ThreeVariantState } from "../../components/elements/three-state-checkbox";
-import { LetterItem } from "../../components/letter-item";
 import { List } from "../../components/list";
 import { useScrollTop } from "../../hooks/use-scroll-top";
+import { LetterItem } from "../letter-item";
+import { openLetter } from "../letter/model";
 import {
   $letters,
   LetterState,
@@ -49,8 +50,9 @@ export const Letters: React.FC = () => {
     onToggleAttachments: React.useCallback((id: string, opened: boolean) => {
       opened ? closeAttachments(id) : openAttachments(id);
     }, []),
-    onCloseAttachments: React.useCallback((id: string) => {
-      closeAttachments(id);
+
+    onOpenLetter: React.useCallback((id: string) => {
+      openLetter(id);
     }, []),
   };
 
@@ -63,7 +65,7 @@ export const Letters: React.FC = () => {
           onRead={callbacks.onRead}
           onMarkImportant={callbacks.onMarkImportant}
           onToggleAttachments={callbacks.onToggleAttachments}
-          onCloseAttachments={callbacks.onCloseAttachments}
+          onOpen={callbacks.onOpenLetter}
         />
       ),
       []

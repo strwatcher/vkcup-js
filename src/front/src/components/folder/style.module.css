@@ -27,5 +27,6 @@
 .active,
 .active:hover,
 .active:focus {
+  font-weight: 700;
   background-color: var(--active);
 }

@@ -13,7 +13,10 @@ export function Checkbox<TState extends string>(
   props: CheckboxProps<TState>
 ): JSX.Element {
   const onClick = React.useCallback(
-    () => props.setState(props.state),
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      props.setState(props.state);
+    },
     [props.state]
   );
 

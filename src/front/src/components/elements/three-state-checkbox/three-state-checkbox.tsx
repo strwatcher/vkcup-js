@@ -34,6 +34,7 @@ export const ThreeStateCheckbox: React.FC<ThreeStateCheckboxProps> = (
         props.state === "unset" && s.unset,
         props.hovered && s.hovered
       )}
+      onClick={(e) => e.stopPropagation()}
     >
       <Checkbox
         state={props.state}

@@ -1,16 +1,16 @@
 import React from "react";
-import { AttachmentsIndicator } from "../../components/elements/attachments-indicator";
-import { DateTimeIndicator } from "../../components/elements/date-time-indicator";
-import { FlagIndicator } from "../../components/elements/flag-indicator";
 import { ReadIndicator } from "../../components/elements/read-indicator";
-import { SelectableAvatar } from "../../components/elements/selectable-avatar";
-import { SlicedAuthor } from "../../components/elements/sliced-author";
-import { SlicedTitleContent } from "../../components/elements/sliced-title-content";
 import {
   ThreeStateCheckbox,
   ThreeVariantState,
 } from "../../components/elements/three-state-checkbox";
 import { LetterItemLayout } from "../../components/layouts/letter-item-layout";
+import { AttachmentsIndicator } from "../../components/letter-item/attachments-indicator";
+import { DateTimeIndicator } from "../../components/letter-item/date-time-indicator";
+import { FlagIndicator } from "../../components/letter-item/flag-indicator";
+import { SelectableAvatar } from "../../components/letter-item/selectable-avatar";
+import { SlicedAuthor } from "../../components/letter-item/sliced-author";
+import { SlicedTitleContent } from "../../components/letter-item/sliced-title-content";
 import { LetterState } from "../../containers/letters/model";
 import { useHover } from "../../hooks/use-hover";
 import { useTheme } from "../../hooks/use-theme";
@@ -74,7 +74,6 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
     >
       <ReadIndicator
         read={props.read}
-        images={images.readCheckboxImages}
         onChange={() => props.onRead(props.id)}
         hovered={hovered}
       />

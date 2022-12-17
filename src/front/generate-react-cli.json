@@ -43,6 +43,18 @@
       "withStory": false,
       "withLazy": false
     },
+    "custom-path": {
+      "withStyle": true,
+      "withIndex": true,
+      "customTemplates": {
+        "component": "templates/component/TemplateName.tsx",
+        "index": "templates/component/index.ts",
+        "style": "templates/component/style.module.css"
+      },
+      "withTest": false,
+      "withStory": false,
+      "withLazy": false
+    },
     "container": {
       "path": "src/containers",
       "withModel": true,

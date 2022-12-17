@@ -9,3 +9,8 @@ body {
 body * {
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: ‘helvetica neue’;
+  src: local(‘Arial’);
+}

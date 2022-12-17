@@ -1,19 +1,17 @@
 import React from "react";
+import { useTheme } from "../../../hooks/use-theme";
 import { joinClasses } from "../../../utils/join-classes";
-import {
-  SimpleCheckbox,
-  SimpleCheckboxState,
-} from "../simple-checbox/simple-checkbox";
+import { SimpleCheckbox } from "../../elements/simple-checbox";
 import s from "./style.module.css";
 
 export type ReadIndicatorProps = {
   hovered: boolean;
-  images: { [P in SimpleCheckboxState]: string };
   read: boolean;
   onChange: () => void;
 };
 
 export const ReadIndicator: React.FC<ReadIndicatorProps> = (props) => {
+  const { resources } = useTheme();
   return (
     <div
       className={joinClasses(
@@ -24,7 +22,7 @@ export const ReadIndicator: React.FC<ReadIndicatorProps> = (props) => {
       onClick={(e) => e.stopPropagation()}
     >
       <SimpleCheckbox
-        images={props.images}
+        images={{ checked: resources.read, unchecked: resources.unread }}
         checked={props.read}
         onChange={props.onChange}
       />

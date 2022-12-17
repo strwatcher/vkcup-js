@@ -1,10 +1,10 @@
 import React from "react";
 import { joinClasses } from "../../../utils/join-classes";
-import { Avatar } from "../avatar";
+import { Avatar } from "../../elements/avatar";
 import {
   SimpleCheckbox,
   SimpleCheckboxState,
-} from "../simple-checbox/simple-checkbox";
+} from "../../elements/simple-checbox/simple-checkbox";
 import s from "./style.module.css";
 
 export type SelectableAvatarProps = {

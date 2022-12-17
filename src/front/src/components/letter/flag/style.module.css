@@ -1,0 +1,8 @@
+.flag {
+  display: flex;
+  gap: 10.5px;
+}
+
+.flag > div {
+  color: var(--letter-head-text);
+}

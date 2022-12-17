@@ -6,8 +6,7 @@ import { Flag } from "../../components/letter/flag";
 import { Info } from "../../components/letter/info";
 import { Title } from "../../components/letter/title";
 import { useTheme } from "../../hooks/use-theme";
-import { letterReadToggled } from "../letters/model";
-import { $currentLetter } from "./model";
+import { $currentLetter, letterReadToggled } from "./model";
 
 export const Letter: React.FC = () => {
   const { flags, resources } = useTheme();

@@ -43,4 +43,5 @@ export {
   $currentLetter,
   letterOpened as openLetter,
   letterClosed as closeLetter,
+  letterReadToggled,
 };

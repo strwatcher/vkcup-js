@@ -15,8 +15,26 @@
 
 .topLine {
   grid-area: top;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.topLine > *:first-child {
+  color: var(--letter-head-text);
+}
+
+.markIndicator {
+  width: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 9px;
 }
 
 .bottomLine {
   grid-area: bottom;
+  font-size: 13px;
+  color: var(--letter-text);
+  align-self: flex-end;
 }

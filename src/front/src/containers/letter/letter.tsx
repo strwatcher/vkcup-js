@@ -1,26 +1,52 @@
 import { useStore } from "effector-react";
-import React from "react";
+import React, { useState } from "react";
 import { LetterLayout } from "../../components/layouts/letter-layout";
 import { Body } from "../../components/letter/body";
 import { Flag } from "../../components/letter/flag";
 import { InfoControls } from "../../components/letter/info-controls";
 import { Title } from "../../components/letter/title";
+import { useHover } from "../../hooks/use-hover";
 import { useTheme } from "../../hooks/use-theme";
-import { $currentLetter, letterReadToggled } from "./model";
+import {
+  $currentLetter,
+  $markIndicator,
+  bookmarkSet,
+  importantSet,
+  letterReadToggled,
+  unset,
+} from "./model";
 
 export const Letter: React.FC = () => {
   const { flags, resources } = useTheme();
+  const letterRef = React.useRef(null);
+  const hovered = useHover(letterRef);
 
   const current = useStore($currentLetter)!;
+  const markIndicator = useStore($markIndicator)!;
 
   const callbacks = {
     toggleRead: React.useCallback(() => {
       letterReadToggled();
     }, []),
+
+    changeMarkIndicator: React.useCallback(() => {
+      switch (markIndicator) {
+        case "unset":
+          bookmarkSet();
+          break;
+        case "first":
+          importantSet();
+          break;
+        case "second":
+          unset();
+          break;
+      }
+    }, [markIndicator]),
   };
 
   return (
     <LetterLayout
+      letterRef={letterRef}
       head={
         <>
           <Title text={current.title} />
@@ -30,13 +56,13 @@ export const Letter: React.FC = () => {
       info={
         <InfoControls
           read={current.read}
-          important={current.important}
-          marked={current.bookmark}
+          onReadChange={callbacks.toggleRead}
+          markIndicator={markIndicator}
+          onMarkIndicatorChange={callbacks.changeMarkIndicator}
           sender={current.author}
           to={current.to}
           dateTime={current.date}
-          onReadChange={callbacks.toggleRead}
-          hovered={true}
+          hovered={hovered}
         />
       }
       attachments={"Attachments"}

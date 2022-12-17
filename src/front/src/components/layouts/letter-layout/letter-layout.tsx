@@ -6,11 +6,12 @@ export type LetterLayoutProps = {
   info: React.ReactNode;
   attachments: React.ReactNode;
   text: React.ReactNode;
+  letterRef: React.RefObject<HTMLDivElement>;
 };
 
 export const LetterLayout: React.FC<LetterLayoutProps> = (props) => {
   return (
-    <div className={s.letterLayout}>
+    <div className={s.letterLayout} ref={props.letterRef}>
       <div className={s.head}>{props.head}</div>
       <div className={s.info}>{props.info}</div>
       <div className={s.attachments}>{props.attachments}</div>

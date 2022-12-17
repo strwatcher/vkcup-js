@@ -1,7 +1,7 @@
 import { createApi, createEvent, createStore, sample } from "effector";
 import { ILetter, ILetters } from "shared";
 import { createRequestFactory } from "../../services/api/model";
-import { $selectedFolder, fetchFoldersFx } from "../folders/model";
+import { $selectedFolder } from "../folders/model";
 import { v4 as uuid4 } from "uuid";
 
 type RawLettersState = {

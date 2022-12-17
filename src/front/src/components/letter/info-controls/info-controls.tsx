@@ -3,11 +3,12 @@ import { IUser } from "shared";
 import { Info } from "./info";
 import { ReadIndicator } from "../../elements/read-indicator";
 import s from "./style.module.css";
+import { ThreeVariantState } from "../../elements/three-state-checkbox";
 
 export type InfoControlsProps = {
   read: boolean;
-  important: boolean;
-  marked: boolean;
+  markIndicator: ThreeVariantState;
+  onMarkIndicatorChange: () => void;
   sender: IUser;
   to: Array<IUser>;
   dateTime: string;
@@ -24,10 +25,12 @@ export const InfoControls: React.FC<InfoControlsProps> = (props) => {
         read={props.read}
       />
       <Info
+        hovered={props.hovered}
         author={props.sender}
         to={props.to}
         dateTime={props.dateTime}
-        indicator={""}
+        indicator={props.markIndicator}
+        onChange={props.onMarkIndicatorChange}
       />
     </div>
   );

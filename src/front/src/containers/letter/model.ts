@@ -1,4 +1,5 @@
-import { createEvent, createStore, sample } from "effector";
+import { createApi, createEvent, createStore, sample } from "effector";
+import { ThreeVariantState } from "../../components/elements/three-state-checkbox";
 import { folderSelected } from "../folders/model";
 import { $letters, LetterState } from "../letters/model";
 
@@ -7,6 +8,24 @@ const letterClosed = createEvent();
 const letterReadToggled = createEvent<void>();
 
 const $currentLetter = createStore<LetterState | null>(null);
+const $markIndicator = $currentLetter.map<ThreeVariantState | null>(
+  (letter) => {
+    if (!letter) return null;
+    if (letter.important) {
+      return "second";
+    }
+    if (letter.bookmark) {
+      return "first";
+    }
+    return "unset";
+  }
+);
+
+const { importantSet, bookmarkSet, unset } = createApi($currentLetter, {
+  importantSet: (letter) => letter && { ...letter, important: true },
+  bookmarkSet: (letter) => letter && { ...letter, bookmark: true },
+  unset: (letter) => letter && { ...letter, bookmark: false, important: false },
+});
 
 sample({
   clock: letterOpened,
@@ -37,4 +56,13 @@ sample({
 
 $currentLetter.on([letterClosed, folderSelected], () => null);
 
-export { $currentLetter, letterOpened, letterClosed, letterReadToggled };
+export {
+  $currentLetter,
+  letterOpened,
+  letterClosed,
+  importantSet,
+  bookmarkSet,
+  unset,
+  letterReadToggled,
+  $markIndicator,
+};

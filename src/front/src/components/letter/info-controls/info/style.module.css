@@ -1,0 +1,22 @@
+.info {
+  display: grid;
+  grid-template:
+    [avatar] "avatar top" 16px [topline]
+    [avatar] "avatar bottom" 16px [bottomLine]
+    / 40px 1fr;
+  gap: 4px;
+}
+
+.avatar {
+  grid-area: avatar;
+  display: flex;
+  align-items: center;
+}
+
+.topLine {
+  grid-area: top;
+}
+
+.bottomLine {
+  grid-area: bottom;
+}

@@ -4,7 +4,7 @@ import { ThreeVariantState } from "../../components/elements/three-state-checkbo
 import { List } from "../../components/list";
 import { useScrollTop } from "../../hooks/use-scroll-top";
 import { LetterItem } from "../letter-item";
-import { openLetter } from "../letter/model";
+import { letterOpened } from "../letter/model";
 import {
   $letters,
   LetterState,
@@ -17,12 +17,14 @@ import {
   openAttachments,
   $justFetched,
   scrolledUp,
+  $areLettersFetching,
 } from "./model";
 
 export const Letters: React.FC = () => {
   const stores = {
     letters: useStore($letters),
     justFetched: useStore($justFetched),
+    fetching: useStore($areLettersFetching),
   };
   const callbacks = {
     onSelect: React.useCallback((id: string) => {
@@ -52,7 +54,7 @@ export const Letters: React.FC = () => {
     }, []),
 
     onOpenLetter: React.useCallback((id: string) => {
-      openLetter(id);
+      letterOpened(id);
     }, []),
   };
 
@@ -84,7 +86,9 @@ export const Letters: React.FC = () => {
 
   return (
     <div ref={scrollRef}>
-      <List render={renders.letter} items={stores.letters.data} />
+      {!stores.fetching && (
+        <List render={renders.letter} items={stores.letters.data} />
+      )}
     </div>
   );
 };

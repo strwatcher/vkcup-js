@@ -3,7 +3,7 @@ import React from "react";
 import { LetterLayout } from "../../components/layouts/letter-layout";
 import { Body } from "../../components/letter/body";
 import { Flag } from "../../components/letter/flag";
-import { Info } from "../../components/letter/info";
+import { InfoControls } from "../../components/letter/info-controls";
 import { Title } from "../../components/letter/title";
 import { useTheme } from "../../hooks/use-theme";
 import { $currentLetter, letterReadToggled } from "./model";
@@ -28,7 +28,7 @@ export const Letter: React.FC = () => {
         </>
       }
       info={
-        <Info
+        <InfoControls
           read={current.read}
           important={current.important}
           marked={current.bookmark}

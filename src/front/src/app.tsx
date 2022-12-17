@@ -3,7 +3,7 @@ import React from "react";
 import { Header } from "./components/elements/header";
 import { Layout } from "./components/layouts/layout";
 import { Letter } from "./containers/letter";
-import { $currentLetter, closeLetter } from "./containers/letter/model";
+import { $currentLetter, letterClosed } from "./containers/letter/model";
 import { Letters } from "./containers/letters";
 import { Sidebar } from "./containers/sidebar";
 import "./global.css";
@@ -28,7 +28,7 @@ export const App: React.FC = () => {
           logo={genUrl(logo)}
           needBack={!!stores.letter}
           backIcon={genUrl(resources.arrowBack)}
-          goBack={closeLetter}
+          goBack={letterClosed}
         />
       }
     >

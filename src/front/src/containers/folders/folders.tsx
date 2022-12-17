@@ -9,8 +9,8 @@ import { genUrl } from "../../services/api/model";
 import {
   $folders,
   $selectedFolder,
-  eventSelectFolder,
   fetchFoldersFx,
+  folderSelected,
 } from "./model";
 
 export const Folders: React.FC = () => {
@@ -24,7 +24,7 @@ export const Folders: React.FC = () => {
 
   const callbacks = {
     selectFolder: React.useCallback((folder: IFolder) => {
-      eventSelectFolder(folder);
+      folderSelected(folder);
     }, []),
   };
 

@@ -13,11 +13,11 @@ const fetchFoldersFx = createRequestFactory<FoldersState>({
   target: $folders,
 });
 
-const eventSelectFolder = createEvent<IFolder>();
+const folderSelected = createEvent<IFolder>();
 
 const $selectedFolder = createStore<IFolder | null>(null);
 
-$selectedFolder.on(eventSelectFolder, (_, data) => data);
+$selectedFolder.on(folderSelected, (_, data) => data);
 
 sample({
   clock: $folders,
@@ -26,4 +26,4 @@ sample({
   target: $selectedFolder,
 });
 
-export { fetchFoldersFx, $folders, eventSelectFolder, $selectedFolder };
+export { fetchFoldersFx, $folders, folderSelected, $selectedFolder };

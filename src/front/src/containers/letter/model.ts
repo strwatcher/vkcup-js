@@ -1,4 +1,5 @@
 import { createEvent, createStore, sample } from "effector";
+import { folderSelected } from "../folders/model";
 import { $letters, LetterState } from "../letters/model";
 
 const letterOpened = createEvent<string>();
@@ -14,34 +15,26 @@ sample({
   target: $currentLetter,
 });
 
+$currentLetter.on(
+  letterReadToggled,
+  (state, _) =>
+    state && {
+      ...state,
+      read: !state.read,
+    }
+);
+
 sample({
-  clock: letterOpened,
+  clock: $currentLetter,
   source: $letters,
-  fn: (letters, id) => ({
+  filter: (_, letter) => !!letter,
+  fn: (letters, letter) => ({
     count: letters.count,
-    data: letters.data.map((letter) =>
-      letter.id === id ? { ...letter, read: true } : letter
-    ),
+    data: letters.data.map((l) => (l.id === letter!.id ? { ...letter! } : l)),
   }),
   target: $letters,
 });
 
-$currentLetter.on(letterReadToggled, (state, _) =>
-  state
-    ? {
-        ...state,
-        read: !state.read,
-      }
-    : null
-);
+$currentLetter.on([letterClosed, folderSelected], () => null);
 
-$currentLetter.watch(console.log);
-
-$currentLetter.on(letterClosed, () => null);
-
-export {
-  $currentLetter,
-  letterOpened as openLetter,
-  letterClosed as closeLetter,
-  letterReadToggled,
-};
+export { $currentLetter, letterOpened, letterClosed, letterReadToggled };

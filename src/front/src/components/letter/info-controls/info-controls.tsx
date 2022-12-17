@@ -1,9 +1,10 @@
 import React from "react";
 import { IUser } from "shared";
+import { Info } from "./info";
 import { ReadIndicator } from "../../elements/read-indicator";
 import s from "./style.module.css";
 
-export type InfoProps = {
+export type InfoControlsProps = {
   read: boolean;
   important: boolean;
   marked: boolean;
@@ -14,13 +15,19 @@ export type InfoProps = {
   hovered: boolean;
 };
 
-export const Info: React.FC<InfoProps> = (props) => {
+export const InfoControls: React.FC<InfoControlsProps> = (props) => {
   return (
-    <div className={s.info}>
+    <div className={s.infoControls}>
       <ReadIndicator
         hovered={props.hovered}
         onChange={props.onReadChange}
         read={props.read}
+      />
+      <Info
+        author={props.sender}
+        to={props.to}
+        dateTime={props.dateTime}
+        indicator={""}
       />
     </div>
   );

@@ -1,0 +1,38 @@
+.bigPreview {
+  text-decoration: none;
+  color: var(--letter-head-text);
+  background-color: var(--secondary);
+  padding: 4px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.bigPreview > img {
+  max-width: 256px;
+  max-height: 256px;
+  border-radius: 12px;
+}
+
+.download {
+  position: absolute;
+  bottom: 6px;
+  left: 4px;
+
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+
+  background: var(--download-gradient);
+  width: calc(100% - 8px);
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  visibility: hidden;
+}
+
+.bigPreview:hover .download {
+  visibility: visible;
+}

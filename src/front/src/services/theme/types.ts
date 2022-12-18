@@ -7,6 +7,7 @@ export type ITheme = {
   letterText: string;
   letterHeadText: string;
   separator: string;
+  downloadGradient: string;
 };
 
 export type IThemeType = "dark" | "light";

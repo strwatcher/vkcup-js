@@ -1,5 +1,8 @@
 import React from "react";
+import { useTheme } from "../../../hooks/use-theme";
+import { genUrl } from "../../../services/api/model";
 import { base64Size, bToMb } from "../../../utils/base64-size";
+import { BigPreview } from "../../elements/big-preview";
 import s from "./style.module.css";
 
 export type IAttachmentItem = {
@@ -10,25 +13,16 @@ export type IAttachmentItem = {
 export type AttachmentItemProps = IAttachmentItem;
 
 export const AttachmentItem: React.FC<AttachmentItemProps> = (props) => {
-  const openImageInNewWindow = React.useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      const newWindow = window.open("about:blank");
-      const image = newWindow!.document.createElement("img");
-      image.src = props.bytes;
-      newWindow?.document.body.appendChild(image);
-    },
-    [props.name, props.bytes]
-  );
+  const { resources } = useTheme();
 
   return (
-    <div className={s.wrapper} onClick={openImageInNewWindow}>
+    <div className={s.wrapper} onClick={(e) => e.stopPropagation()}>
       <img src={props.bytes} className={s.preview} />
       <span className={s.info}>
         {`${props.name}.jpg ${bToMb(base64Size(props.bytes)).toFixed(2)} MB`}
       </span>
       <div className={s.bigPreview}>
-        <img src={props.bytes} onClick={openImageInNewWindow} />
+        <BigPreview {...props} />
       </div>
     </div>
   );

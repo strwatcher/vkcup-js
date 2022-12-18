@@ -7,7 +7,8 @@
     "active": "#00103D14",
     "letterText": "#87898F",
     "letterHeadText": "#2C2D2E",
-    "separator": "#00103D1F"
+    "separator": "#00103D1F",
+    "downloadGradient": "linear-gradient(360deg, rgba(236, 237, 240, 0.95) 56.81%, rgba(236, 237, 240, 0) 104.46%)"
   },
   "dark": {
     "main": "#19191A",
@@ -17,6 +18,7 @@
     "active": "#FFFFFF14",
     "letterText": "#8C8E94",
     "letterHeadText": "#E7E8EA",
-    "separator": "#00000066"
+    "separator": "#00000066",
+    "downloadGradient": "linear-gradient(360deg, rgba(44, 44, 45, 0.9) 45.32%, rgba(44, 44, 45, 0) 104.46%)"
   }
 }

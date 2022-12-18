@@ -35,6 +35,10 @@ export function useTheme() {
       colors.letterHeadText
     );
     document.body.style.setProperty("--separator", colors.separator);
+    document.body.style.setProperty(
+      "--download-gradient",
+      colors.downloadGradient
+    );
 
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);

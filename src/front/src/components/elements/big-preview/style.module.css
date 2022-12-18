@@ -5,6 +5,7 @@
   padding: 4px;
   border-radius: 12px;
   cursor: pointer;
+  position: relative;
 }
 
 .bigPreview > img {

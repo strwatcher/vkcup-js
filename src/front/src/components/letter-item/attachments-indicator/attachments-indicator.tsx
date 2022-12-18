@@ -1,4 +1,5 @@
 import React from "react";
+import { IAttachments } from "shared/types/attachmets";
 import { useClickOutside } from "../../../hooks/use-click-outside";
 import { joinClasses } from "../../../utils/join-classes";
 import { List } from "../../list";
@@ -7,7 +8,7 @@ import s from "./style.module.css";
 
 export type AttachmentsIndicatorProps = {
   icon: string;
-  attachments: any;
+  attachments: IAttachments;
   opened: boolean;
   onToggle: () => void;
 };

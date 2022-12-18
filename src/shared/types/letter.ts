@@ -1,3 +1,4 @@
+import { IAttachments } from "./attachmets";
 import { IFlag } from "./flag";
 import { IFolder } from "./folder";
 import { IUser } from "./user";
@@ -13,5 +14,5 @@ export type ILetter = {
   folder: IFolder;
   date: string;
   flag: IFlag;
-  doc: any;
+  doc: IAttachments;
 };

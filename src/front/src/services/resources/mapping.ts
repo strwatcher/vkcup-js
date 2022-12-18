@@ -11,6 +11,7 @@ export type IThemedResources = {
   checkbox: string;
   arrowBack: string;
   download: string;
+  plus: string;
 };
 
 export type INotThemedResources = {
@@ -28,6 +29,7 @@ export type INotThemedResources = {
   checkboxChecked: string;
   read: string;
   unread: string;
+  pencil: string;
 };
 
 export type IResources = INotThemedResources & IThemedResources;
@@ -40,6 +42,7 @@ export const resourcesMapping: IResourcesMapping = {
     checkbox: "checkbox-dark.svg",
     arrowBack: "arrow-back-light.svg",
     download: "download-light.svg",
+    plus: "plus-light.svg",
   },
   light: {
     menu: "menu.svg",
@@ -48,6 +51,7 @@ export const resourcesMapping: IResourcesMapping = {
     checkbox: "checkbox-light.svg",
     arrowBack: "arrow-back.svg",
     download: "download.svg",
+    plus: "plus.svg",
   },
   notThemed: {
     logo: "logo.svg",
@@ -64,5 +68,6 @@ export const resourcesMapping: IResourcesMapping = {
     checkboxChecked: "checkbox-checked.svg",
     read: "read.svg",
     unread: "unread.svg",
+    pencil: "pencil.svg",
   },
 };

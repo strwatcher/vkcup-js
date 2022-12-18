@@ -1,6 +1,4 @@
 import React from "react";
-import { useTheme } from "../../../hooks/use-theme";
-import { genUrl } from "../../../services/api/model";
 import { base64Size, bToMb } from "../../../utils/base64-size";
 import { BigPreview } from "../../elements/big-preview";
 import s from "./style.module.css";
@@ -13,8 +11,6 @@ export type IAttachmentItem = {
 export type AttachmentItemProps = IAttachmentItem;
 
 export const AttachmentItem: React.FC<AttachmentItemProps> = (props) => {
-  const { resources } = useTheme();
-
   return (
     <div className={s.wrapper} onClick={(e) => e.stopPropagation()}>
       <img src={props.bytes} className={s.preview} />

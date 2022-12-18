@@ -12,9 +12,11 @@ import {
   fetchFoldersFx,
   folderSelected,
 } from "./model";
+import { FoldersLayout } from "../../components/layouts/folders-layout";
+import { AddFolderButton } from "../../components/elements/add-folder-button";
 
 export const Folders: React.FC = () => {
-  const { theme } = useTheme();
+  const { theme, resources, size } = useTheme();
 
   const stores = {
     folders: useStore($folders),
@@ -48,5 +50,17 @@ export const Folders: React.FC = () => {
     fetchFoldersFx();
   }, []);
 
-  return <List items={stores.folders.data} render={renders.folder} />;
+  return (
+    <FoldersLayout>
+      {size === "small" && (
+        <Folder
+          active={false}
+          icon={genUrl(resources.menu)}
+          onClick={() => {}}
+        />
+      )}
+      <List items={stores.folders.data} render={renders.folder} />
+      {size === "big" && <AddFolderButton />}
+    </FoldersLayout>
+  );
 };

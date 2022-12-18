@@ -1,6 +1,7 @@
 import { useStore } from "effector-react";
 import React, { useState } from "react";
 import { LetterLayout } from "../../components/layouts/letter-layout";
+import { Attachments } from "../../components/letter/attachments";
 import { Body } from "../../components/letter/body";
 import { Flag } from "../../components/letter/flag";
 import { InfoControls } from "../../components/letter/info-controls";
@@ -65,7 +66,7 @@ export const Letter: React.FC = () => {
           hovered={hovered}
         />
       }
-      attachments={"Attachments"}
+      attachments={current.doc && <Attachments attachments={current.doc} />}
       text={<Body text={current.text} />}
     />
   );

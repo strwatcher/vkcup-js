@@ -1,4 +1,5 @@
 .layout {
   display: grid;
-  grid-template-rows: 1fr 36px;
+  grid-template-rows: 36px 1fr 36px;
+  gap: 12px;
 }

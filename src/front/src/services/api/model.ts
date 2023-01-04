@@ -8,8 +8,9 @@ type IApiConfig = {
 config as IApiConfig;
 
 export const genUrl = (url: string) => {
-  const baseUrl = config.base;
-  return baseUrl + url;
+  const base = window.location.origin + "/";
+
+  return base + url;
 };
 
 async function request<TReturn>(url: string): Promise<TReturn> {

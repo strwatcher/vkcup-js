@@ -5,8 +5,10 @@ import querystring from "node:querystring";
 import { LettersDb } from "./db/letter-db";
 import { route } from "./router";
 import { IQS } from "shared";
+import config from "./config";
 
 const db = new LettersDb(path.join(__dirname, "db.json"));
+const port = config.port ?? 3000;
 
 http
   .createServer((request, response) => {
@@ -18,6 +20,6 @@ http
     response.setHeader("Content-Type", "application/json");
     route(db, response, parsedQuery, resource);
   })
-  .listen(3000);
+  .listen(port);
 
-console.log("Server running at http://127.0.0.1:3000");
+console.log(`Server running at http://127.0.0.1:${port}`);

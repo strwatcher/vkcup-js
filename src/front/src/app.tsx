@@ -6,11 +6,13 @@ import { Letter } from "./containers/letter";
 import { $currentLetter, letterClosed } from "./containers/letter/model";
 import { Letters } from "./containers/letters";
 import { Sidebar } from "./containers/sidebar";
+import { $resources } from "@/features/theme/model/theme";
 import "./global.css";
 import { useTheme } from "./hooks/use-theme";
 
 export const App: React.FC = () => {
-    const { size, resources } = useTheme();
+    const resources = useStore($resources);
+    const { size } = useTheme();
 
     const stores = {
         letter: useStore($currentLetter),

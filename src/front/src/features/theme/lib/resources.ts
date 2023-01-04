@@ -1,4 +1,4 @@
-import { IThemeType } from "../theme/types";
+import { IThemeType } from "./theme";
 
 export type IResourcesMapping = {
     [P in IThemeType]: IThemedResources;

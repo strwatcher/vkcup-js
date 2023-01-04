@@ -2,7 +2,7 @@ import { useStore } from "effector-react";
 import React, { useRef } from "react";
 import { ThreeVariantState } from "../../components/elements/three-state-checkbox";
 import { List } from "../../components/list";
-import { useScrollTop } from "../../hooks/use-scroll-top";
+import { useScrollTop } from "@/shared/lib/hooks/use-scroll-top";
 import { LetterItem } from "../letter-item";
 import { letterOpened } from "../letter/model";
 import {

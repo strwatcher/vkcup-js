@@ -1,6 +1,5 @@
 import React from "react";
 import { useTheme } from "../../../hooks/use-theme";
-import { genUrl } from "../../../services/api/model";
 import s from "./style.module.css";
 
 export type BigPreviewProps = {
@@ -18,7 +17,7 @@ export const BigPreview: React.FC<BigPreviewProps> = (props) => {
             download={`${props.name}.jpg`}>
             <img src={props.bytes} />
             <div className={s.download}>
-                <img src={genUrl(resources.download)} />
+                <img src={resources.download} />
                 <span>Скачать</span>
             </div>
         </a>

@@ -1,6 +1,6 @@
 import React from "react";
 import { IAttachments } from "shared/types/attachmets";
-import { useClickOutside } from "../../../hooks/use-click-outside";
+import { useClickOutside } from "@/shared/lib/hooks/use-click-outside";
 import { joinClasses } from "../../../utils/join-classes";
 import { List } from "../../list";
 import { AttachmentItem } from "../attachment-item";

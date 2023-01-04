@@ -5,7 +5,6 @@ import { Folder } from "../../components/folder";
 import { List } from "../../components/list";
 import { useTheme } from "../../hooks/use-theme";
 import { $letters } from "../letters/model";
-import { genUrl } from "../../services/api/model";
 import {
     $folders,
     $selectedFolder,
@@ -35,9 +34,9 @@ export const Folders: React.FC = () => {
             (folder: ICompleteFolder) => {
                 return (
                     <Folder
-                        icon={genUrl(
+                        icon={
                             folder.icon[theme as keyof ICompleteFolder["icon"]]
-                        )}
+                        }
                         folder={folder.folder}
                         active={folder.folder === stores.selectedFolder}
                         onClick={callbacks.selectFolder}
@@ -57,7 +56,7 @@ export const Folders: React.FC = () => {
             {size === "small" && (
                 <Folder
                     active={false}
-                    icon={genUrl(resources.menu)}
+                    icon={resources.menu}
                     onClick={() => {}}
                 />
             )}

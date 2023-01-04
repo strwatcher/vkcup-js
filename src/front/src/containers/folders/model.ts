@@ -1,6 +1,6 @@
 import { createEvent, createStore, sample } from "effector";
 import { ICompleteFolder, IFolder } from "shared";
-import { createRequestFactory } from "../../services/api/model";
+import { createRequestFactory } from "@/shared/lib/api/model";
 export type FoldersState = {
     count: number;
     data: Array<ICompleteFolder>;
@@ -21,8 +21,7 @@ $selectedFolder.on(folderSelected, (_, data) => data);
 
 sample({
     clock: $folders,
-    fn: (clockData) =>
-        clockData.data.length ? clockData.data.at(0)!.folder : null,
+    fn: (folders) => (folders.data.length ? folders.data.at(0)!.folder : null),
     target: $selectedFolder,
 });
 

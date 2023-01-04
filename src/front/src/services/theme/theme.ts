@@ -1,3 +1,4 @@
+import { genUrl } from "@/shared/lib/utils/gen-url";
 import { createEvent, createStore, sample } from "effector";
 import { FlagsMapping } from "../flags/mapping";
 import { IResources, resourcesMapping } from "../resources/mapping";
@@ -15,12 +16,12 @@ export const $resources = createStore<IResources>({
     ...resourcesMapping.notThemed,
 });
 export const $flags = createStore<FlagsMapping>({
-    Билеты: resourcesMapping.notThemed.ticket,
-    Заказы: resourcesMapping.notThemed.cart,
-    Регистрации: resourcesMapping.notThemed.key,
-    Финансы: resourcesMapping.notThemed.finances,
-    Путешевствия: resourcesMapping.notThemed.plane,
-    "Штрафы и налоги": resourcesMapping.notThemed.emblem,
+    Билеты: genUrl(resourcesMapping.notThemed.ticket),
+    Заказы: genUrl(resourcesMapping.notThemed.cart),
+    Регистрации: genUrl(resourcesMapping.notThemed.key),
+    Финансы: genUrl(resourcesMapping.notThemed.finances),
+    Путешевствия: genUrl(resourcesMapping.notThemed.plane),
+    "Штрафы и налоги": genUrl(resourcesMapping.notThemed.emblem),
 });
 export const $themeSize = createStore<IThemeSize>(checkSize(window.innerWidth));
 
@@ -34,10 +35,14 @@ sample({
 
 export const eventToggleTheme = createEvent();
 
-$theme.on(eventToggleTheme, (state, _) =>
-    state === "light" ? "dark" : "light"
+$theme.on(eventToggleTheme, (state) => (state === "light" ? "dark" : "light"));
+$themeColors.on(
+    $theme.updates,
+    (_, theme) =>
+        Object.fromEntries(
+            Object.entries(themes[theme]).map(([k, v]) => [k, genUrl(v)])
+        ) as ITheme
 );
-$themeColors.on($theme.updates, (_, data) => themes[data]);
 $resources.on($theme.updates, (_, data) => ({
     ...resourcesMapping[data],
     ...resourcesMapping.notThemed,

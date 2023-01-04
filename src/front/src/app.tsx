@@ -8,7 +8,6 @@ import { Letters } from "./containers/letters";
 import { Sidebar } from "./containers/sidebar";
 import "./global.css";
 import { useTheme } from "./hooks/use-theme";
-import { genUrl } from "./services/api/model";
 
 export const App: React.FC = () => {
     const { size, resources } = useTheme();
@@ -25,14 +24,14 @@ export const App: React.FC = () => {
         <Layout
             head={
                 <Header
-                    logo={genUrl(logo)}
+                    logo={logo}
                     needBack={!!stores.letter}
-                    backIcon={genUrl(resources.arrowBack)}
+                    backIcon={resources.arrowBack}
                     goBack={letterClosed}
                 />
             }>
             <Sidebar />
-            {!!stores.letter ? <Letter /> : <Letters />}
+            {stores.letter ? <Letter /> : <Letters />}
         </Layout>
     );
 };

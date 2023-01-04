@@ -6,7 +6,7 @@ import { Body } from "../../components/letter/body";
 import { Flag } from "../../components/letter/flag";
 import { InfoControls } from "../../components/letter/info-controls";
 import { Title } from "../../components/letter/title";
-import { useHover } from "../../hooks/use-hover";
+import { useHover } from "@/shared/lib/hooks/use-hover";
 import { useTheme } from "../../hooks/use-theme";
 import {
     $currentLetter,

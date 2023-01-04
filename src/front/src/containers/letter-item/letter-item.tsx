@@ -12,9 +12,8 @@ import { SelectableAvatar } from "../../components/letter-item/selectable-avatar
 import { SlicedAuthor } from "../../components/letter-item/sliced-author";
 import { SlicedTitleContent } from "../../components/letter-item/sliced-title-content";
 import { LetterState } from "../../containers/letters/model";
-import { useHover } from "../../hooks/use-hover";
+import { useHover } from "@/shared/lib/hooks/use-hover";
 import { useTheme } from "../../hooks/use-theme";
-import { genUrl } from "../../services/api/model";
 
 export type LetterProps = LetterState & {
     onSelect: (id: string) => void;
@@ -105,10 +104,10 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
                 read={props.read}
             />
 
-            {props.flag && <FlagIndicator icon={genUrl(flags[props.flag])} />}
+            {props.flag && <FlagIndicator icon={flags[props.flag]} />}
             {props.doc && (
                 <AttachmentsIndicator
-                    icon={genUrl(resources.attachment)}
+                    icon={resources.attachment}
                     attachments={props.doc}
                     opened={props.attachmentsOpened}
                     onToggle={() =>

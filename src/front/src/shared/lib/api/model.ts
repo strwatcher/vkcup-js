@@ -1,10 +1,5 @@
 import { createEffect, Effect, sample, Store } from "effector";
-
-export const genUrl = (url: string) => {
-    const base = window.location.origin + "/";
-
-    return base + url;
-};
+import { genUrl } from "../utils/gen-url";
 
 async function request<TReturn>(url: string): Promise<TReturn> {
     const response = await fetch(url);

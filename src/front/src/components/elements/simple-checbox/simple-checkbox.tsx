@@ -1,5 +1,4 @@
 import React from "react";
-import { genUrl } from "../../../services/api/model";
 import { Checkbox } from "../checkbox";
 
 export type SimpleCheckboxState = "checked" | "unchecked";
@@ -15,8 +14,8 @@ export type SimpleCheckboxProps = {
 export const SimpleCheckbox: React.FC<SimpleCheckboxProps> = (props) => {
     const { checked, unchecked } = React.useMemo(
         () => ({
-            checked: <img src={genUrl(props.images.checked)} />,
-            unchecked: <img src={genUrl(props.images.unchecked)} />,
+            checked: <img src={props.images.checked} />,
+            unchecked: <img src={props.images.unchecked} />,
         }),
         [props.images]
     );

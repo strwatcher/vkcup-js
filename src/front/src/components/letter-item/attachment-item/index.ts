@@ -1,5 +1,5 @@
 export {
-  AttachmentItem,
-  type AttachmentItemProps,
-  type IAttachmentItem,
+    AttachmentItem,
+    type AttachmentItemProps,
+    type IAttachmentItem,
 } from "./attachment-item";

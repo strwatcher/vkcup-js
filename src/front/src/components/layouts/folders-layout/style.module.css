@@ -1,11 +1,11 @@
 .layout {
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
 }
 
 @media screen and (max-width: 768px) {
-  .layout {
-    gap: 0;
-  }
+    .layout {
+        gap: 0;
+    }
 }

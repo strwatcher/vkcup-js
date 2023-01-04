@@ -1,13 +1,13 @@
 .readIndicator {
-  display: flex;
-  align-items: center;
-  visibility: visible;
+    display: flex;
+    align-items: center;
+    visibility: visible;
 }
 
 .read {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .hovered {
-  visibility: visible;
+    visibility: visible;
 }

@@ -1,1 +1,4 @@
-export { SelectableAvatar, type SelectableAvatarProps } from "./selectable-avatar";
+export {
+    SelectableAvatar,
+    type SelectableAvatarProps,
+} from "./selectable-avatar";

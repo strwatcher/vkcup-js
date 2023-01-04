@@ -1,6 +1,6 @@
 .avatar {
-  background-color: var(--letter-text);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+    background-color: var(--letter-text);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }

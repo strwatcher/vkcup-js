@@ -1,16 +1,16 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial;
-  font-size: 15px;
-  background: var(--main);
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    font-size: 15px;
+    background: var(--main);
 }
 
 body * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 @font-face {
-  font-family: ‘helvetica neue’;
-  src: local(‘Arial’);
+    font-family: ‘helvetica neue’;
+    src: local(‘Arial’);
 }

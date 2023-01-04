@@ -1,1 +1,4 @@
-export { SlicedTitleContent, type SlicedTitleContentProps } from "./sliced-title-content";
+export {
+    SlicedTitleContent,
+    type SlicedTitleContentProps,
+} from "./sliced-title-content";

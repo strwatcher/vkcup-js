@@ -1,24 +1,24 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .attachments {
-  display: flex;
-  gap: 2px;
+    display: flex;
+    gap: 2px;
 }
 
 .info {
-  display: flex;
-  gap: 16px;
-  color: var(--letter-head-text);
+    display: flex;
+    gap: 16px;
+    color: var(--letter-head-text);
 }
 
 .downloadLink {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .fileSize {
-  color: var(--letter-text);
+    color: var(--letter-text);
 }

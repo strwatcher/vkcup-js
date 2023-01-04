@@ -1,36 +1,36 @@
 .wrapper {
-  color: var(--letter-head-text);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 12px;
-  gap: 8px;
+    color: var(--letter-head-text);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
 }
 
 .wrapper:hover {
-  background-color: var(--hover);
+    background-color: var(--hover);
 }
 
 .preview {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
 }
 
 .info {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 .bigPreview {
-  display: none;
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  transform: translateX(-100%);
-  left: -4px;
-  bottom: 0;
+    display: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-100%);
+    left: -4px;
+    bottom: 0;
 }
 
 .wrapper:hover .bigPreview {
-  display: flex;
+    display: flex;
 }

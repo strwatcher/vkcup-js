@@ -1,13 +1,13 @@
 .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .unset {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .hovered.unset {
-  visibility: visible;
+    visibility: visible;
 }

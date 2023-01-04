@@ -1,23 +1,23 @@
 .wrapper {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
+    width: 32px;
+    height: 32px;
 }
 
 .checkbox,
 .hovered .avatar,
 .selected .avatar {
-  display: none;
+    display: none;
 }
 
 .hovered .checkbox,
 .selected .checkbox {
-  display: block;
+    display: block;
 }

@@ -11,29 +11,28 @@ import { useTheme } from "./hooks/use-theme";
 import { genUrl } from "./services/api/model";
 
 export const App: React.FC = () => {
-  const { size, resources } = useTheme();
+    const { size, resources } = useTheme();
 
-  const stores = {
-    letter: useStore($currentLetter),
-  };
+    const stores = {
+        letter: useStore($currentLetter),
+    };
 
-  const logo = React.useMemo(() => {
-    return size === "big" ? resources.logo : resources.compactLogo;
-  }, [resources, size]);
+    const logo = React.useMemo(() => {
+        return size === "big" ? resources.logo : resources.compactLogo;
+    }, [resources, size]);
 
-  return (
-    <Layout
-      head={
-        <Header
-          logo={genUrl(logo)}
-          needBack={!!stores.letter}
-          backIcon={genUrl(resources.arrowBack)}
-          goBack={letterClosed}
-        />
-      }
-    >
-      <Sidebar />
-      {!!stores.letter ? <Letter /> : <Letters />}
-    </Layout>
-  );
+    return (
+        <Layout
+            head={
+                <Header
+                    logo={genUrl(logo)}
+                    needBack={!!stores.letter}
+                    backIcon={genUrl(resources.arrowBack)}
+                    goBack={letterClosed}
+                />
+            }>
+            <Sidebar />
+            {!!stores.letter ? <Letter /> : <Letters />}
+        </Layout>
+    );
 };

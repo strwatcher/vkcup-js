@@ -1,4 +1,4 @@
-import { useGate, useStore } from "effector-react";
+import { useGate, useUnit } from "effector-react";
 import React from "react";
 import { Header } from "./components/elements/header";
 import { Layout } from "./components/layouts/layout";
@@ -12,15 +12,15 @@ import { $screenSize, ScreenSizeGate } from "./shared/lib/screen-size";
 
 export const App: React.FC = () => {
     useGate(ScreenSizeGate);
-    const resources = useStore($resources);
-    const size = useStore($screenSize);
-
-    const stores = {
-        letter: useStore($currentLetter),
-    };
+    const { resources, size, letter } = useUnit({
+        resources: $resources,
+        size: $screenSize,
+        letter: $currentLetter,
+    });
 
     const logo = React.useMemo(() => {
-        return size === "big" ? resources.logo : resources.compactLogo;
+        if (size === "big") return resources.logo;
+        return resources.compactLogo;
     }, [resources, size]);
 
     return (
@@ -28,13 +28,13 @@ export const App: React.FC = () => {
             head={
                 <Header
                     logo={logo}
-                    needBack={!!stores.letter}
+                    needBack={!!letter}
                     backIcon={resources.arrowBack}
                     goBack={letterClosed}
                 />
             }>
             <Sidebar />
-            {stores.letter ? <Letter /> : <Letters />}
+            {letter ? <Letter /> : <Letters />}
         </Layout>
     );
 };

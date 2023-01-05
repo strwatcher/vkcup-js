@@ -1,4 +1,4 @@
-import { useStore } from "effector-react";
+import { useGate, useStore } from "effector-react";
 import React from "react";
 import { Header } from "./components/elements/header";
 import { Layout } from "./components/layouts/layout";
@@ -6,13 +6,14 @@ import { Letter } from "./containers/letter";
 import { $currentLetter, letterClosed } from "./containers/letter/model";
 import { Letters } from "./containers/letters";
 import { Sidebar } from "./containers/sidebar";
-import { $resources } from "@/features/theme/model/theme";
+import { $resources } from "@/features/theme";
 import "./global.css";
-import { useTheme } from "./hooks/use-theme";
+import { $screenSize, ScreenSizeGate } from "./shared/lib/screen-size";
 
 export const App: React.FC = () => {
+    useGate(ScreenSizeGate);
     const resources = useStore($resources);
-    const { size } = useTheme();
+    const size = useStore($screenSize);
 
     const stores = {
         letter: useStore($currentLetter),

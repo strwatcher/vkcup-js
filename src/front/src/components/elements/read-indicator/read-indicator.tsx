@@ -1,5 +1,6 @@
+import { $resources } from "@/features/theme";
+import { useStore } from "effector-react";
 import React from "react";
-import { useTheme } from "../../../hooks/use-theme";
 import { joinClasses } from "../../../utils/join-classes";
 import { SimpleCheckbox } from "../../elements/simple-checbox";
 import s from "./style.module.css";
@@ -11,7 +12,8 @@ export type ReadIndicatorProps = {
 };
 
 export const ReadIndicator: React.FC<ReadIndicatorProps> = (props) => {
-    const { resources } = useTheme();
+    const resources = useStore($resources);
+
     return (
         <div
             className={joinClasses(

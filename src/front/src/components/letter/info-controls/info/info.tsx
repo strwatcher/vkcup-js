@@ -1,6 +1,7 @@
+import { $resources } from "@/features/theme";
+import { useStore } from "effector-react";
 import React from "react";
 import { IUser } from "shared";
-import { useTheme } from "../../../../hooks/use-theme";
 import { Avatar } from "../../../elements/avatar";
 import {
     ThreeStateCheckbox,
@@ -21,7 +22,7 @@ export type InfoProps = {
 };
 
 export const Info: React.FC<InfoProps> = (props) => {
-    const { resources } = useTheme();
+    const resources = useStore($resources);
 
     return (
         <div className={s.info}>

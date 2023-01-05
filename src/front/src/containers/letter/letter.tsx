@@ -1,5 +1,5 @@
-import { useStore } from "effector-react";
-import React, { useState } from "react";
+import { useStore, useUnit } from "effector-react";
+import React from "react";
 import { LetterLayout } from "../../components/layouts/letter-layout";
 import { Attachments } from "../../components/letter/attachments";
 import { Body } from "../../components/letter/body";
@@ -7,7 +7,6 @@ import { Flag } from "../../components/letter/flag";
 import { InfoControls } from "../../components/letter/info-controls";
 import { Title } from "../../components/letter/title";
 import { useHover } from "@/shared/lib/hooks/use-hover";
-import { useTheme } from "../../hooks/use-theme";
 import {
     $currentLetter,
     $markIndicator,
@@ -16,9 +15,13 @@ import {
     letterReadToggled,
     unset,
 } from "./model";
+import { $flags } from "@/features/theme";
 
 export const Letter: React.FC = () => {
-    const { flags, resources } = useTheme();
+    const { flags } = useUnit({
+        flags: $flags,
+    });
+
     const letterRef = React.useRef(null);
     const hovered = useHover(letterRef);
 
@@ -32,15 +35,15 @@ export const Letter: React.FC = () => {
 
         changeMarkIndicator: React.useCallback(() => {
             switch (markIndicator) {
-                case "unset":
-                    bookmarkSet();
-                    break;
-                case "first":
-                    importantSet();
-                    break;
-                case "second":
-                    unset();
-                    break;
+            case "unset":
+                bookmarkSet();
+                break;
+            case "first":
+                importantSet();
+                break;
+            case "second":
+                unset();
+                break;
             }
         }, [markIndicator]),
     };

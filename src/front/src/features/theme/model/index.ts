@@ -3,19 +3,23 @@ import { createEffect, createEvent, createStore, sample } from "effector";
 import { FlagsMapping } from "../lib/flags";
 import { IResources, resourcesMapping } from "../lib/resources";
 import themes from "./themes.json";
-import { ITheme, IThemeSize, IThemeType } from "../lib/theme";
+import { ITheme, IThemeType } from "../lib/theme";
 
-const checkSize = (width: number) => {
-    return width <= 768 ? "small" : "big";
-};
+const $theme = createStore<IThemeType>("light");
 
-export const $theme = createStore<IThemeType>("light");
-export const $themeColors = createStore<ITheme>(themes["light"]);
-export const $resources = createStore<IResources>({
-    ...resourcesMapping["light"],
-    ...resourcesMapping.notThemed,
-});
-export const $flags = createStore<FlagsMapping>({
+const $themeColors = $theme.map((theme) => themes[theme]);
+
+const $resources = $theme.map(
+    (theme) =>
+        Object.fromEntries(
+            Object.entries({
+                ...resourcesMapping[theme],
+                ...resourcesMapping.notThemed,
+            }).map(([k, v]) => [k, genUrl(v)])
+        ) as IResources
+);
+
+const $flags = createStore<FlagsMapping>({
     Билеты: genUrl(resourcesMapping.notThemed.ticket),
     Заказы: genUrl(resourcesMapping.notThemed.cart),
     Регистрации: genUrl(resourcesMapping.notThemed.key),
@@ -23,12 +27,9 @@ export const $flags = createStore<FlagsMapping>({
     Путешевствия: genUrl(resourcesMapping.notThemed.plane),
     "Штрафы и налоги": genUrl(resourcesMapping.notThemed.emblem),
 });
-export const $themeSize = createStore<IThemeSize>(checkSize(window.innerWidth));
 
-export const windowWidthChanged = createEvent<number>();
-export const eventToggleTheme = createEvent();
-
-export const switchThemeFx = createEffect((colors: ITheme) => {
+const themeToggleClicked = createEvent();
+const switchThemeFx = createEffect((colors: ITheme) => {
     document.body.style.setProperty("--main", colors.main);
     document.body.style.setProperty("--secondary", colors.secondary);
     document.body.style.setProperty("--text", colors.text);
@@ -46,26 +47,18 @@ export const switchThemeFx = createEffect((colors: ITheme) => {
     );
 });
 
-$theme.on(eventToggleTheme, (state) => (state === "light" ? "dark" : "light"));
-$themeColors.on($theme.updates, (_, theme) => themes[theme]);
-$resources.on(
-    $theme.updates,
-    (_, data) =>
-        Object.fromEntries(
-            Object.entries({
-                ...resourcesMapping[data],
-                ...resourcesMapping.notThemed,
-            }).map(([k, v]) => [k, genUrl(v)])
-        ) as IResources
-);
+sample({
+    clock: themeToggleClicked,
+    source: $theme,
+    fn: (theme) => (theme === "light" ? "dark" : "light"),
+    target: $theme,
+});
 
 sample({
     source: $themeColors,
     target: switchThemeFx,
 });
 
-sample({
-    clock: windowWidthChanged,
-    fn: checkSize,
-    target: $themeSize,
-});
+switchThemeFx($themeColors.defaultState);
+
+export { $resources, $flags, $theme, themeToggleClicked };

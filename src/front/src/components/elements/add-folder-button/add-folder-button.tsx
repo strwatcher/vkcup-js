@@ -1,5 +1,6 @@
+import { $resources } from "@/features/theme";
+import { useStore } from "effector-react";
 import React from "react";
-import { useTheme } from "../../../hooks/use-theme";
 import s from "./style.module.css";
 
 export type AddFolderButtonProps = {
@@ -7,7 +8,7 @@ export type AddFolderButtonProps = {
 };
 
 export const AddFolderButton: React.FC<AddFolderButtonProps> = (props) => {
-    const { resources } = useTheme();
+    const resources = useStore($resources);
     return (
         <div className={s.addFolder}>
             <img src={resources.plus} />

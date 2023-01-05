@@ -1,9 +1,8 @@
-import { useStore } from "effector-react";
+import { useStore, useUnit } from "effector-react";
 import React, { useEffect } from "react";
 import { ICompleteFolder, IFolder } from "shared";
 import { Folder } from "../../components/folder";
 import { List } from "../../components/list";
-import { useTheme } from "../../hooks/use-theme";
 import { $letters } from "../letters/model";
 import {
     $folders,
@@ -13,9 +12,17 @@ import {
 } from "./model";
 import { FoldersLayout } from "../../components/layouts/folders-layout";
 import { AddFolderButton } from "../../components/elements/add-folder-button";
+import { $resources } from "@/features/theme";
+import { $theme } from "@/features/theme";
+import { $screenSize } from "@/shared/lib/screen-size";
 
 export const Folders: React.FC = () => {
-    const { theme, resources, size } = useTheme();
+    const { resources, theme } = useUnit({
+        resources: $resources,
+        theme: $theme,
+    });
+
+    const size = useStore($screenSize);
 
     const stores = {
         folders: useStore($folders),

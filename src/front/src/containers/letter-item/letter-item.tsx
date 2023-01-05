@@ -13,7 +13,8 @@ import { SlicedAuthor } from "../../components/letter-item/sliced-author";
 import { SlicedTitleContent } from "../../components/letter-item/sliced-title-content";
 import { LetterState } from "../../containers/letters/model";
 import { useHover } from "@/shared/lib/hooks/use-hover";
-import { useTheme } from "../../hooks/use-theme";
+import { useUnit } from "effector-react";
+import { $flags, $resources } from "@/features/theme";
 
 export type LetterProps = LetterState & {
     onSelect: (id: string) => void;
@@ -24,7 +25,10 @@ export type LetterProps = LetterState & {
 };
 
 export const LetterItem: React.FC<LetterProps> = (props) => {
-    const { resources, flags } = useTheme();
+    const { resources, flags } = useUnit({
+        resources: $resources,
+        flags: $flags,
+    });
     const letterRef = React.useRef<HTMLDivElement>(null);
 
     const hovered = useHover(letterRef);

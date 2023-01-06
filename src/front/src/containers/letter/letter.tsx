@@ -34,17 +34,12 @@ export const Letter: React.FC = () => {
         }, []),
 
         changeMarkIndicator: React.useCallback(() => {
-            switch (markIndicator) {
-            case "unset":
-                bookmarkSet();
-                break;
-            case "first":
-                importantSet();
-                break;
-            case "second":
-                unset();
-                break;
-            }
+            const actionMap = {
+                unset: bookmarkSet,
+                first: importantSet,
+                second: unset,
+            };
+            actionMap[markIndicator]();
         }, [markIndicator]),
     };
 

@@ -1,5 +1,5 @@
+import { joinClasses } from "@/shared/lib/utils/join-classes";
 import React from "react";
-import { joinClasses } from "../../../utils/join-classes";
 import s from "./style.module.css";
 
 export type SlicedAuthorProps = {

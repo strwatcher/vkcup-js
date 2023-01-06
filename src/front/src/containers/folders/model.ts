@@ -1,6 +1,6 @@
 import { createEvent, createStore, sample } from "effector";
 import { ICompleteFolder, IFolder } from "shared";
-import { createRequestFactory } from "@/shared/lib/api/model";
+import { createRequestFactory } from "@/shared/api/model";
 export type FoldersState = {
     count: number;
     data: Array<ICompleteFolder>;

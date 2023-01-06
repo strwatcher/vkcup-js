@@ -1,12 +1,11 @@
 import React from "react";
-import { ThemeToggler } from "../../components/theme-toggler";
 import { Folders } from "../folders";
 import { SidebarLayout } from "../../components/layouts/sidebar-layout";
-import { Button } from "../../components/elements/button";
 import { useStore, useUnit } from "effector-react";
-import { $resources, themeToggleClicked } from "@/features/theme";
+import { $resources, themeToggleClicked, ThemeToggler } from "@/features/theme";
 import { $theme } from "@/features/theme/model";
 import { $screenSize } from "@/shared/lib/screen-size";
+import { CreateLetter } from "@/features/letter-create/ui/create-letter";
 
 export const Sidebar: React.FC = () => {
     const { resources, toggleClicked, theme } = useUnit({
@@ -19,11 +18,7 @@ export const Sidebar: React.FC = () => {
 
     return (
         <SidebarLayout>
-            {size === "small" ? (
-                <Button icon={resources.pencil} />
-            ) : (
-                <Button text={"Написать письмо"} />
-            )}
+            <CreateLetter />
             <Folders />
             <ThemeToggler
                 icon={resources.theme}

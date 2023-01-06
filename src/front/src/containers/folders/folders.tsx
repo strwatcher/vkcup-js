@@ -2,7 +2,7 @@ import { useStore, useUnit } from "effector-react";
 import React, { useEffect } from "react";
 import { ICompleteFolder, IFolder } from "shared";
 import { Folder } from "../../components/folder";
-import { List } from "../../components/list";
+import { List } from "@/shared/ui/list";
 import { $letters } from "../letters/model";
 import {
     $folders,
@@ -11,10 +11,12 @@ import {
     folderSelected,
 } from "./model";
 import { FoldersLayout } from "../../components/layouts/folders-layout";
-import { AddFolderButton } from "../../components/elements/add-folder-button";
 import { $resources } from "@/features/theme";
 import { $theme } from "@/features/theme";
 import { $screenSize } from "@/shared/lib/screen-size";
+import { Button } from "@/shared/ui";
+import { AddFolder } from "@/features/folder-add";
+import { Separator } from "@/shared/ui/separator/separator";
 
 export const Folders: React.FC = () => {
     const { resources, theme } = useUnit({
@@ -61,17 +63,26 @@ export const Folders: React.FC = () => {
     return (
         <FoldersLayout>
             {size === "small" && (
-                <Folder
+                <Button
                     active={false}
-                    icon={resources.menu}
-                    onClick={() => {}}
-                />
+                    variant={"activated"}>
+                    <img src={resources.menu} />
+                </Button>
             )}
             <List
                 items={stores.folders.data}
                 render={renders.folder}
             />
-            {size === "big" && <AddFolderButton />}
+            {size === "big" && (
+                <>
+                    <Separator
+                        direction="horizontal"
+                        size={200}
+                        thickness={1}
+                    />
+                    <AddFolder />
+                </>
+            )}
         </FoldersLayout>
     );
 };

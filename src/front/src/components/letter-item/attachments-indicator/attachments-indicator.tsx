@@ -1,10 +1,10 @@
 import React from "react";
 import { IAttachments } from "shared/types/attachmets";
 import { useClickOutside } from "@/shared/lib/hooks/use-click-outside";
-import { joinClasses } from "../../../utils/join-classes";
-import { List } from "../../list";
+import { List } from "@/shared/ui/list";
 import { AttachmentItem } from "../attachment-item";
 import s from "./style.module.css";
+import { joinClasses } from "@/shared/lib/utils/join-classes";
 
 export type AttachmentsIndicatorProps = {
     icon: string;

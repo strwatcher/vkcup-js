@@ -29,8 +29,8 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
         resources: $resources,
         flags: $flags,
     });
-    const letterRef = React.useRef<HTMLDivElement>(null);
 
+    const letterRef = React.useRef<HTMLDivElement>(null);
     const hovered = useHover(letterRef);
 
     const markImportantState: ThreeVariantState = React.useMemo(() => {

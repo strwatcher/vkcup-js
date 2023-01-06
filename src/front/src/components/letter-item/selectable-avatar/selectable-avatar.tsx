@@ -1,6 +1,6 @@
+import { joinClasses } from "@/shared/lib/utils/join-classes";
+import { Avatar } from "@/shared/ui/avatar";
 import React from "react";
-import { joinClasses } from "../../../utils/join-classes";
-import { Avatar } from "../../elements/avatar";
 import {
     SimpleCheckbox,
     SimpleCheckboxState,

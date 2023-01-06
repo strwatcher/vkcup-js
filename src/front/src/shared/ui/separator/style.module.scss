@@ -1,0 +1,13 @@
+.separator {
+    background-color: var(--letter-text);
+}
+
+.vertical {
+    width: var(--thickness);
+    height: var(--size);
+}
+
+.horizontal {
+    width: var(--size);
+    height: var(--thickness);
+}

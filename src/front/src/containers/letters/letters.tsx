@@ -1,7 +1,6 @@
 import { useStore } from "effector-react";
 import React, { useRef } from "react";
 import { ThreeVariantState } from "../../components/elements/three-state-checkbox";
-import { List } from "../../components/list";
 import { useScrollTop } from "@/shared/lib/hooks/use-scroll-top";
 import { LetterItem } from "../letter-item";
 import { letterOpened } from "../letter/model";
@@ -19,6 +18,7 @@ import {
     scrolledUp,
     $areLettersFetching,
 } from "./model";
+import { List } from "@/shared/ui";
 
 export const Letters: React.FC = () => {
     const stores = {
@@ -35,17 +35,12 @@ export const Letters: React.FC = () => {
         }, []),
         onMarkImportant: React.useCallback(
             (id: string, state: ThreeVariantState) => {
-                switch (state) {
-                    case "unset":
-                        letterBookmarkSet(id);
-                        break;
-                    case "first":
-                        letterImportantSet(id);
-                        break;
-                    case "second":
-                        letterUnset(id);
-                        break;
-                }
+                const actionMap = {
+                    unset: letterBookmarkSet,
+                    first: letterImportantSet,
+                    second: letterUnset,
+                };
+                actionMap[state](id);
             },
             []
         ),

@@ -1,8 +1,8 @@
 import { $resources } from "@/features/theme";
+import { Avatar } from "@/shared/ui/avatar";
 import { useStore } from "effector-react";
 import React from "react";
 import { IUser } from "shared";
-import { Avatar } from "../../../elements/avatar";
 import {
     ThreeStateCheckbox,
     ThreeVariantState,

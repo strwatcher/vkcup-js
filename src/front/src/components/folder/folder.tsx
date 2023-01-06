@@ -1,10 +1,10 @@
+import { Button } from "@/shared/ui";
 import React from "react";
 import { IFolder } from "shared";
-import { joinClasses } from "../../utils/join-classes";
 import s from "./style.module.css";
 
 export interface FolderProps {
-    folder?: IFolder;
+    folder: IFolder;
     icon: string;
     active: boolean;
     onClick: (folder: IFolder) => void;
@@ -12,15 +12,15 @@ export interface FolderProps {
 
 export const Folder: React.FC<FolderProps> = (props) => {
     return (
-        <div
-            tabIndex={0}
-            className={joinClasses(s.wrapper, props.active ? s.active : "")}
-            onClick={() => props.onClick(props.folder!)}>
+        <Button
+            active={props.active}
+            onClick={() => props.onClick(props.folder)}
+            variant={"activated"}>
             <img
                 src={props.icon}
                 alt=""
             />
             <span className={s.title}>{props.folder}</span>
-        </div>
+        </Button>
     );
 };

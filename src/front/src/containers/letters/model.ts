@@ -1,6 +1,6 @@
 import { createApi, createEvent, createStore, sample } from "effector";
 import { ILetter, ILetters } from "shared";
-import { createRequestFactory } from "@/shared/lib/api/model";
+import { createRequestFactory } from "@/shared/api/model";
 import { $selectedFolder } from "../folders/model";
 import { v4 as uuid4 } from "uuid";
 

@@ -1,7 +1,7 @@
 import { $resources } from "@/features/theme";
+import { joinClasses } from "@/shared/lib/utils/join-classes";
 import { useStore } from "effector-react";
 import React from "react";
-import { joinClasses } from "../../../utils/join-classes";
 import { SimpleCheckbox } from "../../elements/simple-checbox";
 import s from "./style.module.css";
 

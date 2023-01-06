@@ -1,6 +1,6 @@
 import React from "react";
 import { IAttachments } from "shared/types/attachmets";
-import { base64Size, bToMb } from "../../../utils/base64-size";
+import { base64Size, bToMb } from "@/shared/lib/utils/base64-size";
 import { BigPreview } from "../../elements/big-preview";
 import s from "./style.module.css";
 

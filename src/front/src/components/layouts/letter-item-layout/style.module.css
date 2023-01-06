@@ -35,6 +35,11 @@
     color: var(--letter-head-text);
 }
 
+.letter > *:nth-child(4) {
+    align-self: center;
+    justify-self: center;
+}
+
 .letter > *:nth-child(5) {
     margin-right: 24px;
 }

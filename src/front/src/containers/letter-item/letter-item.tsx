@@ -1,9 +1,4 @@
 import React from "react";
-import { ReadIndicator } from "../../components/elements/read-indicator";
-import {
-    ThreeStateCheckbox,
-    ThreeVariantState,
-} from "../../components/elements/three-state-checkbox";
 import { LetterItemLayout } from "../../components/layouts/letter-item-layout";
 import { AttachmentsIndicator } from "../../components/letter-item/attachments-indicator";
 import { DateTimeIndicator } from "../../components/letter-item/date-time-indicator";
@@ -15,6 +10,11 @@ import { LetterState } from "../../containers/letters/model";
 import { useHover } from "@/shared/lib/hooks/use-hover";
 import { useUnit } from "effector-react";
 import { $flags, $resources } from "@/features/theme";
+import {
+    ThreeStateCheckbox,
+    ThreeVariantState,
+} from "@/entities/three-state-checkbox";
+import { SimpleCheckbox } from "@/entities/simple-checkbox";
 
 export type LetterProps = LetterState & {
     onSelect: (id: string) => void;
@@ -39,33 +39,6 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
         return "unset";
     }, [props.bookmark, props.important]);
 
-    const images = {
-        readCheckboxImages: React.useMemo(
-            () => ({
-                checked: resources.read,
-                unchecked: resources.unread,
-            }),
-            [resources]
-        ),
-
-        selectCheckboxImages: React.useMemo(
-            () => ({
-                checked: resources.checkboxChecked,
-                unchecked: resources.checkbox,
-            }),
-            [resources]
-        ),
-
-        markImportantCheckboxImages: React.useMemo(
-            () => ({
-                unset: resources.unmarked,
-                first: resources.marked,
-                second: resources.exclamation,
-            }),
-            [resources]
-        ),
-    };
-
     return (
         <LetterItemLayout
             hoverRef={letterRef}
@@ -74,17 +47,25 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
             hasFlag={!!props.flag}
             hasAttachments={!!props.doc}
             onClick={() => props.onOpen(props.id)}>
-            <ReadIndicator
-                read={props.read}
-                onChange={() => props.onRead(props.id)}
+            <SimpleCheckbox
+                hideActive
                 hovered={hovered}
+                checked={props.read}
+                images={{
+                    checked: resources.read,
+                    unchecked: resources.unread,
+                }}
+                onChange={() => props.onRead(props.id)}
             />
 
             <SelectableAvatar
                 id={props.id}
                 selected={props.selected}
                 avatarSrc={props.author.avatar ?? ""}
-                images={images.selectCheckboxImages}
+                images={{
+                    checked: resources.checkboxChecked,
+                    unchecked: resources.checkbox,
+                }}
                 onChange={props.onSelect}
                 hovered={hovered}
             />
@@ -96,10 +77,14 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
             />
 
             <ThreeStateCheckbox
-                state={markImportantState}
-                images={images.markImportantCheckboxImages}
-                onChange={(state) => props.onMarkImportant(props.id, state)}
                 hovered={hovered}
+                state={markImportantState}
+                images={{
+                    unset: resources.unmarked,
+                    first: resources.marked,
+                    second: resources.exclamation,
+                }}
+                onChange={(state) => props.onMarkImportant(props.id, state)}
             />
 
             <SlicedTitleContent

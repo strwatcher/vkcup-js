@@ -1,6 +1,5 @@
 import { useStore } from "effector-react";
 import React, { useRef } from "react";
-import { ThreeVariantState } from "../../components/elements/three-state-checkbox";
 import { useScrollTop } from "@/shared/lib/hooks/use-scroll-top";
 import { LetterItem } from "../letter-item";
 import { letterOpened } from "../letter/model";
@@ -19,6 +18,7 @@ import {
     $areLettersFetching,
 } from "./model";
 import { List } from "@/shared/ui";
+import { ThreeVariantState } from "@/entities/three-state-checkbox";
 
 export const Letters: React.FC = () => {
     const stores = {

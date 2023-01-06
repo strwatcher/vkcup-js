@@ -1,12 +1,12 @@
+import {
+    ThreeStateCheckbox,
+    ThreeVariantState,
+} from "@/entities/three-state-checkbox";
 import { $resources } from "@/features/theme";
 import { Avatar } from "@/shared/ui/avatar";
 import { useStore } from "effector-react";
 import React from "react";
 import { IUser } from "shared";
-import {
-    ThreeStateCheckbox,
-    ThreeVariantState,
-} from "../../../elements/three-state-checkbox";
 import { SlicedAuthor } from "../../../letter-item/sliced-author";
 import { DateTime } from "../../date-time";
 import { Recipients } from "../../recipients";

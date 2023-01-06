@@ -30,7 +30,7 @@ $selectedFolder.on(folderSelected, (_, data) => data);
 sample({
     source: $folders,
     filter: (folders) => folders.length > 0,
-    fn: (folders) => folders.at(-1)!.folder,
+    fn: (folders) => folders.at(0)!.folder,
     target: $selectedFolder,
 });
 

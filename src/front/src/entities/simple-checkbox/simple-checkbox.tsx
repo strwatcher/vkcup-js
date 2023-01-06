@@ -1,9 +1,11 @@
+import { Checkbox } from "@/shared/ui";
 import React from "react";
-import { Checkbox } from "../checkbox";
 
 export type SimpleCheckboxState = "checked" | "unchecked";
 
 export type SimpleCheckboxProps = {
+    hideActive?: boolean;
+    hovered?: boolean;
     checked: boolean;
     images: {
         [P in SimpleCheckboxState]: string;
@@ -27,6 +29,9 @@ export const SimpleCheckbox: React.FC<SimpleCheckboxProps> = (props) => {
 
     return (
         <Checkbox
+            hovered={props.hovered}
+            hideActive={props.hideActive}
+            activeState={"checked"}
             state={state}
             mapping={{ checked, unchecked }}
             setState={props.onChange}

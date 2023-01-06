@@ -1,25 +1,22 @@
 import { createApi, createEvent, createStore, sample } from "effector";
-import { ThreeVariantState } from "../../components/elements/three-state-checkbox";
 import { folderSelected } from "@/features/folders";
 import { $letters, LetterState } from "../letters/model";
+import { ThreeVariantState } from "@/entities/three-state-checkbox";
 
 const letterOpened = createEvent<string>();
 const letterClosed = createEvent();
 const letterReadToggled = createEvent<void>();
 
 const $currentLetter = createStore<LetterState | null>(null);
-const $markIndicator = $currentLetter.map<ThreeVariantState | null>(
-    (letter) => {
-        if (!letter) return null;
-        if (letter.important) {
-            return "second";
-        }
-        if (letter.bookmark) {
-            return "first";
-        }
-        return "unset";
+const $markIndicator = $currentLetter.map<ThreeVariantState>((letter) => {
+    if (letter?.important) {
+        return "second";
     }
-);
+    if (letter?.bookmark) {
+        return "first";
+    }
+    return "unset";
+});
 
 const { importantSet, bookmarkSet, unset } = createApi($currentLetter, {
     importantSet: (letter) => letter && { ...letter, important: true },

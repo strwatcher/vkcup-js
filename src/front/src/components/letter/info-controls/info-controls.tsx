@@ -1,9 +1,11 @@
 import React from "react";
 import { IUser } from "shared";
 import { Info } from "./info";
-import { ReadIndicator } from "../../elements/read-indicator";
 import s from "./style.module.css";
-import { ThreeVariantState } from "../../elements/three-state-checkbox";
+import { useUnit } from "effector-react";
+import { $resources } from "@/features/theme";
+import { SimpleCheckbox } from "@/entities/simple-checkbox";
+import { ThreeVariantState } from "@/entities/three-state-checkbox";
 
 export type InfoControlsProps = {
     read: boolean;
@@ -17,12 +19,16 @@ export type InfoControlsProps = {
 };
 
 export const InfoControls: React.FC<InfoControlsProps> = (props) => {
+    const resources = useUnit($resources);
     return (
         <div className={s.infoControls}>
-            <ReadIndicator
-                hovered={props.hovered}
+            <SimpleCheckbox
                 onChange={props.onReadChange}
-                read={props.read}
+                checked={props.read}
+                images={{
+                    checked: resources.read,
+                    unchecked: resources.unread,
+                }}
             />
             <Info
                 hovered={props.hovered}

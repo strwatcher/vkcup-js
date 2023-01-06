@@ -1,7 +1,5 @@
-import { joinClasses } from "@/shared/lib/utils/join-classes";
+import { Checkbox } from "@/shared/ui";
 import React from "react";
-import { Checkbox } from "../checkbox";
-import s from "./style.module.css";
 
 export type ThreeVariantState = "unset" | "first" | "second";
 
@@ -27,19 +25,15 @@ export const ThreeStateCheckbox: React.FC<ThreeStateCheckboxProps> = (
         }),
         []
     );
+
     return (
-        <div
-            className={joinClasses(
-                s.wrapper,
-                props.state === "unset" && s.unset,
-                props.hovered && s.hovered
-            )}
-            onClick={(e) => e.stopPropagation()}>
-            <Checkbox
-                state={props.state}
-                mapping={mapping}
-                setState={props.onChange}
-            />
-        </div>
+        <Checkbox
+            hovered={props.hovered}
+            state={props.state}
+            mapping={mapping}
+            setState={props.onChange}
+            activeState={"unset"}
+            hideActive
+        />
     );
 };

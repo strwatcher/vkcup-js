@@ -26,7 +26,7 @@ export const Letter: React.FC = () => {
     const hovered = useHover(letterRef);
 
     const current = useStore($currentLetter)!;
-    const markIndicator = useStore($markIndicator)!;
+    const markIndicator = useStore($markIndicator);
 
     const callbacks = {
         toggleRead: React.useCallback(() => {

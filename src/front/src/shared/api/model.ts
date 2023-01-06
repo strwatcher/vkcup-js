@@ -7,7 +7,7 @@ async function request<TReturn>(url: string): Promise<TReturn> {
     return json as TReturn;
 }
 
-export function createRequestFactory<TReturn, TFetch = TReturn>({
+export function createRequest<TReturn, TFetch = TReturn>({
     url,
     target,
     fn,

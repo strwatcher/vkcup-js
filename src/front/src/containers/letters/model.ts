@@ -1,8 +1,8 @@
 import { createApi, createEvent, createStore, sample } from "effector";
 import { ILetter, ILetters } from "shared";
-import { createRequestFactory } from "@/shared/api/model";
-import { $selectedFolder } from "../folders/model";
+import { createRequest } from "@/shared/api/model";
 import { v4 as uuid4 } from "uuid";
+import { $selectedFolder } from "@/features/folders";
 
 type RawLettersState = {
     data: ILetters;
@@ -23,7 +23,7 @@ export type LetterState = ILetter & {
 const $letters = createStore<LettersState>({ data: [], count: 0 });
 const $justFetched = createStore<boolean>(false);
 
-const fetchLettersFx = createRequestFactory({
+const fetchLettersFx = createRequest({
     url: "letters/",
     fn: (letters: RawLettersState) => ({
         count: letters.count,

@@ -1,11 +1,11 @@
 import React from "react";
-import { Folders } from "../folders";
 import { SidebarLayout } from "../../components/layouts/sidebar-layout";
 import { useStore, useUnit } from "effector-react";
 import { $resources, themeToggleClicked, ThemeToggler } from "@/features/theme";
 import { $theme } from "@/features/theme/model";
 import { $screenSize } from "@/shared/lib/screen-size";
 import { CreateLetter } from "@/features/letter-create/ui/create-letter";
+import { Folders } from "@/features/folders";
 
 export const Sidebar: React.FC = () => {
     const { resources, toggleClicked, theme } = useUnit({

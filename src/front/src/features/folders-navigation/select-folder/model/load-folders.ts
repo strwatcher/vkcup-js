@@ -6,18 +6,18 @@ import { createGate } from "effector-react";
 export type FoldersState = Array<ICompleteFolder>;
 
 export function setupFoldersLoading() {
-    const FoldersGate = createGate();
-    const $folders = createStore<FoldersState>([]);
-    const fetchFoldersFx = createRequest<FoldersState, { data: FoldersState }>({
-        url: "folders",
-        target: $folders,
-        fn: (response) => response.data,
-    });
-    sample({
-        clock: FoldersGate.open,
-        fn: () => undefined,
-        target: fetchFoldersFx,
-    });
+  const FoldersGate = createGate();
+  const $folders = createStore<FoldersState>([]);
+  const fetchFoldersFx = createRequest<FoldersState, { data: FoldersState }>({
+    url: "folders",
+    target: $folders,
+    fn: (response) => response.data,
+  });
+  sample({
+    clock: FoldersGate.open,
+    fn: () => undefined,
+    target: fetchFoldersFx,
+  });
 
-    return { FoldersGate, $folders };
+  return { FoldersGate, $folders };
 }

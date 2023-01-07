@@ -1,1 +1,1 @@
-export { CompactLetter } from "./ui/compact-letter";
+export { CompactLetter } from "./compact-letter/ui";

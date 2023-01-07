@@ -1,9 +1,9 @@
 {
+    "parser": "typescript",
     "printWidth": 80,
-    "tabWidth": 4,
+    "tabWidth": 2,
     "semi": true,
     "singleQuote": false,
     "bracketSpacing": true,
-    "singleAttributePerLine": true,
-    "bracketSameLine": true
+    "bracketSameLine": false
 }

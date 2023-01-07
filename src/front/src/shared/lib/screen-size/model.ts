@@ -4,19 +4,19 @@ import { createGate } from "effector-react";
 export type IScreenSize = "small" | "big";
 
 const getCurrentSize = () =>
-    matchMedia("(max-width: 768px)").matches ? "small" : "big";
+  matchMedia("(max-width: 768px)").matches ? "small" : "big";
 
 const screenResized = createEvent<IScreenSize>();
 const handleScreenResize = () => {
-    screenResized(getCurrentSize());
+  screenResized(getCurrentSize());
 };
 
 const subscribeToResizeFx = createEffect(() => {
-    window.addEventListener("resize", handleScreenResize);
+  window.addEventListener("resize", handleScreenResize);
 });
 
 const unsubscribeFromResizeFx = createEffect(() => {
-    window.removeEventListener("resize", handleScreenResize);
+  window.removeEventListener("resize", handleScreenResize);
 });
 
 const $screenSize = createStore<IScreenSize>(getCurrentSize());
@@ -26,8 +26,8 @@ sample({ clock: ScreenSizeGate.open, target: subscribeToResizeFx });
 sample({ clock: ScreenSizeGate.close, target: unsubscribeFromResizeFx });
 
 sample({
-    source: screenResized,
-    target: $screenSize,
+  source: screenResized,
+  target: $screenSize,
 });
 
 export { ScreenSizeGate, $screenSize };

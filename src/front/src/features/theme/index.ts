@@ -1,2 +1,2 @@
-export { $theme, $resources, $flags, themeToggleClicked } from "./model";
+export { themeToggleClicked } from "./model/switch-theme";
 export { ThemeToggler } from "./ui/theme-toggler";

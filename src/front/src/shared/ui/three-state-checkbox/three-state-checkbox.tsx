@@ -4,27 +4,27 @@ import React from "react";
 export type ThreeVariantState = "unset" | "first" | "second";
 
 export type ThreeVariantMapping<T> = {
-    [P in ThreeVariantState]: T;
+  [P in ThreeVariantState]: T;
 };
 
 export type ThreeStateCheckboxProps = {
-    state: ThreeVariantState;
-    images: ThreeVariantMapping<string>;
-    onChange: (state: ThreeVariantState) => void;
-    hovered: boolean;
+  state: ThreeVariantState;
+  images: ThreeVariantMapping<string>;
+  onChange: (state: ThreeVariantState) => void;
+  hovered: boolean;
 };
 
 export const ThreeStateCheckbox: React.FC<ThreeStateCheckboxProps> = (
-    props
+  props
 ) => {
-    return (
-        <Checkbox
-            hovered={props.hovered}
-            state={props.state}
-            images={props.images}
-            setState={props.onChange}
-            activeState={"unset"}
-            hideActive
-        />
-    );
+  return (
+    <Checkbox
+      hovered={props.hovered}
+      state={props.state}
+      images={props.images}
+      setState={props.onChange}
+      activeState={"unset"}
+      hideActive
+    />
+  );
 };

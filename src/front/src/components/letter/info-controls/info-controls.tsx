@@ -4,8 +4,7 @@ import { Info } from "./info";
 import s from "./style.module.css";
 import { useUnit } from "effector-react";
 import { $resources } from "@/features/theme";
-import { SimpleCheckbox } from "@/entities/simple-checkbox";
-import { ThreeVariantState } from "@/entities/three-state-checkbox";
+import { SimpleCheckbox, ThreeVariantState } from "@/shared/ui";
 
 export type InfoControlsProps = {
     read: boolean;

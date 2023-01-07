@@ -2,7 +2,7 @@ import { joinClasses } from "@/shared/lib/utils/join-classes";
 import React, { RefObject } from "react";
 import s from "./style.module.css";
 
-export type LetterItemLayoutProps = {
+export type CompactLetterLayoutProps = {
     children: React.ReactNode;
     selected: boolean;
     read: boolean;
@@ -12,7 +12,9 @@ export type LetterItemLayoutProps = {
     onClick: () => void;
 };
 
-export const LetterItemLayout: React.FC<LetterItemLayoutProps> = (props) => {
+export const CompactLetterLayout: React.FC<CompactLetterLayoutProps> = (
+    props
+) => {
     const className = React.useMemo(() => {
         return joinClasses(
             s.letter,

@@ -2,7 +2,7 @@ import React from "react";
 import { useUnit } from "effector-react";
 import { $resources, themeToggleClicked, ThemeToggler } from "@/features/theme";
 import { $theme } from "@/features/theme/model";
-import { AddFolder, FoldersList } from "@/features/folder";
+import { AddFolder, FoldersList } from "@/features/folders-navigation";
 import { CreateLetter } from "@/features/letter";
 import { Button } from "@/shared/ui";
 import { Separator } from "@/shared/ui/separator/separator";

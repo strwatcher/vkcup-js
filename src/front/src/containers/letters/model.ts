@@ -2,7 +2,7 @@ import { createApi, createEvent, createStore, sample } from "effector";
 import { ILetter, ILetters } from "shared";
 import { createRequest } from "@/shared/api/model";
 import { v4 as uuid4 } from "uuid";
-import { folderSelectionModel } from "@/features/folder";
+import { folderSelectionModel } from "@/features/folders-navigation";
 
 type RawLettersState = {
     data: ILetters;
@@ -103,7 +103,7 @@ const { letterImportantSet, letterBookmarkSet, letterUnset } = createApi(
 );
 
 const { openAttachments, closeAttachments } = createApi($letters, {
-    openAttachments: (letters, letterId) => ({
+    openAttachments: (letters: LettersState, letterId: string) => ({
         count: letters.count,
         data: letters.data.map((letter) =>
             letter.id === letterId
@@ -111,7 +111,7 @@ const { openAttachments, closeAttachments } = createApi($letters, {
                 : letter
         ),
     }),
-    closeAttachments: (letters, letterId) => ({
+    closeAttachments: (letters: LettersState, letterId: string) => ({
         count: letters.count,
         data: letters.data.map((letter) =>
             letter.id === letterId

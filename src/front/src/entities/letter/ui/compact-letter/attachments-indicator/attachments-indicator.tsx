@@ -10,24 +10,32 @@ export type AttachmentsIndicatorProps = {
     icon: string;
     attachments: IAttachments;
     opened: boolean;
-    onToggle: () => void;
+    onOpen: () => void;
+    onClose: () => void;
 };
 
 export const AttachmentsIndicator: React.FC<AttachmentsIndicatorProps> = (
     props
 ) => {
     const callbacks = {
-        toggle: React.useCallback((e: React.MouseEvent) => {
-            e.stopPropagation();
-            props.onToggle();
-        }, []),
+        open: React.useCallback(
+            (e: React.MouseEvent) => {
+                e.stopPropagation();
+                if (!props.opened) {
+                    props.onOpen();
+                } else {
+                    props.onClose();
+                }
+            },
+            [props.onOpen, props.opened]
+        ),
     };
 
-    const indicatorRef = React.useRef(null);
     const popupRef = React.useRef(null);
+    const indicatorRef = React.useRef(null);
 
     useClickOutside(
-        () => props.opened && props.onToggle(),
+        () => props.opened && props.onClose(),
         popupRef,
         indicatorRef
     );
@@ -51,7 +59,7 @@ export const AttachmentsIndicator: React.FC<AttachmentsIndicatorProps> = (
                 ref={indicatorRef}
                 src={props.icon}
                 className={s.indicator}
-                onClick={callbacks.toggle}
+                onClick={callbacks.open}
             />
             <div
                 ref={popupRef}

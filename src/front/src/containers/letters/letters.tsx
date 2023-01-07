@@ -1,4 +1,4 @@
-import { useStore, useUnit } from "effector-react";
+import { useUnit } from "effector-react";
 import React from "react";
 import { useScrollTop } from "@/shared/lib/hooks/use-scroll-top";
 import { letterOpened } from "../letter/model";
@@ -16,9 +16,8 @@ import {
     scrolledUp,
     $areLettersFetching,
 } from "./model";
-import { List } from "@/shared/ui";
-import { ThreeVariantState } from "@/entities/three-state-checkbox";
-import { LetterItem } from "@/features/letter";
+import { List, ThreeVariantState } from "@/shared/ui";
+import { CompactLetter } from "@/entities/letter";
 
 export const Letters: React.FC = () => {
     const {
@@ -61,12 +60,11 @@ export const Letters: React.FC = () => {
     const renders = {
         letter: React.useCallback(
             (letter: LetterState) => (
-                <LetterItem
+                <CompactLetter
                     {...letter}
                     onSelect={onLetterSelectionToggled}
                     onRead={onLetterReadToggled}
                     onMarkImportant={callbacks.onMarkImportant}
-                    onToggleAttachments={callbacks.onToggleAttachments}
                     onOpen={onLetterOpened}
                 />
             ),

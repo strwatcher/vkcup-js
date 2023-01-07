@@ -1,7 +1,7 @@
 import { createApi, createEvent, createStore, sample } from "effector";
 import { $letters, LetterState } from "../letters/model";
-import { ThreeVariantState } from "@/entities/three-state-checkbox";
-import { folderSelectionModel } from "@/features/folder";
+import { folderSelectionModel } from "@/features/folders-navigation";
+import { ThreeVariantState } from "@/shared/ui";
 
 const letterOpened = createEvent<string>();
 const letterClosed = createEvent();

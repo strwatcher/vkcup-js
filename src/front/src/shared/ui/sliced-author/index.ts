@@ -1,0 +1,1 @@
+export { SlicedAuthor } from "./ui";

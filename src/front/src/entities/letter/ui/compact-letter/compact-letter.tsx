@@ -3,32 +3,37 @@ import { useHover } from "@/shared/lib/hooks/use-hover";
 import { useUnit } from "effector-react";
 import { $flags, $resources } from "@/features/theme";
 import {
+    closeAttachments,
+    LetterState,
+    openAttachments,
+} from "@/containers/letters/model";
+import { SelectableAvatar } from "./selectable-avatar";
+import { SlicedTitleContent } from "./sliced-title-content";
+import { AttachmentsIndicator } from "./attachments-indicator";
+import { DateTimeIndicator } from "./date-time-indicator";
+import { CompactLetterLayout } from "./compact-letter-layout";
+import {
+    SimpleCheckbox,
+    SlicedAuthor,
     ThreeStateCheckbox,
     ThreeVariantState,
-} from "@/entities/three-state-checkbox";
-import { SimpleCheckbox } from "@/entities/simple-checkbox";
-import { LetterState } from "@/containers/letters/model";
-import { LetterItemLayout } from "@/components/layouts/letter-item-layout";
-import { SelectableAvatar } from "./selectable-avatar";
-import { SlicedAuthor } from "@/components/letter-item/sliced-author";
-import { SlicedTitleContent } from "@/components/letter-item/sliced-title-content";
-import { FlagIndicator } from "@/components/letter-item/flag-indicator";
-import { AttachmentsIndicator } from "@/components/letter-item/attachments-indicator";
-import { DateTimeIndicator } from "@/components/letter-item/date-time-indicator";
+} from "@/shared/ui";
 
-export type LetterProps = LetterState & {
+export type CompactLetterProps = LetterState & {
     onSelect: (id: string) => void;
     onRead: (id: string) => void;
     onMarkImportant: (id: string, state: ThreeVariantState) => void;
-    onToggleAttachments: (id: string, opened: boolean) => void;
     onOpen: (id: string) => void;
 };
 
-export const LetterItem: React.FC<LetterProps> = (props) => {
-    const { resources, flags } = useUnit({
-        resources: $resources,
-        flags: $flags,
-    });
+export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
+    const { resources, flags, onAttachmentsOpened, onAttachmentsClosed } =
+        useUnit({
+            resources: $resources,
+            flags: $flags,
+            onAttachmentsOpened: openAttachments,
+            onAttachmentsClosed: closeAttachments,
+        });
 
     const letterRef = React.useRef<HTMLDivElement>(null);
     const hovered = useHover(letterRef);
@@ -40,7 +45,7 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
     }, [props.bookmark, props.important]);
 
     return (
-        <LetterItemLayout
+        <CompactLetterLayout
             hoverRef={letterRef}
             read={props.read}
             selected={props.selected}
@@ -93,23 +98,19 @@ export const LetterItem: React.FC<LetterProps> = (props) => {
                 read={props.read}
             />
 
-            {props.flag && <FlagIndicator icon={flags[props.flag]} />}
+            {props.flag && <img src={flags[props.flag]} />}
 
             {props.doc && (
                 <AttachmentsIndicator
                     icon={resources.attachment}
                     attachments={props.doc}
                     opened={props.attachmentsOpened}
-                    onToggle={() =>
-                        props.onToggleAttachments(
-                            props.id,
-                            props.attachmentsOpened
-                        )
-                    }
+                    onOpen={() => onAttachmentsOpened(props.id)}
+                    onClose={() => onAttachmentsClosed(props.id)}
                 />
             )}
 
             <DateTimeIndicator date={props.date} />
-        </LetterItemLayout>
+        </CompactLetterLayout>
     );
 };

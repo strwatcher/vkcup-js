@@ -1,8 +1,6 @@
-import {
-    SimpleCheckbox,
-    SimpleCheckboxState,
-} from "@/entities/simple-checkbox";
+import { SimpleCheckbox } from "@/shared/ui";
 import { Avatar } from "@/shared/ui/avatar";
+import { SimpleCheckboxState } from "@/shared/ui/simple-checkbox";
 import React from "react";
 
 export type SelectableAvatarProps = {

@@ -1,4 +1,5 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
+import { Sliced } from "@/shared/ui";
 import React from "react";
 import s from "./style.module.css";
 
@@ -12,9 +13,11 @@ export const SlicedTitleContent: React.FC<SlicedTitleContentProps> = (
     props
 ) => {
     return (
-        <div className={joinClasses(s.content, props.read && s.read)}>
-            <span className={s.title}>{props.title}</span>
-            {props.text}
-        </div>
+        <Sliced variant="ellipsis">
+            <span className={joinClasses(s.title, !props.read && s.bold)}>
+                {props.title}
+            </span>
+            <span>{props.text}</span>
+        </Sliced>
     );
 };

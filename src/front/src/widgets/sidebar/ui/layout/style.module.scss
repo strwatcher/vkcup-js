@@ -1,0 +1,9 @@
+.layout {
+    display: grid;
+    grid-template-rows: 36px min-content 1px auto 36px;
+    gap: 12px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-rows: 36px 36px 1fr 36px;
+    }
+}

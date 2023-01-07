@@ -10,9 +10,9 @@ type SeparatorProps = {
 
 export const Separator = (props: SeparatorProps) => {
     const setSize = React.useCallback(
-        (node: HTMLDivElement) => {
-            node.style.setProperty("--size", props.size + "px");
-            node.style.setProperty("--thickness", props.thickness + "px");
+        (node: HTMLDivElement | null) => {
+            node?.style.setProperty("--size", props.size + "px");
+            node?.style.setProperty("--thickness", props.thickness + "px");
         },
         [props.size, props.thickness]
     );

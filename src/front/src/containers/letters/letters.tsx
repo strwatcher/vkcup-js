@@ -1,7 +1,6 @@
-import { useStore } from "effector-react";
-import React, { useRef } from "react";
+import { useStore, useUnit } from "effector-react";
+import React from "react";
 import { useScrollTop } from "@/shared/lib/hooks/use-scroll-top";
-import { LetterItem } from "../letter-item";
 import { letterOpened } from "../letter/model";
 import {
     $letters,
@@ -19,20 +18,26 @@ import {
 } from "./model";
 import { List } from "@/shared/ui";
 import { ThreeVariantState } from "@/entities/three-state-checkbox";
+import { LetterItem } from "@/features/letter";
 
 export const Letters: React.FC = () => {
-    const stores = {
-        letters: useStore($letters),
-        justFetched: useStore($justFetched),
-        fetching: useStore($areLettersFetching),
-    };
+    const {
+        letters,
+        justFetched,
+        fetching,
+        onLetterSelectionToggled,
+        onLetterReadToggled,
+        onLetterOpened,
+    } = useUnit({
+        letters: $letters,
+        justFetched: $justFetched,
+        fetching: $areLettersFetching,
+        onLetterReadToggled: letterReadToggled,
+        onLetterSelectionToggled: letterSelectionToggled,
+        onLetterOpened: letterOpened,
+    });
+
     const callbacks = {
-        onSelect: React.useCallback((id: string) => {
-            letterSelectionToggled(id);
-        }, []),
-        onRead: React.useCallback((id: string) => {
-            letterReadToggled(id);
-        }, []),
         onMarkImportant: React.useCallback(
             (id: string, state: ThreeVariantState) => {
                 const actionMap = {
@@ -44,16 +49,13 @@ export const Letters: React.FC = () => {
             },
             []
         ),
+
         onToggleAttachments: React.useCallback(
             (id: string, opened: boolean) => {
                 opened ? closeAttachments(id) : openAttachments(id);
             },
             []
         ),
-
-        onOpenLetter: React.useCallback((id: string) => {
-            letterOpened(id);
-        }, []),
     };
 
     const renders = {
@@ -61,33 +63,28 @@ export const Letters: React.FC = () => {
             (letter: LetterState) => (
                 <LetterItem
                     {...letter}
-                    onSelect={callbacks.onSelect}
-                    onRead={callbacks.onRead}
+                    onSelect={onLetterSelectionToggled}
+                    onRead={onLetterReadToggled}
                     onMarkImportant={callbacks.onMarkImportant}
                     onToggleAttachments={callbacks.onToggleAttachments}
-                    onOpen={callbacks.onOpenLetter}
+                    onOpen={onLetterOpened}
                 />
             ),
             []
         ),
     };
 
-    const scrollRef = useRef(null);
-
-    useScrollTop(
-        () => {
-            scrolledUp();
-        },
-        scrollRef,
-        stores.justFetched
+    const scrollRef = useScrollTop<HTMLDivElement>(
+        () => scrolledUp(),
+        justFetched
     );
 
     return (
         <div ref={scrollRef}>
-            {!stores.fetching && (
+            {!fetching && (
                 <List
                     render={renders.letter}
-                    items={stores.letters.data}
+                    items={letters.data}
                 />
             )}
         </div>

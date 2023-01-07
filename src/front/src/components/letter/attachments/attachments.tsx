@@ -1,8 +1,8 @@
 import React from "react";
 import { IAttachments } from "shared/types/attachmets";
 import { base64Size, bToMb } from "@/shared/lib/utils/base64-size";
-import { BigPreview } from "../../elements/big-preview";
 import s from "./style.module.css";
+import { ImagePreview } from "@/shared/ui";
 
 export type AttachmentsProps = {
     attachments: IAttachments;
@@ -45,7 +45,7 @@ export const Attachments: React.FC<AttachmentsProps> = (props) => {
         <div className={s.wrapper}>
             <div className={s.attachments}>
                 {attachments?.map((doc) => (
-                    <BigPreview {...doc} />
+                    <ImagePreview {...doc} />
                 ))}
             </div>
 

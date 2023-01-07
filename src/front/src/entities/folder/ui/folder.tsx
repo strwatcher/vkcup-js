@@ -2,12 +2,12 @@ import { Button } from "@/shared/ui";
 import React from "react";
 import { IFolder } from "shared";
 
-export interface FolderProps {
+export type FolderProps = {
     folder: IFolder;
     icon: string;
     active: boolean;
     onClick: () => void;
-}
+};
 
 export const Folder: React.FC<FolderProps> = (props) => {
     return (

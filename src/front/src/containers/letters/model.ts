@@ -2,7 +2,7 @@ import { createApi, createEvent, createStore, sample } from "effector";
 import { ILetter, ILetters } from "shared";
 import { createRequest } from "@/shared/api/model";
 import { v4 as uuid4 } from "uuid";
-import { $selectedFolder } from "@/features/folders";
+import { folderSelectionModel } from "@/features/folder";
 
 type RawLettersState = {
     data: ILetters;
@@ -40,8 +40,8 @@ const fetchLettersFx = createRequest({
 const $areLettersFetching = fetchLettersFx.pending;
 
 sample({
-    clock: $selectedFolder,
-    fn: (clockData) => "?folder=" + clockData,
+    clock: folderSelectionModel.$selectedFolder,
+    fn: (folder) => "?folder=" + folder,
     target: fetchLettersFx,
 });
 

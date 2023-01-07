@@ -14,14 +14,6 @@ export type SimpleCheckboxProps = {
 };
 
 export const SimpleCheckbox: React.FC<SimpleCheckboxProps> = (props) => {
-    const { checked, unchecked } = React.useMemo(
-        () => ({
-            checked: <img src={props.images.checked} />,
-            unchecked: <img src={props.images.unchecked} />,
-        }),
-        [props.images]
-    );
-
     const state = React.useMemo(
         () => (props.checked ? "checked" : "unchecked"),
         [props.checked]
@@ -33,7 +25,7 @@ export const SimpleCheckbox: React.FC<SimpleCheckboxProps> = (props) => {
             hideActive={props.hideActive}
             activeState={"checked"}
             state={state}
-            mapping={{ checked, unchecked }}
+            images={props.images}
             setState={props.onChange}
         />
     );

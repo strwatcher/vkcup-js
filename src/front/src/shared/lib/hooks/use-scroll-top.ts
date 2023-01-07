@@ -1,14 +1,17 @@
-import React, { RefObject } from "react";
+import React from "react";
 
-export function useScrollTop(
+export function useScrollTop<T extends HTMLElement>(
     callback: () => void,
-    ref: RefObject<HTMLElement>,
     scroll: boolean
 ) {
-    React.useLayoutEffect(() => {
-        if (scroll) {
-            callback();
-            ref.current?.scrollTo(0, 0);
-        }
-    }, [scroll]);
+    const scrollTop = React.useCallback(
+        (node: T | null) => {
+            if (scroll && node) {
+                callback();
+                node.scrollTo(0, 0);
+            }
+        },
+        [scroll]
+    );
+    return scrollTop;
 }

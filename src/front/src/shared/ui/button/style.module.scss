@@ -13,13 +13,13 @@
     gap: 10px;
     padding: 12px 11px;
     width: 200px;
+
     color: var(--text);
 
     @media screen and (max-width: 768px) {
         border-radius: 4px;
         justify-content: center;
         width: 36px;
-        height: 36px;
 
         & > *:nth-child(2) {
             display: none;
@@ -60,5 +60,13 @@
     gap: 15px;
     padding: 8px 20px;
     width: 200px;
+    height: 36px;
     color: var(--letter-text);
+
+    @media screen and (max-width: 768px) {
+        padding: 12px 11px;
+        border-radius: 4px;
+        justify-content: center;
+        width: 36px;
+    }
 }

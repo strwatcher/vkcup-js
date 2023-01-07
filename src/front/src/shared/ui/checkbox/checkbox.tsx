@@ -4,8 +4,8 @@ import s from "./style.module.scss";
 
 type CheckboxProps<TState extends string> = {
     state: TState;
-    mapping: {
-        [P in TState]: React.ReactElement;
+    images: {
+        [P in TState]: string;
     };
     setState: (state: TState) => void;
     hovered?: boolean;
@@ -25,7 +25,7 @@ export const Checkbox = <TState extends string>(
         [props.state]
     );
 
-    const variants = React.useMemo(() => {
+    const className = React.useMemo(() => {
         let className = joinClasses(s.checkbox);
 
         if (
@@ -38,28 +38,14 @@ export const Checkbox = <TState extends string>(
             className = joinClasses(className, s.hide);
         }
 
-        const states: TState[] = Array.from(
-            Object.keys(props.mapping)
-        ) as TState[];
+        return className;
+    }, [props.activeState, props.hideActive, props.state, props.hovered]);
 
-        const mapping: { [P in TState]?: React.ReactNode } = {};
-        states.forEach((state) => {
-            const element = props.mapping[state];
-            mapping[state] = React.cloneElement(element, {
-                className,
-                onClick,
-            });
-        });
-
-        return mapping;
-    }, [
-        props.mapping,
-        onClick,
-        props.activeState,
-        props.hideActive,
-        props.state,
-        props.hovered,
-    ]);
-
-    return <>{variants[props.state]}</>;
+    return (
+        <img
+            onClick={onClick}
+            className={className}
+            src={props.images[props.state]}
+        />
+    );
 };

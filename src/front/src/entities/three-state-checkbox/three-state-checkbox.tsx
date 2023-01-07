@@ -17,20 +17,11 @@ export type ThreeStateCheckboxProps = {
 export const ThreeStateCheckbox: React.FC<ThreeStateCheckboxProps> = (
     props
 ) => {
-    const mapping: ThreeVariantMapping<React.ReactElement> = React.useMemo(
-        () => ({
-            unset: <img src={props.images.unset} />,
-            first: <img src={props.images.first} />,
-            second: <img src={props.images.second} />,
-        }),
-        []
-    );
-
     return (
         <Checkbox
             hovered={props.hovered}
             state={props.state}
-            mapping={mapping}
+            images={props.images}
             setState={props.onChange}
             activeState={"unset"}
             hideActive

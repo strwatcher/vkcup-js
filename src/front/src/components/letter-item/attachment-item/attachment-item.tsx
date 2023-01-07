@@ -1,7 +1,7 @@
 import React from "react";
 import { base64Size, bToMb } from "@/shared/lib/utils/base64-size";
-import { BigPreview } from "../../elements/big-preview";
 import s from "./style.module.css";
+import { ImagePreview } from "@/shared/ui";
 
 export type IAttachmentItem = {
     name: string;
@@ -25,7 +25,7 @@ export const AttachmentItem: React.FC<AttachmentItemProps> = (props) => {
                 )} MB`}
             </span>
             <div className={s.bigPreview}>
-                <BigPreview {...props} />
+                <ImagePreview {...props} />
             </div>
         </div>
     );

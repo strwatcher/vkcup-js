@@ -1,16 +1,9 @@
-.content {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .title {
     margin-right: 8px;
     color: var(--letter-head-text);
-    font-weight: 700;
+    font-weight: 400;
 }
 
-.read .author,
-.read .title {
-    font-weight: 400;
+.title.bold {
+    font-weight: 700;
 }

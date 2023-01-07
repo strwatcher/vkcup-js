@@ -1,7 +1,7 @@
 import { createApi, createEvent, createStore, sample } from "effector";
-import { folderSelected } from "@/features/folders";
 import { $letters, LetterState } from "../letters/model";
 import { ThreeVariantState } from "@/entities/three-state-checkbox";
+import { folderSelectionModel } from "@/features/folder";
 
 const letterOpened = createEvent<string>();
 const letterClosed = createEvent();
@@ -35,7 +35,7 @@ sample({
 
 $currentLetter.on(
     letterReadToggled,
-    (state, _) =>
+    (state) =>
         state && {
             ...state,
             read: !state.read,
@@ -49,13 +49,19 @@ sample({
     fn: (letters, letter) => ({
         count: letters.count,
         data: letters.data.map((l) =>
-            l.id === letter!.id ? { ...letter! } : l
+            l.id === (letter as LetterState).id
+                ? { ...(letter as LetterState) }
+                : l
         ),
     }),
     target: $letters,
 });
 
-$currentLetter.on([letterClosed, folderSelected], () => null);
+sample({
+    clock: [letterClosed, folderSelectionModel.folderSelected],
+    fn: () => null,
+    target: $currentLetter,
+});
 
 export {
     $currentLetter,

@@ -5,7 +5,6 @@ import { Attachments } from "../../components/letter/attachments";
 import { Body } from "../../components/letter/body";
 import { Flag } from "../../components/letter/flag";
 import { InfoControls } from "../../components/letter/info-controls";
-import { Title } from "../../components/letter/title";
 import { useHover } from "@/shared/lib/hooks/use-hover";
 import {
     $currentLetter,
@@ -16,6 +15,7 @@ import {
     unset,
 } from "./model";
 import { $flags } from "@/features/theme";
+import { H } from "@/shared/ui/h";
 
 export const Letter: React.FC = () => {
     const { flags } = useUnit({
@@ -48,7 +48,7 @@ export const Letter: React.FC = () => {
             letterRef={letterRef}
             head={
                 <>
-                    <Title text={current.title} />
+                    <H text={current.title} />
                     <Flag
                         name={current.flag}
                         icon={flags[current.flag]}

@@ -33,6 +33,7 @@ export const Recipients: React.FC<RecipientsProps> = (props) => {
                 : "";
         return { finalString, otherString };
     }, [props.to]);
+
     return (
         <div>
             {finalString} <u>{otherString}</u>

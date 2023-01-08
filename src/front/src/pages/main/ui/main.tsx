@@ -96,7 +96,6 @@ export const Main: React.FC = () => {
         justFetched={model.lettersJustFetched}
         fetching={model.lettersFetching}
       />
-      )
     </Layout>
   );
 };

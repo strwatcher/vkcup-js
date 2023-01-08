@@ -19,10 +19,14 @@ export const FoldersList = () => {
 
     folderItemClicked: folderSelectionModel.folderClicked,
   });
+  const indexedFolders = React.useMemo(
+    () => folders.map((folder, index) => ({ ...folder, id: `${index}` })),
+    [folders]
+  );
 
   const renders = {
     folder: React.useCallback(
-      (folder: ICompleteFolder) => {
+      (folder: ICompleteFolder & { id: string }) => {
         return (
           <Folder
             icon={folder.icon[theme as keyof ICompleteFolder["icon"]]}
@@ -36,5 +40,5 @@ export const FoldersList = () => {
     ),
   };
 
-  return <List items={folders} render={renders.folder} />;
+  return <List items={indexedFolders} render={renders.folder} />;
 };

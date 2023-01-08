@@ -1,0 +1,59 @@
+import { useUnit } from "effector-react";
+import React from "react";
+import { useHover } from "@/shared/lib/hooks/use-hover";
+import { H } from "@/shared/ui/h";
+import { $flags } from "@/shared/lib/theme";
+import { Paragraph, ThreeVariantState } from "@/shared/ui";
+import { InfoControls } from "./info-controls";
+import { Attachments } from "./attachments";
+import { Flag } from "./flag";
+import { LetterLayout } from "./letter-layout";
+import { LetterState } from "../../lib";
+
+type LetterProps = LetterState & {
+  onReadToggle: (id: string, read: boolean) => void;
+  onMarkToggle: (id: string, mark: ThreeVariantState) => void;
+};
+
+export const Letter = (props: LetterProps) => {
+  const { flags } = useUnit({
+    flags: $flags,
+  });
+
+  const letterRef = React.useRef(null);
+  const hovered = useHover(letterRef);
+
+  const markIndicator = React.useMemo(() => {
+    if (props.important) return "second";
+    if (props.bookmark) return "first";
+    return "unset";
+  }, [props.bookmark, props.important]);
+
+  return (
+    <LetterLayout
+      letterRef={letterRef}
+      head={
+        <>
+          <H text={props.title} />
+          <Flag name={props.flag} icon={flags[props.flag]} />
+        </>
+      }
+      info={
+        <InfoControls
+          read={props.read}
+          onReadChange={() => props.onReadToggle(props.id, props.read)}
+          markIndicator={markIndicator}
+          onMarkIndicatorChange={() =>
+            props.onMarkToggle(props.id, markIndicator)
+          }
+          sender={props.author}
+          to={props.to}
+          dateTime={props.date}
+          hovered={hovered}
+        />
+      }
+      attachments={props.doc && <Attachments attachments={props.doc} />}
+      text={<Paragraph text={props.text} />}
+    />
+  );
+};

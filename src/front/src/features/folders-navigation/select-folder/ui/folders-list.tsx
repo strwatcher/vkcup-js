@@ -17,7 +17,7 @@ export const FoldersList = () => {
     folders: foldersLoadingModel.$folders,
     selectedFolder: folderSelectionModel.$selectedFolder,
 
-    folderItemClicked: folderSelectionModel.folderSelected,
+    folderItemClicked: folderSelectionModel.folderClicked,
   });
 
   const renders = {

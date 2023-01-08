@@ -4,13 +4,12 @@ import { SimpleCheckboxState } from "@/shared/ui/simple-checkbox";
 import React from "react";
 
 export type SelectableAvatarProps = {
-  id: string;
   selected: boolean;
   avatarImage: string;
   images: {
     [P in SimpleCheckboxState]: string;
   };
-  onChange: (id: string) => void;
+  onChange: () => void;
   hovered: boolean;
 };
 
@@ -20,7 +19,7 @@ export const SelectableAvatar: React.FC<SelectableAvatarProps> = (props) => {
       <SimpleCheckbox
         checked={props.selected}
         images={props.images}
-        onChange={() => props.onChange(props.id)}
+        onChange={props.onChange}
       />
     );
   }

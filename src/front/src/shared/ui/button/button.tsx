@@ -10,9 +10,19 @@ export type ButtonProps = {
   children: ReactNode;
 
   active?: boolean;
+  gap?: number;
 };
 
 export const Button = (props: ButtonProps) => {
+  const setGap = React.useCallback(
+    (node: HTMLButtonElement | null) => {
+      if (props.gap) {
+        node?.style.setProperty("--gap", props.gap + "px");
+      }
+    },
+    [props.gap]
+  );
+
   return (
     <button
       className={joinClasses(
@@ -21,6 +31,7 @@ export const Button = (props: ButtonProps) => {
         props.active && s.active
       )}
       onClick={props.onClick}
+      ref={setGap}
     >
       {props.children}
     </button>

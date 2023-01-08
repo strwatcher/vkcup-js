@@ -1,11 +1,6 @@
 import React from "react";
 import { useHover } from "@/shared/lib/hooks/use-hover";
 import { useUnit } from "effector-react";
-import {
-  closeAttachments,
-  LetterState,
-  openAttachments,
-} from "@/containers/letters/model";
 import { SelectableAvatar } from "./selectable-avatar";
 import { SlicedTitleContent } from "./sliced-title-content";
 import { AttachmentsIndicator } from "./attachments-indicator";
@@ -18,22 +13,22 @@ import {
   ThreeVariantState,
 } from "@/shared/ui";
 import { $flags, $resources } from "@/shared/lib/theme";
+import { LetterState } from "../../lib";
 
 export type CompactLetterProps = LetterState & {
-  onSelect: (id: string) => void;
-  onRead: (id: string) => void;
-  onMarkImportant: (id: string, state: ThreeVariantState) => void;
-  onOpen: (id: string) => void;
+  onSelectToggle: (id: string, selected: boolean) => void;
+  onReadToggle: (id: string, read: boolean) => void;
+  onMarkToggle: (id: string, state: ThreeVariantState) => void;
+  onLetterClick: (id: string) => void;
+  onAttachmentsOpened: (id: string) => void;
+  onAttachmentsClosed: (id: string) => void;
 };
 
 export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
-  const { resources, flags, onAttachmentsOpened, onAttachmentsClosed } =
-    useUnit({
-      resources: $resources,
-      flags: $flags,
-      onAttachmentsOpened: openAttachments,
-      onAttachmentsClosed: closeAttachments,
-    });
+  const { resources, flags } = useUnit({
+    resources: $resources,
+    flags: $flags,
+  });
 
   const letterRef = React.useRef<HTMLDivElement>(null);
   const hovered = useHover(letterRef);
@@ -51,7 +46,7 @@ export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
       selected={props.selected}
       hasFlag={!!props.flag}
       hasAttachments={!!props.doc}
-      onClick={() => props.onOpen(props.id)}
+      onClick={() => props.onLetterClick(props.id)}
     >
       <SimpleCheckbox
         hideActive
@@ -61,18 +56,17 @@ export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
           checked: resources.read,
           unchecked: resources.unread,
         }}
-        onChange={() => props.onRead(props.id)}
+        onChange={() => props.onReadToggle(props.id, props.read)}
       />
 
       <SelectableAvatar
-        id={props.id}
         selected={props.selected}
         avatarImage={props.author.avatar ?? ""}
         images={{
           checked: resources.checkboxChecked,
           unchecked: resources.checkbox,
         }}
-        onChange={props.onSelect}
+        onChange={() => props.onSelectToggle(props.id, props.selected)}
         hovered={hovered}
       />
 
@@ -90,7 +84,7 @@ export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
           first: resources.marked,
           second: resources.exclamation,
         }}
-        onChange={(state) => props.onMarkImportant(props.id, state)}
+        onChange={(state) => props.onMarkToggle(props.id, state)}
       />
 
       <SlicedTitleContent
@@ -106,8 +100,8 @@ export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
           icon={resources.attachment}
           attachments={props.doc}
           opened={props.attachmentsOpened}
-          onOpen={() => onAttachmentsOpened(props.id)}
-          onClose={() => onAttachmentsClosed(props.id)}
+          onOpen={() => props.onAttachmentsOpened(props.id)}
+          onClose={() => props.onAttachmentsClosed(props.id)}
         />
       )}
 

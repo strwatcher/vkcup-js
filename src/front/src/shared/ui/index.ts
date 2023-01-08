@@ -8,3 +8,5 @@ export { SimpleCheckbox } from "./simple-checkbox";
 export { ThreeStateCheckbox } from "./three-state-checkbox";
 export type { ThreeVariantState } from "./three-state-checkbox";
 export { SlicedAuthor } from "./sliced-author";
+export { Paragraph } from "./paragraph";
+export { Header } from "./header";

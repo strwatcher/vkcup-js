@@ -3,11 +3,17 @@ import { createEvent, createStore, sample, Store } from "effector";
 import { FoldersState } from "./load-folders";
 
 export function setupFolderSelection($folders: Store<FoldersState>) {
-  const folderSelected = createEvent<IFolder>();
+  const folderClicked = createEvent<IFolder>();
+  const folderWasSelected = sample({ clock: folderClicked });
 
   const $selectedFolder = createStore<IFolder | null>(null);
 
-  $selectedFolder.on(folderSelected, (_, data) => data);
+  sample({
+    source: folderWasSelected,
+    target: $selectedFolder,
+  });
+
+  folderClicked.watch(console.log);
 
   sample({
     source: $folders,
@@ -16,5 +22,5 @@ export function setupFolderSelection($folders: Store<FoldersState>) {
     target: $selectedFolder,
   });
 
-  return { folderSelected, $selectedFolder };
+  return { folderClicked, $selectedFolder };
 }

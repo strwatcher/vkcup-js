@@ -6,13 +6,12 @@
 }
 
 .head {
-    display: flex;
-    align-items: center;
-    width: 100vw;
     height: var(--header-height);
-    background-color: var(--secondary);
-    padding: 12px 16px;
-    filter: drop-shadow(0px 0px 16px rgba(2, 13, 41, 0.12));
+}
+
+.head * {
+    color: var(--text);
+    font-size: 15px;
 }
 
 .content {

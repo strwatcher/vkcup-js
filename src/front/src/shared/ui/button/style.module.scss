@@ -10,7 +10,7 @@
 }
 
 .activated {
-    gap: 10px;
+    gap: var(--gap, 10px);
     padding: 12px 11px;
     width: 200px;
 
@@ -57,7 +57,7 @@
 }
 
 .transparent {
-    gap: 15px;
+    gap: var(--gap, 15px);
     padding: 8px 20px;
     width: 200px;
     height: 36px;
@@ -70,3 +70,4 @@
         width: 36px;
     }
 }
+

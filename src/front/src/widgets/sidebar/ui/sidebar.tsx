@@ -2,12 +2,12 @@ import React from "react";
 import { useUnit } from "effector-react";
 import { themeToggleClicked, ThemeToggler } from "@/features/theme";
 import { AddFolder, FoldersList } from "@/features/folders-navigation";
-import { CreateLetter } from "@/features/letter";
 import { Button } from "@/shared/ui";
 import { Separator } from "@/shared/ui/separator/separator";
 import { $screenSize } from "@/shared/lib/screen-size";
 import { SidebarLayout } from "./layout";
 import { $resources, $theme } from "@/shared/lib/theme";
+import { CreateLetter } from "@/features/letter-managing";
 
 export const Sidebar: React.FC = () => {
   const { resources, toggleClicked, theme, size } = useUnit({

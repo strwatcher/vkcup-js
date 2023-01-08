@@ -23,6 +23,7 @@ function setupLetterMutation($letters: Store<LettersState>) {
     read: (letters, id: string) => mutateLetter(letters, id, { read: true }),
     unread: (letters, id: string) => mutateLetter(letters, id, { read: false }),
   });
+
   const markApi = createApi($letters, {
     unmark: (letters, id: string) =>
       mutateLetter(letters, id, { bookmark: false, important: false }),

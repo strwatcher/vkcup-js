@@ -17,7 +17,7 @@ export const Main: React.FC = () => {
   });
 
   const model = useUnit({
-    letters: mainPageModel.$letters,
+    letters: mainPageModel.$filtered,
     letter: mainPageModel.$activeLetter,
     lettersFetching: mainPageModel.$areLettersFetching,
     lettersJustFetched: mainPageModel.$lettersJustFetched,

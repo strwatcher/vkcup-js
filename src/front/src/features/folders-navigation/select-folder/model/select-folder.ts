@@ -13,8 +13,6 @@ export function setupFolderSelection($folders: Store<FoldersState>) {
     target: $selectedFolder,
   });
 
-  folderClicked.watch(console.log);
-
   sample({
     source: $folders,
     filter: (folders) => folders.length > 0,

@@ -42,7 +42,8 @@ export const AttachmentsIndicator: React.FC<AttachmentsIndicatorProps> = (
 
   const attachments = React.useMemo(
     () =>
-      Array.from(Object.keys(props.attachments)).map((key) => ({
+      Array.from(Object.keys(props.attachments)).map((key, index) => ({
+        id: `${index}`,
         name: key,
         bytes: props.attachments[key],
       })),

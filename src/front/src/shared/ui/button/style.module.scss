@@ -75,4 +75,13 @@
     }
 }
 
+.menuItem {
+    // max-width: 240px;
+    white-space: nowrap;
+    gap: var(--gap, 15px);
+    height: 40px;
+    padding: 10px 24px;
+    color: var(--text)
+}
+
 

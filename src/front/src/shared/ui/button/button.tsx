@@ -2,7 +2,7 @@ import React, { MouseEventHandler, ReactNode } from "react";
 import { joinClasses } from "@/shared/lib/utils/join-classes";
 import s from "./style.module.scss";
 
-type ButtonVariant = "activated" | "outlined" | "transparent";
+type ButtonVariant = "activated" | "outlined" | "transparent" | "menuItem";
 
 export type ButtonProps = {
   variant: ButtonVariant;

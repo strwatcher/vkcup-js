@@ -12,6 +12,7 @@ export type IThemedResources = {
   arrowBack: string;
   download: string;
   plus: string;
+  checkMark: string;
 };
 
 export type INotThemedResources = {
@@ -43,6 +44,7 @@ export const resourcesMapping: IResourcesMapping = {
     arrowBack: "arrow-back-light.svg",
     download: "download-light.svg",
     plus: "plus-light.svg",
+    checkMark: "check-mark-light.svg",
   },
   light: {
     menu: "menu.svg",
@@ -52,6 +54,7 @@ export const resourcesMapping: IResourcesMapping = {
     arrowBack: "arrow-back.svg",
     download: "download.svg",
     plus: "plus.svg",
+    checkMark: "check-mark.svg",
   },
   notThemed: {
     logo: "logo.svg",

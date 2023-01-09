@@ -7,6 +7,7 @@
 
 .head {
     height: var(--header-height);
+    z-index: 2;
 }
 
 .head * {
@@ -15,6 +16,7 @@
 }
 
 .content {
+    z-index: 0;
     --sidebar-width: 232px;
     display: grid;
     grid-template-columns: var(--sidebar-width) 1fr;

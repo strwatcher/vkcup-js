@@ -3,5 +3,12 @@
     margin: 0;
     padding: 0;
     display: flex;
+}
+
+.vertical {
     flex-direction: column;
+}
+
+.horizontal {
+    flex-direction: row;
 }

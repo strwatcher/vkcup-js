@@ -1,5 +1,6 @@
+import { Filter } from "@/entities/filter";
 import { Letter } from "@/entities/letter";
-import { LettersList } from "@/features/letter-managing";
+import { FilterSelect, LettersList } from "@/features/letter-managing";
 import { $screenSize, ScreenSizeGate } from "@/shared/lib/screen-size";
 import { $resources } from "@/shared/lib/theme";
 import { Button, Header, ThreeVariantState } from "@/shared/ui";
@@ -21,7 +22,22 @@ export const Main: React.FC = () => {
     letter: mainPageModel.$activeLetter,
     lettersFetching: mainPageModel.$areLettersFetching,
     lettersJustFetched: mainPageModel.$lettersJustFetched,
+    unreadFilterActive: mainPageModel.unreadFilter.$active,
+    hasAttachmentsFilterActive: mainPageModel.hasAttachmentsFilter.$active,
+    withBookmarkFilterActive: mainPageModel.withBookmarkFilter.$active,
+    allFilterActive: mainPageModel.$unset,
   });
+
+  const filtersEvents = useUnit({
+    unreadActivate: mainPageModel.unreadFilter.activate,
+    unreadDeactivate: mainPageModel.unreadFilter.deactivate,
+    attachmentsActivate: mainPageModel.hasAttachmentsFilter.activate,
+    attachmentsDeactivate: mainPageModel.hasAttachmentsFilter.deactivate,
+    bookmarkActivate: mainPageModel.withBookmarkFilter.activate,
+    bookmarkDeactivate: mainPageModel.withBookmarkFilter.deactivate,
+    deactivateAll: mainPageModel.deactivateAll,
+  });
+
   const callbacks = {
     letterCloseClick: useEvent(mainPageModel.onLetterCloseCliked),
     letterOpenClick: useEvent(mainPageModel.onLetterClicked),
@@ -42,7 +58,7 @@ export const Main: React.FC = () => {
       else mainPageModel.markApi.unmark(id);
     }, []),
 
-    lettersFetchFinished: useEvent(mainPageModel.fetchFinished),
+    onLettersFetchFinished: useEvent(mainPageModel.fetchFinished),
   };
 
   const logo = React.useMemo(() => {
@@ -80,6 +96,28 @@ export const Main: React.FC = () => {
       head={
         <Header>
           <img src={logo} />
+          <FilterSelect
+            all={{
+              activate: filtersEvents.deactivateAll,
+              deactivate: filtersEvents.deactivateAll,
+              active: model.allFilterActive,
+            }}
+            unread={{
+              activate: filtersEvents.unreadActivate,
+              deactivate: filtersEvents.unreadDeactivate,
+              active: model.unreadFilterActive,
+            }}
+            hasAttachments={{
+              activate: filtersEvents.attachmentsActivate,
+              deactivate: filtersEvents.attachmentsDeactivate,
+              active: model.hasAttachmentsFilterActive,
+            }}
+            withBookmark={{
+              activate: filtersEvents.bookmarkActivate,
+              deactivate: filtersEvents.bookmarkDeactivate,
+              active: model.withBookmarkFilterActive,
+            }}
+          />
         </Header>
       }
     >
@@ -92,7 +130,7 @@ export const Main: React.FC = () => {
         onAttachmentsOpened={callbacks.attachmentsOpen}
         onAttachmentsClosed={callbacks.attachmentsClose}
         onLetterClick={callbacks.letterOpenClick}
-        fetchHasFinished={callbacks.lettersFetchFinished}
+        fetchHasFinished={callbacks.onLettersFetchFinished}
         justFetched={model.lettersJustFetched}
         fetching={model.lettersFetching}
       />

@@ -1,37 +1,66 @@
 import { setupFilter } from "@/entities/filter";
-import { combine, createApi, createStore, Store } from "effector";
+import { LetterState } from "@/entities/letter";
+import { combine, createEvent, sample, Store } from "effector";
 import { LettersState } from "../load-letters/model";
 
-export type LetterFilter =
-  | "unread"
-  | "hasAttachments"
-  | "withBookmark"
-  | "unset";
-
 export function setupLettersFilter($letters: Store<LettersState>) {
-  const $activeFilter = createStore<LetterFilter>("unset");
-
-  const filtersApi = createApi($activeFilter, {
-    unset: () => "unset",
-    setHasAttachments: () => "hasAttachments",
-    setWithBookmark: () => "withBookmark",
-    setUnread: () => "unread",
+  const unreadFilter = setupFilter({
+    isFit: (letter: LetterState) => !letter.read,
   });
 
-  const $unread = setupFilter($letters, "read", (read) => !read);
-  const $hasAttachments = setupFilter($letters, "doc");
-  const $withBookmark = setupFilter($letters, "bookmark");
+  const hasAttachmentsFilter = setupFilter({
+    isFit: (letter: LetterState) => !!letter.doc,
+  });
+
+  const withBookmarkFilter = setupFilter({
+    isFit: (letter: LetterState) => letter.bookmark && !letter.important,
+  });
 
   const $filtered = combine(
-    {
-      filter: $activeFilter,
-      unset: $letters,
-      unread: $unread,
-      hasAttachments: $hasAttachments,
-      withBookmark: $withBookmark,
-    },
-    (stores) => stores[stores.filter]
+    $letters,
+    unreadFilter.$active,
+    hasAttachmentsFilter.$active,
+    withBookmarkFilter.$active,
+    (letters, unreadFilterActive, hasAttachmentsActive, withBookmarkActive) => {
+      let filtered = letters;
+      filtered = unreadFilter.apply(unreadFilterActive, filtered);
+      filtered = hasAttachmentsFilter.apply(hasAttachmentsActive, filtered);
+      filtered = withBookmarkFilter.apply(withBookmarkActive, filtered);
+
+      return filtered;
+    }
   );
 
-  return { $activeFilter, $filtered, filtersApi };
+  const $unset = combine(
+    unreadFilter.$active,
+    withBookmarkFilter.$active,
+    hasAttachmentsFilter.$active,
+    (...filters) => !filters.includes(true)
+  );
+
+  const deactivateAll = createEvent();
+
+  sample({
+    source: deactivateAll,
+    target: [
+      unreadFilter.deactivate,
+      hasAttachmentsFilter.deactivate,
+      withBookmarkFilter.deactivate,
+    ],
+  });
+
+  // unreadFilter.activate();
+  // hasAttachmentsFilter.activate();
+  // withBookmarkFilter.activate();
+  //
+  // deactivateAll();
+
+  return {
+    $filtered,
+    unreadFilter,
+    hasAttachmentsFilter,
+    withBookmarkFilter,
+    deactivateAll,
+    $unset,
+  };
 }

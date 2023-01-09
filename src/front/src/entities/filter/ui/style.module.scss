@@ -1,0 +1,15 @@
+.filter {
+  position: relative;
+}
+
+.activeIndicator {
+  position: absolute;
+  top: 50%;
+  left: 7.5px;
+  transform: translateY(-50%);
+}
+
+.text {
+  color: var(--text);
+  font-size: 15px;
+}

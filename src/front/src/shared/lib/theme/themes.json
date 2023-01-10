@@ -8,7 +8,8 @@
         "letterText": "#87898F",
         "letterHeadText": "#2C2D2E",
         "separator": "#00103D1F",
-        "downloadGradient": "linear-gradient(360deg, rgba(236, 237, 240, 0.95) 56.81%, rgba(236, 237, 240, 0) 104.46%)"
+        "downloadGradient": "linear-gradient(360deg, rgba(236, 237, 240, 0.95) 56.81%, rgba(236, 237, 240, 0) 104.46%)",
+        "popupGradient": "drop-shadow(0px 0px 16px rgba(2, 13, 41, 0.12))"
     },
     "dark": {
         "main": "#19191A",
@@ -19,6 +20,7 @@
         "letterText": "#8C8E94",
         "letterHeadText": "#E7E8EA",
         "separator": "#00000066",
-        "downloadGradient": "linear-gradient(360deg, rgba(44, 44, 45, 0.9) 45.32%, rgba(44, 44, 45, 0) 104.46%)"
+        "downloadGradient": "linear-gradient(360deg, rgba(44, 44, 45, 0.9) 45.32%, rgba(44, 44, 45, 0) 104.46%)",
+        "popupGradient": "drop-shadow: 0px 4px 32px rgba(0, 16, 61, 0.16)"
     }
 }

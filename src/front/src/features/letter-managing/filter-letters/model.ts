@@ -49,12 +49,6 @@ export function setupLettersFilter($letters: Store<LettersState>) {
     ],
   });
 
-  // unreadFilter.activate();
-  // hasAttachmentsFilter.activate();
-  // withBookmarkFilter.activate();
-  //
-  // deactivateAll();
-
   return {
     $filtered,
     unreadFilter,

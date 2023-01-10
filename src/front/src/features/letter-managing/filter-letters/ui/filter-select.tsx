@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, List } from "@/shared/ui";
+import { Button, List, Popup } from "@/shared/ui";
 import { useUnit } from "effector-react";
 import { $resources } from "@/shared/lib/theme";
 import { Filter } from "@/entities/filter";
 import { FilterProps } from "@/entities/filter/ui";
-import s from "./style.module.scss";
+import { Separator } from "@/shared/ui/separator/separator";
 
 type FilterSelectProps = {
   all: FilterModel;
@@ -21,7 +21,6 @@ type FilterModel = {
 
 export const FilterSelect = (props: FilterSelectProps) => {
   const resources = useUnit($resources);
-  const [opened, setOpened] = React.useState(false);
 
   const options: Array<FilterProps & { id: string }> = React.useMemo(
     () => [
@@ -61,20 +60,27 @@ export const FilterSelect = (props: FilterSelectProps) => {
   );
 
   return (
-    <div className={s.select}>
-      <Button variant="menuItem" onClick={() => setOpened((prev) => !prev)}>
-        {activeFilters.map((filter) => (
-          <img src={filter.icon} key={filter.id} />
-        ))}
-        {activeFilters.length > 1 || props.all.active
-          ? "Фильтры"
-          : activeFilters[0].text}
-      </Button>
-      {opened && (
-        <div className={s.selectPopup}>
-          <List items={options} render={(filter) => <Filter {...filter} />} />
-        </div>
+    <Popup
+      headRender={(onClick) => (
+        <Button variant="menuItem" adaptive onClick={onClick}>
+          {activeFilters.map((filter) => (
+            <img src={filter.icon} key={filter.id} />
+          ))}
+          {activeFilters.length > 1 || props.all.active
+            ? "Фильтры"
+            : activeFilters[0].text}
+          <img src={resources.arrowDown} />
+        </Button>
       )}
-    </div>
+      body={
+        <>
+          <List items={options} render={(filter) => <Filter {...filter} />} />
+          <Separator size={240} thickness={1} direction="horizontal" />
+          <Button variant="menuItem" onClick={props.all.activate}>
+            Сбросить всё
+          </Button>
+        </>
+      }
+    />
   );
 };

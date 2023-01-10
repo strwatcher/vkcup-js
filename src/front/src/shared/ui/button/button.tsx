@@ -10,6 +10,7 @@ export type ButtonProps = {
   children: ReactNode;
 
   active?: boolean;
+  adaptive?: boolean;
   gap?: number;
 };
 
@@ -28,7 +29,8 @@ export const Button = (props: ButtonProps) => {
       className={joinClasses(
         s.button,
         s[props.variant],
-        props.active && s.active
+        props.active && s.active,
+        props.adaptive && s.adaptive
       )}
       onClick={props.onClick}
       ref={setGap}

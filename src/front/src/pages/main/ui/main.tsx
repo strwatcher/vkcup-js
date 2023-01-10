@@ -1,4 +1,3 @@
-import { Filter } from "@/entities/filter";
 import { Letter } from "@/entities/letter";
 import { FilterSelect, LettersList } from "@/features/letter-managing";
 import { $screenSize, ScreenSizeGate } from "@/shared/lib/screen-size";

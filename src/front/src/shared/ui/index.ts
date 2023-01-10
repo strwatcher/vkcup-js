@@ -10,3 +10,4 @@ export type { ThreeVariantState } from "./three-state-checkbox";
 export { SlicedAuthor } from "./sliced-author";
 export { Paragraph } from "./paragraph";
 export { Header } from "./header";
+export { Popup } from "./popup";

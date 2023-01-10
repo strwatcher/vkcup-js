@@ -15,6 +15,7 @@ const switchThemeFx = createEffect((colors: ITheme) => {
     "--download-gradient",
     colors.downloadGradient
   );
+  document.body.style.setProperty("--popup-gradient", colors.popupGradient);
 });
 
 sample({

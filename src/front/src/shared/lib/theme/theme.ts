@@ -8,6 +8,7 @@ export type ITheme = {
   letterHeadText: string;
   separator: string;
   downloadGradient: string;
+  popupGradient: string;
 };
 
 export type IThemeType = "dark" | "light";

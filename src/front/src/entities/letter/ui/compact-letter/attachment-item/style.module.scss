@@ -1,5 +1,5 @@
 .wrapper {
-    color: var(--letter-head-text);
+    color: var(--textPrimary);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -8,7 +8,7 @@
 }
 
 .wrapper:hover {
-    background-color: var(--hover);
+    background-color: var(--transparentHover);
 }
 
 .preview {

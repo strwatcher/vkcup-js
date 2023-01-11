@@ -1,6 +1,6 @@
 import React from "react";
 import { useUnit } from "effector-react";
-import { themeToggleClicked, ThemeToggler } from "@/features/theme";
+// import { themeToggleClicked, ThemeToggler } from "@/features/theme";
 import { AddFolder, FoldersList } from "@/features/folders-navigation";
 import { Button } from "@/shared/ui";
 import { Separator } from "@/shared/ui/separator/separator";
@@ -10,11 +10,11 @@ import { $resources, $theme } from "@/shared/lib/theme";
 import { CreateLetter } from "@/features/letter-managing";
 
 export const Sidebar: React.FC = () => {
-  const { resources, toggleClicked, theme, size } = useUnit({
+  const { resources, size } = useUnit({
     resources: $resources,
     size: $screenSize,
-    toggleClicked: themeToggleClicked,
-    theme: $theme,
+    // toggleClicked: themeToggleClicked,
+    // theme: $theme,
   });
 
   return (
@@ -32,12 +32,12 @@ export const Sidebar: React.FC = () => {
           <AddFolder />
         </>
       )}
-      <ThemeToggler
-        icon={resources.theme}
-        toggle={toggleClicked}
-        title={`Тема: ${theme === "light" ? "светлая" : "тёмная"}`}
-        variant={size}
-      />
     </SidebarLayout>
   );
 };
+//      <ThemeToggler
+//        icon={resources.theme}
+//        toggle={toggleClicked}
+//        title={`Тема: ${theme === "light" ? "светлая" : "тёмная"}`}
+//        variant={size}
+//

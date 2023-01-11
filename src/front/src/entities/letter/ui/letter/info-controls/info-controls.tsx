@@ -1,7 +1,8 @@
 import React from "react";
+import s from "./style.module.scss";
+
 import { IUser } from "shared";
 import { Info } from "./info";
-import s from "./style.module.css";
 import { useUnit } from "effector-react";
 import { SimpleCheckbox, ThreeVariantState } from "@/shared/ui";
 import { $resources } from "@/shared/lib/theme";

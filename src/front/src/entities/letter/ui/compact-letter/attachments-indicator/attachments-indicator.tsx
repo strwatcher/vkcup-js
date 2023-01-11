@@ -3,7 +3,7 @@ import { IAttachments } from "shared/types/attachmets";
 import { useClickOutside } from "@/shared/lib/hooks/use-click-outside";
 import { List } from "@/shared/ui/list";
 import { AttachmentItem } from "../attachment-item";
-import s from "./style.module.css";
+import s from "./style.module.scss";
 import { joinClasses } from "@/shared/lib/utils/join-classes";
 
 export type AttachmentsIndicatorProps = {

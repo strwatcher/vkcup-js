@@ -1,5 +1,4 @@
-export { $flags, $resources, $themeColors, $theme } from "./model";
-export type { ITheme, IThemeType } from "./theme";
+export { $flags, $resources, $theme } from "./model";
 export { resourcesMapping } from "./resource";
 export type {
   IResources,

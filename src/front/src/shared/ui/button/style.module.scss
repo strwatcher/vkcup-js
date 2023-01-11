@@ -14,7 +14,7 @@
     padding: 12px 11px;
     width: 200px;
 
-    color: var(--text);
+    color: var(--sidebarItemTextPrimary);
 
     @media screen and (max-width: 768px) {
         border-radius: 4px;
@@ -29,20 +29,21 @@
 
     &:hover,
     &:focus {
-        background-color: var(--hover);
+        background-color: var(--transparentHover);
     }
 
     &.active,
     &.active:hover,
     &.active:focus {
         font-weight: 700;
-        background-color: var(--active);
+        background-color: var(--transparentActive);
     }
 }
 
 .outlined {
     justify-content: center;
-    background-color: #ffffff;
+    background-color: var(--backgroundSidebarComposeButton);
+    color: var(--sidebarComposeButtonText);
     border: 1px solid #00103d1f;
     padding: 8px 20px;
     font-weight: 700;
@@ -61,7 +62,7 @@
     padding: 8px 20px;
     width: 200px;
     height: 36px;
-    color: var(--letter-text);
+    color: var(--sidebarItemTextPrimary);
 
     @media screen and (max-width: 768px) {
         padding: 12px 11px;
@@ -81,7 +82,7 @@
     gap: var(--gap, 15px);
     height: 40px;
     padding: 10px 24px;
-    color: var(--text)
+    color: var(--textPrimary)
 }
 
 .adaptive {

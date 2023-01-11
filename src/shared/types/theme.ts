@@ -1,0 +1,40 @@
+export type IThemeType = "dark" | "light" | "colorised";
+
+export type ITheme = {
+  id: string;
+  type: IThemeType;
+
+  textPrimary: string;
+  textSecondary: string;
+  textLink: string;
+  sidebarItemTextPrimary: string;
+  sidebarItemTextActive: string;
+  sidebarComposeButtonText: string;
+  headerTextPrimary: string;
+  headerTextSecondary: string;
+
+  backgroundContrast: string;
+  backgroundLetterList: string;
+  backgroundContent: string;
+  backgroundTertiary: string;
+  backgroundHeader: string;
+  backgroundModal: string;
+  backgroundSidebarComposeButton: string;
+  backgroundAccent: string;
+
+  transparentActive: string;
+  transparentHover: string;
+  themeActive: string;
+  separatorPrimaryAlpha: string;
+
+  headerDropShadow: string;
+  popupBoxShadow: string;
+  downloadGradient: string;
+};
+
+export type IThemePreview = { id: string; background: string; img?: string };
+
+export type IThemesResponse<T> = {
+  common: Array<T>;
+  colorised: Array<T>;
+};

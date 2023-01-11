@@ -1,7 +1,7 @@
 .bigPreview {
     text-decoration: none;
-    color: var(--letter-head-text);
-    background-color: var(--secondary);
+    color: var(--textPrimary);
+    background-color: var(--backgroundContent);
     padding: 4px;
     border-radius: 12px;
     cursor: pointer;
@@ -22,7 +22,7 @@
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
 
-    background: var(--download-gradient);
+    background: var(--downloadGradient);
     width: calc(100% - 8px);
     height: 44px;
 

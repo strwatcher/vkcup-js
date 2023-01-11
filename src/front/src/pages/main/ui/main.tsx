@@ -2,6 +2,7 @@ import { Letter } from "@/entities/letter";
 import { FilterSelect, LettersList } from "@/features/letter-managing";
 import { $screenSize, ScreenSizeGate } from "@/shared/lib/screen-size";
 import { $resources } from "@/shared/lib/theme";
+import { ThemeGate } from "@/shared/lib/theme/model";
 import { Button, Header, ThreeVariantState } from "@/shared/ui";
 import { Sidebar } from "@/widgets/sidebar";
 import { useEvent, useGate, useUnit } from "effector-react";
@@ -11,6 +12,8 @@ import { Layout } from "./layout";
 
 export const Main: React.FC = () => {
   useGate(ScreenSizeGate);
+  useGate(ThemeGate);
+
   const { resources, size } = useUnit({
     resources: $resources,
     size: $screenSize,

@@ -1,6 +1,6 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
 import React, { RefObject } from "react";
-import s from "./style.module.css";
+import s from "./style.module.scss";
 
 export type CompactLetterLayoutProps = {
   children: React.ReactNode;

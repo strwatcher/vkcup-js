@@ -40,7 +40,7 @@ export const FilterSelect = (props: FilterSelectProps) => {
       {
         id: "4",
         text: "С вложениями",
-        icon: resources.attachment,
+        icon: resources.popupAttachment,
         ...props.hasAttachments,
       },
     ],
@@ -66,9 +66,11 @@ export const FilterSelect = (props: FilterSelectProps) => {
           {activeFilters.map((filter) => (
             <img src={filter.icon} key={filter.id} />
           ))}
+
           {activeFilters.length > 1 || props.all.active
             ? "Фильтры"
             : activeFilters[0].text}
+
           <img src={resources.arrowDown} />
         </Button>
       )}

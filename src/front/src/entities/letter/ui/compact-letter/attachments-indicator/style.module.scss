@@ -10,7 +10,7 @@
 }
 
 .attachmentIndicator.active {
-    background-color: var(--active);
+    background-color: var(--transparentActive);
 }
 
 .indicator {
@@ -20,9 +20,9 @@
 .popup {
     position: absolute;
     padding: 4px 0;
-    background-color: var(--secondary);
+    background-color: var(--backgroundContent);
     border-radius: 12px;
-    box-shadow: 0px 4px 32px rgba(0, 16, 61, 0.24);
+    box-shadow: var(--popupBoxShadow);
     left: -4px;
     transform: translateX(-100%);
     z-index: 2;

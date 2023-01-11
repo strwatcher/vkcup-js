@@ -12,13 +12,14 @@
 .info {
     display: flex;
     gap: 16px;
-    color: var(--letter-head-text);
+    color: var(--textPrimary);
 }
 
 .downloadLink {
     text-decoration: none;
+    color: var(--textLink)
 }
 
 .fileSize {
-    color: var(--letter-text);
+    color: var(--textSecondary);
 }

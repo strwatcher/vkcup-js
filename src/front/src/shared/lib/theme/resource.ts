@@ -1,4 +1,4 @@
-import { IThemeType } from "./theme";
+import { IThemeType } from "shared";
 
 export type IResourcesMapping = {
   [P in IThemeType]: IThemedResources;
@@ -7,6 +7,7 @@ export type IResourcesMapping = {
 export type IThemedResources = {
   menu: string;
   attachment: string;
+  popupAttachment: string;
   theme: string;
   checkbox: string;
   arrowBack: string;
@@ -40,6 +41,7 @@ export const resourcesMapping: IResourcesMapping = {
   dark: {
     menu: "menu-light.svg",
     attachment: "attachment-light.svg",
+    popupAttachment: "attachment-light.svg",
     theme: "theme-light.svg",
     checkbox: "checkbox-dark.svg",
     arrowBack: "arrow-back-light.svg",
@@ -51,6 +53,7 @@ export const resourcesMapping: IResourcesMapping = {
   light: {
     menu: "menu.svg",
     attachment: "attachment.svg",
+    popupAttachment: "attachment.svg",
     theme: "theme.svg",
     checkbox: "checkbox-light.svg",
     arrowBack: "arrow-back.svg",
@@ -75,5 +78,18 @@ export const resourcesMapping: IResourcesMapping = {
     read: "read.svg",
     unread: "unread.svg",
     pencil: "pencil.svg",
+  },
+
+  colorised: {
+    menu: "menu.svg",
+    attachment: "attachment.svg",
+    popupAttachment: "attachment-light.svg",
+    theme: "theme.svg",
+    checkbox: "checkbox-light.svg",
+    arrowBack: "arrow-back.svg",
+    download: "download.svg",
+    plus: "plus-light.svg",
+    checkMark: "check-mark-light.svg",
+    arrowDown: "arrow-down-light.svg",
   },
 };

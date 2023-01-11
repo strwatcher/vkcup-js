@@ -4,6 +4,7 @@ import { getFlags } from "./controllers/flags";
 import { getFolders } from "./controllers/folders";
 import { getLettersByFolder } from "./controllers/letters";
 import { getStatic } from "./controllers/static";
+import { getThemes } from "./controllers/themes";
 import { LettersDb } from "./db/letter-db";
 
 export function route(
@@ -19,6 +20,9 @@ export function route(
     getFolders(response);
   } else if (resource === "flags") {
     getFlags(response, db);
+  } else if (resource === "themes") {
+    const id = query?.id;
+    getThemes(response, id);
   } else {
     getStatic(response, resource);
   }

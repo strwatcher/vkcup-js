@@ -1,8 +1,8 @@
 import React from "react";
 import { IAttachments } from "shared/types/attachmets";
 import { base64Size, bToMb } from "@/shared/lib/utils/base64-size";
-import s from "./style.module.css";
 import { ImagePreview } from "@/shared/ui";
+import s from "./style.module.scss";
 
 export type AttachmentsProps = {
   attachments: IAttachments;

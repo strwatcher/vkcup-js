@@ -11,15 +11,15 @@
     align-items: center;
     height: 48px;
     padding: 8px 11px;
-    background-color: var(--secondary);
-    color: var(--letter-text);
+    background-color: var(--backgroundLetterList);
+    color: var(--textSecondary);
     border-radius: 12px;
     position: relative;
 }
 
 .letter::after {
     content: "";
-    background-color: var(--separator);
+    background-color: var(--separatorPrimaryAlpha);
     position: absolute;
     top: calc(100% - 1px);
     left: 65px;
@@ -32,7 +32,7 @@
 }
 
 .letter > *:nth-child(3) {
-    color: var(--letter-head-text);
+    color: var(--textPrimary);
 }
 
 .letter > *:nth-child(2),
@@ -83,11 +83,11 @@
 
 .letter:hover,
 .letter:focus {
-    background-color: var(--hover);
+    background-color: var(--transparentHover);
 }
 
 .selected,
 .selected:hover,
 .selected:focus {
-    background-color: var(--active);
+    background-color: var(--transparentActive);
 }

@@ -1,7 +1,7 @@
 import { $resources } from "@/shared/lib/theme";
 import { useStore } from "effector-react";
 import React from "react";
-import s from "./style.module.css";
+import s from "./style.module.scss";
 
 export type BigPreviewProps = {
   name: string;

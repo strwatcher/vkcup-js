@@ -11,12 +11,13 @@
 }
 
 .head * {
-    color: var(--text);
+    color: var(--headerTextPrimary);
     font-size: 15px;
 }
 
 .content {
     --sidebar-width: 232px;
+    background-color: var(--backgroundTertiary);
     display: grid;
     grid-template-columns: var(--sidebar-width) 1fr;
     height: calc(100vh - var(--header-height));
@@ -25,7 +26,7 @@
 }
 
 .content > div:nth-child(2) {
-    background-color: var(--secondary);
+    background-color: var(--backgroundContent);
     border-radius: 12px;
     width: calc(100vw - var(--sidebar-width) - 36px);
     overflow: auto;

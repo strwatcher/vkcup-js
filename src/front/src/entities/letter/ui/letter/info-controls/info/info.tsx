@@ -10,7 +10,7 @@ import React from "react";
 import { IUser } from "shared";
 import { DateTime } from "../../date-time";
 import { Recipients } from "../../recipients";
-import s from "./style.module.css";
+import s from "./style.module.scss";
 
 export type InfoProps = {
   author: IUser;

@@ -21,7 +21,7 @@
 }
 
 .topLine > *:first-child {
-    color: var(--letter-head-text);
+    color: var(--textPrimary);
 }
 
 .markIndicator {
@@ -35,6 +35,6 @@
 .bottomLine {
     grid-area: bottom;
     font-size: 13px;
-    color: var(--letter-text);
+    color: var(--textSecondary);
     align-self: flex-end;
 }

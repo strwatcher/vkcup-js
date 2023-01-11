@@ -1,7 +1,7 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
 import { Sliced } from "@/shared/ui";
 import React from "react";
-import s from "./style.module.css";
+import s from "./style.module.scss";
 
 export type SlicedTitleContentProps = {
   title: string;

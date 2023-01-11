@@ -1,6 +1,5 @@
 import React from "react";
 import { IUser } from "shared";
-import s from "./style.module.css";
 
 export type RecipientsProps = {
   to: Array<IUser>;

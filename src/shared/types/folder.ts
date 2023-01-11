@@ -1,8 +1,9 @@
+import { IThemeType } from "./theme";
+
 export type ICompleteFolder = {
   folder: IFolder;
   icon: {
-    dark: string;
-    light: string;
+    [P in keyof IThemeType]: string;
   };
 };
 

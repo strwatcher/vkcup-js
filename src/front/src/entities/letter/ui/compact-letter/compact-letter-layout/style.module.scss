@@ -83,11 +83,11 @@
 
 .letter:hover,
 .letter:focus {
-    background-color: var(--transparentHover);
+    background-color: var(--contentTransparentHover);
 }
 
 .selected,
 .selected:hover,
 .selected:focus {
-    background-color: var(--transparentActive);
+    background-color: var(--contentTransparentActive);
 }

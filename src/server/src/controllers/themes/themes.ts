@@ -28,6 +28,8 @@ export type IColoredThemeBase = Pick<
   | "downloadGradient"
   | "headerTextPrimary"
   | "headerTextSecondary"
+  | "contentTransparentHover"
+  | "contentTransparentActive"
 >;
 
 const base: IThemeBase = {
@@ -51,6 +53,8 @@ const lightBase: IColoredThemeBase = {
   sidebarItemTextActive: "#333333",
   transparentHover: "#00103D0A",
   transparentActive: "#00103D14",
+  contentTransparentHover: "#00103D0A",
+  contentTransparentActive: "#00103D14",
   headerDropShadow: "drop-shadow(0px 0px 16px rgba(2, 13, 41, 0.12))",
   headerTextPrimary: "#2C2D2E",
   headerTextSecondary: "#87898F",
@@ -68,6 +72,8 @@ const darkBase: IColoredThemeBase = {
   sidebarItemTextActive: "#E7E8EA",
   transparentHover: "#FFFFFF0A",
   transparentActive: "#FFFFFF14",
+  contentTransparentHover: "#FFFFFF0A",
+  contentTransparentActive: "#FFFFFF14",
   headerDropShadow: "drop-shadow(0px 0px 16px rgba(2, 13, 41, 0.16))",
   headerTextPrimary: "#E7E8EA",
   headerTextSecondary: "#8C8E94",
@@ -85,6 +91,8 @@ const colorisedBase: IColoredThemeBase = {
   backgroundLetterList: "#FFFFFF",
   transparentHover: "#FFFFFF1F",
   transparentActive: "#FFFFFF3D",
+  contentTransparentHover: "#00103D0A",
+  contentTransparentActive: "#00103D14",
   headerTextPrimary: "#E7E8EA",
   headerTextSecondary: "#8C8E94",
   headerDropShadow: "drop-shadow(0px 0px 16px rgba(2, 13, 41, 0.16))",
@@ -110,6 +118,16 @@ export const themes: IThemesResponse<ITheme> = {
       backgroundModal: "#303030",
       backgroundHeader: "#232324",
       separatorPrimaryAlpha: "#00000066",
+    },
+    {
+      id: crypto.randomUUID(),
+      ...base,
+      ...colorisedBase,
+      type: "colorised",
+      backgroundTertiary: "#ffffff",
+      backgroundModal: "#6B1344",
+      backgroundHeader: "#6B1344",
+      backgroundImage: "url(anime-background.png)",
     },
   ],
 

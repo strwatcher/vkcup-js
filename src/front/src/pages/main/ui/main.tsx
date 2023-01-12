@@ -95,6 +95,7 @@ export const Main: React.FC = () => {
   }
   return (
     <Layout
+      contentEmpty={model.letters.length === 0}
       head={
         <Header>
           <img src={logo} />

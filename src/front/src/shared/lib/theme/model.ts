@@ -61,9 +61,11 @@ const $flags = createStore<FlagsMapping>({
 });
 
 const switchThemeFx = createEffect((theme: ITheme) => {
-  Object.keys(theme).forEach((key) =>
-    document.body.style.setProperty(`--${key}`, theme[key as keyof ITheme])
-  );
+  Object.keys(theme).forEach((key) => {
+    if (theme[key as keyof ITheme]) {
+      document.body.style.setProperty(`--${key}`, theme[key as keyof ITheme]!);
+    }
+  });
 });
 
 sample({

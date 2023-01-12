@@ -13,6 +13,8 @@ export type ITheme = {
   headerTextPrimary: string;
   headerTextSecondary: string;
 
+  backgroundImage?: string;
+
   backgroundContrast: string;
   backgroundLetterList: string;
   backgroundContent: string;
@@ -24,6 +26,8 @@ export type ITheme = {
 
   transparentActive: string;
   transparentHover: string;
+  contentTransparentActive: string;
+  contentTransparentHover: string;
   themeActive: string;
   separatorPrimaryAlpha: string;
 

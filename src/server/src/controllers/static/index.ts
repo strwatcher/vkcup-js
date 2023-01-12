@@ -7,6 +7,7 @@ const STATIC_PATH = path.join(__dirname, "static");
 
 const mimeTypes: { [key: string]: string } = {
   html: "text/html; charset=UTF-8",
+  png: "image/png",
   svg: "image/svg+xml",
 };
 

@@ -17,7 +17,9 @@
 
 .content {
     --sidebar-width: 232px;
+    background-image: var(--backgroundImage);
     background-color: var(--backgroundTertiary);
+    background-size: cover;
     display: grid;
     grid-template-columns: var(--sidebar-width) 1fr;
     height: calc(100vh - var(--header-height));
@@ -26,10 +28,19 @@
 }
 
 .content > div:nth-child(2) {
-    background-color: var(--backgroundContent);
-    border-radius: 12px;
     width: calc(100vw - var(--sidebar-width) - 36px);
     overflow: auto;
+    display: flex;
+    background-color: var(--backgroundContent);
+    border-radius: 12px;
+}
+
+.contentEmpty > div:nth-child(2) {
+    background-color: var(--backgroundContrast);
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
+    justify-self: center;
 }
 
 @media screen and (max-width: 768px) {

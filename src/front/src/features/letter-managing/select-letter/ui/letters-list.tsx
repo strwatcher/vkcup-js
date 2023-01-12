@@ -3,6 +3,7 @@ import { useScrollTop } from "@/shared/lib/hooks/use-scroll-top";
 import { List, ThreeVariantState } from "@/shared/ui";
 import { CompactLetter, LetterState } from "@/entities/letter";
 import { LettersState } from "@/features/letter-managing";
+import { Empty } from "./empty";
 
 type LettersListProps = {
   letters: LettersState;
@@ -29,6 +30,10 @@ export const LettersList = (props: LettersListProps) => {
     () => props.fetchHasFinished(),
     props.justFetched
   );
+
+  if (!props.letters.length) {
+    return <Empty />;
+  }
 
   return (
     <div ref={scrollRef}>

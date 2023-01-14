@@ -1,0 +1,58 @@
+.themeSelectorContainer {
+  padding: 6px 10px;
+  position: relative;
+  cursor: pointer
+}
+
+
+
+.imaged {
+  width: 120px;
+  height: 88px;
+
+}
+.solid {
+  width: 67.5px;
+  height: 40px;
+}
+
+.activeImage {
+  display: none;
+}
+
+.activeIndicator {
+  display: none;
+  position: absolute;
+  top: 6px;
+  width: 67.5px;
+  height: 40px;
+
+  background-color: var(--themeActive);
+
+  &.active {
+    display: grid;
+    .activeImage {
+      display: inherit;
+      align-self: center;
+      justify-self: center;
+    }
+  }
+}
+
+.themeSelectorContainer:hover {
+  .activeIndicator {
+    display: grid;
+  }
+}
+
+.themeSelectorContainer:has(.imaged) {
+  padding: 10px;
+
+  .activeIndicator {
+    top: 10px;
+    width: 120px;
+    height: 88px;
+  }
+}
+
+

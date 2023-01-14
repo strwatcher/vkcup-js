@@ -5,8 +5,7 @@ import { Folder } from "@/entities/folder";
 import { useGate, useUnit } from "effector-react";
 import { ICompleteFolder } from "@/../../shared";
 import { folderSelectionModel, foldersLoadingModel } from "../model";
-import { $resources } from "@/shared/lib/theme";
-import { $themeType } from "@/shared/lib/theme/model";
+import { $resources, $themeType } from "@/shared/lib/theme";
 
 export const FoldersList = () => {
   useGate(foldersLoadingModel.FoldersGate);

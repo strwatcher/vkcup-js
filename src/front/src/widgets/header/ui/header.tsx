@@ -5,6 +5,7 @@ import { FilterSelect, FilterSelectProps } from "@/features/letter-managing";
 import { useUnit } from "effector-react";
 import { $resources } from "@/shared/lib/theme";
 import { $screenSize } from "@/shared/lib/screen-size";
+import { SelectTheme } from "@/features/settings/ui/select-theme/select-theme";
 
 type HeaderProps = {
   needReturnBack?: boolean;

@@ -1,0 +1,17 @@
+.modalScreen {
+  position: absolute;
+  z-index: 10;
+  background-color: #00000055;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+  position: absolute;
+  z-index: 11;
+  background-color: var(--backgroundModal);
+
+  width: 100vw;
+  height: 400px;
+  bottom: 0;
+}

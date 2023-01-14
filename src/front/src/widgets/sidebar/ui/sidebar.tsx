@@ -8,11 +8,14 @@ import { $screenSize } from "@/shared/lib/screen-size";
 import { SidebarLayout } from "./layout";
 import { $resources, $theme } from "@/shared/lib/theme";
 import { CreateLetter } from "@/features/letter-managing";
+import { ControlSettings } from "@/features/settings";
+import { toggleSettingsClicked } from "@/features/settings/model/control-settings";
 
 export const Sidebar: React.FC = () => {
-  const { resources, size } = useUnit({
+  const { resources, size, onOpenSettings } = useUnit({
     resources: $resources,
     size: $screenSize,
+    onOpenSettings: toggleSettingsClicked,
     // toggleClicked: themeToggleClicked,
     // theme: $theme,
   });
@@ -32,12 +35,7 @@ export const Sidebar: React.FC = () => {
           <AddFolder />
         </>
       )}
+      <ControlSettings variant={size} toggle={onOpenSettings} />
     </SidebarLayout>
   );
 };
-//      <ThemeToggler
-//        icon={resources.theme}
-//        toggle={toggleClicked}
-//        title={`Тема: ${theme === "light" ? "светлая" : "тёмная"}`}
-//        variant={size}
-//

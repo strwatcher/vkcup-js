@@ -1,9 +1,11 @@
 import { Letter } from "@/entities/letter";
 import { LettersList } from "@/features/letter-managing";
 import { ScreenSizeGate } from "@/shared/lib/screen-size";
-import { ThemeGate } from "@/shared/lib/theme/model";
+import { ThemeGate } from "@/shared/lib/theme";
 import { ThreeVariantState } from "@/shared/ui";
+import { Modal } from "@/shared/ui/modal/modal";
 import { Header } from "@/widgets/header";
+import { SettingsModal } from "@/widgets/settings-modal";
 import { Sidebar } from "@/widgets/sidebar";
 import { useEvent, useGate, useUnit } from "effector-react";
 import React, { useCallback } from "react";
@@ -59,58 +61,61 @@ export const Main: React.FC = () => {
   };
 
   return (
-    <Layout
-      contentEmpty={model.letters.length === 0}
-      head={
-        <Header
-          needReturnBack={!!model.letter}
-          returnBack={callbacks.letterCloseClick}
-          filters={{
-            all: {
-              activate: filtersEvents.deactivateAll,
-              deactivate: filtersEvents.deactivateAll,
-              active: model.allFilterActive,
-            },
-            unread: {
-              activate: filtersEvents.unreadActivate,
-              deactivate: filtersEvents.unreadDeactivate,
-              active: model.unreadFilterActive,
-            },
-            hasAttachments: {
-              activate: filtersEvents.attachmentsActivate,
-              deactivate: filtersEvents.attachmentsDeactivate,
-              active: model.hasAttachmentsFilterActive,
-            },
-            withBookmark: {
-              activate: filtersEvents.bookmarkActivate,
-              deactivate: filtersEvents.bookmarkDeactivate,
-              active: model.withBookmarkFilterActive,
-            },
-          }}
-        />
-      }
-    >
-      <Sidebar />
-      {model.letter ? (
-        <Letter
-          {...model.letter}
-          onReadToggle={callbacks.letterReadToggle}
-          onMarkToggle={callbacks.letterMarkToggle}
-        />
-      ) : (
-        <LettersList
-          letters={model.letters}
-          onReadToggle={callbacks.letterReadToggle}
-          onMarkToggle={callbacks.letterMarkToggle}
-          onSelectToggle={callbacks.letterSelectToggle}
-          onAttachmentsOpened={callbacks.attachmentsOpen}
-          onAttachmentsClosed={callbacks.attachmentsClose}
-          onLetterClick={callbacks.letterOpenClick}
-          fetchHasFinished={callbacks.onLettersFetchFinished}
-          justFetched={model.lettersJustFetched}
-          fetching={model.lettersFetching}
-        />
-      )}
-    </Layout>
+    <>
+      <SettingsModal />
+      <Layout
+        contentEmpty={model.letters.length === 0}
+        head={
+          <Header
+            needReturnBack={!!model.letter}
+            returnBack={callbacks.letterCloseClick}
+            filters={{
+              all: {
+                activate: filtersEvents.deactivateAll,
+                deactivate: filtersEvents.deactivateAll,
+                active: model.allFilterActive,
+              },
+              unread: {
+                activate: filtersEvents.unreadActivate,
+                deactivate: filtersEvents.unreadDeactivate,
+                active: model.unreadFilterActive,
+              },
+              hasAttachments: {
+                activate: filtersEvents.attachmentsActivate,
+                deactivate: filtersEvents.attachmentsDeactivate,
+                active: model.hasAttachmentsFilterActive,
+              },
+              withBookmark: {
+                activate: filtersEvents.bookmarkActivate,
+                deactivate: filtersEvents.bookmarkDeactivate,
+                active: model.withBookmarkFilterActive,
+              },
+            }}
+          />
+        }
+      >
+        <Sidebar />
+        {model.letter ? (
+          <Letter
+            {...model.letter}
+            onReadToggle={callbacks.letterReadToggle}
+            onMarkToggle={callbacks.letterMarkToggle}
+          />
+        ) : (
+          <LettersList
+            letters={model.letters}
+            onReadToggle={callbacks.letterReadToggle}
+            onMarkToggle={callbacks.letterMarkToggle}
+            onSelectToggle={callbacks.letterSelectToggle}
+            onAttachmentsOpened={callbacks.attachmentsOpen}
+            onAttachmentsClosed={callbacks.attachmentsClose}
+            onLetterClick={callbacks.letterOpenClick}
+            fetchHasFinished={callbacks.onLettersFetchFinished}
+            justFetched={model.lettersJustFetched}
+            fetching={model.lettersFetching}
+          />
+        )}
+      </Layout>
+    </>
   );
 };

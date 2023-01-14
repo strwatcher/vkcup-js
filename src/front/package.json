@@ -20,9 +20,6 @@
         "shared": "file:../shared"
     },
     "devDependencies": {
-        "eslint-plugin-effector": "^0.10.3",
-        "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-react": "^7.31.11",
         "@types/react": "^18.0.24",
         "@types/react-dom": "^18.0.8",
         "@types/uuid": "^9.0.0",
@@ -32,6 +29,9 @@
         "concurrently": "^7.6.0",
         "eslint": "^8.31.0",
         "eslint-config-prettier": "^8.6.0",
+        "eslint-plugin-effector": "^0.10.3",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.31.11",
         "generate-react-cli": "^8.0.1",
         "prettier": "^2.8.1",
         "sass": "^1.57.1",

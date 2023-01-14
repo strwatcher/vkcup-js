@@ -1,6 +1,6 @@
 import {
-  ITheme,
-  IThemePreview,
+  ITheme as _ITheme,
+  IThemePreview as _IThemePreview,
   IThemesResponse,
   IThemeType,
 } from "@/../../shared/types/theme";
@@ -11,9 +11,20 @@ import { genUrl } from "../utils/gen-url";
 import { FlagsMapping } from "./flag";
 import { IResources, resourcesMapping } from "./resource";
 
+export type IThemeSection = keyof IThemesResponse<unknown>;
+
+export type ITheme = _ITheme & {
+  section: keyof IThemesResponse<unknown>;
+};
+export type IThemePreview = _IThemePreview & {
+  section: keyof IThemesResponse<unknown>;
+  acitve: boolean;
+};
+
 const ThemeGate = createGate();
 
 const $themes = createStore<IThemesResponse<IThemePreview> | null>(null);
+
 const fetchThemesFx = createRequest({ url: "themes", target: $themes });
 
 const $theme = createStore<ITheme | null>(null);
@@ -29,11 +40,6 @@ sample({
   fn: (themes) => themes!.common.at(0)!.id,
   target: fetchThemeByIdFx,
 });
-
-// sample({
-//   source: fetchThemeByIdFx.doneData,
-//   target:
-// })
 
 sample({
   source: $theme,
@@ -61,6 +67,7 @@ const $flags = createStore<FlagsMapping>({
 });
 
 const switchThemeFx = createEffect((theme: ITheme) => {
+  document.body.style.setProperty("--backgroundImage", "");
   Object.keys(theme).forEach((key) => {
     if (theme[key as keyof ITheme]) {
       document.body.style.setProperty(`--${key}`, theme[key as keyof ITheme]!);
@@ -74,4 +81,12 @@ sample({
   target: switchThemeFx,
 });
 
-export { $resources, $flags, $theme, $themeType, ThemeGate };
+export {
+  $resources,
+  $flags,
+  $theme,
+  $themes,
+  $themeType,
+  ThemeGate,
+  fetchThemeByIdFx,
+};

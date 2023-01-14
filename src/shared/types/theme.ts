@@ -14,6 +14,7 @@ export type ITheme = {
   headerTextSecondary: string;
 
   backgroundImage?: string;
+  previewImage?: string;
 
   backgroundContrast: string;
   backgroundLetterList: string;

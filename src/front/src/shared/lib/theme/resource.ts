@@ -17,6 +17,7 @@ export type IThemedResources = {
   arrowDown: string;
   logo: string;
   emptyList: string;
+  gear: string;
 };
 
 export type INotThemedResources = {
@@ -34,6 +35,7 @@ export type INotThemedResources = {
   read: string;
   unread: string;
   pencil: string;
+  doneMark: string;
 };
 
 export type IResources = INotThemedResources & IThemedResources;
@@ -52,6 +54,7 @@ export const resourcesMapping: IResourcesMapping = {
     arrowDown: "arrow-down-light.svg",
     logo: "logo-light.svg",
     emptyList: "empty-list-dark.png",
+    gear: "gear-light.svg",
   },
   light: {
     menu: "menu.svg",
@@ -66,6 +69,7 @@ export const resourcesMapping: IResourcesMapping = {
     arrowDown: "arrow-down.svg",
     logo: "logo.svg",
     emptyList: "empty-list-light.png",
+    gear: "gear.svg",
   },
   darkColorised: {
     menu: "menu.svg",
@@ -80,6 +84,7 @@ export const resourcesMapping: IResourcesMapping = {
     arrowDown: "arrow-down-light.svg",
     logo: "logo-light.svg",
     emptyList: "empty-list-custom.svg",
+    gear: "gear-light.svg",
   },
   lightColorised: {
     menu: "menu.svg",
@@ -94,6 +99,7 @@ export const resourcesMapping: IResourcesMapping = {
     arrowDown: "arrow-down-light.svg",
     logo: "logo-light.svg",
     emptyList: "empty-list-custom.svg",
+    gear: "gear.svg",
   },
   notThemed: {
     compactLogo: "logo-compact.svg",
@@ -110,5 +116,6 @@ export const resourcesMapping: IResourcesMapping = {
     read: "read.svg",
     unread: "unread.svg",
     pencil: "pencil.svg",
+    doneMark: "done-mark.svg",
   },
 };

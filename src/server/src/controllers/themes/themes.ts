@@ -132,6 +132,7 @@ export const themes: IThemesResponse<ITheme> = {
       ...lightBase,
       backgroundTertiary: "#F6F7F8",
       backgroundHeader: "#FFFFFF",
+      previewImage: "light-preview.svg",
     },
     {
       id: crypto.randomUUID(),
@@ -140,6 +141,7 @@ export const themes: IThemesResponse<ITheme> = {
       backgroundTertiary: "#19191A",
       backgroundHeader: "#232324",
       separatorPrimaryAlpha: "#00000066",
+      previewImage: "dark-preview.svg",
     },
     {
       id: crypto.randomUUID(),
@@ -149,6 +151,7 @@ export const themes: IThemesResponse<ITheme> = {
       backgroundTertiary: "#ffffff",
       backgroundHeader: "#6B1344",
       backgroundImage: "url(anime-background.png)",
+      previewImage: "anime-preview.png",
     },
   ],
 
@@ -277,9 +280,25 @@ Object.keys(themes).forEach((key) =>
   themesList.push(...themes[key as keyof IThemesResponse<ITheme>])
 );
 
-export const themesPreview: IThemesResponse<IThemePreview> = Object.fromEntries(
-  Object.entries(themes).map(([k, v]) => [
-    k,
-    v.map((theme) => ({ id: theme.id, background: theme.backgroundTertiary })),
-  ])
-) as IThemesResponse<IThemePreview>;
+// export const themesPreview: IThemesResponse<IThemePreview> = Object.fromEntries(
+//   Object.entries(themes).map(([k, v]) => [
+//     k,
+//     v.map(),
+//   ])
+// ) as IThemesResponse<IThemePreview>;
+
+export const themesPreview: IThemesResponse<IThemePreview> = {
+  common: themes.common.map((theme) => ({
+    id: theme.id,
+    background: theme.backgroundTertiary,
+    img: theme.previewImage,
+  })),
+  darkColorised: themes.darkColorised.map((theme) => ({
+    id: theme.id,
+    background: theme.backgroundTertiary,
+  })),
+  lightColorised: themes.lightColorised.map((theme) => ({
+    id: theme.id,
+    background: theme.backgroundTertiary,
+  })),
+};

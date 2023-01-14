@@ -4,6 +4,7 @@ export { setupActiveLetter } from "./select-letter/model";
 export { setupLettersFilter } from "./filter-letters/model";
 export { LettersList } from "./select-letter/ui/letters-list";
 
+export type { FilterSelectProps } from "./filter-letters/ui";
 export { FilterSelect } from "./filter-letters/ui";
 
 export type { LettersState } from "./load-letters/model";

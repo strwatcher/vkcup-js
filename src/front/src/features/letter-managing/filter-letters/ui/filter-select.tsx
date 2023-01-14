@@ -6,7 +6,7 @@ import { Filter } from "@/entities/filter";
 import { FilterProps } from "@/entities/filter/ui";
 import { Separator } from "@/shared/ui/separator/separator";
 
-type FilterSelectProps = {
+export type FilterSelectProps = {
   all: FilterModel;
   unread: FilterModel;
   hasAttachments: FilterModel;
@@ -62,7 +62,7 @@ export const FilterSelect = (props: FilterSelectProps) => {
   return (
     <Popup
       headRender={(onClick) => (
-        <Button variant="menuItem" adaptive onClick={onClick}>
+        <Button variant="headerButton" adaptive onClick={onClick}>
           {activeFilters.map((filter) => (
             <img src={filter.icon} key={filter.id} />
           ))}

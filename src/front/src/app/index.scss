@@ -10,6 +10,17 @@ body * {
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555555;
+    border-radius: 10px;
+    background-clip: content-box;
+    border: 5px solid transparent;
+}
+
 @font-face {
     font-family: ‘helvetica neue’;
     src: local(‘Arial’);

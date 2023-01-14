@@ -25,8 +25,8 @@ sample({ clock: ThemeGate.open, fn: () => undefined, target: fetchThemesFx });
 
 sample({
   source: $themes,
-  filter: (themes) => !!themes && !!themes?.colorised.at(0)?.id,
-  fn: (themes) => themes!.colorised.at(0)!.id,
+  filter: (themes) => !!themes && !!themes?.common.at(0)?.id,
+  fn: (themes) => themes!.common.at(0)!.id,
   target: fetchThemeByIdFx,
 });
 

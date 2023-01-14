@@ -57,13 +57,16 @@
     }
 }
 
-.transparent {
+.sidebarButton,
+.headerButton{
     gap: var(--gap, 15px);
     padding: 8px 20px;
     width: 200px;
     height: 36px;
-    color: var(--sidebarItemTextPrimary);
+}
 
+.sidebarButton {
+    color: var(--sidebarItemTextPrimary);
     @media screen and (max-width: 768px) {
         padding: 12px 11px;
         border-radius: 4px;
@@ -76,13 +79,26 @@
     }
 }
 
+.headerButton {
+    color: var(--headerTextPrimary);
+    font-size: 15px;
+    font-weight: 500;
+}
+
 .menuItem {
     width: 240px;
     white-space: nowrap;
+    border-radius: 0;
     gap: var(--gap, 15px);
     height: 40px;
     padding: 10px 24px;
-    color: var(--textPrimary)
+    color: var(--textPrimary);
+    font-size: 15px;
+
+    &:hover,
+    &:focus {
+        background-color: var(--contentTransparentHover);
+    }
 }
 
 .adaptive {

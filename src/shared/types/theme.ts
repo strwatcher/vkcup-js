@@ -1,4 +1,4 @@
-export type IThemeType = "dark" | "light" | "colorised";
+export type IThemeType = "dark" | "light" | "darkColorised" | "lightColorised";
 
 export type ITheme = {
   id: string;
@@ -40,5 +40,6 @@ export type IThemePreview = { id: string; background: string; img?: string };
 
 export type IThemesResponse<T> = {
   common: Array<T>;
-  colorised: Array<T>;
+  darkColorised: Array<T>;
+  lightColorised: Array<T>;
 };

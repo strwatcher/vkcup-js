@@ -10,7 +10,7 @@ export type AddFolderProps = {
 export const AddFolder: React.FC<AddFolderProps> = (props) => {
   const resources = useStore($resources);
   return (
-    <Button onClick={props.onClick} variant="transparent">
+    <Button onClick={props.onClick} variant="sidebarButton">
       <img src={resources.plus} />
       <span>Новая папка</span>
     </Button>

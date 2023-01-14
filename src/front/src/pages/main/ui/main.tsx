@@ -1,9 +1,9 @@
 import { Letter } from "@/entities/letter";
-import { FilterSelect, LettersList } from "@/features/letter-managing";
-import { $screenSize, ScreenSizeGate } from "@/shared/lib/screen-size";
-import { $resources } from "@/shared/lib/theme";
+import { LettersList } from "@/features/letter-managing";
+import { ScreenSizeGate } from "@/shared/lib/screen-size";
 import { ThemeGate } from "@/shared/lib/theme/model";
-import { Button, Header, ThreeVariantState } from "@/shared/ui";
+import { ThreeVariantState } from "@/shared/ui";
+import { Header } from "@/widgets/header";
 import { Sidebar } from "@/widgets/sidebar";
 import { useEvent, useGate, useUnit } from "effector-react";
 import React, { useCallback } from "react";
@@ -13,11 +13,6 @@ import { Layout } from "./layout";
 export const Main: React.FC = () => {
   useGate(ScreenSizeGate);
   useGate(ThemeGate);
-
-  const { resources, size } = useUnit({
-    resources: $resources,
-    size: $screenSize,
-  });
 
   const model = useUnit({
     letters: mainPageModel.$filtered,
@@ -63,80 +58,59 @@ export const Main: React.FC = () => {
     onLettersFetchFinished: useEvent(mainPageModel.fetchFinished),
   };
 
-  const logo = React.useMemo(() => {
-    if (size === "big") return resources.logo;
-    return resources.compactLogo;
-  }, [resources, size]);
-
-  if (model.letter) {
-    return (
-      <Layout
-        head={
-          <Header>
-            <Button
-              variant="transparent"
-              gap={19.5}
-              onClick={callbacks.letterCloseClick}
-            >
-              <img src={resources.arrowBack} />
-              <span>Вернуться</span>
-            </Button>
-          </Header>
-        }
-      >
-        <Sidebar />
+  return (
+    <Layout
+      contentEmpty={model.letters.length === 0}
+      head={
+        <Header
+          needReturnBack={!!model.letter}
+          returnBack={callbacks.letterCloseClick}
+          filters={{
+            all: {
+              activate: filtersEvents.deactivateAll,
+              deactivate: filtersEvents.deactivateAll,
+              active: model.allFilterActive,
+            },
+            unread: {
+              activate: filtersEvents.unreadActivate,
+              deactivate: filtersEvents.unreadDeactivate,
+              active: model.unreadFilterActive,
+            },
+            hasAttachments: {
+              activate: filtersEvents.attachmentsActivate,
+              deactivate: filtersEvents.attachmentsDeactivate,
+              active: model.hasAttachmentsFilterActive,
+            },
+            withBookmark: {
+              activate: filtersEvents.bookmarkActivate,
+              deactivate: filtersEvents.bookmarkDeactivate,
+              active: model.withBookmarkFilterActive,
+            },
+          }}
+        />
+      }
+    >
+      <Sidebar />
+      {model.letter ? (
         <Letter
           {...model.letter}
           onReadToggle={callbacks.letterReadToggle}
           onMarkToggle={callbacks.letterMarkToggle}
         />
-      </Layout>
-    );
-  }
-  return (
-    <Layout
-      contentEmpty={model.letters.length === 0}
-      head={
-        <Header>
-          <img src={logo} />
-          <FilterSelect
-            all={{
-              activate: filtersEvents.deactivateAll,
-              deactivate: filtersEvents.deactivateAll,
-              active: model.allFilterActive,
-            }}
-            unread={{
-              activate: filtersEvents.unreadActivate,
-              deactivate: filtersEvents.unreadDeactivate,
-              active: model.unreadFilterActive,
-            }}
-            hasAttachments={{
-              activate: filtersEvents.attachmentsActivate,
-              deactivate: filtersEvents.attachmentsDeactivate,
-              active: model.hasAttachmentsFilterActive,
-            }}
-            withBookmark={{
-              activate: filtersEvents.bookmarkActivate,
-              deactivate: filtersEvents.bookmarkDeactivate,
-              active: model.withBookmarkFilterActive,
-            }}
-          />
-        </Header>
-      }
-    >
-      <Sidebar />
-      <LettersList
-        letters={model.letters}
-        onReadToggle={callbacks.letterReadToggle}
-        onMarkToggle={callbacks.letterMarkToggle}
-        onSelectToggle={callbacks.letterSelectToggle}
-        onAttachmentsOpened={callbacks.attachmentsOpen}
-        onAttachmentsClosed={callbacks.attachmentsClose}
-        onLetterClick={callbacks.letterOpenClick}
-        fetchHasFinished={callbacks.onLettersFetchFinished}
-        justFetched={model.lettersJustFetched}
-        fetching={model.lettersFetching}
-      />
+      ) : (
+        <LettersList
+          letters={model.letters}
+          onReadToggle={callbacks.letterReadToggle}
+          onMarkToggle={callbacks.letterMarkToggle}
+          onSelectToggle={callbacks.letterSelectToggle}
+          onAttachmentsOpened={callbacks.attachmentsOpen}
+          onAttachmentsClosed={callbacks.attachmentsClose}
+          onLetterClick={callbacks.letterOpenClick}
+          fetchHasFinished={callbacks.onLettersFetchFinished}
+          justFetched={model.lettersJustFetched}
+          fetching={model.lettersFetching}
+        />
+      )}
     </Layout>
   );
 };

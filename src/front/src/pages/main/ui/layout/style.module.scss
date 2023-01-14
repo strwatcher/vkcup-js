@@ -10,10 +10,6 @@
     z-index: 2;
 }
 
-.head * {
-    color: var(--headerTextPrimary);
-    font-size: 15px;
-}
 
 .content {
     --sidebar-width: 232px;
@@ -30,7 +26,6 @@
 .content > div:nth-child(2) {
     width: calc(100vw - var(--sidebar-width) - 36px);
     overflow: auto;
-    display: flex;
     background-color: var(--backgroundContent);
     border-radius: 12px;
 }

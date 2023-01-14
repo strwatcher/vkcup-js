@@ -5,11 +5,12 @@ import { Folder } from "@/entities/folder";
 import { useGate, useUnit } from "effector-react";
 import { ICompleteFolder } from "@/../../shared";
 import { folderSelectionModel, foldersLoadingModel } from "../model";
-import { $resources, $theme } from "@/shared/lib/theme";
+import { $resources } from "@/shared/lib/theme";
 import { $themeType } from "@/shared/lib/theme/model";
 
 export const FoldersList = () => {
   useGate(foldersLoadingModel.FoldersGate);
+
   const { theme, folders, selectedFolder, folderItemClicked } = useUnit({
     resources: $resources,
     theme: $themeType,

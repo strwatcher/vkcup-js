@@ -29,7 +29,10 @@ sample({
     activeLetterModel.onLetterClicked,
   ],
   source: letterLoadingModel.$letters,
-  filter: (letters, id) => !letters.find((letter) => id === letter.id)?.doc,
+  filter: (letters, id) => {
+    const letterToCheck = letters.find((letter) => id === letter.id);
+    return Boolean(letterToCheck?.attachments && !letterToCheck.doc);
+  },
   fn: (_, id) => id,
   target: attachmentsManagerModel.fetchAttachmentsFx,
 });

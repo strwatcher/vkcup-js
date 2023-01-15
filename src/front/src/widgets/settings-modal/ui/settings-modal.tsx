@@ -1,10 +1,10 @@
-import { SelectTheme } from "@/features/settings";
 import { Modal } from "@/shared/ui";
 import { useUnit } from "effector-react";
 import {
   $areSettingsActive,
   toggleSettingsClicked,
 } from "@/features/settings/model/control-settings";
+import { NavigateSettings } from "@/features/settings";
 
 export const SettingsModal = () => {
   const { opened, onClose } = useUnit({
@@ -13,7 +13,7 @@ export const SettingsModal = () => {
   });
   return (
     <Modal opened={opened} onClose={onClose}>
-      <SelectTheme />
+      <NavigateSettings />
     </Modal>
   );
 };

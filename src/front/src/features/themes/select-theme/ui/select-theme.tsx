@@ -1,6 +1,6 @@
 import { SettingsPage, ThemesSet } from "@/entities/settings";
 import { useUnit } from "effector-react";
-import { $activeTheme, themeSelectClicked } from "../../model/select-theme";
+import { $activeTheme, themeSelectClicked } from "../model";
 
 export const SelectTheme = () => {
   const { activeTheme, onThemeClicked } = useUnit({

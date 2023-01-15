@@ -1,1 +1,2 @@
-export { SettingsPage } from "./settings-page";
+export { SettingsPage } from "./ui";
+export type { ISettingsPage } from "./model";

@@ -1,0 +1,11 @@
+.navigateSettingsContainer {
+  display: flex;
+
+  & > *:nth-child(1) {
+    padding: 20px 17px 20px 20px
+  }
+
+  & > *:nth-child(3) {
+    padding: 26px 32px;
+  }
+}

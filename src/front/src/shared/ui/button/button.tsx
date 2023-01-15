@@ -9,8 +9,11 @@ type ButtonVariant =
   | "menuItem"
   | "headerButton";
 
+type TextVariant = "primary" | "sidebar" | "header";
+
 export type ButtonProps = {
   variant: ButtonVariant;
+  textVariant?: TextVariant;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 
@@ -35,7 +38,8 @@ export const Button = (props: ButtonProps) => {
         s.button,
         s[props.variant],
         props.active && s.active,
-        props.adaptive && s.adaptive
+        props.adaptive && s.adaptive,
+        props.textVariant && s[props.textVariant]
       )}
       onClick={props.onClick}
       ref={setGap}

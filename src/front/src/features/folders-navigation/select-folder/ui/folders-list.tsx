@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo, useCallback } from "react";
 import { List } from "@/shared/ui/list";
 import { $screenSize } from "@/shared/lib/screen-size";
 import { Folder } from "@/entities/folder";
@@ -20,13 +20,13 @@ export const FoldersList = () => {
 
     folderItemClicked: folderSelectionModel.folderClicked,
   });
-  const indexedFolders = React.useMemo(
+  const indexedFolders = useMemo(
     () => folders.map((folder, index) => ({ ...folder, id: `${index}` })),
     [folders]
   );
 
   const renders = {
-    folder: React.useCallback(
+    folder: useCallback(
       (folder: ICompleteFolder & { id: string }) => {
         return (
           <Folder

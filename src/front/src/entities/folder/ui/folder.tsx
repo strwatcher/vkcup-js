@@ -1,5 +1,4 @@
 import { Button } from "@/shared/ui";
-import React from "react";
 import { IFolder } from "shared";
 
 export type FolderProps = {
@@ -9,7 +8,7 @@ export type FolderProps = {
   onClick: () => void;
 };
 
-export const Folder: React.FC<FolderProps> = (props) => {
+export const Folder = (props: FolderProps) => {
   return (
     <Button active={props.active} onClick={props.onClick} variant={"activated"}>
       <img src={props.icon} alt="" />

@@ -3,16 +3,15 @@ import { LettersList } from "@/features/letter-managing";
 import { ScreenSizeGate } from "@/shared/lib/screen-size";
 import { ThemeGate } from "@/shared/lib/theme";
 import { ThreeVariantState } from "@/shared/ui";
-import { Modal } from "@/shared/ui/modal/modal";
 import { Header } from "@/widgets/header";
 import { SettingsModal } from "@/widgets/settings-modal";
 import { Sidebar } from "@/widgets/sidebar";
 import { useEvent, useGate, useUnit } from "effector-react";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { mainPageModel } from "../model";
 import { Layout } from "./layout";
 
-export const Main: React.FC = () => {
+export const Main = () => {
   useGate(ScreenSizeGate);
   useGate(ThemeGate);
 

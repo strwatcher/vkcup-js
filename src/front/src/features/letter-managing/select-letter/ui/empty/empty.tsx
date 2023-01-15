@@ -1,6 +1,5 @@
 import { $resources } from "@/shared/lib/theme";
 import { useUnit } from "effector-react";
-import React from "react";
 
 import s from "./style.module.scss";
 

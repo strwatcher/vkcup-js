@@ -1,4 +1,3 @@
-import React from "react";
 import s from "./style.module.scss";
 
 export type FlagProps = {
@@ -6,7 +5,7 @@ export type FlagProps = {
   name: string;
 };
 
-export const Flag: React.FC<FlagProps> = (props) => {
+export const Flag = (props: FlagProps) => {
   return (
     <div className={s.flag}>
       <img src={props.icon} />

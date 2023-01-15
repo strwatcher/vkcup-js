@@ -4,6 +4,7 @@ import { IFolder } from "./folder";
 import { IUser } from "./user";
 
 export type ILetter = {
+  id: string;
   author: IUser;
   to: Array<IUser>;
   title: string;
@@ -14,5 +15,6 @@ export type ILetter = {
   folder: IFolder;
   date: string;
   flag: IFlag;
-  doc: IAttachments;
+  doc?: IAttachments;
+  attachments: boolean;
 };

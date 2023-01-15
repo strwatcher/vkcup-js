@@ -1,8 +1,8 @@
-import React from "react";
-
+import { useCallback } from "react";
 import { Button } from "@/shared/ui";
 import { useStore } from "effector-react";
 import { $resources } from "@/shared/lib/theme";
+
 import s from "./style.module.scss";
 
 export type FilterProps = {
@@ -14,7 +14,7 @@ export type FilterProps = {
 };
 export const Filter = (props: FilterProps) => {
   const resources = useStore($resources);
-  const toggle = React.useCallback(() => {
+  const toggle = useCallback(() => {
     if (props.active) {
       props.deactivate();
     } else {

@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react";
+import { MouseEventHandler } from "react";
 import { $resources, $themes, IThemeSection } from "@/shared/lib/theme";
 import { List, ThemeSelector } from "@/shared/ui";
 import { useStoreMap } from "effector-react";

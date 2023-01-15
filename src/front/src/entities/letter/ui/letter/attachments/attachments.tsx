@@ -1,15 +1,15 @@
-import React from "react";
 import { IAttachments } from "shared/types/attachmets";
 import { base64Size, bToMb } from "@/shared/lib/utils/base64-size";
 import { ImagePreview } from "@/shared/ui";
 import s from "./style.module.scss";
+import { useMemo } from "react";
 
 export type AttachmentsProps = {
   attachments: IAttachments;
 };
 
-export const Attachments: React.FC<AttachmentsProps> = (props) => {
-  const fileRules = React.useMemo(
+export const Attachments = (props: AttachmentsProps) => {
+  const fileRules = useMemo(
     () => ({
       one: "файл",
       few: "файла",
@@ -19,7 +19,7 @@ export const Attachments: React.FC<AttachmentsProps> = (props) => {
     []
   );
 
-  const attachments = React.useMemo(
+  const attachments = useMemo(
     () =>
       props.attachments &&
       Array.from(Object.keys(props.attachments)).map((key) => ({
@@ -29,7 +29,7 @@ export const Attachments: React.FC<AttachmentsProps> = (props) => {
     [props.attachments]
   );
 
-  const signs = React.useMemo(() => {
+  const signs = useMemo(() => {
     const size = `(${bToMb(
       base64Size(attachments.map((a) => a.bytes).join(""))
     ).toFixed(2)}Mb)`;
@@ -44,8 +44,8 @@ export const Attachments: React.FC<AttachmentsProps> = (props) => {
   return (
     <div className={s.wrapper}>
       <div className={s.attachments}>
-        {attachments?.map((doc) => (
-          <ImagePreview {...doc} />
+        {attachments?.map((doc, index) => (
+          <ImagePreview {...doc} key={index} />
         ))}
       </div>
 
@@ -54,7 +54,7 @@ export const Attachments: React.FC<AttachmentsProps> = (props) => {
         <div className={s.download}>
           <a href={""} className={s.downloadLink}>
             Скачать
-          </a>{" "}
+          </a>
           <span className={s.fileSize}>{signs.size}</span>
         </div>
       </div>

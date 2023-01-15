@@ -1,13 +1,34 @@
 import { IFolder, ILetters } from "shared";
 import { DataBase } from "./db";
+import crypto from "crypto";
+import { IAttachments } from "shared/types/attachmets";
 
 export class LettersDb extends DataBase<ILetters> {
-  getByFolder(folder: IFolder) {
+  constructor(path: string) {
+    super(path);
+    this._data = this._data.map((letter) => ({
+      ...letter,
+      id: crypto.randomUUID(),
+    }));
+  }
+
+  getByFolder(folder: IFolder): ILetters {
+    let result: ILetters;
     if (folder === "Входящие") {
-      return this._data.filter((item) => item.folder === undefined);
+      result = this._data.filter((item) => item.folder === undefined);
+    } else {
+      result = this._data.filter((item) => item.folder === folder);
     }
 
-    return this._data.filter((item) => item.folder === folder);
+    return result.map((letter) => ({
+      ...letter,
+      attachments: !!letter.doc,
+      doc: undefined,
+    }));
+  }
+
+  getDocById(letterId: string): IAttachments | undefined {
+    return this._data.find((letter) => letter.id === letterId)?.doc;
   }
 
   getAllFlags() {

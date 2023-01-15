@@ -1,4 +1,3 @@
-import React from "react";
 import { SelectTheme } from "@/features/settings";
 import { Modal } from "@/shared/ui";
 import { useUnit } from "effector-react";

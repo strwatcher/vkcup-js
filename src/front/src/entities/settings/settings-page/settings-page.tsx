@@ -1,9 +1,9 @@
 import { Box, Sign } from "@/shared/ui";
-import React from "react";
+import { ReactNode } from "react";
 import s from "./style.module.scss";
 
 type SettingsPageProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   head: string;
 };
 export const SettingsPage = (props: SettingsPageProps) => {

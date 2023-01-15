@@ -1,5 +1,7 @@
+import { IAttachments } from "@/../../shared/types/attachmets";
 import { LetterState } from "@/entities/letter";
-import { createApi, Store } from "effector";
+import { createRequest } from "@/shared/api/model";
+import { createApi, createEffect, createStore, sample, Store } from "effector";
 import { LettersState } from "../load-letters/model";
 
 function mutateLetter<Key extends keyof LetterState>(

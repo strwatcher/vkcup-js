@@ -1,10 +1,10 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
-import React from "react";
+import { ReactNode } from "react";
 import s from "./style.module.scss";
 
 type BoxProps = {
   variant: "horizontal" | "vertical";
-  children: React.ReactNode;
+  children: ReactNode;
 };
 export const Box = (props: BoxProps) => {
   return (

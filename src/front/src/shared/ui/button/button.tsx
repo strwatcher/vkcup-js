@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, ReactNode } from "react";
+import { useCallback, MouseEventHandler, ReactNode } from "react";
 import { joinClasses } from "@/shared/lib/utils/join-classes";
 import s from "./style.module.scss";
 
@@ -20,7 +20,7 @@ export type ButtonProps = {
 };
 
 export const Button = (props: ButtonProps) => {
-  const setGap = React.useCallback(
+  const setGap = useCallback(
     (node: HTMLButtonElement | null) => {
       if (props.gap) {
         node?.style.setProperty("--gap", props.gap + "px");

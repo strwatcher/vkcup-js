@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import s from "./style.module.scss";
 
 type HeaderProps = {

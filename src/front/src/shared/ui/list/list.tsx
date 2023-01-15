@@ -1,9 +1,9 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
-import React from "react";
+import { ReactNode } from "react";
 import s from "./style.module.scss";
 
 type ListProps<T extends { id: string }> = {
-  render: (props: T) => React.ReactNode;
+  render: (props: T) => ReactNode;
   items: Array<T>;
   direction: "horizontal" | "vertical";
 };

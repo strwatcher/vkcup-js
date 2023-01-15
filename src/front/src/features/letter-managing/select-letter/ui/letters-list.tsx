@@ -1,4 +1,4 @@
-import React from "react";
+import { useCallback } from "react";
 import { useScrollTop } from "@/shared/lib/hooks/use-scroll-top";
 import { List, ThreeVariantState } from "@/shared/ui";
 import { CompactLetter, LetterState } from "@/entities/letter";
@@ -20,7 +20,7 @@ type LettersListProps = {
 
 export const LettersList = (props: LettersListProps) => {
   const renders = {
-    letter: React.useCallback(
+    letter: useCallback(
       (letter: LetterState) => <CompactLetter {...props} {...letter} />,
       [props]
     ),

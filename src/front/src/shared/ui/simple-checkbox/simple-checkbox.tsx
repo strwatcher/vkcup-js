@@ -1,5 +1,5 @@
 import { Checkbox } from "@/shared/ui";
-import React from "react";
+import { useMemo } from "react";
 
 export type SimpleCheckboxState = "checked" | "unchecked";
 
@@ -13,8 +13,8 @@ export type SimpleCheckboxProps = {
   onChange: () => void;
 };
 
-export const SimpleCheckbox: React.FC<SimpleCheckboxProps> = (props) => {
-  const state = React.useMemo(
+export const SimpleCheckbox = (props: SimpleCheckboxProps) => {
+  const state = useMemo(
     () => (props.checked ? "checked" : "unchecked"),
     [props.checked]
   );

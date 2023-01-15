@@ -1,5 +1,4 @@
 import { Checkbox } from "@/shared/ui";
-import React from "react";
 
 export type ThreeVariantState = "unset" | "first" | "second";
 
@@ -14,9 +13,7 @@ export type ThreeStateCheckboxProps = {
   hovered: boolean;
 };
 
-export const ThreeStateCheckbox: React.FC<ThreeStateCheckboxProps> = (
-  props
-) => {
+export const ThreeStateCheckbox = (props: ThreeStateCheckboxProps) => {
   return (
     <Checkbox
       hovered={props.hovered}

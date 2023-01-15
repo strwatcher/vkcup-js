@@ -1,25 +1,23 @@
-import React from "react";
 import { IAttachments } from "shared/types/attachmets";
 import { useClickOutside } from "@/shared/lib/hooks/use-click-outside";
 import { List } from "@/shared/ui/list";
 import { AttachmentItem } from "../attachment-item";
 import s from "./style.module.scss";
 import { joinClasses } from "@/shared/lib/utils/join-classes";
+import { useCallback, MouseEvent, useRef, useMemo } from "react";
 
 export type AttachmentsIndicatorProps = {
   icon: string;
-  attachments: IAttachments;
+  attachments?: IAttachments;
   opened: boolean;
   onOpen: () => void;
   onClose: () => void;
 };
 
-export const AttachmentsIndicator: React.FC<AttachmentsIndicatorProps> = (
-  props
-) => {
+export const AttachmentsIndicator = (props: AttachmentsIndicatorProps) => {
   const callbacks = {
-    open: React.useCallback(
-      (e: React.MouseEvent) => {
+    open: useCallback(
+      (e: MouseEvent) => {
         e.stopPropagation();
         if (!props.opened) {
           props.onOpen();
@@ -31,8 +29,8 @@ export const AttachmentsIndicator: React.FC<AttachmentsIndicatorProps> = (
     ),
   };
 
-  const popupRef = React.useRef(null);
-  const indicatorRef = React.useRef(null);
+  const popupRef = useRef(null);
+  const indicatorRef = useRef(null);
 
   useClickOutside(
     () => props.opened && props.onClose(),
@@ -40,13 +38,15 @@ export const AttachmentsIndicator: React.FC<AttachmentsIndicatorProps> = (
     indicatorRef
   );
 
-  const attachments = React.useMemo(
+  const attachments = useMemo(
     () =>
-      Array.from(Object.keys(props.attachments)).map((key, index) => ({
-        id: `${index}`,
-        name: key,
-        bytes: props.attachments[key],
-      })),
+      props.attachments
+        ? Array.from(Object.keys(props.attachments)).map((key, index) => ({
+          id: `${index}`,
+          name: key,
+          bytes: props.attachments![key],
+        }))
+        : [],
     [props.attachments]
   );
 

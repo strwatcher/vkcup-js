@@ -1,4 +1,4 @@
-import React from "react";
+import { useCallback } from "react";
 import { joinClasses } from "@/shared/lib/utils/join-classes";
 import s from "./style.module.scss";
 
@@ -9,7 +9,7 @@ type SeparatorProps = {
 };
 
 export const Separator = (props: SeparatorProps) => {
-  const setSize = React.useCallback(
+  const setSize = useCallback(
     (node: HTMLDivElement | null) => {
       node?.style.setProperty("--size", props.size + "px");
       node?.style.setProperty("--thickness", props.thickness + "px");

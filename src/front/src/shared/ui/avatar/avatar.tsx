@@ -1,11 +1,10 @@
-import React from "react";
 import s from "./style.module.scss";
 
 export type AvatarProps = {
   src?: string;
 };
 
-export const Avatar: React.FC<AvatarProps> = (props) => {
+export const Avatar = (props: AvatarProps) => {
   return props.src ? (
     <img className={s.avatar} src={props.src} />
   ) : (

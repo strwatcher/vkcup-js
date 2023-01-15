@@ -1,6 +1,5 @@
 import { $resources } from "@/shared/lib/theme";
 import { useStore } from "effector-react";
-import React from "react";
 import s from "./style.module.scss";
 
 export type BigPreviewProps = {
@@ -8,7 +7,7 @@ export type BigPreviewProps = {
   bytes: string;
 };
 
-export const ImagePreview: React.FC<BigPreviewProps> = (props) => {
+export const ImagePreview = (props: BigPreviewProps) => {
   const resources = useStore($resources);
 
   return (

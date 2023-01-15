@@ -1,7 +1,9 @@
-import { defineConfig } from "vite";
+import { defineConfig, PluginOption } from "vite";
 import { viteSingleFile } from "vite-plugin-singlefile";
 import react from "@vitejs/plugin-react";
 import babel from "vite-plugin-babel";
+import { visualizer } from "rollup-plugin-visualizer";
+import viteCompression from "vite-plugin-compression";
 import path from "path";
 
 // https://vitejs.dev/config/
@@ -11,6 +13,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  mode: "production",
 
   plugins: [
     react(),
@@ -20,5 +23,6 @@ export default defineConfig({
         plugins: ["@babel/plugin-transform-react-jsx"],
       },
     }),
+    visualizer() as unknown as PluginOption,
   ],
 });

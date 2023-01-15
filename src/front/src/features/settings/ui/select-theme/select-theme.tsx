@@ -1,4 +1,3 @@
-import React from "react";
 import { SettingsPage, ThemesSet } from "@/entities/settings";
 import { useUnit } from "effector-react";
 import { $activeTheme, themeSelectClicked } from "../../model/select-theme";

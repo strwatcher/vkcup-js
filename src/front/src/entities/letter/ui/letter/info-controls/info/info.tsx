@@ -6,7 +6,6 @@ import {
 } from "@/shared/ui";
 import { Avatar } from "@/shared/ui/avatar";
 import { useStore } from "effector-react";
-import React from "react";
 import { IUser } from "shared";
 import { DateTime } from "../../date-time";
 import { Recipients } from "../../recipients";
@@ -21,7 +20,7 @@ export type InfoProps = {
   hovered: boolean;
 };
 
-export const Info: React.FC<InfoProps> = (props) => {
+export const Info = (props: InfoProps) => {
   const resources = useStore($resources);
 
   return (

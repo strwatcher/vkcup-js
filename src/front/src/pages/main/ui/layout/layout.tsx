@@ -1,14 +1,14 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
-import React from "react";
+import { ReactNode } from "react";
 import s from "./style.module.scss";
 
 export type LayoutProps = {
-  head: React.ReactNode;
-  children: React.ReactNode;
+  head: ReactNode;
+  children: ReactNode;
   contentEmpty?: boolean;
 };
 
-export const Layout: React.FC<LayoutProps> = (props) => {
+export const Layout = (props: LayoutProps) => {
   return (
     <div className={s.layout}>
       <div className={s.head}>{props.head}</div>

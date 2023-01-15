@@ -1,4 +1,3 @@
-import React from "react";
 import s from "./style.module.scss";
 
 import { IUser } from "shared";
@@ -18,7 +17,7 @@ export type InfoControlsProps = {
   hovered: boolean;
 };
 
-export const InfoControls: React.FC<InfoControlsProps> = (props) => {
+export const InfoControls = (props: InfoControlsProps) => {
   const resources = useUnit($resources);
   return (
     <div className={s.infoControls}>

@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 import { Button, List, Popup } from "@/shared/ui";
 import { useUnit } from "effector-react";
 import { $resources } from "@/shared/lib/theme";
@@ -22,7 +22,7 @@ type FilterModel = {
 export const FilterSelect = (props: FilterSelectProps) => {
   const resources = useUnit($resources);
 
-  const options: Array<FilterProps & { id: string }> = React.useMemo(
+  const options: Array<FilterProps & { id: string }> = useMemo(
     () => [
       { id: "1", text: "Все письма", ...props.all },
       {
@@ -47,7 +47,7 @@ export const FilterSelect = (props: FilterSelectProps) => {
     [props.all, props.unread, props.hasAttachments, props.withBookmark]
   );
 
-  const activeFilters = React.useMemo(
+  const activeFilters = useMemo(
     () =>
       options
         .filter((option) => option.active)

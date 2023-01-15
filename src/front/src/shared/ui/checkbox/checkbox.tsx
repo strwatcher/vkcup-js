@@ -1,5 +1,5 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
-import React from "react";
+import { useCallback, useMemo, MouseEvent } from "react";
 import s from "./style.module.scss";
 
 type CheckboxProps<TState extends string> = {
@@ -16,8 +16,8 @@ type CheckboxProps<TState extends string> = {
 export const Checkbox = <TState extends string>(
   props: CheckboxProps<TState>
 ) => {
-  const onClick = React.useCallback(
-    (e: React.MouseEvent) => {
+  const onClick = useCallback(
+    (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       props.setState(props.state);
@@ -25,7 +25,7 @@ export const Checkbox = <TState extends string>(
     [props.state]
   );
 
-  const className = React.useMemo(() => {
+  const className = useMemo(() => {
     let className = joinClasses(s.checkbox);
 
     if (

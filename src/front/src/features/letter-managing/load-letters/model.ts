@@ -19,7 +19,6 @@ export function setupLettersLoading($activeFolder: Store<IFolder | null>) {
       letters.data.map((letter) => ({
         ...letter,
         selected: false,
-        id: crypto.randomUUID(),
         attachmentsOpened: false,
       })),
 

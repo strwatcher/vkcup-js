@@ -1,12 +1,12 @@
-import React from "react";
+import { useMemo } from "react";
 import s from "./style.module.scss";
 
 export type DateTimeProps = {
   dateTime: string;
 };
 
-export const DateTime: React.FC<DateTimeProps> = (props) => {
-  const months = React.useMemo(
+export const DateTime = (props: DateTimeProps) => {
+  const months = useMemo(
     () => [
       "января",
       "февраля",
@@ -23,16 +23,13 @@ export const DateTime: React.FC<DateTimeProps> = (props) => {
     ],
     []
   );
-  const dateTime = React.useMemo(
-    () => new Date(props.dateTime),
-    [props.dateTime]
-  );
-  const isToday = React.useMemo(
+  const dateTime = useMemo(() => new Date(props.dateTime), [props.dateTime]);
+  const isToday = useMemo(
     () => dateTime.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0),
     [dateTime]
   );
 
-  const finalDate = React.useMemo(() => {
+  const finalDate = useMemo(() => {
     let date = "";
     if (isToday) {
       date = "Сегодня";

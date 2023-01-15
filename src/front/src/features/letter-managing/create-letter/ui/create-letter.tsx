@@ -1,4 +1,3 @@
-import React from "react";
 import { $screenSize } from "@/shared/lib/screen-size";
 import { Button } from "@/shared/ui";
 import { useUnit } from "effector-react";

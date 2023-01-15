@@ -1,5 +1,5 @@
 import { useUnit } from "effector-react";
-import React from "react";
+import { useRef, useMemo } from "react";
 import { useHover } from "@/shared/lib/hooks/use-hover";
 import { H } from "@/shared/ui/h";
 import { $flags } from "@/shared/lib/theme";
@@ -20,10 +20,10 @@ export const Letter = (props: LetterProps) => {
     flags: $flags,
   });
 
-  const letterRef = React.useRef(null);
+  const letterRef = useRef(null);
   const hovered = useHover(letterRef);
 
-  const markIndicator = React.useMemo(() => {
+  const markIndicator = useMemo(() => {
     if (props.important) return "second";
     if (props.bookmark) return "first";
     return "unset";

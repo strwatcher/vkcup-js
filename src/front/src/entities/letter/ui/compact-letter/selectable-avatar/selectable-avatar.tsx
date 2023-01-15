@@ -1,7 +1,6 @@
 import { SimpleCheckbox } from "@/shared/ui";
 import { Avatar } from "@/shared/ui/avatar";
 import { SimpleCheckboxState } from "@/shared/ui/simple-checkbox";
-import React from "react";
 
 export type SelectableAvatarProps = {
   selected: boolean;
@@ -13,7 +12,7 @@ export type SelectableAvatarProps = {
   hovered: boolean;
 };
 
-export const SelectableAvatar: React.FC<SelectableAvatarProps> = (props) => {
+export const SelectableAvatar = (props: SelectableAvatarProps) => {
   if ((!props.selected && props.hovered) || props.selected) {
     return (
       <SimpleCheckbox

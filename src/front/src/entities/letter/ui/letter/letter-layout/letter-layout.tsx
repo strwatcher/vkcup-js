@@ -1,15 +1,15 @@
-import React from "react";
+import { ReactNode, RefObject } from "react";
 import s from "./style.module.scss";
 
 export type LetterLayoutProps = {
-  head: React.ReactNode;
-  info: React.ReactNode;
-  attachments: React.ReactNode;
-  text: React.ReactNode;
-  letterRef: React.RefObject<HTMLDivElement>;
+  head: ReactNode;
+  info: ReactNode;
+  attachments: ReactNode;
+  text: ReactNode;
+  letterRef: RefObject<HTMLDivElement>;
 };
 
-export const LetterLayout: React.FC<LetterLayoutProps> = (props) => {
+export const LetterLayout = (props: LetterLayoutProps) => {
   return (
     <div className={s.letterLayout} ref={props.letterRef}>
       <div className={s.head}>{props.head}</div>

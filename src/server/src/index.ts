@@ -6,7 +6,6 @@ import { LettersDb } from "./db/letter-db";
 import { route } from "./router";
 import { IQS } from "shared";
 import config from "./config";
-
 const db = new LettersDb(path.join(__dirname, "db.json"));
 const port = config.port ?? 3000;
 

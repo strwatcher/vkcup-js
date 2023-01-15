@@ -1,15 +1,15 @@
-import React, { RefObject } from "react";
+import { useState, useCallback, useEffect, RefObject } from "react";
 
 export function useHover(ref: RefObject<HTMLElement>) {
-  const [hover, setHover] = React.useState(false);
-  const onMouseOver = React.useCallback(() => {
+  const [hover, setHover] = useState(false);
+  const onMouseOver = useCallback(() => {
     setHover(true);
   }, []);
-  const onMouseOut = React.useCallback(() => {
+  const onMouseOut = useCallback(() => {
     setHover(false);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     ref.current?.addEventListener("mouseover", onMouseOver);
     ref.current?.addEventListener("mouseout", onMouseOut);
 

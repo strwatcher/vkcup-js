@@ -1,9 +1,9 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
-import React, { RefObject } from "react";
+import { ReactNode, RefObject, useMemo } from "react";
 import s from "./style.module.scss";
 
 export type CompactLetterLayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   selected: boolean;
   read: boolean;
   hoverRef: RefObject<HTMLDivElement>;
@@ -12,10 +12,8 @@ export type CompactLetterLayoutProps = {
   onClick: () => void;
 };
 
-export const CompactLetterLayout: React.FC<CompactLetterLayoutProps> = (
-  props
-) => {
-  const className = React.useMemo(() => {
+export const CompactLetterLayout = (props: CompactLetterLayoutProps) => {
+  const className = useMemo(() => {
     return joinClasses(
       s.letter,
       props.read && s.read,

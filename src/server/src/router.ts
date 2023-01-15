@@ -1,5 +1,6 @@
 import { ServerResponse } from "http";
 import { IQS } from "shared";
+import { getAttachmentsById } from "./controllers/attachments";
 import { getFlags } from "./controllers/flags";
 import { getFolders } from "./controllers/folders";
 import { getLettersByFolder } from "./controllers/letters";
@@ -23,6 +24,9 @@ export function route(
   } else if (resource === "themes") {
     const id = query?.id;
     getThemes(response, id);
+  } else if (resource === "attachments") {
+    const id = query?.id;
+    getAttachmentsById(response, db, id);
   } else {
     getStatic(response, resource);
   }

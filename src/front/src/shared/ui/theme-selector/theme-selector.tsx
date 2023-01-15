@@ -1,5 +1,5 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
-import React, { MouseEventHandler } from "react";
+import { MouseEventHandler } from "react";
 import s from "./style.module.scss";
 
 type ThemeSelectorProps = {

@@ -1,6 +1,5 @@
 import { joinClasses } from "@/shared/lib/utils/join-classes";
 import { Sliced } from "@/shared/ui";
-import React from "react";
 import s from "./style.module.scss";
 
 export type SlicedAuthorProps = {
@@ -9,7 +8,7 @@ export type SlicedAuthorProps = {
   read: boolean;
 };
 
-export const SlicedAuthor: React.FC<SlicedAuthorProps> = (props) => {
+export const SlicedAuthor = (props: SlicedAuthorProps) => {
   return (
     <Sliced variant="clip">
       <span className={joinClasses(s.author, props.read && s.read)}>

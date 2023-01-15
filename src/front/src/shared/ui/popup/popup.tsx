@@ -1,5 +1,5 @@
 import { useClickOutside } from "@/shared/lib/hooks/use-click-outside";
-import React, { MouseEventHandler, ReactNode } from "react";
+import { useState, useRef, MouseEventHandler, ReactNode } from "react";
 import s from "./style.module.scss";
 
 type PopupProps = {
@@ -8,8 +8,8 @@ type PopupProps = {
 };
 
 export const Popup = (props: PopupProps) => {
-  const [opened, setOpened] = React.useState(false);
-  const popupRef = React.useRef(null);
+  const [opened, setOpened] = useState(false);
+  const popupRef = useRef(null);
 
   useClickOutside(() => setOpened(false), popupRef);
 

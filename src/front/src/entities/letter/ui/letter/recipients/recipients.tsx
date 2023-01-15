@@ -1,12 +1,12 @@
-import React from "react";
+import { useMemo } from "react";
 import { IUser } from "shared";
 
 export type RecipientsProps = {
   to: Array<IUser>;
 };
 
-export const Recipients: React.FC<RecipientsProps> = (props) => {
-  const recipientsRule = React.useMemo(
+export const Recipients = (props: RecipientsProps) => {
+  const recipientsRule = useMemo(
     () => ({
       one: "получатель",
       few: "получателя",
@@ -15,7 +15,7 @@ export const Recipients: React.FC<RecipientsProps> = (props) => {
     }),
     []
   );
-  const { finalString, otherString } = React.useMemo(() => {
+  const { finalString, otherString } = useMemo(() => {
     const recipients = props.to
       .slice(0, 4)
       .map((user) => `${user.name} ${user.surname}`.trim());

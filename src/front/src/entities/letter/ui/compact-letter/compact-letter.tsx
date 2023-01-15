@@ -1,4 +1,3 @@
-import React from "react";
 import { useHover } from "@/shared/lib/hooks/use-hover";
 import { useUnit } from "effector-react";
 import { SelectableAvatar } from "./selectable-avatar";
@@ -14,6 +13,7 @@ import {
 } from "@/shared/ui";
 import { $flags, $resources } from "@/shared/lib/theme";
 import { LetterState } from "../../lib";
+import { useMemo, useRef } from "react";
 
 export type CompactLetterProps = LetterState & {
   onSelectToggle: (id: string, selected: boolean) => void;
@@ -24,16 +24,16 @@ export type CompactLetterProps = LetterState & {
   onAttachmentsClosed: (id: string) => void;
 };
 
-export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
+export const CompactLetter = (props: CompactLetterProps) => {
   const { resources, flags } = useUnit({
     resources: $resources,
     flags: $flags,
   });
 
-  const letterRef = React.useRef<HTMLDivElement>(null);
+  const letterRef = useRef<HTMLDivElement>(null);
   const hovered = useHover(letterRef);
 
-  const markImportantState: ThreeVariantState = React.useMemo(() => {
+  const markImportantState: ThreeVariantState = useMemo(() => {
     if (props.important) return "second";
     if (props.bookmark) return "first";
     return "unset";
@@ -45,7 +45,7 @@ export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
       read={props.read}
       selected={props.selected}
       hasFlag={!!props.flag}
-      hasAttachments={!!props.doc}
+      hasAttachments={props.attachments}
       onClick={() => props.onLetterClick(props.id)}
     >
       <SimpleCheckbox
@@ -95,7 +95,7 @@ export const CompactLetter: React.FC<CompactLetterProps> = (props) => {
 
       {props.flag && <img src={flags[props.flag]} />}
 
-      {props.doc && (
+      {props.attachments && (
         <AttachmentsIndicator
           icon={resources.attachment}
           attachments={props.doc}

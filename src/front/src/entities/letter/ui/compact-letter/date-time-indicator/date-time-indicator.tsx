@@ -1,11 +1,11 @@
-import React from "react";
+import { useMemo } from "react";
 
 export type DateTimeIndicatorProps = {
   date: string;
 };
 
-export const DateTimeIndicator: React.FC<DateTimeIndicatorProps> = (props) => {
-  const months = React.useMemo(
+export const DateTimeIndicator = (props: DateTimeIndicatorProps) => {
+  const months = useMemo(
     () => [
       "янв",
       "фев",
@@ -22,13 +22,13 @@ export const DateTimeIndicator: React.FC<DateTimeIndicatorProps> = (props) => {
     ],
     []
   );
-  const date = React.useMemo(() => new Date(props.date), [props.date]);
-  const isToday = React.useMemo(
+  const date = useMemo(() => new Date(props.date), [props.date]);
+  const isToday = useMemo(
     () => date.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0),
     [date]
   );
 
-  const finalDate = React.useMemo(() => {
+  const finalDate = useMemo(() => {
     if (isToday) {
       return `${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
     }

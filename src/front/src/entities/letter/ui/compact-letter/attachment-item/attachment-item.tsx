@@ -1,4 +1,3 @@
-import React from "react";
 import { base64Size, bToMb } from "@/shared/lib/utils/base64-size";
 import s from "./style.module.scss";
 import { ImagePreview } from "@/shared/ui";
@@ -10,7 +9,7 @@ export type IAttachmentItem = {
 
 export type AttachmentItemProps = IAttachmentItem;
 
-export const AttachmentItem: React.FC<AttachmentItemProps> = (props) => {
+export const AttachmentItem = (props: AttachmentItemProps) => {
   return (
     <div className={s.wrapper} onClick={(e) => e.stopPropagation()}>
       <img src={props.bytes} className={s.preview} />

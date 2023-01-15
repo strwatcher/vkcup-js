@@ -1,10 +1,10 @@
-import React from "react";
+import { ReactNode } from "react";
 import s from "./style.module.scss";
 
 export type SidebarLayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export const SidebarLayout: React.FC<SidebarLayoutProps> = (props) => {
+export const SidebarLayout = (props: SidebarLayoutProps) => {
   return <div className={s.layout}>{props.children}</div>;
 };

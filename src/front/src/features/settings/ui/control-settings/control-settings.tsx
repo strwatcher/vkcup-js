@@ -1,4 +1,3 @@
-import React from "react";
 import { IScreenSize } from "@/shared/lib/screen-size";
 import { Button } from "@/shared/ui";
 import s from "./style.module.scss";

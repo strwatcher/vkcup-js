@@ -1,10 +1,10 @@
-import React from "react";
+import { useCallback } from "react";
 
 export function useScrollTop<T extends HTMLElement>(
   callback: () => void,
   scroll: boolean
 ) {
-  const scrollTop = React.useCallback(
+  const scrollTop = useCallback(
     (node: T | null) => {
       if (scroll && node) {
         callback();

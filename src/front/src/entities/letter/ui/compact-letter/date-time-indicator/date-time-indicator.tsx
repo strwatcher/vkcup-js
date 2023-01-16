@@ -1,3 +1,5 @@
+import { useMonthTranslate } from "@/shared/lib/language";
+import { MonthRule } from "@/shared/lib/language/dict-type";
 import { useMemo } from "react";
 
 export type DateTimeIndicatorProps = {
@@ -23,6 +25,14 @@ export const DateTimeIndicator = (props: DateTimeIndicatorProps) => {
     []
   );
   const date = useMemo(() => new Date(props.date), [props.date]);
+
+  const { month } = useMonthTranslate({
+    month: {
+      key: "monthShort",
+      month: (date.getMonth() + 1) as keyof MonthRule,
+    },
+  });
+
   const isToday = useMemo(
     () => date.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0),
     [date]
@@ -32,8 +42,8 @@ export const DateTimeIndicator = (props: DateTimeIndicatorProps) => {
     if (isToday) {
       return `${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
     }
-    return `${date.getDate()} ${months[date.getMonth()]}`;
-  }, [date, isToday]);
+    return `${date.getDate()} ${month}`;
+  }, [date, isToday, month]);
 
   return <>{finalDate}</>;
 };

@@ -1,5 +1,5 @@
-import { createEffect, Effect, sample, Store, Unit } from "effector";
-import { genUrl } from "../lib/utils/gen-url";
+import { createEffect, Effect, sample, Store } from "effector";
+import { genUrl } from "../lib";
 
 async function request<TReturn>(url: string): Promise<TReturn> {
   const response = await fetch(url);

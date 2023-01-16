@@ -3,27 +3,27 @@ import { IThemeType } from "./theme";
 export type ICompleteFolder = {
   folder: IFolder;
   icon: {
-    [P in keyof IThemeType]: string;
+    [P in IThemeType]: string;
   };
 };
 
 export type IFolder =
-  | "Архив"
-  | "Входящие"
-  | "Важное"
-  | "Отправленные"
-  | "Черновики"
-  | "Спам"
-  | "Корзина";
+  | "archive"
+  | "in"
+  | "important"
+  | "sent"
+  | "drafts"
+  | "spam"
+  | "basket";
 
 export function isFolder(str?: string): str is IFolder {
   return (
-    str === "Архив" ||
-    str === "Входящие" ||
-    str === "Важное" ||
-    str === "Отправленные" ||
-    str === "Черновики" ||
-    str === "Спам" ||
-    str === "Корзина"
+    str === "archive" ||
+    str === "in" ||
+    str === "important" ||
+    str === "sent" ||
+    str === "drafts" ||
+    str === "spam" ||
+    str === "basket"
   );
 }

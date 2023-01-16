@@ -1,4 +1,4 @@
-import { joinClasses } from "@/shared/lib/utils/join-classes";
+import { joinClasses } from "@/shared/lib";
 import { ReactNode, RefObject, useMemo } from "react";
 import s from "./style.module.scss";
 

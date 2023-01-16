@@ -1,3 +1,4 @@
+import { usePluralTranslate, useTranslate } from "@/shared/lib/language";
 import { useMemo } from "react";
 import { IUser } from "shared";
 
@@ -6,36 +7,36 @@ export type RecipientsProps = {
 };
 
 export const Recipients = (props: RecipientsProps) => {
-  const recipientsRule = useMemo(
-    () => ({
-      one: "получатель",
-      few: "получателя",
-      many: "получателей",
-      other: "получателя",
-    }),
-    []
-  );
-  const { finalString, otherString } = useMemo(() => {
+  const { recipientSign, another } = useTranslate({
+    recipientSign: "recipient",
+    another: "another",
+  });
+
+  const visibleRecipients = useMemo(() => {
     const recipients = props.to
       .slice(0, 4)
       .map((user) => `${user.name} ${user.surname}`.trim());
 
-    const finalString = `Кому: ${recipients.join(" ")}`;
-    const recipientsLeft = props.to.length - 4;
-    const recipientsKey = new Intl.PluralRules("ru-RU").select(
-      recipientsLeft
-    ) as "one" | "few" | "many" | "other";
+    const result = `${recipientSign}: ${recipients.join(" ")}`;
+    return result;
+  }, [props.to, another]);
 
-    const otherString =
+  const recipientsLeft = useMemo(() => props.to.length - 4, [props.to.length]);
+  const { recipientsPlural } = usePluralTranslate({
+    recipientsPlural: { key: "recipients", plural: recipientsLeft },
+  });
+
+  const anotherRecipients = useMemo(
+    () =>
       recipientsLeft > 0
-        ? `ещё ${recipientsLeft} ${recipientsRule[recipientsKey]}`
-        : "";
-    return { finalString, otherString };
-  }, [props.to]);
+        ? `${another} ${recipientsLeft} ${recipientsPlural}`
+        : "",
+    [another, recipientsLeft, recipientsPlural]
+  );
 
   return (
     <div>
-      {finalString} <u>{otherString}</u>
+      {visibleRecipients} <u>{anotherRecipients}</u>
     </div>
   );
 };

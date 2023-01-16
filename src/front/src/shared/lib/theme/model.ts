@@ -7,7 +7,7 @@ import {
 import { createRequest } from "@/shared/api/model";
 import { createEffect, createStore, sample } from "effector";
 import { createGate } from "effector-react";
-import { genUrl } from "../utils/gen-url";
+import { genUrl } from "../gen-url";
 import { FlagsMapping } from "./flag";
 import { IResources, resourcesMapping } from "./resource";
 
@@ -58,12 +58,12 @@ const $resources = $themeType.map((theme) => {
 });
 
 const $flags = createStore<FlagsMapping>({
-  Билеты: genUrl(resourcesMapping.notThemed.ticket),
-  Заказы: genUrl(resourcesMapping.notThemed.cart),
-  Регистрации: genUrl(resourcesMapping.notThemed.key),
-  Финансы: genUrl(resourcesMapping.notThemed.finances),
-  Путешевствия: genUrl(resourcesMapping.notThemed.plane),
-  "Штрафы и налоги": genUrl(resourcesMapping.notThemed.emblem),
+  tickets: genUrl(resourcesMapping.notThemed.ticket),
+  orders: genUrl(resourcesMapping.notThemed.cart),
+  registrations: genUrl(resourcesMapping.notThemed.key),
+  finance: genUrl(resourcesMapping.notThemed.finances),
+  travelling: genUrl(resourcesMapping.notThemed.plane),
+  finesAndTaxes: genUrl(resourcesMapping.notThemed.emblem),
 });
 
 const switchThemeFx = createEffect((theme: ITheme) => {

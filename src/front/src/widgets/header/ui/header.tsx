@@ -5,6 +5,7 @@ import { FilterSelect, FilterSelectProps } from "@/features/letter-managing";
 import { useUnit } from "effector-react";
 import { $resources } from "@/shared/lib/theme";
 import { $screenSize } from "@/shared/lib/screen-size";
+import { useTranslate } from "@/shared/lib/language";
 
 type HeaderProps = {
   needReturnBack?: boolean;
@@ -17,6 +18,7 @@ export const Header = (props: HeaderProps) => {
     resources: $resources,
     size: $screenSize,
   });
+  const { returnBack } = useTranslate({ returnBack: "returnBack" });
 
   const logo = useMemo(() => {
     if (size === "big") return resources.logo;
@@ -28,7 +30,7 @@ export const Header = (props: HeaderProps) => {
       <HeaderLayout>
         <Button variant="headerButton" gap={19.5} onClick={props.returnBack}>
           <img src={resources.arrowBack} />
-          <span>Вернуться</span>
+          <span>{returnBack}</span>
         </Button>
       </HeaderLayout>
     );

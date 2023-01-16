@@ -14,12 +14,6 @@ export function setupAttachmentsManager($letters: Store<LettersState>) {
     target: $currentAttachments,
   });
 
-  // sample({
-  //   clock: attachmentsApi.open,
-  //   // source: $letters,
-  //   target: fetchAttachmentsFx,
-  // });
-
   sample({
     clock: $currentAttachments,
     source: $letters,

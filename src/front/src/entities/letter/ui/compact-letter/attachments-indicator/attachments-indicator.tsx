@@ -3,8 +3,8 @@ import { useClickOutside } from "@/shared/lib/hooks/use-click-outside";
 import { List } from "@/shared/ui/list";
 import { AttachmentItem } from "../attachment-item";
 import s from "./style.module.scss";
-import { joinClasses } from "@/shared/lib/utils/join-classes";
 import { useCallback, MouseEvent, useRef, useMemo } from "react";
+import { joinClasses } from "@/shared/lib";
 
 export type AttachmentsIndicatorProps = {
   icon: string;

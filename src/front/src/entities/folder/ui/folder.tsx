@@ -1,3 +1,4 @@
+import { useTranslate } from "@/shared/lib/language";
 import { Button } from "@/shared/ui";
 import { IFolder } from "shared";
 
@@ -9,10 +10,11 @@ export type FolderProps = {
 };
 
 export const Folder = (props: FolderProps) => {
+  const { folder } = useTranslate({ folder: props.folder });
   return (
     <Button active={props.active} onClick={props.onClick} variant={"activated"}>
       <img src={props.icon} alt="" />
-      <span>{props.folder}</span>
+      <span>{folder}</span>
     </Button>
   );
 };

@@ -1,4 +1,5 @@
 import { SettingsPage, ThemesSet } from "@/entities/settings";
+import { useTranslate } from "@/shared/lib/language";
 import { useUnit } from "effector-react";
 import { $activeTheme, themeSelectClicked } from "../model";
 
@@ -7,9 +8,12 @@ export const SelectTheme = () => {
     onThemeClicked: themeSelectClicked,
     activeTheme: $activeTheme,
   });
+  const { visibleAppearanceSign } = useTranslate({
+    visibleAppearanceSign: "lookSectionSign",
+  });
 
   return (
-    <SettingsPage head="Настройки внешнего вида вашей почты и темы оформления">
+    <SettingsPage head={visibleAppearanceSign}>
       <ThemesSet
         section="darkColorised"
         onActivate={onThemeClicked}

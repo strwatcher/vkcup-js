@@ -1,4 +1,5 @@
 import { SettingsSidebar } from "@/entities/settings";
+import { SwitchLanguage } from "@/features/languages";
 import { SelectTheme } from "@/features/themes";
 import { Separator } from "@/shared/ui/separator/separator";
 import { useUnit } from "effector-react";
@@ -19,7 +20,11 @@ export const NavigateSettings = () => {
     <div className={s.navigateSettingsContainer}>
       <SettingsSidebar {...model} />
       <Separator direction="vertical" size={400} thickness={1} />
-      {model.currentSettingsPage === "themes" ? <SelectTheme /> : <></>}
+      {model.currentSettingsPage === "themes" ? (
+        <SelectTheme />
+      ) : (
+        <SwitchLanguage />
+      )}
     </div>
   );
 };

@@ -101,6 +101,15 @@
     }
 }
 
+.accent {
+    height: 36px;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: var(--backgroundAccent);
+}
+
 .adaptive {
     width: fit-content
 }
@@ -116,4 +125,3 @@
 .header {
     color: var(--headerTextPrimary)
 }
-

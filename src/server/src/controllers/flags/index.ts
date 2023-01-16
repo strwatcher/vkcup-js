@@ -1,4 +1,5 @@
 import { ServerResponse } from "http";
+import { toFlag } from "shared/types/flag";
 import { LettersDb } from "../../db/letter-db";
 
 export function getFlags(response: ServerResponse, db: LettersDb) {

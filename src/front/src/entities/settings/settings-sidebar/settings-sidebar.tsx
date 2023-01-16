@@ -1,4 +1,7 @@
+import { $language, useTranslate } from "@/shared/lib/language";
+import { $resources } from "@/shared/lib/theme";
 import { Button } from "@/shared/ui";
+import { useStore, useStoreMap } from "effector-react";
 import { MouseEventHandler } from "react";
 import { ISettingsPage } from "../settings-page";
 import s from "./style.module.scss";
@@ -10,6 +13,19 @@ type SettingsSidebarProps = {
 };
 
 export const SettingsSidebar = (props: SettingsSidebarProps) => {
+  const { visualAppearance, language } = useTranslate({
+    visualAppearance: "look",
+    language: "language",
+  });
+  const { en, ru } = useStoreMap($resources, (resources) => ({
+    en: resources.en,
+    ru: resources.ru,
+  }));
+
+  const currentLanguage = useStore($language);
+  const image = currentLanguage === "en-EN" ? en : ru;
+  const languageName = currentLanguage === "en-EN" ? "English" : "Русский";
+
   return (
     <div className={s.settingsSidebar}>
       <Button
@@ -18,7 +34,7 @@ export const SettingsSidebar = (props: SettingsSidebarProps) => {
         onClick={props.openThemes}
         active={props.currentSettingsPage === "themes"}
       >
-        Внешний вид
+        {visualAppearance}
       </Button>
       <Button
         variant="activated"
@@ -26,7 +42,8 @@ export const SettingsSidebar = (props: SettingsSidebarProps) => {
         onClick={props.openLanguage}
         active={props.currentSettingsPage === "language"}
       >
-        Язык
+        {`${language}: ${languageName}`}
+        <img src={image} />
       </Button>
     </div>
   );

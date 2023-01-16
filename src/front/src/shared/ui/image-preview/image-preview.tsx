@@ -1,3 +1,4 @@
+import { useTranslate } from "@/shared/lib/language";
 import { $resources } from "@/shared/lib/theme";
 import { useStore } from "effector-react";
 import s from "./style.module.scss";
@@ -9,7 +10,7 @@ export type BigPreviewProps = {
 
 export const ImagePreview = (props: BigPreviewProps) => {
   const resources = useStore($resources);
-
+  const { download } = useTranslate({ download: "download" });
   return (
     <a
       className={s.bigPreview}
@@ -19,7 +20,7 @@ export const ImagePreview = (props: BigPreviewProps) => {
       <img src={props.bytes} />
       <div className={s.download}>
         <img src={resources.download} />
-        <span>Скачать</span>
+        <span>{download}</span>
       </div>
     </a>
   );

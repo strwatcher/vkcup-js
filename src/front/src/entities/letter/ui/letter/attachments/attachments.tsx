@@ -1,24 +1,15 @@
 import { IAttachments } from "shared/types/attachmets";
-import { base64Size, bToMb } from "@/shared/lib/utils/base64-size";
 import { ImagePreview } from "@/shared/ui";
 import s from "./style.module.scss";
 import { useMemo } from "react";
+import { base64Size, bToMb } from "@/shared/lib";
+import { usePluralTranslate, useTranslate } from "@/shared/lib/language";
 
 export type AttachmentsProps = {
   attachments: IAttachments;
 };
 
 export const Attachments = (props: AttachmentsProps) => {
-  const fileRules = useMemo(
-    () => ({
-      one: "файл",
-      few: "файла",
-      many: "файлов",
-      other: "файла",
-    }),
-    []
-  );
-
   const attachments = useMemo(
     () =>
       props.attachments &&
@@ -29,17 +20,20 @@ export const Attachments = (props: AttachmentsProps) => {
     [props.attachments]
   );
 
+  const { filesCount } = usePluralTranslate({
+    filesCount: { key: "filesCount", plural: attachments.length },
+  });
+
   const signs = useMemo(() => {
     const size = `(${bToMb(
       base64Size(attachments.map((a) => a.bytes).join(""))
     ).toFixed(2)}Mb)`;
-    const amountKey = new Intl.PluralRules("ru-RU").select(
-      attachments.length
-    ) as "one" | "few" | "many" | "other";
 
-    const amount = `${attachments.length} ${fileRules[amountKey]}`;
+    const amount = `${attachments.length} ${filesCount}`;
     return { amount, size };
-  }, [attachments]);
+  }, [attachments, filesCount]);
+
+  const { download } = useTranslate({ download: "download" });
 
   return (
     <div className={s.wrapper}>
@@ -53,7 +47,7 @@ export const Attachments = (props: AttachmentsProps) => {
         <span className={s.filesAmount}>{signs.amount}</span>
         <div className={s.download}>
           <a href={""} className={s.downloadLink}>
-            Скачать
+            {download}
           </a>
           <span className={s.fileSize}>{signs.size}</span>
         </div>

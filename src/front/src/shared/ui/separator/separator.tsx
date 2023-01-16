@@ -1,5 +1,5 @@
+import { joinClasses } from "@/shared/lib";
 import { useCallback } from "react";
-import { joinClasses } from "@/shared/lib/utils/join-classes";
 import s from "./style.module.scss";
 
 type SeparatorProps = {

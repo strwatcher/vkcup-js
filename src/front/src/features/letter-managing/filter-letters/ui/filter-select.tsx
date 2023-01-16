@@ -5,6 +5,7 @@ import { $resources } from "@/shared/lib/theme";
 import { Filter } from "@/entities/filter";
 import { FilterProps } from "@/entities/filter/ui";
 import { Separator } from "@/shared/ui/separator/separator";
+import { useTranslate } from "@/shared/lib/language";
 
 export type FilterSelectProps = {
   all: FilterModel;
@@ -21,30 +22,48 @@ type FilterModel = {
 
 export const FilterSelect = (props: FilterSelectProps) => {
   const resources = useUnit($resources);
+  const { allLetters, withFlag, withAttachments, unread, filters, resetAll } =
+    useTranslate({
+      allLetters: "allLetters",
+      unread: "unread",
+      withFlag: "withFlag",
+      withAttachments: "withAttachments",
+      filters: "filters",
+      resetAll: "eraseAll",
+    });
 
   const options: Array<FilterProps & { id: string }> = useMemo(
     () => [
-      { id: "1", text: "Все письма", ...props.all },
+      { id: "1", text: allLetters, ...props.all },
       {
         id: "2",
-        text: "Непрочитанные",
+        text: unread,
         icon: resources.unread,
         ...props.unread,
       },
       {
         id: "3",
-        text: "С флажком",
+        text: withFlag,
         icon: resources.marked,
         ...props.withBookmark,
       },
       {
         id: "4",
-        text: "С вложениями",
+        text: withAttachments,
         icon: resources.popupAttachment,
         ...props.hasAttachments,
       },
     ],
-    [props.all, props.unread, props.hasAttachments, props.withBookmark]
+    [
+      props.all,
+      props.unread,
+      props.hasAttachments,
+      props.withBookmark,
+      allLetters,
+      unread,
+      withAttachments,
+      withFlag,
+    ]
   );
 
   const activeFilters = useMemo(
@@ -68,7 +87,7 @@ export const FilterSelect = (props: FilterSelectProps) => {
           ))}
 
           {activeFilters.length > 1 || props.all.active
-            ? "Фильтры"
+            ? filters
             : activeFilters[0].text}
 
           <img src={resources.arrowDown} />
@@ -79,7 +98,7 @@ export const FilterSelect = (props: FilterSelectProps) => {
           <List items={options} render={(filter) => <Filter {...filter} />} />
           <Separator size={240} thickness={1} direction="horizontal" />
           <Button variant="menuItem" onClick={props.all.activate}>
-            Сбросить всё
+            {resetAll}
           </Button>
         </>
       }

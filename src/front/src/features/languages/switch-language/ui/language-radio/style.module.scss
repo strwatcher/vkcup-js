@@ -1,0 +1,9 @@
+.languageRadio {
+  display: grid;
+  grid-template-columns: 20px 20px auto;
+  align-items: center;
+  gap: 12px;
+  height: 20px;
+
+  margin-bottom: 10px;
+}

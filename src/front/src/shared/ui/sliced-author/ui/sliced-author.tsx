@@ -1,4 +1,4 @@
-import { joinClasses } from "@/shared/lib/utils/join-classes";
+import { joinClasses } from "@/shared/lib";
 import { Sliced } from "@/shared/ui";
 import s from "./style.module.scss";
 

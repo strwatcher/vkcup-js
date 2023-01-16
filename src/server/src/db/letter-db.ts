@@ -2,19 +2,21 @@ import { IFolder, ILetters } from "shared";
 import { DataBase } from "./db";
 import crypto from "crypto";
 import { IAttachments } from "shared/types/attachmets";
+import { toFlag } from "shared/types/flag";
 
 export class LettersDb extends DataBase<ILetters> {
   constructor(path: string) {
     super(path);
     this._data = this._data.map((letter) => ({
       ...letter,
+      flag: toFlag(letter.flag),
       id: crypto.randomUUID(),
     }));
   }
 
   getByFolder(folder: IFolder): ILetters {
     let result: ILetters;
-    if (folder === "Входящие") {
+    if (folder === "in") {
       result = this._data.filter((item) => item.folder === undefined);
     } else {
       result = this._data.filter((item) => item.folder === folder);
@@ -35,9 +37,11 @@ export class LettersDb extends DataBase<ILetters> {
     const result: string[] = [];
     this._data.forEach(
       (letter) =>
-        !result.find((i) => letter.flag === i) && result.push(letter.flag)
+        !result.find((i) => letter.flag === i) &&
+        letter.flag &&
+        result.push(letter.flag)
     );
 
-    return result;
+    return result.map((flag) => toFlag(flag));
   }
 }

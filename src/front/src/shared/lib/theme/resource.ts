@@ -18,6 +18,7 @@ export type IThemedResources = {
   logo: string;
   emptyList: string;
   gear: string;
+  radioUnchecked: string;
 };
 
 export type INotThemedResources = {
@@ -36,6 +37,9 @@ export type INotThemedResources = {
   unread: string;
   pencil: string;
   doneMark: string;
+  ru: string;
+  en: string;
+  radioChecked: string;
 };
 
 export type IResources = INotThemedResources & IThemedResources;
@@ -55,6 +59,7 @@ export const resourcesMapping: IResourcesMapping = {
     logo: "logo-light.svg",
     emptyList: "empty-list-dark.png",
     gear: "gear-light.svg",
+    radioUnchecked: "radio-dark-unchecked.svg",
   },
   light: {
     menu: "menu.svg",
@@ -70,6 +75,7 @@ export const resourcesMapping: IResourcesMapping = {
     logo: "logo.svg",
     emptyList: "empty-list-light.png",
     gear: "gear.svg",
+    radioUnchecked: "radio-light-unchecked.svg",
   },
   darkColorised: {
     menu: "menu.svg",
@@ -85,6 +91,8 @@ export const resourcesMapping: IResourcesMapping = {
     logo: "logo-light.svg",
     emptyList: "empty-list-custom.svg",
     gear: "gear-light.svg",
+
+    radioUnchecked: "radio-light-unchecked.svg",
   },
   lightColorised: {
     menu: "menu.svg",
@@ -100,6 +108,7 @@ export const resourcesMapping: IResourcesMapping = {
     logo: "logo-light.svg",
     emptyList: "empty-list-custom.svg",
     gear: "gear.svg",
+    radioUnchecked: "radio-light-unchecked.svg",
   },
   notThemed: {
     compactLogo: "logo-compact.svg",
@@ -117,5 +126,8 @@ export const resourcesMapping: IResourcesMapping = {
     unread: "unread.svg",
     pencil: "pencil.svg",
     doneMark: "done-mark.svg",
+    ru: "ru.svg",
+    en: "usa.svg",
+    radioChecked: "radio-checked.svg",
   },
 };

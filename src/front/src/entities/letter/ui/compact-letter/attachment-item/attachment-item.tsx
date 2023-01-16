@@ -1,4 +1,4 @@
-import { base64Size, bToMb } from "@/shared/lib/utils/base64-size";
+import { base64Size, bToMb } from "@/shared/lib";
 import s from "./style.module.scss";
 import { ImagePreview } from "@/shared/ui";
 

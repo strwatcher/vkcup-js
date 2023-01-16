@@ -9,7 +9,7 @@ export function setupLettersFilter($letters: Store<LettersState>) {
   });
 
   const hasAttachmentsFilter = setupFilter({
-    isFit: (letter: LetterState) => !!letter.doc,
+    isFit: (letter: LetterState) => !!letter.attachments,
   });
 
   const withBookmarkFilter = setupFilter({

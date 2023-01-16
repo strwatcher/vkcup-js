@@ -1,5 +1,5 @@
+import { joinClasses } from "@/shared/lib";
 import { useCallback, MouseEventHandler, ReactNode } from "react";
-import { joinClasses } from "@/shared/lib/utils/join-classes";
 import s from "./style.module.scss";
 
 type ButtonVariant =
@@ -7,7 +7,8 @@ type ButtonVariant =
   | "outlined"
   | "sidebarButton"
   | "menuItem"
-  | "headerButton";
+  | "headerButton"
+  | "accent";
 
 type TextVariant = "primary" | "sidebar" | "header";
 

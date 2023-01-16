@@ -5,20 +5,18 @@ import { FoldersToIcons, iconsMapping } from "./iconsMapping";
 function createFolder(folder: IFolder, map: FoldersToIcons): ICompleteFolder {
   return {
     folder,
-    icon: {
-      ...map[folder],
-    },
+    icon: { ...map[folder] },
   };
 }
 
 const rawFolders: Array<IFolder> = [
-  "Входящие",
-  "Важное",
-  "Отправленные",
-  "Черновики",
-  "Архив",
-  "Спам",
-  "Корзина",
+  "in",
+  "important",
+  "sent",
+  "drafts",
+  "archive",
+  "spam",
+  "basket",
 ];
 const completeFolders: Array<ICompleteFolder> = rawFolders.map((folder) =>
   createFolder(folder, iconsMapping)

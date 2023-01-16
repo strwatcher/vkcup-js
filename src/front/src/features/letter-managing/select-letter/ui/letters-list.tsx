@@ -21,7 +21,9 @@ type LettersListProps = {
 export const LettersList = (props: LettersListProps) => {
   const renders = {
     letter: useCallback(
-      (letter: LetterState) => <CompactLetter {...props} {...letter} />,
+      (letter: LetterState, index: number) => (
+        <CompactLetter {...props} {...letter} attachmentsDown={index < 4} />
+      ),
       [props]
     ),
   };

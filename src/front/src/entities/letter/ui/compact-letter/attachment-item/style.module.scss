@@ -31,6 +31,12 @@
     bottom: 0;
 }
 
+.down {
+    bottom: 100%;
+    transform: translate(-100%, 100%);
+}
+
+
 .wrapper:hover .bigPreview {
     display: flex;
 }

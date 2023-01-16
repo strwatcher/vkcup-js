@@ -12,6 +12,7 @@ export type AttachmentsIndicatorProps = {
   opened: boolean;
   onOpen: () => void;
   onClose: () => void;
+  attachmentsDown?: boolean;
 };
 
 export const AttachmentsIndicator = (props: AttachmentsIndicatorProps) => {
@@ -45,6 +46,7 @@ export const AttachmentsIndicator = (props: AttachmentsIndicatorProps) => {
           id: `${index}`,
           name: key,
           bytes: props.attachments![key],
+          down: props.attachmentsDown,
         }))
         : [],
     [props.attachments]

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import s from "./style.module.scss";
 
 type ListProps<T extends { id: string }> = {
-  render: (props: T) => ReactNode;
+  render: (props: T, index: number) => ReactNode;
   items: Array<T>;
   direction: "horizontal" | "vertical";
 };
@@ -11,8 +11,8 @@ type ListProps<T extends { id: string }> = {
 export const List = <T extends { id: string }>(props: ListProps<T>) => {
   return (
     <ul className={joinClasses(s.list, s[props.direction])}>
-      {props.items.map((i) => (
-        <li key={i.id}>{props.render(i)}</li>
+      {props.items.map((i, index) => (
+        <li key={i.id}>{props.render(i, index)}</li>
       ))}
     </ul>
   );

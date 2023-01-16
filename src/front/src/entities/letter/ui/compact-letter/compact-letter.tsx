@@ -22,6 +22,7 @@ export type CompactLetterProps = LetterState & {
   onLetterClick: (id: string) => void;
   onAttachmentsOpened: (id: string) => void;
   onAttachmentsClosed: (id: string) => void;
+  attachmentsDown?: boolean;
 };
 
 export const CompactLetter = (props: CompactLetterProps) => {
@@ -102,6 +103,7 @@ export const CompactLetter = (props: CompactLetterProps) => {
           opened={props.attachmentsOpened}
           onOpen={() => props.onAttachmentsOpened(props.id)}
           onClose={() => props.onAttachmentsClosed(props.id)}
+          attachmentsDown={props.attachmentsDown}
         />
       )}
 

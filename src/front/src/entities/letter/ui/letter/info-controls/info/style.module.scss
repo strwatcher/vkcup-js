@@ -2,7 +2,7 @@
     display: grid;
     grid-template:
         [avatar] "avatar top" 16px [topline]
-        [avatar] "avatar bottom" 16px [bottomLine]
+        [avatar] "avatar bottom" auto [bottomLine]
         / 40px 1fr;
     gap: 4px;
 }

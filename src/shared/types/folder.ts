@@ -16,6 +16,20 @@ export type IFolder =
   | "spam"
   | "basket";
 
+const map = {
+  Архив: "archive",
+  Важное: "important",
+  Отправленные: "sent",
+  Черновики: "drafts",
+  Спам: "spam",
+  Корзина: "basket",
+};
+
+export function toFolder(rawFolder?: string): IFolder {
+  if (!rawFolder) return "in";
+  return map[rawFolder as keyof typeof map] as IFolder;
+}
+
 export function isFolder(str?: string): str is IFolder {
   return (
     str === "archive" ||

@@ -3,6 +3,7 @@ import { DataBase } from "./db";
 import crypto from "crypto";
 import { IAttachments } from "shared/types/attachmets";
 import { toFlag } from "shared/types/flag";
+import { toFolder } from "shared/types/folder";
 
 export class LettersDb extends DataBase<ILetters> {
   constructor(path: string) {
@@ -15,12 +16,9 @@ export class LettersDb extends DataBase<ILetters> {
   }
 
   getByFolder(folder: IFolder): ILetters {
-    let result: ILetters;
-    if (folder === "in") {
-      result = this._data.filter((item) => item.folder === undefined);
-    } else {
-      result = this._data.filter((item) => item.folder === folder);
-    }
+    const result = this._data.filter(
+      (item) => toFolder(item.folder) === folder
+    );
 
     return result.map((letter) => ({
       ...letter,

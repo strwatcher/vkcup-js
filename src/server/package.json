@@ -4,9 +4,12 @@
   "type": "commonjs",
   "main": "index.ts",
   "scripts": {
-    "start:build": "node ./build.js --watch",
+    "start:build": "node ./build.js --watch --outfile=../../dist/server.js",
     "start:run": "nodemon --watch ../../dist/server.js ../../dist/server.js",
     "start": "concurrently npm:start:*",
+    "dev:build": "node ./build.js --watch --outfile=../../dev/server.js",
+    "dev:run": "nodemon --watch ../../dev/server.js ../../dev/server.js",
+    "dev": "concurrently npm:dev:*",
     "build": "node ./build.js"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 const esbuild = require("esbuild");
+const { argv } = require("process");
 
 const args = require("yargs").argv;
 
@@ -7,10 +8,12 @@ function onRebuild(error, result) {
   else console.log("watch build succeeded");
 }
 
+console.log(args.outfile)
+
 esbuild
   .build({
     entryPoints: ["./src/index.ts"],
-    outfile: "../../dist/server.js",
+    // outfile: "../../dist/server.js",
     bundle: true,
     minify: true,
     platform: "node",
@@ -18,6 +21,7 @@ esbuild
     watch: {
       onRebuild: !!args.watch && onRebuild,
     },
+    outfile: args.outfile,
   })
   .then(() => console.log("⚡ Done"))
   .catch(() => process.exit(1));

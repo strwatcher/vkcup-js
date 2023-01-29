@@ -16,7 +16,10 @@ export function route(
 ) {
   if (resource === "letters" && query) {
     const folder = query.folder;
-    getLettersByFolder(response, db, folder);
+    const shift = query.shift;
+    const limit = query.limit;
+
+    getLettersByFolder(response, db, { folder, limit, shift });
   } else if (resource === "folders") {
     getFolders(response);
   } else if (resource === "flags") {

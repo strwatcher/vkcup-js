@@ -25,11 +25,14 @@
     left: 65px;
     width: calc(100% - 65px - 12px);
     height: 1px;
+    display: none;
 }
 
 .letter:last-child::after {
-    visibility: hidden;
+    display: block;
+    
 }
+
 
 .letter > *:nth-child(3) {
     color: var(--textPrimary);

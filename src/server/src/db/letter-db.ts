@@ -15,16 +15,25 @@ export class LettersDb extends DataBase<ILetters> {
     }));
   }
 
-  getByFolder(folder: IFolder): ILetters {
-    const result = this._data.filter(
+  getByFolder({
+    folder,
+    limit,
+    shift,
+  }: {
+    folder: IFolder;
+    limit: number;
+    shift: number;
+  }): { data: ILetters; count: number } {
+    const filtered = this._data.filter(
       (item) => toFolder(item.folder) === folder
     );
-
-    return result.map((letter) => ({
+    const data = filtered.slice(shift, limit + shift).map((letter) => ({
       ...letter,
       attachments: !!letter.doc,
       doc: undefined,
     }));
+
+    return { data, count: filtered.length };
   }
 
   getDocById(letterId: string): IAttachments | undefined {

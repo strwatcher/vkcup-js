@@ -37,6 +37,12 @@ sample({
   target: attachmentsManagerModel.fetchAttachmentsFx,
 });
 
+sample({
+  clock: folderSelectionModel.$selectedFolder,
+  fn: () => null,
+  target: activeLetterModel.$previousLetterId,
+});
+
 export const mainPageModel = {
   ...letterLoadingModel,
   ...letterMutationModel,

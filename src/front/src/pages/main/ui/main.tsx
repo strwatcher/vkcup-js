@@ -24,6 +24,9 @@ export const Main = () => {
     hasAttachmentsFilterActive: mainPageModel.hasAttachmentsFilter.$active,
     withBookmarkFilterActive: mainPageModel.withBookmarkFilter.$active,
     allFilterActive: mainPageModel.$unset,
+    loadMoreLetters: mainPageModel.loadMoreLetters,
+    hasMore: mainPageModel.$hasMore,
+    previousLetterId: mainPageModel.$previousLetterId,
   });
 
   const filtersEvents = useUnit({
@@ -102,6 +105,7 @@ export const Main = () => {
           />
         ) : (
           <LettersList
+            previousLetterId={model.previousLetterId}
             letters={model.letters}
             onReadToggle={callbacks.letterReadToggle}
             onMarkToggle={callbacks.letterMarkToggle}
@@ -112,6 +116,8 @@ export const Main = () => {
             fetchHasFinished={callbacks.onLettersFetchFinished}
             justFetched={model.lettersJustFetched}
             fetching={model.lettersFetching}
+            loadMoreLetters={model.loadMoreLetters}
+            hasMore={model.hasMore}
           />
         )}
       </Layout>

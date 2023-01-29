@@ -16,6 +16,8 @@ export function setupActiveLetter($letters: Store<LettersState>) {
     return letters.find((letter) => letter.id === id);
   });
 
+  const $previousLetterId = createStore<string | null>(null);
+
   sample({
     source: letterWillOpened,
     target: $activeLetterId,
@@ -27,10 +29,16 @@ export function setupActiveLetter($letters: Store<LettersState>) {
     target: $activeLetterId,
   });
 
+  sample({
+    clock: letterWillOpened,
+    target: $previousLetterId,
+  });
+
   return {
     onLetterClicked,
     onLetterCloseCliked,
     $activeLetter,
+    $previousLetterId,
     letterWillClosed,
   };
 }

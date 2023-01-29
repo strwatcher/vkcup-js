@@ -8,7 +8,6 @@
         "start:tsc-watch": "tsc --watch",
         "start:vite-watch": "vite build --outDir=../../dist/ --watch",
         "start": "concurrently npm:start:*",
-        "g:cm": "npx generate-react-cli component",
         "format": "prettier --write ."
     },
     "dependencies": {

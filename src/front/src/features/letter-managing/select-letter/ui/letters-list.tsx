@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import { List, ThreeVariantState } from "@/shared/ui";
+import { List, Loader, ThreeVariantState } from "@/shared/ui";
 import { CompactLetter, LetterState } from "@/entities/letter";
 import { LettersState } from "@/features/letter-managing";
 import { Empty } from "./empty";
@@ -67,7 +67,9 @@ export const LettersList = memo((props: LettersListProps) => {
   return (
     <div ref={scrollRootRef}>
       <div ref={scrollRef}>
-        <List render={renders.letter} items={props.letters} />
+        <Loader loads={props.fetching}>
+          <List render={renders.letter} items={props.letters} />
+        </Loader>
         <div ref={infinityScrollRef} />
       </div>
     </div>

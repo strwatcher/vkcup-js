@@ -1,0 +1,34 @@
+.spinner {
+  --small: 16px;
+  --medium: 32px;
+  --big: 64px;
+
+  border: 16px solid var(--textSecondary);
+  border-top: 16px solid var(--backgroundAccent);
+  border-radius: 50%;
+
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+.small {
+  width: var(--small);
+  height: var(--small);
+  border-width: calc(var(--small) / 7);
+}
+
+.medium {
+  width: var(--medium);
+  height: var(--medium);
+  border-width: calc(var(--medium) / 7);
+}
+
+.big {
+  width: var(--big);
+  height: var(--big);
+  border-width: calc(var(--big) / 7);
+}

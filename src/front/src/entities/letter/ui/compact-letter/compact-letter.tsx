@@ -23,6 +23,7 @@ export type CompactLetterProps = LetterState & {
   onAttachmentsOpened: (id: string) => void;
   onAttachmentsClosed: (id: string) => void;
   attachmentsDown?: boolean;
+  attachmentsFetching: boolean;
 };
 
 export const CompactLetter = (props: CompactLetterProps) => {
@@ -98,6 +99,7 @@ export const CompactLetter = (props: CompactLetterProps) => {
 
       {props.attachments && (
         <AttachmentsIndicator
+          fetching={props.attachmentsFetching}
           icon={resources.attachment}
           attachments={props.doc}
           opened={props.attachmentsOpened}

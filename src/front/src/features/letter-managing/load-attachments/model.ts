@@ -26,5 +26,7 @@ export function setupAttachmentsManager($letters: Store<LettersState>) {
     target: $letters,
   });
 
-  return { fetchAttachmentsFx };
+  const $attachmentsFetching = fetchAttachmentsFx.pending;
+
+  return { fetchAttachmentsFx, $attachmentsFetching };
 }

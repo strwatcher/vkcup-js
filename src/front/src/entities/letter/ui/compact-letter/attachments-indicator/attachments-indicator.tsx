@@ -5,6 +5,7 @@ import { AttachmentItem } from "../attachment-item";
 import s from "./style.module.scss";
 import { useCallback, MouseEvent, useRef, useMemo } from "react";
 import { joinClasses } from "@/shared/lib";
+import { Spinner } from "@/shared/ui/spinner";
 
 export type AttachmentsIndicatorProps = {
   icon: string;
@@ -13,6 +14,7 @@ export type AttachmentsIndicatorProps = {
   onOpen: () => void;
   onClose: () => void;
   attachmentsDown?: boolean;
+  fetching: boolean;
 };
 
 export const AttachmentsIndicator = (props: AttachmentsIndicatorProps) => {
@@ -66,10 +68,14 @@ export const AttachmentsIndicator = (props: AttachmentsIndicatorProps) => {
         ref={popupRef}
         className={joinClasses(s.popup, !props.opened && s.closed)}
       >
-        <List
-          items={attachments}
-          render={(props) => <AttachmentItem {...props} />}
-        />
+        {props.fetching ? (
+          <Spinner size="medium" />
+        ) : (
+          <List
+            items={attachments}
+            render={(props) => <AttachmentItem {...props} />}
+          />
+        )}
       </div>
     </div>
   );

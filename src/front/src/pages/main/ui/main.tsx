@@ -27,6 +27,7 @@ export const Main = () => {
     loadMoreLetters: mainPageModel.loadMoreLetters,
     hasMore: mainPageModel.$hasMore,
     previousLetterId: mainPageModel.$previousLetterId,
+    attachmetnsFetching: mainPageModel.$attachmentsFetching,
   });
 
   const filtersEvents = useUnit({
@@ -99,12 +100,14 @@ export const Main = () => {
         <Sidebar />
         {model.letter ? (
           <Letter
+            attachmentsFetching={model.attachmetnsFetching}
             {...model.letter}
             onReadToggle={callbacks.letterReadToggle}
             onMarkToggle={callbacks.letterMarkToggle}
           />
         ) : (
           <LettersList
+            attachmentsFetching={model.attachmetnsFetching}
             previousLetterId={model.previousLetterId}
             letters={model.letters}
             onReadToggle={callbacks.letterReadToggle}

@@ -48,4 +48,5 @@ export const mainPageModel = {
   ...letterMutationModel,
   ...activeLetterModel,
   ...filterLettersModel,
+  ...attachmentsManagerModel,
 };

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import { memo, useCallback, useLayoutEffect, useRef } from "react";
 import { List, Loader, ThreeVariantState } from "@/shared/ui";
 import { CompactLetter, LetterState } from "@/entities/letter";
 import { LettersState } from "@/features/letter-managing";
@@ -8,6 +8,7 @@ import { useScrollTop } from "@/shared/lib/hooks/use-scroll-top";
 import { useScrollInto } from "@/shared/lib/hooks/use-scroll-into";
 
 type LettersListProps = {
+  attachmentsFetching: boolean;
   previousLetterId: string | null;
   letters: LettersState;
   onSelectToggle: (id: string, selected: boolean) => void;
@@ -39,7 +40,7 @@ export const LettersList = memo((props: LettersListProps) => {
   const destinationLetter = useRef(null);
   const lastLetter = useRef(null);
 
-  useScrollInto(destinationLetter, [props.letters]);
+  useScrollInto(destinationLetter, []);
 
   useLayoutEffect(() => {
     destinationLetter.current = lastLetter.current;

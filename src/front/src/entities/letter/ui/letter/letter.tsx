@@ -11,6 +11,7 @@ import { LetterLayout } from "./letter-layout";
 import { LetterState } from "../../lib";
 
 type LetterProps = LetterState & {
+  attachmentsFetching: boolean;
   onReadToggle: (id: string, read: boolean) => void;
   onMarkToggle: (id: string, mark: ThreeVariantState) => void;
 };
@@ -52,7 +53,14 @@ export const Letter = (props: LetterProps) => {
           hovered={hovered}
         />
       }
-      attachments={props.doc && <Attachments attachments={props.doc} />}
+      attachments={
+        props.attachments && (
+          <Attachments
+            attachments={props.doc}
+            fetching={props.attachmentsFetching}
+          />
+        )
+      }
       text={<Paragraph text={props.text} />}
     />
   );

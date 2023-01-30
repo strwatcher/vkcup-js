@@ -1,12 +1,19 @@
 .loader {
-  position: relative
+  position: relative;
+  will-change: transform;
 }
 
 .loaderWall {
   position: absolute;
-  top: 0;
+  bottom: 0;
 
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--separatorPrimaryAlpha);
+
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  align-items: flex-end;
 }
+

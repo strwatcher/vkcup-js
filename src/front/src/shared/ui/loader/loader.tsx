@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Spinner } from "../spinner";
 import s from "./style.module.scss";
 
 type LoaderProps = {
@@ -10,7 +11,9 @@ export const Loader = (props: LoaderProps) => {
     return (
       <div className={s.loader}>
         {props.children}
-        <div className={s.loaderWall} />
+        <div className={s.loaderWall}>
+          <Spinner size="big" />
+        </div>
       </div>
     );
   return <>{props.children}</>;

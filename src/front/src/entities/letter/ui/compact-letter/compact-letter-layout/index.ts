@@ -1,1 +1,4 @@
-export { CompactLetterLayout } from "./compact-letter-layout";
+import { memo } from "react";
+import { CompactLetterLayout as Layout } from "./compact-letter-layout";
+
+export const CompactLetterLayout = memo(Layout);

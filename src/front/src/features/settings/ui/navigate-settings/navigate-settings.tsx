@@ -3,17 +3,14 @@ import { SwitchLanguage } from "@/features/languages";
 import { SelectTheme } from "@/features/themes";
 import { Separator } from "@/shared/ui/separator/separator";
 import { useUnit } from "effector-react";
-import {
-  $currentSettingsPage,
-  settingsNavigationApi,
-} from "../../model/navigate-settings";
+import { $$settings } from "../../model";
 import s from "./style.module.scss";
 
 export const NavigateSettings = () => {
   const model = useUnit({
-    currentSettingsPage: $currentSettingsPage,
-    openThemes: settingsNavigationApi.openThemes,
-    openLanguage: settingsNavigationApi.openLanguage,
+    currentSettingsPage: $$settings.$currentPage,
+    openThemes: $$settings.navigationApi.openThemes,
+    openLanguage: $$settings.navigationApi.openLanguage,
   });
 
   return (

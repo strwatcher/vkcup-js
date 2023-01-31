@@ -1,7 +1,7 @@
 import { useMemo, MouseEventHandler } from "react";
 
 import { Button, Header as HeaderLayout } from "@/shared/ui";
-import { FilterSelect, FilterSelectProps } from "@/features/letter-managing";
+import { FilterSelect } from "@/features/manage-letters";
 import { useUnit } from "effector-react";
 import { $resources } from "@/shared/lib/theme";
 import { $screenSize } from "@/shared/lib/screen-size";
@@ -10,7 +10,6 @@ import { useTranslate } from "@/shared/lib/language";
 type HeaderProps = {
   needReturnBack?: boolean;
   returnBack: MouseEventHandler<HTMLButtonElement>;
-  filters: FilterSelectProps;
 };
 
 export const Header = (props: HeaderProps) => {
@@ -39,7 +38,7 @@ export const Header = (props: HeaderProps) => {
   return (
     <HeaderLayout>
       <img src={logo} />
-      <FilterSelect {...props.filters} />
+      <FilterSelect />
     </HeaderLayout>
   );
 };

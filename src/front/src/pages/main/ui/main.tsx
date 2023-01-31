@@ -1,129 +1,59 @@
 import { Letter } from "@/entities/letter";
-import { LettersList } from "@/features/letter-managing";
+import {
+  $$filterLetters,
+  $$selectLetter,
+  LettersList,
+} from "@/features/manage-letters";
 import { ScreenSizeGate } from "@/shared/lib/screen-size";
 import { ThemeGate } from "@/shared/lib/theme";
 import { ThreeVariantState } from "@/shared/ui";
+import { Content } from "@/widgets/content";
 import { Header } from "@/widgets/header";
 import { SettingsModal } from "@/widgets/settings-modal";
 import { Sidebar } from "@/widgets/sidebar";
-import { useEvent, useGate, useUnit } from "effector-react";
+import { useEvent, useGate, useStoreMap, useUnit } from "effector-react";
 import { useCallback } from "react";
-import { mainPageModel } from "../model";
 import { Layout } from "./layout";
 
 export const Main = () => {
   useGate(ScreenSizeGate);
   useGate(ThemeGate);
 
-  const model = useUnit({
-    letters: mainPageModel.$filtered,
-    letter: mainPageModel.$activeLetter,
-    lettersFetching: mainPageModel.$areLettersFetching,
-    lettersJustFetched: mainPageModel.$lettersJustFetched,
-    unreadFilterActive: mainPageModel.unreadFilter.$active,
-    hasAttachmentsFilterActive: mainPageModel.hasAttachmentsFilter.$active,
-    withBookmarkFilterActive: mainPageModel.withBookmarkFilter.$active,
-    allFilterActive: mainPageModel.$unset,
-    loadMoreLetters: mainPageModel.loadMoreLetters,
-    hasMore: mainPageModel.$hasMore,
-    previousLetterId: mainPageModel.$previousLetterId,
-    attachmetnsFetching: mainPageModel.$attachmentsFetching,
-  });
+  const lettersListEmpty = useStoreMap(
+    $$filterLetters.$filtered,
+    (letters) => !letters.length
+  );
 
-  const filtersEvents = useUnit({
-    unreadActivate: mainPageModel.unreadFilter.activate,
-    unreadDeactivate: mainPageModel.unreadFilter.deactivate,
-    attachmentsActivate: mainPageModel.hasAttachmentsFilter.activate,
-    attachmentsDeactivate: mainPageModel.hasAttachmentsFilter.deactivate,
-    bookmarkActivate: mainPageModel.withBookmarkFilter.activate,
-    bookmarkDeactivate: mainPageModel.withBookmarkFilter.deactivate,
-    deactivateAll: mainPageModel.deactivateAll,
-  });
+  const letterOpened = useStoreMap(
+    $$selectLetter.$active,
+    (letter) => !!letter
+  );
 
-  const callbacks = {
-    letterCloseClick: useEvent(mainPageModel.onLetterCloseCliked),
-    letterOpenClick: useEvent(mainPageModel.onLetterClicked),
-    attachmentsOpen: useEvent(mainPageModel.attachmentsApi.open),
-    attachmentsClose: mainPageModel.attachmentsApi.close,
-
-    letterReadToggle: useCallback((id: string, read: boolean) => {
-      if (read) mainPageModel.readApi.unread(id);
-      else mainPageModel.readApi.read(id);
-    }, []),
-    letterSelectToggle: useCallback((id: string, selected: boolean) => {
-      if (selected) mainPageModel.selectionApi.deselect(id);
-      else mainPageModel.selectionApi.select(id);
-    }, []),
-    letterMarkToggle: useCallback((id: string, mark: ThreeVariantState) => {
-      if (mark === "unset") mainPageModel.markApi.bookmark(id);
-      else if (mark === "first") mainPageModel.markApi.markImportant(id);
-      else mainPageModel.markApi.unmark(id);
-    }, []),
-
-    onLettersFetchFinished: useEvent(mainPageModel.fetchFinished),
-  };
+  const closeContent = useEvent($$selectLetter.onCloseClicked);
 
   return (
     <>
-      <SettingsModal />
       <Layout
-        contentEmpty={model.letters.length === 0}
+        contentEmpty={lettersListEmpty}
         head={
-          <Header
-            needReturnBack={!!model.letter}
-            returnBack={callbacks.letterCloseClick}
-            filters={{
-              all: {
-                activate: filtersEvents.deactivateAll,
-                deactivate: filtersEvents.deactivateAll,
-                active: model.allFilterActive,
-              },
-              unread: {
-                activate: filtersEvents.unreadActivate,
-                deactivate: filtersEvents.unreadDeactivate,
-                active: model.unreadFilterActive,
-              },
-              hasAttachments: {
-                activate: filtersEvents.attachmentsActivate,
-                deactivate: filtersEvents.attachmentsDeactivate,
-                active: model.hasAttachmentsFilterActive,
-              },
-              withBookmark: {
-                activate: filtersEvents.bookmarkActivate,
-                deactivate: filtersEvents.bookmarkDeactivate,
-                active: model.withBookmarkFilterActive,
-              },
-            }}
-          />
+          <Header needReturnBack={letterOpened} returnBack={closeContent} />
         }
       >
         <Sidebar />
-        {model.letter ? (
-          <Letter
-            attachmentsFetching={model.attachmetnsFetching}
-            {...model.letter}
-            onReadToggle={callbacks.letterReadToggle}
-            onMarkToggle={callbacks.letterMarkToggle}
-          />
-        ) : (
-          <LettersList
-            attachmentsFetching={model.attachmetnsFetching}
-            previousLetterId={model.previousLetterId}
-            letters={model.letters}
-            onReadToggle={callbacks.letterReadToggle}
-            onMarkToggle={callbacks.letterMarkToggle}
-            onSelectToggle={callbacks.letterSelectToggle}
-            onAttachmentsOpened={callbacks.attachmentsOpen}
-            onAttachmentsClosed={callbacks.attachmentsClose}
-            onLetterClick={callbacks.letterOpenClick}
-            fetchHasFinished={callbacks.onLettersFetchFinished}
-            justFetched={model.lettersJustFetched}
-            fetching={model.lettersFetching}
-            loadMoreLetters={model.loadMoreLetters}
-            hasMore={model.hasMore}
-          />
-        )}
+        <Content />
       </Layout>
+      <SettingsModal />
     </>
   );
 };
+
+//   {model.letter ? (
+//     <Letter
+//       attachmentsFetching={model.attachmetnsFetching}
+//       {...model.letter}
+//       onReadToggle={callbacks.letterReadToggle}
+//       onMarkToggle={callbacks.letterMarkToggle}
+//     />
+//   ) : (
+//     <LettersList />
+//   )}

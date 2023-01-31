@@ -5,15 +5,14 @@ import { Separator } from "@/shared/ui/separator/separator";
 import { $screenSize } from "@/shared/lib/screen-size";
 import { SidebarLayout } from "./layout";
 import { $resources } from "@/shared/lib/theme";
-import { CreateLetter } from "@/features/letter-managing";
+import { CreateLetter } from "@/features/manage-letters";
 import { ControlSettings } from "@/features/settings";
-import { toggleSettingsClicked } from "@/features/settings/model/control-settings";
+import { $$settings } from "@/features/settings/model";
 
 export const Sidebar = () => {
-  const { resources, size, onOpenSettings } = useUnit({
+  const { resources, size } = useUnit({
     resources: $resources,
     size: $screenSize,
-    onOpenSettings: toggleSettingsClicked,
   });
 
   return (
@@ -31,7 +30,7 @@ export const Sidebar = () => {
           <AddFolder />
         </>
       )}
-      <ControlSettings variant={size} toggle={onOpenSettings} />
+      <ControlSettings variant={size} toggle={$$settings.toggleClicked} />
     </SidebarLayout>
   );
 };

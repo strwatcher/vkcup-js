@@ -1,17 +1,23 @@
-// import { createEffect, createEvent, sample } from "effector";
-// import { $theme, $themeColors, ITheme } from "@/shared/lib/theme";
+import { ISettingsPage } from "@/entities/settings/settings-page";
+import { createApi, createEvent, createStore, sample } from "effector";
 
-import { createEvent, createStore, sample } from "effector";
+export const $$settings = () => {
+  const toggleClicked = createEvent();
 
-const toggleSettingsClicked = createEvent();
+  const $active = createStore(false);
 
-const $areSettingsActive = createStore(false);
+  const $currentPage = createStore<ISettingsPage>("themes");
+  const navigationApi = createApi($currentPage, {
+    openThemes: () => "themes",
+    openLanguage: () => "language",
+  });
 
-sample({
-  clock: toggleSettingsClicked,
-  source: $areSettingsActive,
-  fn: (prev) => !prev,
-  target: $areSettingsActive,
-});
+  sample({
+    clock: toggleClicked,
+    source: $active,
+    fn: (prev) => !prev,
+    target: $active,
+  });
 
-export { $areSettingsActive, toggleSettingsClicked };
+  return { $active, toggleClicked, $currentPage, navigationApi };
+};

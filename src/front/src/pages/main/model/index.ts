@@ -1,52 +1,53 @@
 import { folderSelectionModel } from "@/features/folders-navigation";
 import {
-  setupActiveLetter,
-  setupLetterMutation,
-  setupLettersFilter,
-  setupLettersLoading,
-  setupAttachmentsManager,
-} from "@/features/letter-managing";
+  $$selectLetter,
+  $$mutateLetter,
+  $$loadAttachments,
+  $$loadLetters,
+} from "@/features/manage-letters";
 import { sample } from "effector";
-
-const letterLoadingModel = setupLettersLoading(
-  folderSelectionModel.$selectedFolder
-);
-const letterMutationModel = setupLetterMutation(letterLoadingModel.$letters);
-const activeLetterModel = setupActiveLetter(letterLoadingModel.$letters);
-const filterLettersModel = setupLettersFilter(letterLoadingModel.$letters);
-const attachmentsManagerModel = setupAttachmentsManager(
-  letterLoadingModel.$letters
-);
+import { debug } from "patronum";
 
 sample({
   clock: folderSelectionModel.folderClicked,
-  target: activeLetterModel.letterWillClosed,
+  target: $$selectLetter.letterWillClosed,
 });
 
 sample({
-  clock: [
-    letterMutationModel.attachmentsApi.open,
-    activeLetterModel.onLetterClicked,
-  ],
-  source: letterLoadingModel.$letters,
+  clock: [$$mutateLetter.attachmentsApi.open, $$selectLetter.onOpenClicked],
+  source: $$loadLetters.$letters,
   filter: (letters, id) => {
     const letterToCheck = letters.find((letter) => id === letter.id);
     return Boolean(letterToCheck?.attachments && !letterToCheck.doc);
   },
   fn: (_, id) => id,
-  target: attachmentsManagerModel.fetchAttachmentsFx,
+  target: $$loadAttachments.fetchAttachmentsFx,
 });
 
 sample({
   clock: folderSelectionModel.$selectedFolder,
   fn: () => null,
-  target: activeLetterModel.$previousLetterId,
+  target: $$selectLetter.$previousId,
 });
 
-export const mainPageModel = {
-  ...letterLoadingModel,
-  ...letterMutationModel,
-  ...activeLetterModel,
-  ...filterLettersModel,
-  ...attachmentsManagerModel,
-};
+sample({
+  clock: folderSelectionModel.$selectedFolder,
+  target: $$loadLetters.reload,
+});
+
+sample({
+  clock: $$loadLetters.willLoaded,
+  source: {
+    folder: folderSelectionModel.$selectedFolder,
+    shift: $$loadLetters.$shift,
+    limit: $$loadLetters.$limit,
+  },
+  fn: ({ folder, shift, limit }) =>
+    `?folder=${folder}&shift=${shift}&limit=${limit}`,
+
+  target: $$loadLetters.loadFx,
+});
+
+debug({
+  folder: folderSelectionModel.$selectedFolder,
+});

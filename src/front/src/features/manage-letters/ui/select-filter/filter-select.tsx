@@ -6,21 +6,31 @@ import { Filter } from "@/entities/filter";
 import { FilterProps } from "@/entities/filter/ui";
 import { Separator } from "@/shared/ui/separator/separator";
 import { useTranslate } from "@/shared/lib/language";
+import { $$filterLetters } from "../../model";
 
-export type FilterSelectProps = {
-  all: FilterModel;
-  unread: FilterModel;
-  hasAttachments: FilterModel;
-  withBookmark: FilterModel;
-};
+export const FilterSelect = () => {
+  const allLettersFilter = useUnit({
+    active: $$filterLetters.$isUnset,
+    activate: $$filterLetters.unsetAll,
+    deactivate: $$filterLetters.unsetAll,
+  });
 
-type FilterModel = {
-  active: boolean;
-  activate: () => void;
-  deactivate: () => void;
-};
+  const unreadFilter = useUnit({
+    active: $$filterLetters.unreadFilter.$active,
+    activate: $$filterLetters.unreadFilter.activate,
+    deactivate: $$filterLetters.unreadFilter.deactivate,
+  });
+  const hasAttachmentsFilter = useUnit({
+    active: $$filterLetters.hasAttachmentsFilter.$active,
+    activate: $$filterLetters.hasAttachmentsFilter.activate,
+    deactivate: $$filterLetters.hasAttachmentsFilter.deactivate,
+  });
+  const withBookmarkFilter = useUnit({
+    active: $$filterLetters.withBookmarkFilter.$active,
+    activate: $$filterLetters.withBookmarkFilter.activate,
+    deactivate: $$filterLetters.withBookmarkFilter.deactivate,
+  });
 
-export const FilterSelect = (props: FilterSelectProps) => {
   const resources = useUnit($resources);
   const { allLetters, withFlag, withAttachments, unread, filters, resetAll } =
     useTranslate({
@@ -32,39 +42,27 @@ export const FilterSelect = (props: FilterSelectProps) => {
       resetAll: "eraseAll",
     });
 
-  const options: Array<FilterProps & { id: string }> = useMemo(
-    () => [
-      { id: "1", text: allLetters, ...props.all },
-      {
-        id: "2",
-        text: unread,
-        icon: resources.unread,
-        ...props.unread,
-      },
-      {
-        id: "3",
-        text: withFlag,
-        icon: resources.marked,
-        ...props.withBookmark,
-      },
-      {
-        id: "4",
-        text: withAttachments,
-        icon: resources.popupAttachment,
-        ...props.hasAttachments,
-      },
-    ],
-    [
-      props.all,
-      props.unread,
-      props.hasAttachments,
-      props.withBookmark,
-      allLetters,
-      unread,
-      withAttachments,
-      withFlag,
-    ]
-  );
+  const options: Array<FilterProps & { id: string }> = [
+    { id: "1", text: allLetters, ...allLettersFilter },
+    {
+      id: "2",
+      text: unread,
+      icon: resources.unread,
+      ...unreadFilter,
+    },
+    {
+      id: "3",
+      text: withFlag,
+      icon: resources.marked,
+      ...withBookmarkFilter,
+    },
+    {
+      id: "4",
+      text: withAttachments,
+      icon: resources.popupAttachment,
+      ...hasAttachmentsFilter,
+    },
+  ];
 
   const activeFilters = useMemo(
     () =>
@@ -86,7 +84,7 @@ export const FilterSelect = (props: FilterSelectProps) => {
             <img src={filter.icon} key={filter.id} />
           ))}
 
-          {activeFilters.length > 1 || props.all.active
+          {activeFilters.length > 1 || allLettersFilter.active
             ? filters
             : activeFilters[0].text}
 
@@ -97,7 +95,7 @@ export const FilterSelect = (props: FilterSelectProps) => {
         <>
           <List items={options} render={(filter) => <Filter {...filter} />} />
           <Separator size={240} thickness={1} direction="horizontal" />
-          <Button variant="menuItem" onClick={props.all.activate}>
+          <Button variant="menuItem" onClick={allLettersFilter.activate}>
             {resetAll}
           </Button>
         </>

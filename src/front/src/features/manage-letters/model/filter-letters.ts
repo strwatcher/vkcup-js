@@ -1,9 +1,9 @@
 import { setupFilter } from "@/entities/filter";
 import { LetterState } from "@/entities/letter";
 import { combine, createEvent, sample, Store } from "effector";
-import { LettersState } from "../load-letters/model";
+import { LettersState } from "../types";
 
-export function setupLettersFilter($letters: Store<LettersState>) {
+export const $$filterLetters = ($letters: Store<LettersState>) => {
   const unreadFilter = setupFilter({
     isFit: (letter: LetterState) => !letter.read,
   });
@@ -31,17 +31,17 @@ export function setupLettersFilter($letters: Store<LettersState>) {
     }
   );
 
-  const $unset = combine(
+  const $isUnset = combine(
     unreadFilter.$active,
     withBookmarkFilter.$active,
     hasAttachmentsFilter.$active,
     (...filters) => !filters.includes(true)
   );
 
-  const deactivateAll = createEvent();
+  const unsetAll = createEvent();
 
   sample({
-    source: deactivateAll,
+    source: unsetAll,
     target: [
       unreadFilter.deactivate,
       hasAttachmentsFilter.deactivate,
@@ -51,10 +51,13 @@ export function setupLettersFilter($letters: Store<LettersState>) {
 
   return {
     $filtered,
+
     unreadFilter,
     hasAttachmentsFilter,
     withBookmarkFilter,
-    deactivateAll,
-    $unset,
+
+    unsetAll,
+
+    $isUnset,
   };
-}
+};

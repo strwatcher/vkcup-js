@@ -1,13 +1,13 @@
-import { MouseEventHandler, ReactNode } from "react";
+import { ReactNode } from "react";
 import s from "./style.module.scss";
 
 type ModalProps = {
   children: ReactNode;
-  opened: boolean;
-  onClose: MouseEventHandler;
+  active: boolean;
+  onClose: () => void;
 };
 export const Modal = (props: ModalProps) => {
-  if (!props.opened) return null;
+  if (!props.active) return null;
 
   return (
     <>

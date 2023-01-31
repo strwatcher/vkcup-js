@@ -1,18 +1,12 @@
 import { Modal } from "@/shared/ui";
 import { useUnit } from "effector-react";
-import {
-  $areSettingsActive,
-  toggleSettingsClicked,
-} from "@/features/settings/model/control-settings";
 import { NavigateSettings } from "@/features/settings";
+import { $$settings } from "@/features/settings/model";
 
 export const SettingsModal = () => {
-  const { opened, onClose } = useUnit({
-    opened: $areSettingsActive,
-    onClose: toggleSettingsClicked,
-  });
+  const active = useUnit($$settings.$active);
   return (
-    <Modal opened={opened} onClose={onClose}>
+    <Modal active={active} onClose={$$settings.toggleClicked}>
       <NavigateSettings />
     </Modal>
   );

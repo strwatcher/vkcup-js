@@ -1,18 +1,8 @@
 import { LetterState } from "@/entities/letter";
 import { createApi, Store } from "effector";
-import { LettersState } from "../load-letters/model";
+import { LettersState } from "../types";
 
-function mutateLetter<Key extends keyof LetterState>(
-  letters: LettersState,
-  id: string,
-  map: { [P in Key]: LetterState[P] }
-) {
-  return letters.map((letter) =>
-    letter.id === id ? { ...letter, ...map } : letter
-  );
-}
-
-function setupLetterMutation($letters: Store<LettersState>) {
+export const $$mutateLetter = ($letters: Store<LettersState>) => {
   const selectionApi = createApi($letters, {
     select: (letters, id: string) =>
       mutateLetter(letters, id, { selected: true }),
@@ -41,6 +31,14 @@ function setupLetterMutation($letters: Store<LettersState>) {
   });
 
   return { selectionApi, readApi, markApi, attachmentsApi };
-}
+};
 
-export { setupLetterMutation };
+function mutateLetter<Key extends keyof LetterState>(
+  letters: LettersState,
+  id: string,
+  map: { [P in Key]: LetterState[P] }
+) {
+  return letters.map((letter) =>
+    letter.id === id ? { ...letter, ...map } : letter
+  );
+}

@@ -1,9 +1,9 @@
 import { createRequest } from "@/shared/api/model";
 import { createStore, sample, Store } from "effector";
 import { IAttachments } from "shared/types/attachmets";
-import { LettersState } from "../load-letters/model";
+import { LettersState } from "../types";
 
-export function setupAttachmentsManager($letters: Store<LettersState>) {
+export function $$loadAttachments($letters: Store<LettersState>) {
   const $currentAttachments = createStore<{
     data: IAttachments;
     id: string;
@@ -26,7 +26,7 @@ export function setupAttachmentsManager($letters: Store<LettersState>) {
     target: $letters,
   });
 
-  const $attachmentsFetching = fetchAttachmentsFx.pending;
+  const $fetching = fetchAttachmentsFx.pending;
 
-  return { fetchAttachmentsFx, $attachmentsFetching };
+  return { fetchAttachmentsFx, $fetching };
 }

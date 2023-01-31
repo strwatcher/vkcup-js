@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  padding: 8px;
+  gap: 8px;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 15px;
+  border: 1px solid var(--separatorPrimaryAlpha);
+  outline-color: var(--separatorPrimaryAlpha);
+  border-radius: 8px;
+  color: var(--textPrimary)
+}
+
+.label {
+  color: var(--textSecondary);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+.email {
+  width: 200px;
+}

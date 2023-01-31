@@ -12,4 +12,4 @@ export { OpenedLetter } from "./ui/select-letter/opened-letter";
 
 export { FilterSelect } from "./ui/select-filter";
 
-export { CreateLetterButton } from "./ui/create-letter";
+export { CreateLetterButton, CreateLetterForm } from "./ui/create-letter";

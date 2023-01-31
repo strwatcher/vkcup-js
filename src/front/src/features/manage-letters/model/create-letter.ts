@@ -13,6 +13,7 @@ export const $$createLetter = () => {
     fields: {
       header: "",
       body: "",
+      currentRecipient: "",
       recipients: [],
       files: {},
     } as CreatingLetterState,
@@ -22,11 +23,20 @@ export const $$createLetter = () => {
     {
       header: fields.header.$value,
       body: fields.body.$value,
+      currentRecipient: fields.currentRecipient.$value,
       recipients: fields.recipients.$value,
       files: fields.files.$value,
     },
     ({ ...values }) => values as CreatingLetterState
   );
 
-  return { $values, $creating, start, end };
+  const change = {
+    header: fields.header.onChange,
+    body: fields.body.onChange,
+    currentRecipient: fields.currentRecipient.onChange,
+    recipients: fields.recipients.onChange,
+    files: fields.files.onChange,
+  };
+
+  return { $values, $creating, start, end, change };
 };

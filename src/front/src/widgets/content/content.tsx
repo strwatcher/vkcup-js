@@ -1,4 +1,8 @@
-import { LettersList, OpenedLetter } from "@/features/manage-letters";
+import {
+  CreateLetterForm,
+  LettersList,
+  OpenedLetter,
+} from "@/features/manage-letters";
 import { useUnit } from "effector-react";
 import { $$state } from ".";
 
@@ -9,7 +13,7 @@ export const Content = () => {
   });
 
   if (letterCreating) {
-    return <div>Hello</div>;
+    return <CreateLetterForm />;
   }
   if (letterOpened) {
     return <OpenedLetter />;

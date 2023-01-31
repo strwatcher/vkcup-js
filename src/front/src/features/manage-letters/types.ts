@@ -11,6 +11,7 @@ export type RawLettersState = {
 export type CreatingLetterState = {
   header: string;
   body: string;
+  currentRecipient: string;
   recipients: Array<string>;
   files: IAttachments;
 };

@@ -5,12 +5,22 @@ import {
   $$loadAttachments,
   $$loadLetters,
 } from "@/features/manage-letters";
-import { sample } from "effector";
-import { debug } from "patronum";
+import { $$createLetter } from "@/features/manage-letters/model";
+import { $$state } from "@/widgets/content";
+import { combine, createEvent, sample } from "effector";
+
+export const returnHome = createEvent();
+export const $needReturnBack = combine(
+  $$state.$letterOpened,
+  $$state.$letterCreating,
+  (opened, creating) => opened || creating
+);
+
+sample({ clock: $$selectFolder.$selectedFolder, target: returnHome });
 
 sample({
-  clock: $$selectFolder.folderClicked,
-  target: $$selectLetter.letterWillClosed,
+  clock: returnHome,
+  target: [$$selectLetter.onCloseClicked, $$createLetter.end],
 });
 
 sample({
@@ -46,8 +56,4 @@ sample({
     `?folder=${folder}&shift=${shift}&limit=${limit}`,
 
   target: $$loadLetters.loadFx,
-});
-
-debug({
-  folder: $$selectFolder.$selectedFolder,
 });

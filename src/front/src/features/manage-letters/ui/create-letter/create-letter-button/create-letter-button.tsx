@@ -1,15 +1,14 @@
 import { $screenSize } from "@/shared/lib/screen-size";
 import { Button } from "@/shared/ui";
 import { useUnit } from "effector-react";
-import { MouseEventHandler } from "react";
 import { $resources } from "@/shared/lib/theme";
 import { useTranslate } from "@/shared/lib/language";
 
-type CreateLetterProps = {
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+type CreateLetterButtonProps = {
+  onClick?: () => void;
 };
 
-export const CreateLetter = (props: CreateLetterProps) => {
+export const CreateLetterButton = (props: CreateLetterButtonProps) => {
   const { size, resources } = useUnit({
     size: $screenSize,
     resources: $resources,

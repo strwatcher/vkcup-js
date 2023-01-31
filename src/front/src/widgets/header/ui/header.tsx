@@ -1,4 +1,4 @@
-import { useMemo, MouseEventHandler } from "react";
+import { useMemo } from "react";
 
 import { Button, Header as HeaderLayout } from "@/shared/ui";
 import { FilterSelect } from "@/features/manage-letters";
@@ -9,7 +9,7 @@ import { useTranslate } from "@/shared/lib/language";
 
 type HeaderProps = {
   needReturnBack?: boolean;
-  returnBack: MouseEventHandler<HTMLButtonElement>;
+  returnBack: () => void;
 };
 
 export const Header = (props: HeaderProps) => {

@@ -5,9 +5,10 @@ import { Separator } from "@/shared/ui/separator/separator";
 import { $screenSize } from "@/shared/lib/screen-size";
 import { SidebarLayout } from "./layout";
 import { $resources } from "@/shared/lib/theme";
-import { CreateLetter } from "@/features/manage-letters";
+import { CreateLetterButton } from "@/features/manage-letters";
 import { ControlSettings } from "@/features/settings";
 import { $$settings } from "@/features/settings/model";
+import { $$createLetter } from "@/features/manage-letters/model";
 
 export const Sidebar = () => {
   const { resources, size } = useUnit({
@@ -17,7 +18,7 @@ export const Sidebar = () => {
 
   return (
     <SidebarLayout>
-      <CreateLetter />
+      <CreateLetterButton onClick={$$createLetter.start} />
       {size === "small" && (
         <Button active={false} variant={"activated"}>
           <img src={resources.menu} />

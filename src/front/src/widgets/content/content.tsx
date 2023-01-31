@@ -1,12 +1,16 @@
-import {
-  $$selectLetter,
-  LettersList,
-  OpenedLetter,
-} from "@/features/manage-letters";
-import { useStoreMap } from "effector-react";
+import { LettersList, OpenedLetter } from "@/features/manage-letters";
+import { useUnit } from "effector-react";
+import { $$state } from ".";
 
 export const Content = () => {
-  const letterOpened = useStoreMap($$selectLetter.$active, Boolean);
+  const { letterOpened, letterCreating } = useUnit({
+    letterOpened: $$state.$letterOpened,
+    letterCreating: $$state.$letterCreating,
+  });
+
+  if (letterCreating) {
+    return <div>Hello</div>;
+  }
   if (letterOpened) {
     return <OpenedLetter />;
   }

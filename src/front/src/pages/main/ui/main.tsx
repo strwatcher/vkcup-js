@@ -1,18 +1,12 @@
-import { Letter } from "@/entities/letter";
-import {
-  $$filterLetters,
-  $$selectLetter,
-  LettersList,
-} from "@/features/manage-letters";
+import { $$filterLetters } from "@/features/manage-letters";
 import { ScreenSizeGate } from "@/shared/lib/screen-size";
 import { ThemeGate } from "@/shared/lib/theme";
-import { ThreeVariantState } from "@/shared/ui";
 import { Content } from "@/widgets/content";
 import { Header } from "@/widgets/header";
 import { SettingsModal } from "@/widgets/settings-modal";
 import { Sidebar } from "@/widgets/sidebar";
-import { useEvent, useGate, useStoreMap, useUnit } from "effector-react";
-import { useCallback } from "react";
+import { useGate, useStoreMap, useUnit } from "effector-react";
+import { $needReturnBack, returnHome } from "../model";
 import { Layout } from "./layout";
 
 export const Main = () => {
@@ -24,19 +18,14 @@ export const Main = () => {
     (letters) => !letters.length
   );
 
-  const letterOpened = useStoreMap(
-    $$selectLetter.$active,
-    (letter) => !!letter
-  );
-
-  const closeContent = useEvent($$selectLetter.onCloseClicked);
+  const needReturnBack = useUnit($needReturnBack);
 
   return (
     <>
       <Layout
         contentEmpty={lettersListEmpty}
         head={
-          <Header needReturnBack={letterOpened} returnBack={closeContent} />
+          <Header needReturnBack={needReturnBack} returnBack={returnHome} />
         }
       >
         <Sidebar />

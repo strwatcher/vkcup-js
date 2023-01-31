@@ -2,7 +2,7 @@ import { ICompleteFolder, IFolder } from "shared";
 import { createEvent, createStore, sample, Store } from "effector";
 import { FoldersState } from "./load-folders";
 
-export function setupFolderSelection($folders: Store<FoldersState>) {
+export function $$selectFolder($folders: Store<FoldersState>) {
   const folderClicked = createEvent<IFolder>();
   const folderWasSelected = sample({ clock: folderClicked });
 

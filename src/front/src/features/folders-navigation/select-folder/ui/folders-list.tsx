@@ -4,21 +4,21 @@ import { $screenSize } from "@/shared/lib/screen-size";
 import { Folder } from "@/entities/folder";
 import { useGate, useUnit } from "effector-react";
 import { ICompleteFolder } from "@/../../shared";
-import { folderSelectionModel, foldersLoadingModel } from "../model";
+import { $$selectFolder, $$loadFolders } from "../model";
 import { $resources, $themeType } from "@/shared/lib/theme";
 
 export const FoldersList = () => {
-  useGate(foldersLoadingModel.FoldersGate);
+  useGate($$loadFolders.FoldersGate);
 
   const { theme, folders, selectedFolder, folderItemClicked } = useUnit({
     resources: $resources,
     theme: $themeType,
     size: $screenSize,
 
-    folders: foldersLoadingModel.$folders,
-    selectedFolder: folderSelectionModel.$selectedFolder,
+    folders: $$loadFolders.$folders,
+    selectedFolder: $$selectFolder.$selectedFolder,
 
-    folderItemClicked: folderSelectionModel.folderClicked,
+    folderItemClicked: $$selectFolder.folderClicked,
   });
   const indexedFolders = useMemo(
     () => folders.map((folder, index) => ({ ...folder, id: `${index}` })),

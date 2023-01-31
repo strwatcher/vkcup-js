@@ -1,7 +1,5 @@
-import { setupFoldersLoading } from "./load-folders";
-import { setupFolderSelection } from "./select-folder";
+import { $$loadFolders as loadFolders } from "./load-folders";
+import { $$selectFolder as selectFolder } from "./select-folder";
 
-export const foldersLoadingModel = setupFoldersLoading();
-export const folderSelectionModel = setupFolderSelection(
-  foldersLoadingModel.$folders
-);
+export const $$loadFolders = loadFolders();
+export const $$selectFolder = selectFolder($$loadFolders.$folders);

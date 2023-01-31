@@ -5,7 +5,7 @@ import { createGate } from "effector-react";
 
 export type FoldersState = Array<ICompleteFolder>;
 
-export function setupFoldersLoading() {
+export function $$loadFolders() {
   const FoldersGate = createGate();
   const $folders = createStore<FoldersState>([]);
   const fetchFoldersFx = createRequest<FoldersState, { data: FoldersState }>({

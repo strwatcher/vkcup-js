@@ -1,4 +1,4 @@
-import { folderSelectionModel } from "@/features/folders-navigation";
+import { $$selectFolder } from "@/features/folders-navigation";
 import {
   $$selectLetter,
   $$mutateLetter,
@@ -9,7 +9,7 @@ import { sample } from "effector";
 import { debug } from "patronum";
 
 sample({
-  clock: folderSelectionModel.folderClicked,
+  clock: $$selectFolder.folderClicked,
   target: $$selectLetter.letterWillClosed,
 });
 
@@ -25,20 +25,20 @@ sample({
 });
 
 sample({
-  clock: folderSelectionModel.$selectedFolder,
+  clock: $$selectFolder.$selectedFolder,
   fn: () => null,
   target: $$selectLetter.$previousId,
 });
 
 sample({
-  clock: folderSelectionModel.$selectedFolder,
+  clock: $$selectFolder.$selectedFolder,
   target: $$loadLetters.reload,
 });
 
 sample({
   clock: $$loadLetters.willLoaded,
   source: {
-    folder: folderSelectionModel.$selectedFolder,
+    folder: $$selectFolder.$selectedFolder,
     shift: $$loadLetters.$shift,
     limit: $$loadLetters.$limit,
   },
@@ -49,5 +49,5 @@ sample({
 });
 
 debug({
-  folder: folderSelectionModel.$selectedFolder,
+  folder: $$selectFolder.$selectedFolder,
 });

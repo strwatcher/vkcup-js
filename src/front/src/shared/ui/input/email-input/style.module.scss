@@ -21,7 +21,9 @@
 }
 
 .emailList {
-  width: 100%;
+  display: flex;
+  gap: 8px;
+  width: calc(100% - 200px);
   overflow: auto;
 }
 
@@ -29,7 +31,7 @@
   color: var(--textPrimary);
   background-color: var(--);
   border-radius: 8px;
-  padding: 8px;
+  padding: 4px;
   border: 1px solid var(--separatorPrimaryAlpha);
   cursor:function-exists;
   position: relative;

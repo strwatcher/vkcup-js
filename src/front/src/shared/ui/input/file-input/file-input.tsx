@@ -7,6 +7,7 @@ import { ImagePreview } from "../../image-preview";
 
 type FileInputProps = BaseInputProps & {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onRemove: (fileName: string) => void;
   multiple?: boolean;
   value: IAttachments;
 };
@@ -29,7 +30,6 @@ export const FileInput = (props: FileInputProps) => {
           accept={"image/*"}
           onChange={props.onChange}
           multiple={props.multiple}
-          value={""}
         />
         <label className={s.label} htmlFor={props.id} tabIndex={1}>
           {props.label}
@@ -39,7 +39,13 @@ export const FileInput = (props: FileInputProps) => {
         <div className={s.filePreview}>
           <List
             items={files}
-            render={(file) => <ImagePreview {...file} type={"heightBased"} />}
+            render={(file) => (
+              <ImagePreview
+                {...file}
+                type={"heightBased"}
+                onClick={() => props.onRemove(file.name)}
+              />
+            )}
             direction={"horizontal"}
           />
         </div>

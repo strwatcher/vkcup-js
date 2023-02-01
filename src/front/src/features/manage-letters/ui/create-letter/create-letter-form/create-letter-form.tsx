@@ -54,6 +54,7 @@ export const CreateLetterForm = () => {
             e.target.files ? Array.from(e.target.files) : []
           )
         }
+        onRemove={$$createLetter.removeAttachment}
         value={attachments ?? {}}
         multiple
       />

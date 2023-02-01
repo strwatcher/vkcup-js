@@ -58,7 +58,19 @@ export const $$createLetter = () => {
     target: loadFilesFx,
   });
 
+  const removeAttachment = createEvent<string>();
   const $attachments = createStore<IAttachments | null>(null);
+
+  sample({
+    clock: removeAttachment,
+    source: $attachments,
+    filter: Boolean,
+    fn: (attachments: IAttachments, attachmentToRemove) =>
+      Object.fromEntries(
+        Object.entries(attachments).filter(([k]) => k !== attachmentToRemove)
+      ),
+    target: $attachments,
+  });
 
   sample({
     clock: loadFilesFx.doneData,
@@ -183,5 +195,6 @@ export const $$createLetter = () => {
     send,
     addRecipient,
     removeRecipient,
+    removeAttachment,
   };
 };

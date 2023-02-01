@@ -38,13 +38,15 @@ export const EmailInput = (props: EmailInputProps) => {
         onChange={(e) => props.onChange(e.target.value)}
         onKeyDown={onAdd}
       />
-      {props.addedEmails.map((email) => (
-        <EmailItem
-          email={email}
-          onRemove={() => props.onRemove(email)}
-          key={email}
-        />
-      ))}
+      <div className={s.emailList}>
+        {props.addedEmails.map((email) => (
+          <EmailItem
+            email={email}
+            onRemove={() => props.onRemove(email)}
+            key={email}
+          />
+        ))}
+      </div>
     </InputLayout>
   );
 };

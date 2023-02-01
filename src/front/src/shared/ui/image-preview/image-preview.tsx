@@ -8,25 +8,34 @@ export type ImagePreviewProps = {
   name: string;
   bytes: string;
   type: "big" | "heightBased";
+  onClick?: () => void;
 };
 
 export const ImagePreview = (props: ImagePreviewProps) => {
   const resources = useStore($resources);
   const { download } = useTranslate({ download: "download" });
-  return (
-    <a
-      className={joinClasses(s.imagePreview, s[props.type])}
-      href={props.bytes}
-      download={`${props.name}.jpg`}
-    >
-      <img src={props.bytes} />
-      {props.type === "big" && (
+
+  if (props.type === "big")
+    return (
+      <a
+        className={joinClasses(s.imagePreview, s.big)}
+        href={props.bytes}
+        download={`${props.name}.jpg`}
+      >
         <div className={s.download}>
           <img src={resources.download} />
           <span>{download}</span>
         </div>
-      )}
-    </a>
+      </a>
+    );
+
+  return (
+    <div
+      className={joinClasses(s.imagePreview, s.heightBased)}
+      onClick={props.onClick}
+    >
+      <img src={props.bytes} />
+    </div>
   );
 };
 

@@ -35,14 +35,3 @@ export const Main = () => {
     </>
   );
 };
-
-//   {model.letter ? (
-//     <Letter
-//       attachmentsFetching={model.attachmetnsFetching}
-//       {...model.letter}
-//       onReadToggle={callbacks.letterReadToggle}
-//       onMarkToggle={callbacks.letterMarkToggle}
-//     />
-//   ) : (
-//     <LettersList />
-//   )}

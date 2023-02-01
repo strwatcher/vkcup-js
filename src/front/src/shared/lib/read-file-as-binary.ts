@@ -5,7 +5,10 @@ export const readFileAsBinary: (
     const reader = new FileReader();
 
     reader.onload = () => {
-      resolve({ body: reader.result as string, title: file.name });
+      resolve({
+        body: reader.result as string,
+        title: file.name.replace(/\.[^/.]+$/, ""),
+      });
     };
 
     reader.onerror = (e) => reject(e);

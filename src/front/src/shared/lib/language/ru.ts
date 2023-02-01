@@ -36,6 +36,10 @@ export const ruDict: LanguageDictType = {
     noLetters: "Писем нет",
     download: "Скачать",
     recipient: "Кому",
+    letterTheme: "Тема",
+    insertFiles: "Вложить файлы",
+    letterText: "Текст письма...",
+    send: "Отправить",
   },
   plural: {
     filesCount: {

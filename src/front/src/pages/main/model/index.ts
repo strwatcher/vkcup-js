@@ -1,3 +1,5 @@
+import { IFolder } from "@/../../shared";
+import { LetterState } from "@/entities/letter";
 import { $$selectFolder } from "@/features/folders-navigation";
 import {
   $$selectLetter,
@@ -8,6 +10,8 @@ import {
 import { $$createLetter } from "@/features/manage-letters/model";
 import { $$state } from "@/widgets/content";
 import { combine, createEvent, sample } from "effector";
+import { $$lettersInFolders as lettersInFolders } from "./letters-in-folders";
+import { v4 as uuid } from "uuid";
 
 export const returnHome = createEvent();
 export const $needReturnBack = combine(
@@ -15,6 +19,7 @@ export const $needReturnBack = combine(
   $$state.$letterCreating,
   (opened, creating) => opened || creating
 );
+const $$lettersInFolders = lettersInFolders();
 
 sample({ clock: $$selectFolder.$selectedFolder, target: returnHome });
 
@@ -44,6 +49,20 @@ sample({
   clock: $$selectFolder.$selectedFolder,
   target: $$loadLetters.reload,
 });
+sample({
+  clock: $$loadLetters.reload,
+  source: {
+    letters: $$loadLetters.$letters,
+    existsLetters: $$lettersInFolders.$kv,
+    folder: $$selectFolder.$selectedFolder,
+  },
+  filter: ({ folder }) => !!folder,
+  fn: ({ letters, existsLetters, folder }) => [
+    ...(existsLetters[folder!] ?? []),
+    ...letters,
+  ],
+  target: $$loadLetters.$letters,
+});
 
 sample({
   clock: $$loadLetters.willLoaded,
@@ -56,4 +75,49 @@ sample({
     `?folder=${folder}&shift=${shift}&limit=${limit}`,
 
   target: $$loadLetters.loadFx,
+});
+
+sample({
+  clock: $$createLetter.send,
+  fn: (letterData) => {
+    const letter: LetterState = {
+      author: {
+        //hardcode, i know. This data should be got from session model or something like that in theory
+        name: "Миша",
+        surname: "Рузин",
+        email: "strwatcher.focused@gmail.com",
+      },
+      title: letterData.title,
+      text: letterData.text,
+      doc: letterData.doc,
+      to: letterData.to.map((email) => ({ email, name: email, surname: "" })),
+      attachments: !!letterData.doc,
+      important: false,
+      bookmark: false,
+      read: false,
+      folder: "sent",
+      id: uuid(),
+      selected: false,
+      attachmentsOpened: false,
+      date: new Date().toLocaleString(),
+    };
+    const folder: IFolder = "sent";
+
+    return { letter, folder };
+  },
+
+  target: $$lettersInFolders.putLetterInFolder,
+});
+
+sample({
+  clock: $$createLetter.send,
+  target: $$createLetter.end,
+});
+
+sample({
+  clock: $$lettersInFolders.putLetterInFolder,
+  source: $$selectFolder.$selectedFolder,
+  filter: (currentFolder, { folder }) => folder === currentFolder,
+  fn: (_, { letter }) => letter,
+  target: $$loadLetters.putLetterOnTop,
 });

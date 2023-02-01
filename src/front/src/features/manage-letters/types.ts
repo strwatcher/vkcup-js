@@ -8,10 +8,17 @@ export type RawLettersState = {
   count: number;
 };
 
-export type CreatingLetterState = {
-  header: string;
-  body: string;
+export type ICreatingLetterForm = {
+  title: string;
+  text: string;
   currentRecipient: string;
-  recipients: Array<string>;
-  file: Array<File>;
+  files: Array<File>;
+};
+
+export type ICreatingLetter = Omit<
+  ICreatingLetterForm,
+  "currentRecipient" | "file"
+> & {
+  doc?: IAttachments;
+  to: Array<string>;
 };

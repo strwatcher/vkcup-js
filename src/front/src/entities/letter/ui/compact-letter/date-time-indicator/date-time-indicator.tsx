@@ -7,23 +7,6 @@ export type DateTimeIndicatorProps = {
 };
 
 export const DateTimeIndicator = (props: DateTimeIndicatorProps) => {
-  const months = useMemo(
-    () => [
-      "янв",
-      "фев",
-      "мар",
-      "апр",
-      "мая",
-      "июн",
-      "июл",
-      "авг",
-      "сен",
-      "окт",
-      "ноя",
-      "дек",
-    ],
-    []
-  );
   const date = useMemo(() => new Date(props.date), [props.date]);
 
   const { month } = useMonthTranslate({
@@ -34,7 +17,7 @@ export const DateTimeIndicator = (props: DateTimeIndicatorProps) => {
   });
 
   const isToday = useMemo(
-    () => date.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0),
+    () => date.getDate() === new Date().getDate(),
     [date]
   );
 

@@ -14,7 +14,7 @@ export type ILetter = {
   read: boolean;
   folder: IFolder;
   date: string;
-  flag: IFlag;
+  flag?: IFlag;
   doc?: IAttachments;
   attachments: boolean;
 };

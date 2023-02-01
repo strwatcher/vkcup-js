@@ -1,6 +1,7 @@
 import { combine, createEvent, createStore, sample } from "effector";
 import { createRequest } from "@/shared/api/model";
 import { LettersState, RawLettersState } from "../types";
+import { LetterState } from "@/entities/letter";
 
 export const $$loadLetters = () => {
   const $letters = createStore<LettersState>([]);
@@ -41,6 +42,7 @@ export const $$loadLetters = () => {
   const reload = createEvent();
   const willLoaded = createEvent();
 
+  const putLetterOnTop = createEvent<LetterState>();
   // sample({
   //   clock: $shift,
   //   source: { folder: $activeFolder, limit: $limit },
@@ -92,6 +94,13 @@ export const $$loadLetters = () => {
 
   sample({ clock: [loadMore, reload], target: willLoaded });
 
+  sample({
+    clock: putLetterOnTop,
+    source: $letters,
+    fn: (letters, letterToPut) => [letterToPut, ...letters],
+    target: $letters,
+  });
+
   return {
     $shift,
     $limit,
@@ -107,5 +116,6 @@ export const $$loadLetters = () => {
     loadMore,
     reload,
     willLoaded,
+    putLetterOnTop,
   };
 };

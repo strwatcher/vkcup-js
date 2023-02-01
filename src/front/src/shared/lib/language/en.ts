@@ -37,6 +37,10 @@ export const enDict: LanguageDictType = {
     noLetters: "Letters not found",
     download: "Download",
     recipient: "To",
+    letterTheme: "Theme",
+    insertFiles: "Insert files",
+    letterText: "Letter text...",
+    send: "Send",
   },
   plural: {
     filesCount: {

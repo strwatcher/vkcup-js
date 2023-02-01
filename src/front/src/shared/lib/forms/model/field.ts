@@ -15,5 +15,5 @@ export const $$field = <T>(initValue: T, reset: Event<void>) => {
     target: $value,
   });
 
-  return { $value, onChange, reset };
+  return { $value, onChange };
 };

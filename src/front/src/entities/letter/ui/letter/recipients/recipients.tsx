@@ -17,7 +17,7 @@ export const Recipients = (props: RecipientsProps) => {
       .slice(0, 4)
       .map((user) => `${user.name} ${user.surname}`.trim());
 
-    const result = `${recipientSign}: ${recipients.join(" ")}`;
+    const result = `${recipientSign}: ${recipients.join(", ")}`;
     return result;
   }, [props.to, another]);
 

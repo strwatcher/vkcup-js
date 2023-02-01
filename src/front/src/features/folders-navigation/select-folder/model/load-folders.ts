@@ -13,6 +13,7 @@ export function $$loadFolders() {
     target: $folders,
     fn: (response) => response.data,
   });
+
   sample({
     clock: FoldersGate.open,
     fn: () => undefined,

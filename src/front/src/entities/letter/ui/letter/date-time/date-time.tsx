@@ -10,7 +10,7 @@ export type DateTimeProps = {
 export const DateTime = (props: DateTimeProps) => {
   const dateTime = useMemo(() => new Date(props.dateTime), [props.dateTime]);
   const isToday = useMemo(
-    () => dateTime.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0),
+    () => dateTime.getDate() === new Date().getDate(),
     [dateTime]
   );
 

@@ -22,6 +22,7 @@ export const Main = () => {
 
   return (
     <>
+      <SettingsModal />
       <Layout
         contentEmpty={lettersListEmpty}
         head={
@@ -31,7 +32,6 @@ export const Main = () => {
         <Sidebar />
         <Content />
       </Layout>
-      <SettingsModal />
     </>
   );
 };

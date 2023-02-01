@@ -36,7 +36,7 @@ export const Letter = (props: LetterProps) => {
       head={
         <>
           <H text={props.title} />
-          <Flag name={props.flag} icon={flags[props.flag]} />
+          {props.flag && <Flag name={props.flag} icon={flags[props.flag]} />}
         </>
       }
       info={

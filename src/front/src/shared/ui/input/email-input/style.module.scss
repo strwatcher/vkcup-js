@@ -1,0 +1,40 @@
+.emailInput {
+  width: 200px;
+  padding: 8px;
+  font-size: 15px;
+  border: 1px solid var(--separatorPrimaryAlpha);
+  outline-color: var(--separatorPrimaryAlpha);
+  border-radius: 8px;
+  color: var(--textPrimary)
+ }
+
+ .emailInputInvalid {
+   border: 1px solid red;
+   outline-color: red;
+ }
+
+.label {
+  color: var(--textSecondary);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+.emailList {
+  width: 100%;
+  overflow: auto;
+}
+
+.emailItem {
+  color: var(--textPrimary);
+  background-color: var(--);
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid var(--separatorPrimaryAlpha);
+  cursor:function-exists;
+  position: relative;
+}
+
+.emailItem:hover {
+
+}

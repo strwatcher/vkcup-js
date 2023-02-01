@@ -1,47 +1,72 @@
 import { $$createLetter } from "@/features/manage-letters/model";
-import { Button, FileInput, Input, MultilineInput } from "@/shared/ui";
+import { useTranslate } from "@/shared/lib/language";
+import {
+  Button,
+  EmailInput,
+  FileInput,
+  Input,
+  MultilineInput,
+} from "@/shared/ui";
 import { useUnit } from "effector-react";
 import s from "./style.module.scss";
 
 export const CreateLetterForm = () => {
-  const values = useUnit($$createLetter.$values);
+  const { values, attachments, addedRecipients, invalid } = useUnit({
+    values: $$createLetter.$values,
+    attachments: $$createLetter.$attachments,
+    addedRecipients: $$createLetter.$to,
+    invalid: $$createLetter.$recipientInvalid,
+  });
 
-  const attachments = useUnit($$createLetter.$attachments);
+  const { theme, to, text, send, insertFiles } = useTranslate({
+    theme: "letterTheme",
+    to: "recipient",
+    text: "letterText",
+    send: "send",
+    insertFiles: "insertFiles",
+  });
+
   return (
     <div className={s.createLetterForm}>
       <Input
-        id={"letterHeader"}
+        id={"letterTitle"}
         type="text"
-        value={values.header}
-        onChange={$$createLetter.change.header}
-        label={"Тема"}
+        value={values.title}
+        onChange={$$createLetter.change.title}
+        label={theme}
       />
-      <Input
+      <EmailInput
         id={"letterHeader"}
-        type="email"
         value={values.currentRecipient}
         onChange={$$createLetter.change.currentRecipient}
-        label={"Кому"}
+        label={to}
+        onAdd={$$createLetter.addRecipient}
+        onRemove={$$createLetter.removeRecipient}
+        addedEmails={addedRecipients}
+        invalid={invalid}
       />
 
       <FileInput
         id={"img"}
-        label={"Вложить файлы"}
+        label={insertFiles}
         onChange={(e) =>
           $$createLetter.change.files(
             e.target.files ? Array.from(e.target.files) : []
           )
         }
-        value={attachments}
+        value={attachments ?? {}}
         multiple
       />
 
       <MultilineInput
-        value={values.body}
-        onChange={$$createLetter.change.body}
+        placeholder={text}
+        value={values.text}
+        onChange={$$createLetter.change.text}
       />
 
-      <Button variant="accent">{"Отправить"}</Button>
+      <Button variant="accent" onClick={() => $$createLetter.submit()}>
+        {send}
+      </Button>
     </div>
   );
 };

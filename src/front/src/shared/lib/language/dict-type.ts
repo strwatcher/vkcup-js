@@ -34,6 +34,10 @@ export type LanguageDictType = {
     language: string;
     download: string;
     recipient: string;
+    letterTheme: string;
+    insertFiles: string;
+    letterText: string;
+    send: string;
   };
   plural: {
     filesCount: PluralRule;

@@ -1,6 +1,15 @@
 import { $$form } from "@/shared/lib/forms";
-import { combine, createApi, createStore } from "effector";
+import { readFileAsBinary } from "@/shared/lib";
+import {
+  combine,
+  createApi,
+  createEffect,
+  createStore,
+  sample,
+} from "effector";
+import { debug } from "patronum";
 import { CreatingLetterState } from "../types";
+import { IAttachments } from "shared/types/attachmets";
 
 export const $$createLetter = () => {
   const $creating = createStore(false);
@@ -9,13 +18,13 @@ export const $$createLetter = () => {
     end: () => false,
   });
 
-  const { fields } = $$form({
+  const { fields, reset } = $$form({
     fields: {
       header: "",
       body: "",
       currentRecipient: "",
       recipients: [],
-      files: {},
+      file: [],
     } as CreatingLetterState,
   });
 
@@ -25,7 +34,8 @@ export const $$createLetter = () => {
       body: fields.body.$value,
       currentRecipient: fields.currentRecipient.$value,
       recipients: fields.recipients.$value,
-      files: fields.files.$value,
+      // files: fields.files.$value,
+      file: fields.file.$value,
     },
     ({ ...values }) => values as CreatingLetterState
   );
@@ -35,8 +45,44 @@ export const $$createLetter = () => {
     body: fields.body.onChange,
     currentRecipient: fields.currentRecipient.onChange,
     recipients: fields.recipients.onChange,
-    files: fields.files.onChange,
+    files: fields.file.onChange,
   };
 
-  return { $values, $creating, start, end, change };
+  const loadFilesFx = createEffect(async (files: Array<File>) => {
+    const parsedFiles = await Promise.all(
+      files.map((file) => readFileAsBinary(file))
+    );
+    return parsedFiles;
+  });
+
+  sample({
+    clock: change.files,
+    filter: (files) => !!files.length,
+    target: loadFilesFx,
+  });
+
+  const $attachments = createStore<IAttachments>({});
+
+  sample({
+    clock: loadFilesFx.doneData,
+    source: $attachments,
+    fn: (oldAttachments, newAttachments) => ({
+      ...oldAttachments,
+      ...Object.fromEntries(
+        newAttachments.map((attachment) => [attachment.title, attachment.body])
+      ),
+    }),
+    target: $attachments,
+  });
+
+  sample({
+    clock: $creating,
+    filter: (creating) => !creating,
+    target: reset,
+  });
+
+  // sample({ clock: loadFileFx.doneData,  });
+  debug({ files: $attachments, letterForm: $values });
+
+  return { $values, $creating, $attachments, start, end, change };
 };

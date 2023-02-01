@@ -13,5 +13,5 @@ export type CreatingLetterState = {
   body: string;
   currentRecipient: string;
   recipients: Array<string>;
-  files: IAttachments;
+  file: Array<File>;
 };

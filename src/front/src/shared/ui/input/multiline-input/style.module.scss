@@ -1,0 +1,11 @@
+.input {
+  resize: none;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  font-size: 15px;
+  border: 1px solid var(--separatorPrimaryAlpha);
+  outline-color: var(--separatorPrimaryAlpha);
+  border-radius: 8px;
+  color: var(--textPrimary)
+}

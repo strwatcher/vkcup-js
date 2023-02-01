@@ -1,12 +1,14 @@
 import { $$createLetter } from "@/features/manage-letters/model";
-import { Input } from "@/shared/ui";
+import { Button, FileInput, Input, MultilineInput } from "@/shared/ui";
 import { useUnit } from "effector-react";
+import s from "./style.module.scss";
 
 export const CreateLetterForm = () => {
   const values = useUnit($$createLetter.$values);
 
+  const attachments = useUnit($$createLetter.$attachments);
   return (
-    <div>
+    <div className={s.createLetterForm}>
       <Input
         id={"letterHeader"}
         type="text"
@@ -21,6 +23,25 @@ export const CreateLetterForm = () => {
         onChange={$$createLetter.change.currentRecipient}
         label={"Кому"}
       />
+
+      <FileInput
+        id={"img"}
+        label={"Вложить файлы"}
+        onChange={(e) =>
+          $$createLetter.change.files(
+            e.target.files ? Array.from(e.target.files) : []
+          )
+        }
+        value={attachments}
+        multiple
+      />
+
+      <MultilineInput
+        value={values.body}
+        onChange={$$createLetter.change.body}
+      />
+
+      <Button variant="accent">{"Отправить"}</Button>
     </div>
   );
 };

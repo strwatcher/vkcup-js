@@ -1,20 +1,21 @@
 import { joinClasses } from "@/shared/lib";
 import { ChangeEvent } from "react";
 import s from "./style.module.scss";
+import { BaseInputProps } from "../types";
+import { InputLayout } from "../input-layout";
 
-type InputProps = {
+type InputProps = BaseInputProps & {
   type: "text" | "email";
   onChange: (value: string) => void;
   value: string;
-  label: string;
-  id: string;
 };
 export const Input = (props: InputProps) => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     props.onChange(e.target.value);
   };
+
   return (
-    <div className={s.container}>
+    <InputLayout>
       <label className={s.label} htmlFor={props.id}>
         {props.label}
       </label>
@@ -25,6 +26,6 @@ export const Input = (props: InputProps) => {
         value={props.value}
         onChange={onChange}
       />
-    </div>
+    </InputLayout>
   );
 };

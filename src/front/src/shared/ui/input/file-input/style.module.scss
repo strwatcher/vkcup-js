@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  gap: 8px;
+  position: relative;
+}
+
+.filePreview {
+  padding: 8px;
+  width: calc(100% - 8px);
+  overflow: auto
+}
+
+.input {
+  width: calc(100% - 8px);
+  padding: 8px;
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+}
+
+
+.label {
+  color: var(--textSecondary);
+  width: 100%;
+
+  border: 1px solid var(--separatorPrimaryAlpha);
+  border-radius: 8px;
+
+  outline-color: var(--separatorPrimaryAlpha);
+
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+
+

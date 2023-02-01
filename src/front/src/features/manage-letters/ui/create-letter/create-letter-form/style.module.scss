@@ -1,0 +1,16 @@
+.createLetterForm {
+  display: flex; 
+  flex-direction: column;
+  padding: 8px;
+  gap: 16px;
+
+  & > div:has(textarea) {
+    flex-grow: 1;
+  }
+
+  & > button {
+    width: fit-content;
+  }
+}
+
+

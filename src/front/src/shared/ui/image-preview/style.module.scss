@@ -1,4 +1,4 @@
-.bigPreview {
+.imagePreview {
     text-decoration: none;
     color: var(--textPrimary);
     background-color: var(--backgroundContent);
@@ -8,19 +8,21 @@
     position: relative;
 }
 
-.bigPreview > img {
+.big > img {
     max-width: 256px;
     max-height: 256px;
     border-radius: 12px;
+}
+
+.heightBased > img {
+    max-height: 128px;
+    border-radius: 6px;
 }
 
 .download {
     position: absolute;
     bottom: 6px;
     left: 4px;
-
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
 
     background: var(--downloadGradient);
     width: calc(100% - 8px);
@@ -33,7 +35,16 @@
 
     visibility: hidden;
 }
+.big > .download {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
 
-.bigPreview:hover .download {
+.heightBased > .download {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.imagePreview:hover .download {
     visibility: visible;
 }

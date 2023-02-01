@@ -1,4 +1,4 @@
-export { Input } from "./input";
+export { Input, FileInput, MultilineInput } from "./input";
 export { Avatar } from "./avatar";
 export { Button } from "./button";
 export { Box } from "./box";

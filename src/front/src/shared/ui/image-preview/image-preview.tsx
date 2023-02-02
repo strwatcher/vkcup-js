@@ -22,6 +22,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
         href={props.bytes}
         download={`${props.name}.jpg`}
       >
+        <img src={props.bytes} />
         <div className={s.download}>
           <img src={resources.download} />
           <span>{download}</span>

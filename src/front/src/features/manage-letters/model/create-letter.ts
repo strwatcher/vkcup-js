@@ -8,7 +8,6 @@ import {
   createStore,
   sample,
 } from "effector";
-import { debug } from "patronum";
 import { ICreatingLetter, ICreatingLetterForm } from "../types";
 import { IAttachments } from "shared/types/attachmets";
 
@@ -178,10 +177,6 @@ export const $$createLetter = () => {
     target: $recipientInvalid,
   });
 
-  debug({
-    submit,
-    send,
-  });
   return {
     $values,
     $creating,

@@ -28,6 +28,7 @@
 }
 
 .emailItem {
+  cursor: not-allowed;
   color: var(--textPrimary);
   background-color: var(--);
   border-radius: 8px;
@@ -37,6 +38,3 @@
   position: relative;
 }
 
-.emailItem:hover {
-
-}

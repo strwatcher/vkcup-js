@@ -14,9 +14,12 @@
     border-radius: 12px;
 }
 
-.heightBased > img {
-    max-height: 128px;
-    border-radius: 6px;
+.heightBased {
+    cursor: not-allowed;
+    img {
+        max-height: 128px;
+        border-radius: 6px;
+    }
 }
 
 .download {

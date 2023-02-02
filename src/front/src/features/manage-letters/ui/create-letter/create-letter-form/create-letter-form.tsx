@@ -92,7 +92,7 @@ export const CreateLetterForm = () => {
           ref={dragAndDropArea}
           onDragLeave={dragAreaLeave}
         >
-          {"Вложить файлы"}
+          {insertFiles}
         </div>
       )}
       <Input

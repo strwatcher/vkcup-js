@@ -1,4 +1,4 @@
-import { createEffect, Effect, sample, Store } from "effector";
+import { createEffect, Effect, sample, Store, Unit } from "effector";
 import { genUrl } from "../lib";
 
 async function request<TReturn>(url: string): Promise<TReturn> {
@@ -13,7 +13,7 @@ export function createRequest<TReturn, TFetch = TReturn>({
   fn,
 }: {
   url: string;
-  target: Store<TReturn>;
+  target: Unit<TReturn>;
   fn?: (data: TFetch) => TReturn;
 }): Effect<string | undefined | void, TFetch> {
   const requestFx = createEffect((params?: string) =>

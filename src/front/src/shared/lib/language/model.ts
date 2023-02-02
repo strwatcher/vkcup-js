@@ -1,8 +1,12 @@
-import { createStore } from "effector";
 import { ruDict } from "./ru";
 import { enDict } from "./en";
+import { createLocalStorageItem } from "../localstorage";
 
-const $language = createStore<"ru-RU" | "en-EN">("ru-RU");
+const {
+  $value: $language,
+  update,
+  gate: LocalStorageLanguageGate,
+} = createLocalStorageItem<"ru-RU" | "en-EN">("language", "ru-RU");
 
 const $activeDict = $language.map((language) => {
   if (language === "ru-RU") {
@@ -11,4 +15,9 @@ const $activeDict = $language.map((language) => {
   return enDict;
 });
 
-export { $language, $activeDict };
+export {
+  $language,
+  $activeDict,
+  update as updateLanguage,
+  LocalStorageLanguageGate,
+};

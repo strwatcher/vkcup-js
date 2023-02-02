@@ -4,4 +4,4 @@ export {
   useMonthTranslate,
 } from "./use-translate";
 
-export { $language } from "./model";
+export { $language, updateLanguage, LocalStorageLanguageGate } from "./model";

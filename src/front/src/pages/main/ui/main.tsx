@@ -1,6 +1,8 @@
 import { $$filterLetters } from "@/features/manage-letters";
+import { LocalStorageLanguageGate } from "@/shared/lib/language";
 import { ScreenSizeGate } from "@/shared/lib/screen-size";
 import { ThemeGate } from "@/shared/lib/theme";
+import { LocalStorageThemeGate } from "@/shared/lib/theme/model";
 import { Content } from "@/widgets/content";
 import { Header } from "@/widgets/header";
 import { SettingsModal } from "@/widgets/settings-modal";
@@ -12,6 +14,8 @@ import { Layout } from "./layout";
 export const Main = () => {
   useGate(ScreenSizeGate);
   useGate(ThemeGate);
+  useGate(LocalStorageThemeGate);
+  useGate(LocalStorageLanguageGate);
 
   const lettersListEmpty = useStoreMap(
     $$filterLetters.$filtered,

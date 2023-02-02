@@ -10,6 +10,7 @@ import { createGate } from "effector-react";
 import { genUrl } from "../gen-url";
 import { FlagsMapping } from "./flag";
 import { IResources, resourcesMapping } from "./resource";
+import { createLocalStorageItem } from "../localstorage";
 
 export type IThemeSection = keyof IThemesResponse<unknown>;
 
@@ -27,17 +28,23 @@ const $themes = createStore<IThemesResponse<IThemePreview> | null>(null);
 
 const fetchThemesFx = createRequest({ url: "themes", target: $themes });
 
-const $theme = createStore<ITheme | null>(null);
+// const $theme = createStore<ITheme | null>(null);
+const {
+  $value: $theme,
+  update,
+  gate: LocalStorageThemeGate,
+} = createLocalStorageItem<ITheme | null>("theme", null);
 const $themeType = createStore<IThemeType>("light");
 
-const fetchThemeByIdFx = createRequest({ url: "themes/?id=", target: $theme });
+const fetchThemeByIdFx = createRequest({ url: "themes/?id=", target: update });
 
 sample({ clock: ThemeGate.open, fn: () => undefined, target: fetchThemesFx });
 
 sample({
-  source: $themes,
-  filter: (themes) => !!themes && !!themes?.common.at(0)?.id,
-  fn: (themes) => themes!.common.at(0)!.id,
+  clock: $themes,
+  source: $theme,
+  filter: (theme, themes) => !!themes && !!themes?.common.at(0)?.id && !theme,
+  fn: (_, themes) => themes!.common.at(0)!.id,
   target: fetchThemeByIdFx,
 });
 
@@ -89,4 +96,5 @@ export {
   $themeType,
   ThemeGate,
   fetchThemeByIdFx,
+  LocalStorageThemeGate,
 };

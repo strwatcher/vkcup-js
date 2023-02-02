@@ -28,7 +28,6 @@ const $themes = createStore<IThemesResponse<IThemePreview> | null>(null);
 
 const fetchThemesFx = createRequest({ url: "themes", target: $themes });
 
-// const $theme = createStore<ITheme | null>(null);
 const {
   $value: $theme,
   update,
@@ -39,6 +38,13 @@ const $themeType = createStore<IThemeType>("light");
 const fetchThemeByIdFx = createRequest({ url: "themes/?id=", target: update });
 
 sample({ clock: ThemeGate.open, fn: () => undefined, target: fetchThemesFx });
+sample({
+  clock: ThemeGate.open,
+  source: $theme,
+  filter: (theme) => Boolean(theme),
+  fn: (theme) => theme!.id,
+  target: fetchThemeByIdFx,
+});
 
 sample({
   clock: $themes,

@@ -153,6 +153,7 @@ export const $$createLetter = () => {
 
   $to.reset(reset);
   $attachments.reset(reset);
+  $recipientInvalid.reset(reset);
 
   const submit = createEvent();
   const send = createEvent<ICreatingLetter>();

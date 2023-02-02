@@ -126,7 +126,6 @@ sample({
 sample({
   clock: $$lettersInFolders.putLetterInFolder,
   source: $$loadLetters.$letters,
-  filter: (_, { folder, letter }) => folder !== letter.folder,
   fn: (letters, { letter }) => letters.filter((l) => l.id !== letter.id),
   target: $$loadLetters.$letters,
 });

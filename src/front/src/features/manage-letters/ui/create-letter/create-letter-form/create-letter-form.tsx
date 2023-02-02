@@ -1,4 +1,5 @@
 import { $$createLetter } from "@/features/manage-letters/model";
+import { joinClasses } from "@/shared/lib";
 import { useTranslate } from "@/shared/lib/language";
 import {
   Button,
@@ -8,6 +9,7 @@ import {
   MultilineInput,
 } from "@/shared/ui";
 import { useUnit } from "effector-react";
+import { DragEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import s from "./style.module.scss";
 
 export const CreateLetterForm = () => {
@@ -26,8 +28,73 @@ export const CreateLetterForm = () => {
     insertFiles: "insertFiles",
   });
 
+  const [dragStarted, setDragStarted] = useState(false);
+  const dragAndDropStarterArea = useRef<HTMLDivElement>(null);
+  const dragAndDropArea = useRef<HTMLDivElement>(null);
+
+  const dragAreaEnter = (e: DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log("started");
+    setDragStarted(true);
+  };
+
+  const dragoverFiles = (e: DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = "copy";
+    }
+  };
+
+  const dropFiles = (e: DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (e.dataTransfer && e.dataTransfer.files.length) {
+      $$createLetter.change.files(Array.from(e.dataTransfer.files));
+    }
+    setDragStarted(false);
+  };
+
+  const dragAreaLeave = (e: DragEvent<HTMLDivElement>) => {
+    // e.stopPropagation();
+    e.preventDefault();
+    console.log("leave");
+    setDragStarted(false);
+  };
+
+  useEffect(() => {
+    const pasteFiles = (e: ClipboardEvent) => {
+      if (e.clipboardData?.files.length) {
+        e.preventDefault();
+        $$createLetter.change.files(Array.from(e.clipboardData.files));
+      }
+    };
+
+    document.addEventListener("paste", pasteFiles);
+
+    return () => {
+      document.removeEventListener("paste", pasteFiles);
+    };
+  }, []);
+
   return (
-    <div className={s.createLetterForm}>
+    <div
+      className={s.createLetterForm}
+      ref={dragAndDropStarterArea}
+      onDragEnter={dragAreaEnter}
+      onDragOver={dragoverFiles}
+      onDrop={dropFiles}
+    >
+      {dragStarted && (
+        <div
+          className={s.dragAndDropArea}
+          ref={dragAndDropArea}
+          onDragLeave={dragAreaLeave}
+        >
+          {"Вложить файлы"}
+        </div>
+      )}
       <Input
         id={"letterTitle"}
         type="text"

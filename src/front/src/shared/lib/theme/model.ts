@@ -3,7 +3,7 @@ import {
   IThemePreview as _IThemePreview,
   IThemesResponse,
   IThemeType,
-} from "@/../../shared/types/theme";
+} from "shared/types/theme";
 import { createRequest } from "@/shared/api/model";
 import { createEffect, createStore, sample } from "effector";
 import { createGate } from "effector-react";

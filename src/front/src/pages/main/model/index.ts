@@ -1,6 +1,9 @@
-import { IFolder } from "@/../../shared";
+import { IFolder } from "shared";
 import { LetterState } from "@/entities/letter";
-import { $$selectFolder } from "@/features/folders-navigation";
+import {
+  $$lettersInFolders,
+  $$selectFolder,
+} from "@/features/folders-navigation";
 import {
   $$selectLetter,
   $$mutateLetter,
@@ -10,7 +13,6 @@ import {
 import { $$createLetter } from "@/features/manage-letters/model";
 import { $$state } from "@/widgets/content";
 import { combine, createEvent, sample } from "effector";
-import { $$lettersInFolders as lettersInFolders } from "./letters-in-folders";
 import { v4 as uuid } from "uuid";
 
 export const returnHome = createEvent();
@@ -19,7 +21,6 @@ export const $needReturnBack = combine(
   $$state.$letterCreating,
   (opened, creating) => opened || creating
 );
-const $$lettersInFolders = lettersInFolders();
 
 sample({ clock: $$selectFolder.$selectedFolder, target: returnHome });
 
@@ -120,4 +121,12 @@ sample({
   filter: (currentFolder, { folder }) => folder === currentFolder,
   fn: (_, { letter }) => letter,
   target: $$loadLetters.putLetterOnTop,
+});
+
+sample({
+  clock: $$lettersInFolders.putLetterInFolder,
+  source: $$loadLetters.$letters,
+  filter: (_, { folder, letter }) => folder !== letter.folder,
+  fn: (letters, { letter }) => letters.filter((l) => l.id !== letter.id),
+  target: $$loadLetters.$letters,
 });

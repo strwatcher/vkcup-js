@@ -1,5 +1,4 @@
 import { $$createLetter } from "@/features/manage-letters/model";
-import { joinClasses } from "@/shared/lib";
 import { useTranslate } from "@/shared/lib/language";
 import {
   Button,
@@ -9,7 +8,7 @@ import {
   MultilineInput,
 } from "@/shared/ui";
 import { useUnit } from "effector-react";
-import { DragEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { DragEvent, useEffect, useRef, useState } from "react";
 import s from "./style.module.scss";
 
 export const CreateLetterForm = () => {
@@ -33,14 +32,11 @@ export const CreateLetterForm = () => {
   const dragAndDropArea = useRef<HTMLDivElement>(null);
 
   const dragAreaEnter = (e: DragEvent<HTMLDivElement>) => {
-    e.stopPropagation();
     e.preventDefault();
-    console.log("started");
     setDragStarted(true);
   };
 
   const dragoverFiles = (e: DragEvent<HTMLDivElement>) => {
-    e.stopPropagation();
     e.preventDefault();
     if (e.dataTransfer) {
       e.dataTransfer.dropEffect = "copy";
@@ -48,18 +44,19 @@ export const CreateLetterForm = () => {
   };
 
   const dropFiles = (e: DragEvent<HTMLDivElement>) => {
-    e.stopPropagation();
     e.preventDefault();
     if (e.dataTransfer && e.dataTransfer.files.length) {
-      $$createLetter.change.files(Array.from(e.dataTransfer.files));
+      $$createLetter.change.files(
+        Array.from(e.dataTransfer.files).filter((file) =>
+          /^image\/\w*/.test(file.type)
+        )
+      );
     }
     setDragStarted(false);
   };
 
   const dragAreaLeave = (e: DragEvent<HTMLDivElement>) => {
-    // e.stopPropagation();
     e.preventDefault();
-    console.log("leave");
     setDragStarted(false);
   };
 

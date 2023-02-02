@@ -3,9 +3,10 @@ import { List } from "@/shared/ui/list";
 import { $screenSize } from "@/shared/lib/screen-size";
 import { Folder } from "@/entities/folder";
 import { useGate, useUnit } from "effector-react";
-import { ICompleteFolder } from "@/../../shared";
-import { $$selectFolder, $$loadFolders } from "../model";
+import { ICompleteFolder, IFolder } from "shared";
+import { $$selectFolder, $$loadFolders, $$lettersInFolders } from "../model";
 import { $resources, $themeType } from "@/shared/lib/theme";
+import { LetterState } from "@/entities/letter";
 
 export const FoldersList = () => {
   useGate($$loadFolders.FoldersGate);
@@ -25,6 +26,10 @@ export const FoldersList = () => {
     [folders]
   );
 
+  const moveLetterHandler = (letter: LetterState, folder: IFolder) => {
+    $$lettersInFolders.putLetterInFolder({ letter, folder });
+  };
+
   const renders = {
     folder: useCallback(
       (folder: ICompleteFolder & { id: string }) => {
@@ -34,6 +39,7 @@ export const FoldersList = () => {
             folder={folder.folder}
             active={folder.folder === selectedFolder}
             onClick={() => folderItemClicked(folder.folder)}
+            onMoveLetter={(letter) => moveLetterHandler(letter, folder.folder)}
           />
         );
       },

@@ -1,4 +1,4 @@
-import { IFlag } from "@/../../shared";
+import { IFlag } from "shared";
 import { useTranslate } from "@/shared/lib/language";
 import s from "./style.module.scss";
 

@@ -1,7 +1,7 @@
 import { IFolder } from "shared";
-import { LetterState } from "@/entities/letter";
 import { createEvent, createStore, sample } from "effector";
-import { LettersInFoldersState } from "../types";
+import { LetterState } from "@/entities/letter";
+import { LettersInFoldersState } from "../../types";
 
 export const $$lettersInFolders = () => {
   const $kv = createStore<LettersInFoldersState>({});

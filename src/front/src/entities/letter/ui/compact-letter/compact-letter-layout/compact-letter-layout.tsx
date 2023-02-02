@@ -1,5 +1,11 @@
 import { joinClasses } from "@/shared/lib";
-import { ReactNode, RefObject, useMemo } from "react";
+import {
+  DragEvent,
+  DragEventHandler,
+  ReactNode,
+  RefObject,
+  useMemo,
+} from "react";
 import s from "./style.module.scss";
 
 export type CompactLetterLayoutProps = {
@@ -10,6 +16,7 @@ export type CompactLetterLayoutProps = {
   hasAttachments: boolean;
   hasFlag: boolean;
   onClick: () => void;
+  onDragStart: (e: DragEvent<HTMLDivElement>) => void;
 };
 
 export const CompactLetterLayout = (props: CompactLetterLayoutProps) => {
@@ -23,12 +30,19 @@ export const CompactLetterLayout = (props: CompactLetterLayoutProps) => {
     );
   }, [props.read, props.selected, props.hasAttachments, props.hasFlag]);
 
+  const dragStartHandler = (e: DragEvent<HTMLDivElement>) => {
+    console.log("started");
+    props.onDragStart(e);
+  };
+
   return (
     <div
       onClick={props.onClick}
       tabIndex={0}
       ref={props.hoverRef}
       className={className}
+      draggable
+      onDragStart={dragStartHandler}
     >
       {props.children}
     </div>

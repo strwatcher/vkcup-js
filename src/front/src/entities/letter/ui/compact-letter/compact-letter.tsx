@@ -13,7 +13,7 @@ import {
 } from "@/shared/ui";
 import { $flags, $resources } from "@/shared/lib/theme";
 import { LetterState } from "../../lib";
-import { useMemo, useRef } from "react";
+import { DragEvent, useMemo, useRef } from "react";
 
 export type CompactLetterProps = LetterState & {
   onSelectToggle: (id: string, selected: boolean) => void;
@@ -41,6 +41,15 @@ export const CompactLetter = (props: CompactLetterProps) => {
     return "unset";
   }, [props.bookmark, props.important]);
 
+  const dragStartHandler = (e: DragEvent<HTMLDivElement>) => {
+    if (e.dataTransfer) {
+      e.dataTransfer.setData(
+        "letter",
+        JSON.stringify({ ...(props as LetterState) })
+      );
+    }
+  };
+
   return (
     <CompactLetterLayout
       hoverRef={letterRef}
@@ -49,6 +58,7 @@ export const CompactLetter = (props: CompactLetterProps) => {
       hasFlag={!!props.flag}
       hasAttachments={props.attachments}
       onClick={() => props.onLetterClick(props.id)}
+      onDragStart={dragStartHandler}
     >
       <SimpleCheckbox
         hideActive

@@ -1,5 +1,10 @@
 import { joinClasses } from "@/shared/lib";
-import { useCallback, MouseEventHandler, ReactNode } from "react";
+import {
+  useCallback,
+  MouseEventHandler,
+  ReactNode,
+  DragEventHandler,
+} from "react";
 import s from "./style.module.scss";
 
 type ButtonVariant =
@@ -16,6 +21,8 @@ export type ButtonProps = {
   variant: ButtonVariant;
   textVariant?: TextVariant;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  onDrop?: DragEventHandler<HTMLButtonElement>;
+  onDragOver?: DragEventHandler<HTMLButtonElement>;
   children: ReactNode;
 
   active?: boolean;
@@ -43,6 +50,8 @@ export const Button = (props: ButtonProps) => {
         props.textVariant && s[props.textVariant]
       )}
       onClick={props.onClick}
+      onDrop={props.onDrop}
+      onDragOver={props.onDragOver}
       ref={setGap}
     >
       {props.children}

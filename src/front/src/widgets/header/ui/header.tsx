@@ -10,6 +10,7 @@ import { useTranslate } from "@/shared/lib/language";
 type HeaderProps = {
   needReturnBack?: boolean;
   returnBack: () => void;
+  loading: boolean;
 };
 
 export const Header = (props: HeaderProps) => {
@@ -36,7 +37,7 @@ export const Header = (props: HeaderProps) => {
   }
 
   return (
-    <HeaderLayout>
+    <HeaderLayout loading={props.loading}>
       <img src={logo} />
       <FilterSelect />
     </HeaderLayout>

@@ -1,5 +1,5 @@
 import { memo, useCallback, useLayoutEffect, useRef } from "react";
-import { List, Loader, ThreeVariantState } from "@/shared/ui";
+import { List, ThreeVariantState } from "@/shared/ui";
 import { CompactLetter, LetterState } from "@/entities/letter";
 import { Empty } from "../empty";
 import { useInfinityScroll } from "@/shared/lib/hooks/use-infinity-scroll";
@@ -90,19 +90,13 @@ export const LettersList = memo(() => {
   };
 
   if (!model.letters.length) {
-    return (
-      <Loader loads={model.fetching}>
-        <Empty />
-      </Loader>
-    );
+    return <Empty />;
   }
 
   return (
     <div ref={scrollRootRef}>
       <div ref={scrollRef}>
-        <Loader loads={model.fetching}>
-          <List render={renders.letter} items={model.letters} />
-        </Loader>
+        <List render={renders.letter} items={model.letters} />
         <div ref={infinityScrollRef} />
       </div>
     </div>

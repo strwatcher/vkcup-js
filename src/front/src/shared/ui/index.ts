@@ -16,4 +16,4 @@ export { Popup } from "./popup";
 export { ThemeSelector } from "./theme-selector";
 export { Modal } from "./modal";
 export { Sign } from "./sign";
-export { Loader } from "./loader";
+export { Progressbar } from "./progressbar";

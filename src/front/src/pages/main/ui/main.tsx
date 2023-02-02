@@ -1,4 +1,4 @@
-import { $$filterLetters } from "@/features/manage-letters";
+import { $$filterLetters, $$loadLetters } from "@/features/manage-letters";
 import { LocalStorageLanguageGate } from "@/shared/lib/language";
 import { ScreenSizeGate } from "@/shared/lib/screen-size";
 import { ThemeGate } from "@/shared/lib/theme";
@@ -21,6 +21,7 @@ export const Main = () => {
     $$filterLetters.$filtered,
     (letters) => !letters.length
   );
+  const lettersFetching = useUnit($$loadLetters.$fetching);
 
   const needReturnBack = useUnit($needReturnBack);
 
@@ -30,7 +31,11 @@ export const Main = () => {
       <Layout
         contentEmpty={lettersListEmpty}
         head={
-          <Header needReturnBack={needReturnBack} returnBack={returnHome} />
+          <Header
+            needReturnBack={needReturnBack}
+            returnBack={returnHome}
+            loading={lettersFetching}
+          />
         }
       >
         <Sidebar />

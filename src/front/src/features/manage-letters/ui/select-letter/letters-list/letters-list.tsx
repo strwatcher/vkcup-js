@@ -13,6 +13,8 @@ import {
   $$selectLetter,
   $$loadAttachments,
 } from "@/features/manage-letters";
+import s from "./style.module.scss";
+import { joinClasses } from "@/shared/lib";
 
 export const LettersList = memo(() => {
   const model = useUnit({
@@ -89,13 +91,16 @@ export const LettersList = memo(() => {
     ),
   };
 
-  if (!model.letters.length) {
+  if (!model.letters.length && !model.fetching) {
     return <Empty />;
   }
 
   return (
     <div ref={scrollRootRef}>
-      <div ref={scrollRef}>
+      <div
+        ref={scrollRef}
+        className={joinClasses(model.fetching && s.disabled)}
+      >
         <List render={renders.letter} items={model.letters} />
         <div ref={infinityScrollRef} />
       </div>

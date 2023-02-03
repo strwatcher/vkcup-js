@@ -2,6 +2,7 @@ import { combine, createEvent, createStore, sample } from "effector";
 import { createRequest } from "@/shared/api/model";
 import { LettersState, RawLettersState } from "../types";
 import { LetterState } from "@/entities/letter";
+import { debug } from "patronum";
 
 export const $$loadLetters = () => {
   const $letters = createStore<LettersState>([]);
@@ -40,16 +41,33 @@ export const $$loadLetters = () => {
 
   const loadMore = createEvent();
   const reload = createEvent();
+  const $reloading = createStore(false);
+
   const willLoaded = createEvent();
 
   const putLetterOnTop = createEvent<LetterState>();
-  // sample({
-  //   clock: $shift,
-  //   source: { folder: $activeFolder, limit: $limit },
-  //   fn: ({ folder, limit }, shift) =>
-  //     "?folder=" + folder + "&shift=" + shift + "&limit=" + limit,
-  //   target: loadFx,
-  // });
+
+  sample({
+    clock: reload,
+    fn: () => true,
+    target: $reloading,
+  });
+
+  sample({
+    clock: reload,
+    fn: () => 0,
+    target: $shift,
+  });
+
+  sample({
+    clock: loadFx.done,
+    source: $reloading,
+    filter: Boolean,
+    fn: () => [],
+    target: $letters,
+  });
+
+  sample({ clock: loadFx.done, fn: () => false, target: $reloading });
 
   sample({
     clock: $loadedLetters,
@@ -80,18 +98,6 @@ export const $$loadLetters = () => {
     target: $shift,
   });
 
-  sample({
-    clock: reload,
-    fn: () => 0,
-    target: $shift,
-  });
-
-  sample({
-    clock: reload,
-    fn: () => [],
-    target: $letters,
-  });
-
   sample({ clock: [loadMore, reload], target: willLoaded });
 
   sample({
@@ -109,6 +115,7 @@ export const $$loadLetters = () => {
 
     $fetching,
     $firstFetched,
+    $reloading,
     firstFetchFinished,
 
     loadFx,

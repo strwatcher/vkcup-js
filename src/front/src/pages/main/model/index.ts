@@ -118,14 +118,17 @@ sample({
 sample({
   clock: $$lettersInFolders.putLetterInFolder,
   source: $$selectFolder.$selectedFolder,
-  filter: (currentFolder, { folder }) => folder === currentFolder,
   fn: (_, { letter }) => letter,
   target: $$loadLetters.putLetterOnTop,
 });
 
 sample({
   clock: $$lettersInFolders.putLetterInFolder,
-  source: $$loadLetters.$letters,
-  fn: (letters, { letter }) => letters.filter((l) => l.id !== letter.id),
+  source: {
+    letters: $$loadLetters.$letters,
+  },
+  fn: ({ letters }, { letter }) => {
+    return letters.filter((l) => l.id !== letter.id);
+  },
   target: $$loadLetters.$letters,
 });

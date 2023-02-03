@@ -28,7 +28,7 @@ export type ButtonProps = {
   children: ReactNode;
 
   active?: boolean;
-  hovered?: boolean;
+  dragedOver?: boolean;
   adaptive?: boolean;
   gap?: number;
 };
@@ -51,7 +51,7 @@ export const Button = (props: ButtonProps) => {
         props.active && s.active,
         props.adaptive && s.adaptive,
         props.textVariant && s[props.textVariant],
-        props.hovered && s.hovered
+        props.dragedOver && s.dragedOver
       )}
       onClick={props.onClick}
       onDrop={props.onDrop}

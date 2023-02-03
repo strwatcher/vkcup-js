@@ -1,8 +1,6 @@
 import { combine, createEvent, createStore, sample } from "effector";
 import { createRequest } from "@/shared/api/model";
 import { LettersState, RawLettersState } from "../types";
-import { LetterState } from "@/entities/letter";
-import { debug } from "patronum";
 
 export const $$loadLetters = () => {
   const $letters = createStore<LettersState>([]);

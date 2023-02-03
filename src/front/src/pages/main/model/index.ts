@@ -14,7 +14,6 @@ import { $$createLetter } from "@/features/manage-letters/model";
 import { $$state } from "@/widgets/content";
 import { combine, createEvent, sample } from "effector";
 import { v4 as uuid } from "uuid";
-import { debug } from "patronum";
 
 export const returnHome = createEvent();
 export const $needReturnBack = combine(
@@ -135,8 +134,4 @@ sample({
   source: $$loadLetters.$letters,
   fn: (letters, { letter }) => letters.filter((l) => l.id !== letter.id),
   target: $$loadLetters.$letters,
-});
-
-debug({
-  letters: $$loadLetters.$letters,
 });

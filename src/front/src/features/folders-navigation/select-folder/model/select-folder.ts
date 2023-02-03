@@ -1,7 +1,6 @@
 import { ICompleteFolder, IFolder } from "shared";
 import { createEvent, createStore, sample, Store } from "effector";
 import { FoldersState } from "./load-folders";
-import { debug } from "patronum";
 
 export function $$selectFolder($folders: Store<FoldersState>) {
   const folderClicked = createEvent<IFolder>();
@@ -28,8 +27,6 @@ export function $$selectFolder($folders: Store<FoldersState>) {
     fn: (folders) => (folders.at(0) as ICompleteFolder).folder,
     target: $selectedFolder,
   });
-
-  debug({ $previousFolder });
 
   return { folderClicked, $selectedFolder, $previousFolder };
 }

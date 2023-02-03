@@ -35,12 +35,13 @@ export const Folder = (props: FolderProps) => {
       ) as LetterState;
       props.onMoveLetter(letter);
     }
+    setDragedOver(false);
   };
 
   return (
     <Button
       active={props.active}
-      hovered={dragedOver}
+      dragedOver={dragedOver}
       onClick={props.onClick}
       onDrop={dropHandler}
       onDragOver={dragOverHandler}

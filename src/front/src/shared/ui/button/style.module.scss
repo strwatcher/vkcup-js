@@ -9,6 +9,11 @@
     border-radius: 8px;
 }
 
+.dragedOver {
+    background-color: var(--backgroundAccent)
+}
+
+
 .activated {
     gap: var(--gap, 10px);
     padding: 12px 11px;
@@ -28,8 +33,7 @@
     }
 
     &:hover,
-    &:focus,
-    &.hovered{
+    &:focus {
         background-color: var(--transparentHover);
     }
 

@@ -37,7 +37,6 @@ export const $$loadLetters = () => {
   });
 
   const $fetching = loadFx.pending;
-  const $firstFetched = createStore(false);
 
   const loadMore = createEvent();
   const reload = createEvent();
@@ -45,7 +44,19 @@ export const $$loadLetters = () => {
 
   const willLoaded = createEvent();
 
-  const putLetterOnTop = createEvent<LetterState>();
+  const setState = createEvent<{ letters: LettersState; shift: number }>();
+
+  sample({
+    clock: setState,
+    fn: ({ shift }) => shift,
+    target: $shift,
+  });
+
+  sample({
+    clock: setState,
+    fn: ({ letters }) => letters,
+    target: $letters,
+  });
 
   sample({
     clock: reload,
@@ -72,23 +83,8 @@ export const $$loadLetters = () => {
   sample({
     clock: $loadedLetters,
     source: $letters,
-    fn: (letters) => letters.length === 0,
-    target: $firstFetched,
-  });
-
-  sample({
-    clock: $loadedLetters,
-    source: $letters,
     fn: (oldLetters, newLetters) => [...oldLetters, ...newLetters.data],
     target: $letters,
-  });
-
-  const firstFetchFinished = createEvent();
-
-  sample({
-    clock: firstFetchFinished,
-    fn: () => false,
-    target: $firstFetched,
   });
 
   sample({
@@ -98,14 +94,7 @@ export const $$loadLetters = () => {
     target: $shift,
   });
 
-  sample({ clock: [loadMore, reload], target: willLoaded });
-
-  sample({
-    clock: putLetterOnTop,
-    source: $letters,
-    fn: (letters, letterToPut) => [letterToPut, ...letters],
-    target: $letters,
-  });
+  sample({ clock: [reload, loadMore], target: willLoaded });
 
   return {
     $shift,
@@ -114,15 +103,12 @@ export const $$loadLetters = () => {
     $hasMore,
 
     $fetching,
-    $firstFetched,
-    $reloading,
-    firstFetchFinished,
 
     loadFx,
 
     loadMore,
     reload,
     willLoaded,
-    putLetterOnTop,
+    setState,
   };
 };

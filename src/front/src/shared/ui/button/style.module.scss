@@ -28,7 +28,8 @@
     }
 
     &:hover,
-    &:focus {
+    &:focus,
+    &.hovered{
         background-color: var(--transparentHover);
     }
 

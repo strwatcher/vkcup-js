@@ -2,6 +2,7 @@ import { IFolder } from "shared";
 import { createEvent, createStore, sample } from "effector";
 import { LetterState } from "@/entities/letter";
 import { LettersInFoldersState } from "../../types";
+import { LettersState } from "@/features/manage-letters";
 
 export const $$lettersInFolders = () => {
   const $kv = createStore<LettersInFoldersState>({});
@@ -11,6 +12,12 @@ export const $$lettersInFolders = () => {
     folder: IFolder;
   }>();
 
+  const loadLettersInFolder = createEvent<{
+    letters: LettersState;
+    folder: IFolder;
+    shift: number;
+  }>();
+
   sample({
     clock: putLetterInFolder,
     source: $kv,
@@ -18,16 +25,28 @@ export const $$lettersInFolders = () => {
       if (!kv[folder]) {
         return {
           ...kv,
-          [folder]: [letter],
+          [folder]: { letters: [letter], shift: 0 },
         };
       }
       return {
         ...kv,
-        [folder]: [letter, ...kv[folder]!],
+        [folder]: { ...kv[folder], letters: [letter, ...kv[folder]!.letters] },
       };
     },
     target: $kv,
   });
 
-  return { $kv, putLetterInFolder };
+  sample({
+    clock: loadLettersInFolder,
+    source: $kv,
+    fn: (kv, { letters, folder, shift }) => {
+      return {
+        ...kv,
+        [folder]: { letters: [...letters], shift },
+      };
+    },
+    target: $kv,
+  });
+
+  return { $kv, putLetterInFolder, loadLettersInFolder };
 };

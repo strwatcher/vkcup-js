@@ -1,7 +1,7 @@
 import { LetterState } from "@/entities/letter";
 import { useTranslate } from "@/shared/lib/language";
 import { Button } from "@/shared/ui";
-import { DragEvent } from "react";
+import { DragEvent, useState } from "react";
 import { IFolder } from "shared";
 
 export type FolderProps = {
@@ -14,10 +14,17 @@ export type FolderProps = {
 
 export const Folder = (props: FolderProps) => {
   const { folder } = useTranslate({ folder: props.folder });
+  const [dragedOver, setDragedOver] = useState(false);
 
   const dragOverHandler = (e: DragEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
+    setDragedOver(true);
+  };
+
+  const dragLeaveHandler = (e: DragEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setDragedOver(false);
   };
 
   const dropHandler = (e: DragEvent<HTMLButtonElement>) => {
@@ -33,9 +40,11 @@ export const Folder = (props: FolderProps) => {
   return (
     <Button
       active={props.active}
+      hovered={dragedOver}
       onClick={props.onClick}
       onDrop={dropHandler}
       onDragOver={dragOverHandler}
+      onDragLeave={dragLeaveHandler}
       variant={"activated"}
     >
       <img src={props.icon} alt="" />

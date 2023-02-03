@@ -23,9 +23,12 @@ export type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   onDrop?: DragEventHandler<HTMLButtonElement>;
   onDragOver?: DragEventHandler<HTMLButtonElement>;
+  onDragLeave?: DragEventHandler<HTMLButtonElement>;
+
   children: ReactNode;
 
   active?: boolean;
+  hovered?: boolean;
   adaptive?: boolean;
   gap?: number;
 };
@@ -47,11 +50,13 @@ export const Button = (props: ButtonProps) => {
         s[props.variant],
         props.active && s.active,
         props.adaptive && s.adaptive,
-        props.textVariant && s[props.textVariant]
+        props.textVariant && s[props.textVariant],
+        props.hovered && s.hovered
       )}
       onClick={props.onClick}
       onDrop={props.onDrop}
       onDragOver={props.onDragOver}
+      onDragLeave={props.onDragLeave}
       ref={setGap}
     >
       {props.children}

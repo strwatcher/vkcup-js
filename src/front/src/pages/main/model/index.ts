@@ -49,22 +49,35 @@ sample({
 
 sample({
   clock: $$selectFolder.$selectedFolder,
-  target: $$loadLetters.reload,
+  source: {
+    previousFolder: $$selectFolder.$previousFolder,
+    letters: $$loadLetters.$letters,
+    shift: $$loadLetters.$shift,
+  },
+  filter: ({ previousFolder }) => Boolean(previousFolder),
+  fn: ({ previousFolder, letters, shift }) => {
+    return {
+      shift,
+      folder: previousFolder!,
+      letters,
+    };
+  },
+  target: $$lettersInFolders.loadLettersInFolder,
 });
 
 sample({
-  clock: $$loadLetters.reload,
-  source: {
-    letters: $$loadLetters.$letters,
-    existsLetters: $$lettersInFolders.$kv,
-    folder: $$selectFolder.$selectedFolder,
-  },
-  filter: ({ folder }) => !!folder,
-  fn: ({ letters, existsLetters, folder }) => [
-    ...(existsLetters[folder!] ?? []),
-    ...letters,
-  ],
-  target: $$loadLetters.$letters,
+  clock: $$selectFolder.$selectedFolder,
+  source: $$lettersInFolders.$kv,
+  filter: (kv, folder) => !!folder && !!kv[folder!]?.letters.length,
+  fn: (kv, folder) => kv[folder!]!,
+  target: $$loadLetters.setState,
+});
+
+sample({
+  clock: $$selectFolder.$selectedFolder,
+  source: $$lettersInFolders.$kv,
+  filter: (kv, folder) => !folder || !kv[folder!]?.letters.length,
+  target: $$loadLetters.reload,
 });
 
 sample({
@@ -119,26 +132,11 @@ sample({
 
 sample({
   clock: $$lettersInFolders.putLetterInFolder,
-  source: $$selectFolder.$selectedFolder,
-  fn: (_, { letter }) => letter,
-  target: $$loadLetters.putLetterOnTop,
-});
-
-sample({
-  clock: $$lettersInFolders.putLetterInFolder,
-  source: {
-    letters: $$loadLetters.$letters,
-  },
-  fn: ({ letters }, { letter }) => {
-    return letters.filter((l) => l.id !== letter.id);
-  },
+  source: $$loadLetters.$letters,
+  fn: (letters, { letter }) => letters.filter((l) => l.id !== letter.id),
   target: $$loadLetters.$letters,
 });
 
 debug({
-  reload: $$loadLetters.reload,
-  reloading: $$loadLetters.$reloading,
   letters: $$loadLetters.$letters,
-  loadDone: $$loadLetters.loadFx.doneData,
-  load: $$loadLetters.loadFx,
 });

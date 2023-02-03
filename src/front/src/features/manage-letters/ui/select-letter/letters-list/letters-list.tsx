@@ -15,12 +15,13 @@ import {
 } from "@/features/manage-letters";
 import s from "./style.module.scss";
 import { joinClasses } from "@/shared/lib";
+import { $$selectFolder } from "@/features/folders-navigation";
 
 export const LettersList = memo(() => {
   const model = useUnit({
+    folder: $$selectFolder.$selectedFolder,
     letters: $$filterLetters.$filtered,
     fetching: $$loadLetters.$fetching,
-    firstFetched: $$loadLetters.$firstFetched,
     hasMore: $$loadLetters.$hasMore,
 
     attachmentsFetching: $$loadAttachments.$fetching,
@@ -45,10 +46,6 @@ export const LettersList = memo(() => {
     []
   );
 
-  const scrollRef = useScrollTop<HTMLDivElement>(() => {
-    $$loadLetters.firstFetchFinished();
-  }, model.firstFetched);
-
   const scrollRootRef = useRef(null);
   const infinityScrollRef = useInfinityScroll(
     scrollRootRef,
@@ -60,7 +57,7 @@ export const LettersList = memo(() => {
   const destinationLetter = useRef(null);
   const lastLetter = useRef(null);
 
-  useScrollInto(destinationLetter, []);
+  useScrollInto(destinationLetter, [model.folder]);
 
   useLayoutEffect(() => {
     destinationLetter.current = lastLetter.current;
@@ -97,10 +94,7 @@ export const LettersList = memo(() => {
 
   return (
     <div ref={scrollRootRef}>
-      <div
-        ref={scrollRef}
-        className={joinClasses(model.fetching && s.disabled)}
-      >
+      <div className={joinClasses(model.fetching && s.disabled)}>
         <List render={renders.letter} items={model.letters} />
         <div ref={infinityScrollRef} />
       </div>

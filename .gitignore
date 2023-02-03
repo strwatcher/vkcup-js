@@ -8,7 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+dist/db.json
+dist/server.js
+dist/index.html
 dev
 dist-ssr
 *.local

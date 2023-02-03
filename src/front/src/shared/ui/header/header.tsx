@@ -11,7 +11,7 @@ export const Header = (props: HeaderProps) => {
   return (
     <header className={s.header}>
       <div className={s.controls}>{props.children}</div>
-      {props.loading && <Progressbar />}
+      {props.loading && <Progressbar finished={!props.loading} />}
     </header>
   );
 };

@@ -7,10 +7,19 @@
   background-color: var(--backgroundAccent);
   height: 100%;
 
-  animation: fill 1.5s linear infinite;
+  animation: fill 1.5s linear ;
 }
 
 @keyframes fill {
   0% { width: 0%;}
-  100% { width: 100%;}
+  100% { width: 90%;}
+}
+
+.finished {
+  animation: finishFill 0.5s linear;
+}
+
+@keyframes finishFill {
+  0% {width: 90%;}
+  100% {width: 100%;}
 }

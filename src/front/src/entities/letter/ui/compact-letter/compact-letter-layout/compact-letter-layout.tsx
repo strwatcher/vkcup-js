@@ -31,7 +31,6 @@ export const CompactLetterLayout = (props: CompactLetterLayoutProps) => {
   }, [props.read, props.selected, props.hasAttachments, props.hasFlag]);
 
   const dragStartHandler = (e: DragEvent<HTMLDivElement>) => {
-    console.log("started");
     props.onDragStart(e);
   };
 

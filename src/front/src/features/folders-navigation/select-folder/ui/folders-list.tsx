@@ -27,7 +27,6 @@ export const FoldersList = () => {
   );
 
   const moveLetterHandler = (letter: LetterState, folder: IFolder) => {
-    // console.log(folder, selectedFolder);
     if (folder !== selectedFolder) {
       $$lettersInFolders.putLetterInFolder({ letter, folder });
     }

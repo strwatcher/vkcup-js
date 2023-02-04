@@ -14,6 +14,7 @@ import { $$createLetter } from "@/features/manage-letters/model";
 import { $$state } from "@/widgets/content";
 import { combine, createEvent, sample } from "effector";
 import { v4 as uuid } from "uuid";
+import { debug } from "patronum";
 
 export const returnHome = createEvent();
 export const $needReturnBack = combine(
@@ -131,7 +132,22 @@ sample({
 
 sample({
   clock: $$lettersInFolders.putLetterInFolder,
-  source: $$loadLetters.$letters,
-  fn: (letters, { letter }) => letters.filter((l) => l.id !== letter.id),
+  source: {
+    currentFolder: $$selectFolder.$selectedFolder,
+    letters: $$loadLetters.$letters,
+  },
+  filter: ({ currentFolder }, { folder }) => currentFolder !== folder,
+  fn: ({ letters }, { letter }) => letters.filter((l) => l.id !== letter.id),
+  target: $$loadLetters.$letters,
+});
+
+sample({
+  clock: $$lettersInFolders.putLetterInFolder,
+  source: {
+    currentFolder: $$selectFolder.$selectedFolder,
+    letters: $$loadLetters.$letters,
+  },
+  filter: ({ currentFolder }, { folder }) => currentFolder === folder,
+  fn: ({ letters }, { letter }) => [letter, ...letters],
   target: $$loadLetters.$letters,
 });
